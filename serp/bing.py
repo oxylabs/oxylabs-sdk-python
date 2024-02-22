@@ -1,12 +1,9 @@
 from utils.defaults import DEFAULT_LIMIT_SERP, set_default_domain, set_default_limit, set_default_pages, set_default_start_page, set_default_user_agent
 from utils.utils import BaseSearchOpts, BaseUrlOpts
 from utils.constants import Render, Domain, UserAgent, Source
-from serp.serp import SerpClient
 from serp.response import Resp
 import dataclasses
 import json
-from typing import Optional
-
 
 BingSearchAcceptedDomainParameters = [
     Domain.DOMAIN_COM,
@@ -22,10 +19,10 @@ class BingSearchOpts(BaseSearchOpts):
     """
     Represents the search options for Bing.
     """
-    locale: str  
-    geo_location: str  
-    render: Render  
-    parse: bool  
+    locale: str = None
+    geo_location: str = None
+    render: Render = None
+    parse: bool = False
 
     def check_parameter_validity(self):
         """
@@ -42,6 +39,9 @@ class BingSearchOpts(BaseSearchOpts):
 
         if self.limit <= 0 or self.pages <= 0 or self.start_page <= 0:
             raise ValueError("Limit, pages and start_page parameters must be greater than 0")
+        
+        if self.limit > 50:
+            raise ValueError("Limit parameter must be less than or equal to 50")
 
 @dataclasses.dataclass
 class BingUrlOpts(BaseUrlOpts):
@@ -72,23 +72,37 @@ class Bing:
             client: The client object used for making API requests.
         """
         self.client = client
+    def scrape_bing_search(self, query, opts=None):
+        defaults = {
+            'domain': "",
+            'start_page': "",
+            'pages': "",
+            'limit': "",
+            'user_agent': "",
+            'callback_url': "",
+            'poll_interval': "",
+            'locale': "", 
+            'geo_location': "", 
+            'render': "", 
+            'parse': "" 
+        }
 
-    def scrape_bing_search(self, query: str, opts: Optional[BingSearchOpts] = None):
         if opts is None:
-            opts = BingSearchOpts(
-                domain=None,
-                start_page=None,
-                pages=None,
-                limit=None,
-                user_agent=UserAgent.UA_DESKTOP,
-                callback_url=None,
-                parse_instructions=None,
-                poll_interval=None,
-                locale=None, 
-                geo_location=None, 
-                render=None, 
-                parse=False 
-            )
+            opts = defaults
+        elif isinstance(opts, dict):
+            defaults.update(opts)
+            opts = defaults
+        elif isinstance(opts, BingSearchOpts):
+            opts = vars(opts)  # Convert the BingSearchOpts object to a dictionary
+        else:
+            raise ValueError("opts must be either None, a dictionary, or an instance of BingSearchOpts.")
+
+        # Add missing keys
+        for key in defaults:
+            if key not in opts:
+                opts[key] = defaults[key]
+
+        opts = BingSearchOpts(**opts)
 
         # Set defaults
         opts.domain = set_default_domain(opts.domain)
@@ -119,16 +133,17 @@ class Bing:
         # Add custom parsing instructions to the payload if provided
         if opts.parse_instructions is not None:
             payload["parsing_instructions"] = opts.parse_instructions
-
+            
         # Convert payload to JSON
         json_payload = json.dumps(payload)
+            
         # Make the request
         http_resp = self.client.req(json_payload, "POST")
 
         # Process the response
         resp = Resp.from_http_resp(http_resp, opts.parse, False)
 
-        return resp
+        return resp.response_body
 
 
     def scrape_bing_url(self):
@@ -137,4 +152,7 @@ class Bing:
 
         This method implements the functionality to scrape URLs from Bing.
         """
-        pass  # Functionality goes here
+        # defaults = {
+            
+            
+        # }

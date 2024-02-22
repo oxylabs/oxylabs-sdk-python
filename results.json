@@ -1,0 +1,134 @@
+{
+    "results": [
+        {
+            "content": {
+                "parse_status_code": 12000,
+                "bing_search_results": {
+                    "url": [
+                        "https://en.wikipedia.org/wiki/Apple_Inc.",
+                        "https://support.apple.com/hu-hu",
+                        "https://www.apple.com/newsroom/2024/02/introducing-apple-sports-a-new-app-for-sports-fans/"
+                    ],
+                    "title": [
+                        "Apple Inc. - Wikipedia",
+                        "Hivatalos Apple-t\u00e1mogat\u00e1s",
+                        "Introducing Apple Sports, a new app for sports fans - Apple"
+                    ],
+                    "description": [
+                        "Naprak\u00e9sz inform\u00e1ci\u00f3kat kaphatsz az ",
+                        "-k\u00e9sz\u00fcl\u00e9keiddel kapcsolatban, p\u00e9ld\u00e1ul a j\u00f3t\u00e1ll\u00e1sr\u00f3l, a jav\u00edt\u00e1sokr\u00f3l \u00e9s m\u00e9g sok minden m\u00e1sr\u00f3l. Bejelentkez\u00e9s a Saj\u00e1t t\u00e1mogat\u00e1s \u2026",
+                        "Get personalized access to solutions for your ",
+                        " products. Download the ",
+                        " Support app. Learn how to set up and use your",
+                        " Find all the topics, resources, and \u2026",
+                        "\u00a0\u00b7 CUPERTINO, CALIFORNIA ",
+                        " today introduced ",
+                        " Sports, a free app for iPhone that gives sports fans access to real-time scores, stats, and more. Designed \u2026"
+                    ]
+                }
+            },
+            "created_at": "2024-02-22 11:34:21",
+            "updated_at": "2024-02-22 11:34:22",
+            "page": 1,
+            "url": "https://www.bing.com/search?form=QBLH&q=apple",
+            "job_id": "7166394783118700545",
+            "status_code": 200,
+            "parser_type": "custom"
+        }
+    ],
+    "job": {
+        "callback_url": "https://realtime.oxylabs.io:443/api/done",
+        "client_id": 46759,
+        "context": [
+            {
+                "key": "force_headers",
+                "value": null
+            },
+            {
+                "key": "safe_search",
+                "value": null
+            }
+        ],
+        "created_at": "2024-02-22 11:34:21",
+        "domain": "com",
+        "geo_location": "",
+        "id": "7166394783118700545",
+        "limit": 10,
+        "locale": "",
+        "pages": 1,
+        "parse": true,
+        "parser_type": "custom",
+        "parsing_instructions": {
+            "bing_search_results": {
+                "url": {
+                    "_fns": [
+                        {
+                            "_fn": "xpath",
+                            "_args": [
+                                "//li[@class='b_algo']/h2/a/@href"
+                            ]
+                        }
+                    ]
+                },
+                "title": {
+                    "_fns": [
+                        {
+                            "_fn": "xpath",
+                            "_args": [
+                                "//li[@class='b_algo']/h2/a/text()"
+                            ]
+                        }
+                    ]
+                },
+                "description": {
+                    "_fns": [
+                        {
+                            "_fn": "xpath",
+                            "_args": [
+                                "//li[@class='b_algo']/div[@class='b_caption']/p/text()"
+                            ]
+                        }
+                    ]
+                }
+            }
+        },
+        "browser_instructions": null,
+        "render": "",
+        "url": null,
+        "query": "apple",
+        "source": "bing_search",
+        "start_page": 1,
+        "status": "done",
+        "storage_type": null,
+        "storage_url": null,
+        "subdomain": "www",
+        "content_encoding": "utf-8",
+        "updated_at": "2024-02-22 11:34:22",
+        "user_agent_type": "desktop",
+        "session_info": null,
+        "statuses": [],
+        "client_notes": null,
+        "_links": [
+            {
+                "rel": "self",
+                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545",
+                "method": "GET"
+            },
+            {
+                "rel": "results",
+                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545/results",
+                "method": "GET"
+            },
+            {
+                "rel": "results-html",
+                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545/results?type=raw",
+                "method": "GET"
+            },
+            {
+                "rel": "results-parsed",
+                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545/results?type=parsed",
+                "method": "GET"
+            }
+        ]
+    }
+}
