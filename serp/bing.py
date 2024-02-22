@@ -6,12 +6,12 @@ import dataclasses
 import json
 
 BingSearchAcceptedDomainParameters = [
-    Domain.DOMAIN_COM,
-    Domain.DOMAIN_RU,
-    Domain.DOMAIN_UA,
-    Domain.DOMAIN_BY,
-    Domain.DOMAIN_KZ,
-    Domain.DOMAIN_TR,
+    Domain.DOMAIN_COM.value,
+    Domain.DOMAIN_RU.value,
+    Domain.DOMAIN_UA.value,
+    Domain.DOMAIN_BY.value,
+    Domain.DOMAIN_KZ.value,
+    Domain.DOMAIN_TR.value,
 ]
 
 @dataclasses.dataclass
@@ -39,9 +39,7 @@ class BingSearchOpts(BaseSearchOpts):
 
         if self.limit <= 0 or self.pages <= 0 or self.start_page <= 0:
             raise ValueError("Limit, pages and start_page parameters must be greater than 0")
-        
-        if self.limit > 50:
-            raise ValueError("Limit parameter must be less than or equal to 50")
+
 
 @dataclasses.dataclass
 class BingUrlOpts(BaseUrlOpts):
@@ -117,7 +115,7 @@ class Bing:
         # Prepare payload
         payload = {
             "source": Source.BingSearch.value,
-            "domain": opts.domain.value,
+            "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
             "pages": opts.pages,

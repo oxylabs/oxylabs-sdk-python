@@ -1,7 +1,7 @@
-from serp.serp import SerpClient, SerpClientAsync
-from serp.bing import Bing, BingSearchOpts
+from serp.serp import SerpClient
+from serp.bing import Bing
 import json
-
+from utils import constants
 
 # Initialize the clients
 serp_client = SerpClient('hamdan', 'gzR4pHW9eiEM#Ky')
@@ -12,6 +12,8 @@ browser = Bing(serp_client)
 # # results = browser.scrape_bing_search('apple')
 results = browser.scrape_bing_search('ford', {
     'parse': True,
+    'locale': constants.Locale.LOCALE_FR.value,
+    'domain': constants.Domain.DOMAIN_TR.value,
 })
 
 

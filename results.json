@@ -2,38 +2,102 @@
     "results": [
         {
             "content": {
-                "parse_status_code": 12000,
-                "bing_search_results": {
-                    "url": [
-                        "https://en.wikipedia.org/wiki/Apple_Inc.",
-                        "https://support.apple.com/hu-hu",
-                        "https://www.apple.com/newsroom/2024/02/introducing-apple-sports-a-new-app-for-sports-fans/"
-                    ],
-                    "title": [
-                        "Apple Inc. - Wikipedia",
-                        "Hivatalos Apple-t\u00e1mogat\u00e1s",
-                        "Introducing Apple Sports, a new app for sports fans - Apple"
-                    ],
-                    "description": [
-                        "Naprak\u00e9sz inform\u00e1ci\u00f3kat kaphatsz az ",
-                        "-k\u00e9sz\u00fcl\u00e9keiddel kapcsolatban, p\u00e9ld\u00e1ul a j\u00f3t\u00e1ll\u00e1sr\u00f3l, a jav\u00edt\u00e1sokr\u00f3l \u00e9s m\u00e9g sok minden m\u00e1sr\u00f3l. Bejelentkez\u00e9s a Saj\u00e1t t\u00e1mogat\u00e1s \u2026",
-                        "Get personalized access to solutions for your ",
-                        " products. Download the ",
-                        " Support app. Learn how to set up and use your",
-                        " Find all the topics, resources, and \u2026",
-                        "\u00a0\u00b7 CUPERTINO, CALIFORNIA ",
-                        " today introduced ",
-                        " Sports, a free app for iPhone that gives sports fans access to real-time scores, stats, and more. Designed \u2026"
+                "url": "https://www.bing.com/search?form=QBLH&setLang=fr&q=ford",
+                "page": 1,
+                "results": {
+                    "paid": [],
+                    "organic": [
+                        {
+                            "pos": 1,
+                            "url": "https://www.ford.com/",
+                            "desc": "WebExplore the latest models of Ford vehicles, including hybrid and electric cars, SUVs, crossovers, trucks, vans and more. Learn about tax savings, special offers, connected \u2026",
+                            "title": "Ford\u00ae - New Hybrid & Electric Vehicles, SUVs, Crossovers, Trucks, \u2026",
+                            "url_shown": "https://www.ford.com",
+                            "pos_overall": 1
+                        },
+                        {
+                            "pos": 2,
+                            "url": "https://www.centroamerica.ford.com/es/slv/",
+                            "desc": "WebConoce lo que Ford El Salvador tiene para ti. Descubre los Veh\u00edculos, Herramientas de Compra, Beneficios de Mantenimiento para Propietarios y todo lo que necesitas para \u2026",
+                            "title": "Ford El Salvador | Nuevos Autos, SUVs, Crossovers y Pickups",
+                            "url_shown": "https://www.centroamerica.ford.com/es/slv",
+                            "pos_overall": 2
+                        },
+                        {
+                            "pos": 3,
+                            "url": "https://www.fordelsalvador.com/",
+                            "desc": "WebNueva Generaci\u00f3n Ford Ranger. Ver m\u00e1s. Solicitar precio. Ford F-150. Ver m\u00e1s. Solicitar precio. Utilidad es su segundo nombre VER CROSSOVERS Y SUVS . Averta. Averta. \u2026",
+                            "title": "Ford El Salvador",
+                            "url_shown": "https://www.fordelsalvador.com",
+                            "pos_overall": 3
+                        },
+                        {
+                            "pos": 4,
+                            "url": "https://www.ford.fr/voitures-neuves",
+                            "desc": "WebD\u00e9couvrez notre large gamme de voitures Ford : Citadines, SUV, sportives, familiales, hybrides ou \u00e9lectriques... Choisissez le v\u00e9hicule de vos envies. Aide et Contact",
+                            "title": "Achat voiture neuve : nos v\u00e9hicules particuliers Ford | Ford FR",
+                            "url_shown": "https://www.ford.fr/voitures-neuves",
+                            "pos_overall": 4
+                        },
+                        {
+                            "pos": 5,
+                            "url": "https://www.ford.fr/",
+                            "desc": "Web24H pour vous faire aimer le E-Transit. R\u00e9server un essai Trouver votre concessionnaire. Neuves ou occasions, Ford France vous propose un catalogue unique de voitures et d'utilitaires, \u00e0 l'achat ou en location.",
+                            "title": "Le Site Officiel de Ford France | Ford FR",
+                            "url_shown": "https://www.ford.fr",
+                            "pos_overall": 5
+                        },
+                        {
+                            "pos": 6,
+                            "url": "https://fr.ford.ca/",
+                            "desc": "WebExplorez l\u2019excitante gamme Ford de VUS, multisegments, v\u00e9hicules hybrides, camions et fourgons. \u00c9quipez le v\u00f4tre et planifiez un essai routier d\u00e8s aujourd\u2019hui.",
+                            "title": "Ford \u2013 Voitures, camions, VUS, hybrides et VUM neufs | V\u00e9hicules \u2026",
+                            "url_shown": "https://fr.ford.ca",
+                            "pos_overall": 6
+                        },
+                        {
+                            "pos": 7,
+                            "url": "https://www.fordelsalvador.com/bronco-sport.php",
+                            "desc": "WebFord Bronco Sport cuenta con tracci\u00f3n 4x4 est\u00e1ndar, G.O.A.T. ModesTM (Goes Over Any Type of Terrain) y un sistema de suspensi\u00f3n H.O.S.S. (High-Performance, Off-Road, \u2026",
+                            "title": "Ford El Salvador",
+                            "url_shown": "https://www.fordelsalvador.com/bronco-sport.php",
+                            "pos_overall": 7
+                        },
+                        {
+                            "pos": 8,
+                            "url": "https://www.ford.com/new-cars/",
+                            "desc": "WebExplore the family of Ford cars, from the iconic Mustang to the innovative Mustang Shelby GT350 and GT500. Find the best car for you with fuel economy, technology, safety and \u2026",
+                            "title": "New Cars from Ford\u00ae | Find the Best Car for You | Ford.com",
+                            "url_shown": "https://www.ford.com/new-cars",
+                            "pos_overall": 8
+                        },
+                        {
+                            "pos": 9,
+                            "url": "https://fr.ford.ca/trucks/f150/",
+                            "desc": "WebAvec huit garnitures, six moteurs et une multitude d\u2019options d\u2019emballage, les possibilit\u00e9s sont infinies lors de la conception de votre camion Ford F-150\u00ae 2023. Explorez le \u2026",
+                            "title": "Camion Ford F-150\u00ae 2023 | Prix, photos, sp\u00e9cifications et plus",
+                            "url_shown": "https://fr.ford.ca/trucks/f150",
+                            "pos_overall": 9
+                        },
+                        {
+                            "pos": 10,
+                            "url": "https://fordelsalvador.com/territory.php",
+                            "desc": "WebFord Territory llega con Motor EcoBoost\u00ae I4 de 1.8L y tecnolog\u00eda de punta Ford, para que obtengas el mejor desempe\u00f1o y disfrutes de cada viaje. Gran Experiencia de \u2026",
+                            "title": "Ford El Salvador",
+                            "url_shown": "https://fordelsalvador.com/territory.php",
+                            "pos_overall": 10
+                        }
                     ]
-                }
+                },
+                "parse_status_code": 12000
             },
-            "created_at": "2024-02-22 11:34:21",
-            "updated_at": "2024-02-22 11:34:22",
+            "created_at": "2024-02-22 12:20:06",
+            "updated_at": "2024-02-22 12:20:55",
             "page": 1,
-            "url": "https://www.bing.com/search?form=QBLH&q=apple",
-            "job_id": "7166394783118700545",
+            "url": "https://www.bing.com/search?form=QBLH&setLang=fr&q=ford",
+            "job_id": "7166406296726451201",
             "status_code": 200,
-            "parser_type": "custom"
+            "parser_type": ""
         }
     ],
     "job": {
@@ -49,53 +113,20 @@
                 "value": null
             }
         ],
-        "created_at": "2024-02-22 11:34:21",
-        "domain": "com",
+        "created_at": "2024-02-22 12:20:06",
+        "domain": "tr",
         "geo_location": "",
-        "id": "7166394783118700545",
+        "id": "7166406296726451201",
         "limit": 10,
-        "locale": "",
+        "locale": "fr",
         "pages": 1,
         "parse": true,
-        "parser_type": "custom",
-        "parsing_instructions": {
-            "bing_search_results": {
-                "url": {
-                    "_fns": [
-                        {
-                            "_fn": "xpath",
-                            "_args": [
-                                "//li[@class='b_algo']/h2/a/@href"
-                            ]
-                        }
-                    ]
-                },
-                "title": {
-                    "_fns": [
-                        {
-                            "_fn": "xpath",
-                            "_args": [
-                                "//li[@class='b_algo']/h2/a/text()"
-                            ]
-                        }
-                    ]
-                },
-                "description": {
-                    "_fns": [
-                        {
-                            "_fn": "xpath",
-                            "_args": [
-                                "//li[@class='b_algo']/div[@class='b_caption']/p/text()"
-                            ]
-                        }
-                    ]
-                }
-            }
-        },
+        "parser_type": null,
+        "parsing_instructions": null,
         "browser_instructions": null,
-        "render": "",
+        "render": "html",
         "url": null,
-        "query": "apple",
+        "query": "ford",
         "source": "bing_search",
         "start_page": 1,
         "status": "done",
@@ -103,7 +134,7 @@
         "storage_url": null,
         "subdomain": "www",
         "content_encoding": "utf-8",
-        "updated_at": "2024-02-22 11:34:22",
+        "updated_at": "2024-02-22 12:20:55",
         "user_agent_type": "desktop",
         "session_info": null,
         "statuses": [],
@@ -111,22 +142,22 @@
         "_links": [
             {
                 "rel": "self",
-                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545",
+                "href": "http://data.oxylabs.io/v1/queries/7166406296726451201",
                 "method": "GET"
             },
             {
                 "rel": "results",
-                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545/results",
+                "href": "http://data.oxylabs.io/v1/queries/7166406296726451201/results",
                 "method": "GET"
             },
             {
                 "rel": "results-html",
-                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545/results?type=raw",
+                "href": "http://data.oxylabs.io/v1/queries/7166406296726451201/results?type=raw",
                 "method": "GET"
             },
             {
                 "rel": "results-parsed",
-                "href": "http://data.oxylabs.io/v1/queries/7166394783118700545/results?type=parsed",
+                "href": "http://data.oxylabs.io/v1/queries/7166406296726451201/results?type=parsed",
                 "method": "GET"
             }
         ]

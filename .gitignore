@@ -3,17 +3,9 @@
 *.pyo
 *.pyd
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
 *.egg-info/
 dist/
 build/
-*.egg-info/
-.eggs/
-*.egg
-*.egg-info
-*.egg-info/
 .venv/
 *.json
 *.html
