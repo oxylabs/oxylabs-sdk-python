@@ -15,3 +15,6 @@ build/
 *.egg-info
 *.egg-info/
 .venv/
+*.json
+*.html
+*.txt
