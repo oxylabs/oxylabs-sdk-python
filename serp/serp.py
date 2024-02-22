@@ -15,7 +15,7 @@ class SerpClient:
         api_credentials = ApiCredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
-    def req(self, json_payload: dict, method: str) -> Optional[requests.Response]:
+    def req(self, json_payload, method):
         """
         Proxy method to call the req method of the internal client.
 

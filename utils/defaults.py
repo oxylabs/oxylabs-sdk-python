@@ -2,17 +2,17 @@ from utils.constants import UserAgent, Domain
 from datetime import timedelta
 
 # Constants
-DEFAULT_USER_AGENT: str = UserAgent.UA_DESKTOP
-DEFAULT_DOMAIN: str = Domain.DOMAIN_COM
-DEFAULT_START_PAGE: int = 1
-DEFAULT_PAGES: int = 1
-DEFAULT_LIMIT_SERP: int = 10
-DEFAULT_LIMIT_ECOMMERCE: int = 48
-SYNC_BASE_URL: str = "https://realtime.oxylabs.io/v1/queries"
-ASYNC_BASE_URL: str = "https://data.oxylabs.io/v1/queries"
+DEFAULT_USER_AGENT = UserAgent.UA_DESKTOP
+DEFAULT_DOMAIN = Domain.DOMAIN_COM
+DEFAULT_START_PAGE = 1
+DEFAULT_PAGES = 1
+DEFAULT_LIMIT_SERP = 10
+DEFAULT_LIMIT_ECOMMERCE = 48
+SYNC_BASE_URL = "https://realtime.oxylabs.io/v1/queries"
+ASYNC_BASE_URL = "https://data.oxylabs.io/v1/queries"
 
-DEFAULT_TIMEOUT: timedelta = timedelta(seconds=50)
-DEFAULT_POLL_INTERVAL: timedelta = timedelta(seconds=2)
+DEFAULT_TIMEOUT = timedelta(seconds=50)
+DEFAULT_POLL_INTERVAL = timedelta(seconds=2)
 
 # Functions to set default values
 def set_default_domain(domain: str) -> str:

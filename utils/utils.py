@@ -17,14 +17,14 @@ class BaseSearchOpts:
         parse_instructions (dict): The instructions for parsing the search results.
         poll_interval (int): The interval (in seconds) between polling for search results.
     """
-    domain: Domain
-    start_page: int
-    pages: int
-    limit: int
-    user_agent: UserAgent
-    callback_url: str
-    parse_instructions: dict
-    poll_interval: int
+    domain: Domain = None
+    start_page: int = 1
+    pages: int = 1
+    limit: int = 10
+    user_agent: UserAgent = UserAgent.UA_DESKTOP
+    callback_url: str = None
+    parse_instructions: dict = None
+    poll_interval: int = 0
 
 @dataclasses.dataclass
 class BaseUrlOpts:

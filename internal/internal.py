@@ -24,11 +24,11 @@ class ApiCredentials:
 
 
 class Client:
-    def __init__(self, base_url: str, api_credentials: ApiCredentials):
+    def __init__(self, base_url, api_credentials):
         self.base_url = base_url
         self.api_credentials = api_credentials
 
-    def req(self, json_payload: dict, method: str) -> Optional[requests.Response]:
+    def req(self, json_payload, method):
         # Prepare headers
         headers = {
             "Content-Type": "application/json",
@@ -38,9 +38,9 @@ class Client:
         # Make the request
         try:
             if method == "POST":
-                response = requests.post(self.base_url, headers=headers, data=json_payload, timeout=50)
+                response = requests.post(self.base_url, headers=headers, data=json_payload, timeout=500)
             elif method == "GET":
-                response = requests.get(self.base_url, headers=headers, timeout=50)
+                response = requests.get(self.base_url, headers=headers, timeout=500)
             else:
                 print(f"Unsupported method: {method}")
                 return None
