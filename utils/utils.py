@@ -1,5 +1,8 @@
 import dataclasses
 from utils.constants import UserAgent, Domain
+from urllib.parse import urlparse
+from utils.defaults import DEFAULT_TIMEOUT
+
 
 
 @dataclasses.dataclass
@@ -17,14 +20,16 @@ class BaseSearchOpts:
         parse_instructions (dict): The instructions for parsing the search results.
         poll_interval (int): The interval (in seconds) between polling for search results.
     """
+
     domain: Domain = None
     start_page: int = 1
     pages: int = 1
     limit: int = 10
-    user_agent: UserAgent = UserAgent.UA_DESKTOP
+    user_agent_type: UserAgent = UserAgent.UA_DESKTOP
     callback_url: str = None
     parse_instructions: dict = None
     poll_interval: int = 0
+
 
 @dataclasses.dataclass
 class BaseUrlOpts:
@@ -37,7 +42,44 @@ class BaseUrlOpts:
         parse_instructions (dict): The instructions for parsing the search results.
         poll_interval (int): The interval (in seconds) between polling for search results.
     """
-    user_agent: UserAgent
+
+    user_agent_type: UserAgent
     callback_url: str
     parse_instructions: dict
     poll_interval: int
+    
+    
+class Config:
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(Config, cls).__new__(cls, *args, **kwargs)
+            cls._instance.timeout = DEFAULT_TIMEOUT
+        return cls._instance
+
+    def set_timeout(self, timeout):
+        self.timeout = timeout
+        return self.timeout
+
+def validate_url(input_url, host):
+    # Check if the URL is empty
+    if not input_url:
+        raise ValueError("URL parameter is empty")
+
+    # Parse the URL
+    parsed_url = urlparse(input_url)
+
+    # Check if the scheme (protocol) is present and not empty
+    if not parsed_url.scheme:
+        raise ValueError("URL is missing scheme")
+
+    # Check if the host is present and not empty
+    if not parsed_url.netloc:
+        raise ValueError("URL is missing a host")
+
+    # Check if the host matches the expected domain or host
+    if host not in parsed_url.netloc:
+        raise ValueError(f"URL does not belong to {host}")
+
+    return None
