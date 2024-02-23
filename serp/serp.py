@@ -1,7 +1,6 @@
 from internal.internal import Client, ApiCredentials
-from typing import Optional
 from utils.defaults import SYNC_BASE_URL
-import requests
+
 
 class SerpClient:
     def __init__(self, username, password):
@@ -39,4 +38,4 @@ class SerpClientAsync:
             password (str): The password for API authentication.
         """
         api_credentials = ApiCredentials(username, password)
-        self.client = Client('AsyncBaseUrl', api_credentials)
+        self.client = Client("AsyncBaseUrl", api_credentials)

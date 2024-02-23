@@ -2,8 +2,8 @@ from utils.constants import UserAgent, Domain
 from datetime import timedelta
 
 # Constants
-DEFAULT_USER_AGENT = UserAgent.UA_DESKTOP
-DEFAULT_DOMAIN = Domain.DOMAIN_COM
+DEFAULT_USER_AGENT = UserAgent.UA_DESKTOP.value
+DEFAULT_DOMAIN = Domain.DOMAIN_COM.value
 DEFAULT_START_PAGE = 1
 DEFAULT_PAGES = 1
 DEFAULT_LIMIT_SERP = 10
@@ -11,8 +11,9 @@ DEFAULT_LIMIT_ECOMMERCE = 48
 SYNC_BASE_URL = "https://realtime.oxylabs.io/v1/queries"
 ASYNC_BASE_URL = "https://data.oxylabs.io/v1/queries"
 
-DEFAULT_TIMEOUT = timedelta(seconds=50)
-DEFAULT_POLL_INTERVAL = timedelta(seconds=2)
+DEFAULT_TIMEOUT = 50
+DEFAULT_POLL_INTERVAL = 2
+
 
 # Functions to set default values
 def set_default_domain(domain: str) -> str:
@@ -27,6 +28,7 @@ def set_default_domain(domain: str) -> str:
     """
     return domain if domain else DEFAULT_DOMAIN
 
+
 def set_default_start_page(start_page: int) -> int:
     """
     Sets the default start page for the application.
@@ -38,6 +40,7 @@ def set_default_start_page(start_page: int) -> int:
     - int: The start page that was set as the default, or the default start page if start_page is None.
     """
     return start_page if start_page else DEFAULT_START_PAGE
+
 
 def set_default_pages(pages: int) -> int:
     """
@@ -52,6 +55,7 @@ def set_default_pages(pages: int) -> int:
     """
     return pages if pages else DEFAULT_PAGES
 
+
 def set_default_limit(limit: int, default_limit: int) -> int:
     """
     Sets the default limit if the limit is not provided.
@@ -65,6 +69,7 @@ def set_default_limit(limit: int, default_limit: int) -> int:
     """
     return limit if limit else default_limit
 
+
 def set_default_user_agent(user_agent):
     """
     Sets the default user agent if provided, otherwise returns the default user agent.
@@ -75,7 +80,7 @@ def set_default_user_agent(user_agent):
     Returns:
         str: The default user agent.
     """
-    return user_agent.value if user_agent else DEFAULT_USER_AGENT.value
+    return user_agent if user_agent else DEFAULT_USER_AGENT
 
 
 def set_default_hotel_occupancy(ctx: dict) -> int:
@@ -90,6 +95,7 @@ def set_default_hotel_occupancy(ctx: dict) -> int:
     """
     return ctx.get("hotel_occupancy", 2)
 
+
 def set_default_sort_by(ctx: dict) -> str:
     """
     Sets the default sort_by value based on the provided context.
@@ -102,6 +108,7 @@ def set_default_sort_by(ctx: dict) -> str:
     """
     return ctx.get("sort_by", "r")
 
+
 def set_default_http_method(ctx: dict) -> str:
     """
     Sets the default HTTP method for the given context.
@@ -113,6 +120,7 @@ def set_default_http_method(ctx: dict) -> str:
         str: The default HTTP method. If not specified in the context, "get" is returned.
     """
     return ctx.get("http_method", "get")
+
 
 def set_default_content_encoding(content_encoding: str) -> str:
     """

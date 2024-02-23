@@ -1,7 +1,7 @@
 import requests
-import json
-from typing import Optional
 import base64
+from utils.utils import Config
+
 
 class ApiCredentials:
     def __init__(self, username, password):
@@ -32,24 +32,37 @@ class Client:
         # Prepare headers
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
+            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
+
+        config = Config()
+        timeout = config.timeout
+        print(f"Timeout in internal: {timeout}")
 
         # Make the request
         try:
             if method == "POST":
-                response = requests.post(self.base_url, headers=headers, data=json_payload, timeout=500)
+                response = requests.post(
+                    self.base_url, headers=headers, data=json_payload, timeout=timeout
+                )
             elif method == "GET":
-                response = requests.get(self.base_url, headers=headers, timeout=500)
+                response = requests.get(self.base_url, headers=headers, timeout=timeout)
             else:
                 print(f"Unsupported method: {method}")
                 return None
 
             response.raise_for_status()
-            return response
+
+            if response.status_code == 200:
+                return response.json()
+            else:
+                print(f"Error occurred: {response.status_code}")
+                return None
 
         except requests.exceptions.Timeout:
-            print("Timeout error")
+            print(
+                f"Timeout error. The request to {self.base_url} with method {method} has timed out."
+            )
             return None
         except requests.exceptions.HTTPError as err:
             print(f"HTTP error occurred: {err}")
