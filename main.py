@@ -2,8 +2,8 @@ from serp.serp import SerpClient, SerpClientAsync
 from serp.bing import Bing
 from serp.bing_async import BingAsync
 import json
-from utils import constants
-import aiohttp
+from dotenv import load_dotenv
+import os
 import asyncio
 
 
@@ -22,11 +22,15 @@ import asyncio
     
 # )
 
+# Load the environment variables from .env file
+load_dotenv()
+
 async def main():
-    browser = BingAsync(serp_client)
+    serp_client = SerpClientAsync(os.getenv('OXYLABS_USER'), os.getenv('OXYLABS_PASSWORD'))
+    client = BingAsync(serp_client)
 
     # Await the async method and get the results
-    results = await browser.scrape_bing_search_async(
+    results = await client.scrape_bing_search(
         "nike",
         {
             'start_page': 1,

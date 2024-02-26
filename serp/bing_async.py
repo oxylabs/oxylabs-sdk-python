@@ -13,8 +13,6 @@ from utils.defaults import (
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url, Config
 from utils.constants import Render, Domain, UserAgent, Source
 import dataclasses
-import aiohttp
-import asyncio
 
 
 BingSearchAcceptedDomainParameters = [
@@ -79,7 +77,26 @@ class BingAsync:
 
         return opts
     
-    async def scrape_bing_search_async(self, query, opts=None):
+    async def get_payload_response(self, payload):
+        """
+        Processes the payload asynchronously, starts a job, polls for its completion, and retrieves the results.
+
+        Args:
+            payload (dict): The payload for the request.
+
+        Returns:
+            The response from the server after the job is completed.
+        """
+        # Remove empty or null values from the payload
+        payload = {k: v for k, v in payload.items() if v is not None}
+
+        # Start the job and get its ID
+        job_id = await self.client.get_job_id(payload)
+
+        # Poll for the job status until completion and return the results
+        return await self.client.poll_job_status(job_id)
+    
+    async def scrape_bing_search(self, query, opts=None):
         # Prepare your JSON payload based on the query and opts
         defaults = {
             "domain": DEFAULT_DOMAIN,
@@ -129,7 +146,6 @@ class BingAsync:
         if opts.parse_instructions is not None:
             payload["parsing_instructions"] = opts.parse_instructions
 
-        job_id = await self.client.get_job_id(payload)
-        await self.client.poll_job_status(job_id)
-        return await self.client.get_http_resp(job_id)
+        response = await self.get_payload_response(payload)
+        return response
     

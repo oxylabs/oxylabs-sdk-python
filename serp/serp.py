@@ -63,16 +63,4 @@ class SerpClientAsync:
         Returns:
             None: This method returns None but will raise an exception if the job is faulted.
         """
-        await self.client.poll_job_status(job_id, poll_interval)
-
-    async def get_http_resp(self, job_id):
-        """
-        Wrapper method to get the HTTP response for a completed job.
-
-        Args:
-            job_id (str): The job ID whose results are to be fetched.
-
-        Returns:
-            dict: The JSON response containing the job's results.
-        """
-        return await self.client.get_http_resp(job_id)
+        return await self.client.poll_job_status(job_id, poll_interval)
