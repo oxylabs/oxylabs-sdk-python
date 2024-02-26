@@ -1,72 +1,31 @@
 from serp.serp import SerpClient
 from serp.bing import Bing
+from serp.baidu import Baidu
+from serp.yandex import Yandex
 import json
-from utils import constants
-
+from utils.constants import Render, Domain, UserAgent, Locale
+import random
+import time
 
 # Initialize the clients
-serp_client = SerpClient("hamdan", "gzR4pHW9eiEM#Ky")
+serp_client = SerpClient("serpuman", "Alpha#Beta#123")
 
+bing = Bing(serp_client)
+baidu = Baidu(serp_client)
+yandex = Yandex(serp_client)
 
-browser = Bing(serp_client)
+results = bing.scrape_bing_search("nike",{'parse': True},4)
+results = baidu.scrape_baidu_search("nike",{'parse': True,'domain':'cn'},1)
+results = yandex.scrape_yandex_search("nike")
 
-results = browser.scrape_bing_search(
-    "iphone",
-    {
-        'start_page': 1,
-        'parse': True,
-    },
-    
-)
-
-
-# results = browser.scrape_bing_url('https://www.bing.com/search?form=MY0291&OCID=MY0291&q=Bing+AI&showconv=1',{
-#     'user_agent_type': constants.UserAgent.UA_DESKTOP_CHROME.value,
-#     'geo_location': 'Lahore, Punjab, Pakistan',
-#     'parse': True,
-# },3)
-
-# results = browser.scrape_bing_search('pakistan', {
-#     'parse': True,
-#         "parse_instructions": {
-#         "bing_search_results": {
-#             "title": {
-#                 "_fns": [
-#                     {
-#                         "_fn": "xpath",
-#                         "_args": [
-#                             "//li[@class='b_algo']/h2/a/text()"
-#                         ]
-#                     }
-#                 ]
-#             },
-#             "description": {
-#                 "_fns": [
-#                     {
-#                         "_fn": "xpath",
-#                         "_args": [
-#                             "//li[@class='b_algo']/div[@class='b_caption']/p/text()"
-#                         ]
-#                     }
-#                 ]
-#             },
-#             "url": {
-#                 "_fns": [
-#                     {
-#                         "_fn": "xpath",
-#                         "_args": [
-#                             "//li[@class='b_algo']/h2/a/@href"
-#                         ]
-#                     }
-#                 ]
-#             }
-#         }
-#     }
-# })
+# results = bing.scrape_bing_url("https://www.bing.com/search?q=nike")
+# results = baidu.scrape_baidu_url("https://www.baidu.com/s?wd=nike")
+# results = yandex.scrape_yandex_url("https://yandex.com/search/?text=nike&lr=10616&search_source=yacom_desktop_common")
 
 
 
 # print(type(results)) results is dict now write to file as json
-with open("results.json", "w") as f:
-    json.dump(results, f, indent=4)
-    
+# with open("results.json", "w") as f:
+#     json.dump(results, f, indent=4)
+
+
