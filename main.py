@@ -1,23 +1,46 @@
-from serp.serp import SerpClient
+from serp.serp import SerpClient, SerpClientAsync
 from serp.bing import Bing
+from serp.bing_async import BingAsync
 import json
 from utils import constants
+import aiohttp
+import asyncio
 
 
 # Initialize the clients
-serp_client = SerpClient("hamdan", "gzR4pHW9eiEM#Ky")
+# serp_client = SerpClient("hamdan", "gzR4pHW9eiEM#Ky")
 
 
-browser = Bing(serp_client)
+# browser = Bing(serp_client)
 
-results = browser.scrape_bing_search(
-    "iphone",
-    {
-        'start_page': 1,
-        'parse': True,
-    },
+# results = browser.scrape_bing_search(
+#     "iphone",
+#     {
+#         'start_page': 1,
+#         'parse': True,
+#     },
     
-)
+# )
+
+async def main():
+    browser = BingAsync(serp_client)
+
+    # Await the async method and get the results
+    results = await browser.scrape_bing_search_async(
+        "nike",
+        {
+            'start_page': 1,
+            'parse': True,
+        },
+    )
+
+    # Now that you have awaited the results, you can dump it into a file
+    with open('results.json', 'w') as f:
+        json.dump(results, f, indent=4)
+
+# Ensure the main coroutine is executed
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 # results = browser.scrape_bing_url('https://www.bing.com/search?form=MY0291&OCID=MY0291&q=Bing+AI&showconv=1',{
@@ -67,6 +90,3 @@ results = browser.scrape_bing_search(
 
 
 # print(type(results)) results is dict now write to file as json
-with open("results.json", "w") as f:
-    json.dump(results, f, indent=4)
-    

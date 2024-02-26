@@ -1,5 +1,7 @@
 import requests
 import base64
+import aiohttp
+import asyncio
 from utils.utils import Config
 
 
@@ -70,3 +72,48 @@ class Client:
         except requests.exceptions.RequestException as err:
             print(f"Error occurred: {err}")
             return None
+
+class ClientAsync:
+    def __init__(self, base_url, api_credentials):
+        self.base_url = base_url
+        self.api_credentials = api_credentials
+
+    async def get_job_id(self, json_payload):
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
+        }
+        async with aiohttp.ClientSession() as session:
+            async with session.post(self.base_url, headers=headers, json=json_payload) as response:
+                response.raise_for_status()
+                data = await response.json()
+                return data['id']
+
+    async def poll_job_status(self, job_id, poll_interval=5):
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
+        }
+        job_status_url = f"{self.base_url}/{job_id}"  # Adjust URL path as needed
+        async with aiohttp.ClientSession() as session:
+            while True:
+                async with session.get(job_status_url, headers=headers) as response:
+                    response.raise_for_status()
+                    job = await response.json()
+                    print("status", job['status'])
+                    if job['status'] == 'done':
+                        return
+                    elif job['status'] == 'faulted':
+                        raise Exception("Job faulted")
+                await asyncio.sleep(poll_interval)
+
+    async def get_http_resp(self, job_id):
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
+        }
+        result_url = f"{self.base_url}/{job_id}/results"  # Adjust URL path as needed
+        async with aiohttp.ClientSession() as session:
+            async with session.get(result_url, headers=headers) as response:
+                response.raise_for_status()
+                return await response.json()
