@@ -88,13 +88,24 @@ class ClientAsync:
                 response.raise_for_status()
                 data = await response.json()
                 return data['id']
+            
+    async def get_http_resp(self, job_id):
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
+        }
+        result_url = f"{self.base_url}/{job_id}/results"
+        async with aiohttp.ClientSession() as session:
+            async with session.get(result_url, headers=headers) as response:
+                response.raise_for_status()
+                return await response.json()
 
     async def poll_job_status(self, job_id, poll_interval=5):
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
         }
-        job_status_url = f"{self.base_url}/{job_id}"  # Adjust URL path as needed
+        job_status_url = f"{self.base_url}/{job_id}"
         async with aiohttp.ClientSession() as session:
             while True:
                 async with session.get(job_status_url, headers=headers) as response:
@@ -102,18 +113,9 @@ class ClientAsync:
                     job = await response.json()
                     print("status", job['status'])
                     if job['status'] == 'done':
-                        return
+                        resp = await self.get_http_resp(job_id)
+                        return resp
                     elif job['status'] == 'faulted':
                         raise Exception("Job faulted")
                 await asyncio.sleep(poll_interval)
 
-    async def get_http_resp(self, job_id):
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
-        }
-        result_url = f"{self.base_url}/{job_id}/results"  # Adjust URL path as needed
-        async with aiohttp.ClientSession() as session:
-            async with session.get(result_url, headers=headers) as response:
-                response.raise_for_status()
-                return await response.json()
