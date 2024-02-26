@@ -1,8 +1,7 @@
 import dataclasses
-from utils.constants import UserAgent, Domain
+from utils.constants import UserAgent, Domain,Render
 from urllib.parse import urlparse
 from utils.defaults import DEFAULT_TIMEOUT
-
 
 
 @dataclasses.dataclass
@@ -19,6 +18,7 @@ class BaseSearchOpts:
         callback_url (str): The URL to send the search results to.
         parse_instructions (dict): The instructions for parsing the search results.
         poll_interval (int): The interval (in seconds) between polling for search results.
+        parse (bool): Whether to parse the search results.
     """
 
     domain: Domain = None
@@ -29,6 +29,7 @@ class BaseSearchOpts:
     callback_url: str = None
     parse_instructions: dict = None
     poll_interval: int = 0
+    parse: bool = False
 
 
 @dataclasses.dataclass
@@ -41,14 +42,25 @@ class BaseUrlOpts:
         callback_url (str): The URL to send the search results to.
         parse_instructions (dict): The instructions for parsing the search results.
         poll_interval (int): The interval (in seconds) between polling for search results.
+        parse (bool): Whether to parse the search results.
     """
 
-    user_agent_type: UserAgent
-    callback_url: str
-    parse_instructions: dict
-    poll_interval: int
-    
-    
+    user_agent_type: UserAgent = UserAgent.UA_DESKTOP
+    callback_url: str = None
+    parse_instructions: dict = None
+    poll_interval: int = 0
+    parse: bool = False
+
+
+class BaseGoogleOpts:
+    geo_location: str = None
+    user_agent: UserAgent = None
+    render: Render = None
+    callback_url: str = None
+    parse_instructions: None
+    poll_interval: None
+
+
 class Config:
     _instance = None
 
@@ -61,6 +73,10 @@ class Config:
     def set_timeout(self, timeout):
         self.timeout = timeout
         return self.timeout
+
+    def reset_timeout(self):
+        self.timeout = DEFAULT_TIMEOUT
+
 
 def validate_url(input_url, host):
     # Check if the URL is empty

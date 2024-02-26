@@ -37,7 +37,6 @@ class Client:
 
         config = Config()
         timeout = config.timeout
-        print(f"Timeout in internal: {timeout}")
 
         # Make the request
         try:
@@ -45,6 +44,7 @@ class Client:
                 response = requests.post(
                     self.base_url, headers=headers, data=json_payload, timeout=timeout
                 )
+                print(response.status_code)
             elif method == "GET":
                 response = requests.get(self.base_url, headers=headers, timeout=timeout)
             else:
@@ -66,6 +66,7 @@ class Client:
             return None
         except requests.exceptions.HTTPError as err:
             print(f"HTTP error occurred: {err}")
+            print(response.text)
             return None
         except requests.exceptions.RequestException as err:
             print(f"Error occurred: {err}")
