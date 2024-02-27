@@ -69,7 +69,7 @@ class Config:
         self.timeout = DEFAULT_TIMEOUT
 
     def reset_polling(self):
-        self.timeout = DEFAULT_POLL_INTERVAL
+        self.poll_interval = DEFAULT_POLL_INTERVAL
 
 def validate_url(input_url, host):
     # Check if the URL is empty

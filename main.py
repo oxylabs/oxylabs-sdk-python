@@ -8,7 +8,7 @@ import asyncio
 
 load_dotenv()
 
-async def main():
+async def mainAsync():
     serp_client = SerpClientAsync(os.getenv('OXYLABS_USER'), os.getenv('OXYLABS_PASSWORD'))
     client = BingAsync(serp_client)
 
@@ -19,13 +19,57 @@ async def main():
             'start_page': 1,
             'parse': True,
         },
-        poll_interval=3
+        poll_interval=4,
+        timeout=15
     )
 
-    # Now that you have awaited the results, you can dump it into a file
+    await client.scrape_bing_search(
+        "adidas",
+        {
+            'start_page': 1,
+            'parse': True,
+        }
+    )
+
+    await client.scrape_bing_search(
+        "adidas",
+        {
+            'start_page': 1,
+            'parse': True,
+        },
+        poll_interval=5,
+        timeout=35
+    )
+
     with open('results.json', 'w') as f:
         json.dump(results, f, indent=4)
 
+def mainSync():
+        serp_client = SerpClient(os.getenv('OXYLABS_USER'), os.getenv('OXYLABS_PASSWORD'))
+        client = Bing(serp_client)
+
+        results = client.scrape_bing_search(
+        "nike",
+        {
+            'start_page': 1,
+            'parse': True,
+        },
+        timeout=15
+        )
+
+        results2 = client.scrape_bing_url(
+        "https://www.bing.com/search?q=nike",
+        {
+            'parse': True,
+        },
+        timeout=45
+        )
+            
+        with open('results.json', 'w') as f:
+            json.dump(results, f, indent=4)
+
+
 # Ensure the main coroutine is executed
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(mainAsync())
+    #  mainSync()

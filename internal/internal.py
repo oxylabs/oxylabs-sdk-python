@@ -1,9 +1,9 @@
 import requests
 import base64
 import aiohttp
+from aiohttp import ClientTimeout
 import asyncio
 from utils.utils import Config
-from utils.defaults import DEFAULT_POLL_INTERVAL
 
 
 class ApiCredentials:
@@ -84,8 +84,10 @@ class ClientAsync:
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
         }
+        config = Config()
+        timeout = ClientTimeout(total=config.timeout)
         async with aiohttp.ClientSession() as session:
-            async with session.post(self.base_url, headers=headers, json=json_payload) as response:
+            async with session.post(self.base_url, headers=headers, json=json_payload, timeout=timeout) as response:
                 response.raise_for_status()
                 data = await response.json()
                 return data['id']
@@ -95,10 +97,13 @@ class ClientAsync:
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
         }
+        config = Config()
+        timeout = ClientTimeout(total=config.timeout)
+        print("timeout", config.timeout)
         result_url = f"{self.base_url}/{job_id}/results"
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.get(result_url, headers=headers) as response:
+                async with session.get(result_url, headers=headers, timeout=timeout) as response:
                     response.raise_for_status()
                     return await response.json()
         except aiohttp.ClientError as e:
