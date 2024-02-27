@@ -12,6 +12,8 @@ from utils.defaults import (
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url, Config
 from utils.constants import Render, Domain, UserAgent, Source
+import utils.utils as utils
+
 import dataclasses
 import json
 
@@ -32,16 +34,11 @@ class BaiduSearchOpts(BaseSearchOpts):
         """
         Checks the validity of BaiduSearchOpts parameters.
         """
-        if self.domain and self.domain not in BaiduSearchAcceptedDomainParameters:
-            raise ValueError(f"Invalid domain parameter: {self.domain}")
-
-        if not UserAgent.is_user_agent_valid(self.user_agent_type):
-            raise ValueError(f"Invalid user agent parameter: {self.user_agent_type}")
-
-        if self.limit <= 0 or self.pages <= 0 or self.start_page <= 0:
-            raise ValueError(
-                "Limit, pages and start_page parameters must be greater than 0"
-            )
+        utils.check_domain_validity(self.domain, BaiduSearchAcceptedDomainParameters)
+        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_limit_validity(self.limit)
+        utils.check_pages_validity(self.pages)
+        utils.check_start_page_validity(self.start_page)
 
 
 @dataclasses.dataclass
@@ -54,8 +51,8 @@ class BaiduUrlOpts(BaseUrlOpts):
         """
         Checks the validity of BaiduUrlOpts parameters.
         """
-        if not UserAgent.is_user_agent_valid(self.user_agent_type):
-            raise ValueError(f"Invalid user agent parameter: {self.user_agent_type}")
+        utils.check_user_agent_validity(self.user_agent_type)
+
 
 
 @dataclasses.dataclass

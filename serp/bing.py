@@ -11,6 +11,7 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url, Config
+import utils.utils as utils
 from utils.constants import Render, Domain, UserAgent, Source
 import dataclasses
 import json
@@ -35,25 +36,17 @@ class BingSearchOpts(BaseSearchOpts):
     locale: str = None
     geo_location: str = None
     render: Render = None
-    
 
     def check_parameter_validity(self):
         """
         Checks the validity of BingSearchOpts parameters.
         """
-        if self.domain and self.domain not in BingSearchAcceptedDomainParameters:
-            raise ValueError(f"Invalid domain parameter: {self.domain}")
-
-        if not UserAgent.is_user_agent_valid(self.user_agent_type):
-            raise ValueError(f"Invalid user agent parameter: {self.user_agent_type}")
-
-        if self.render and not Render.is_render_valid(self.render):
-            raise ValueError(f"Invalid render parameter: {self.render}")
-
-        if self.limit <= 0 or self.pages <= 0 or self.start_page <= 0:
-            raise ValueError(
-                "Limit, pages and start_page parameters must be greater than 0"
-            )
+        utils.check_domain_validity(self.domain, BingSearchAcceptedDomainParameters)
+        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_render_validity(self.render)
+        utils.check_limit_validity(self.limit)
+        utils.check_pages_validity(self.pages)
+        utils.check_start_page_validity(self.start_page)
 
 
 @dataclasses.dataclass
@@ -69,11 +62,9 @@ class BingUrlOpts(BaseUrlOpts):
         """
         Checks the validity of BingUrlOpts parameters.
         """
-        if not UserAgent.is_user_agent_valid(self.user_agent_type):
-            raise ValueError(f"Invalid user agent parameter: {self.user_agent_type}")
+        utils.check_user_agent_validity(self.user_agent_type)
 
-        if self.render and not Render.is_render_valid(self.render):
-            raise ValueError(f"Invalid render parameter: {self.render}")
+        utils.check_render_validity(self.render)
 
 
 class Bing:
@@ -116,7 +107,7 @@ class Bing:
 
         if timeout is not None:
             config.set_timeout(timeout)
-            
+
         else:
             config.reset_timeout()
 
@@ -136,7 +127,7 @@ class Bing:
 
         opts = self.set_or_update_opts(opts, defaults)
 
-        opts = BingSearchOpts(**opts)
+        opts = BingSearchOpts(**opts if opts is not None else {})
 
         # Set defaults
         opts.domain = set_default_domain(opts.domain)
@@ -178,10 +169,9 @@ class Bing:
 
         if timeout is not None:
             config.set_timeout(timeout)
-            
+
         else:
             config.reset_timeout()
-
 
         # Check validity of url
         validate_url(url, "bing")

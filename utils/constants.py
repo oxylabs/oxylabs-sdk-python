@@ -78,7 +78,7 @@ class Source(Enum):
     GoogleAds = "google_ads"
     GoogleHotels = "google_hotels"
     GoogleSearch = "google_search"
-    GoogleImages = "google_images"
+    GoogleImages = "google_search"
     GoogleSuggestions = "google_suggest"
     GoogleTravelHotels = "google_travel_hotels"
     GoogleTrendsExplore = "google_trends_explore"

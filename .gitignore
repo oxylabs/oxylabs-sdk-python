@@ -9,4 +9,4 @@ build/
 .venv/
 *.json
 *.html
-*.txt
+.env
