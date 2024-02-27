@@ -98,7 +98,7 @@ class BingAsync:
     
     async def scrape_bing_search(
         self, query: str, opts: Optional[Dict[str, Any]] = None, 
-        poll_interval: Optional[int] = None
+        poll_interval: Optional[int] = None, timeout: Optional[int] = None
     ) -> Dict[str, Any]:
 
         """
@@ -121,6 +121,7 @@ class BingAsync:
                 }
                 This parameter allows customization of the search request.
             poll_interval (int | None, optional): The interval in seconds between status checks for the asynchronous job. Defaults to None.
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
 
         Returns:
             The response from the server after the job is completed.
@@ -128,13 +129,14 @@ class BingAsync:
         config = Config()
 
         if poll_interval is not None:
-            config.set_polling(poll_interval)
-
-        if poll_interval is not None:
-            config.set_polling(poll_interval)
-            
+            config.set_polling(poll_interval)    
         else:
             config.reset_polling()
+
+        if timeout is not None:
+            config.set_timeout(timeout)
+        else:
+            config.reset_timeout()
 
         # Prepare your JSON payload based on the query and opts
         defaults = {
@@ -184,6 +186,6 @@ class BingAsync:
         if opts.parse_instructions is not None:
             payload["parsing_instructions"] = opts.parse_instructions
 
-        response = await self.get_payload_response(payload)
-        return response
+        resp = await self.get_payload_response(payload)
+        return resp
     
