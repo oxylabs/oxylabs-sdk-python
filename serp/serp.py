@@ -52,7 +52,7 @@ class SerpClientAsync:
         """
         return await self.client.get_job_id(json_payload)
 
-    async def poll_job_status(self, job_id, poll_interval=5):
+    async def poll_job_status(self, job_id):
         """
         Wrapper method to poll the status of a job until it's completed.
 
@@ -63,4 +63,4 @@ class SerpClientAsync:
         Returns:
             None: This method returns None but will raise an exception if the job is faulted.
         """
-        return await self.client.poll_job_status(job_id, poll_interval)
+        return await self.client.poll_job_status(job_id)

@@ -3,6 +3,7 @@ import base64
 import aiohttp
 import asyncio
 from utils.utils import Config
+from utils.defaults import DEFAULT_POLL_INTERVAL
 
 
 class ApiCredentials:
@@ -95,12 +96,26 @@ class ClientAsync:
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
         }
         result_url = f"{self.base_url}/{job_id}/results"
-        async with aiohttp.ClientSession() as session:
-            async with session.get(result_url, headers=headers) as response:
-                response.raise_for_status()
-                return await response.json()
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(result_url, headers=headers) as response:
+                    response.raise_for_status()
+                    return await response.json()
+        except aiohttp.ClientError as e:
+            print(f"Error fetching results: {e}")
+            return None
+        except asyncio.TimeoutError:
+            print(f"Timeout error. The request to {result_url} has timed out.")
+            return None
 
-    async def poll_job_status(self, job_id, poll_interval=5):
+    async def poll_job_status(self, job_id):
+        config = Config()
+        poll_interval = config.poll_interval
+        # if poll_interval is not None and poll_interval >= DEFAULT_POLL_INTERVAL:
+        #     poll_interval = poll_interval
+        # else:
+        #     poll_interval = DEFAULT_POLL_INTERVAL
+        print("debug poll interval", poll_interval)
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
@@ -108,14 +123,18 @@ class ClientAsync:
         job_status_url = f"{self.base_url}/{job_id}"
         async with aiohttp.ClientSession() as session:
             while True:
-                async with session.get(job_status_url, headers=headers) as response:
-                    response.raise_for_status()
-                    job = await response.json()
-                    print("status", job['status'])
-                    if job['status'] == 'done':
-                        resp = await self.get_http_resp(job_id)
-                        return resp
-                    elif job['status'] == 'faulted':
-                        raise Exception("Job faulted")
+                try:
+                    async with session.get(job_status_url, headers=headers) as response:
+                        if response.status == 200:
+                            job = await response.json()
+                            print("status", job['status'])
+                            if job['status'] == 'done':
+                                return await self.get_http_resp(job_id)
+                            elif job['status'] == 'faulted':
+                                raise Exception("Job faulted")
+                        else:
+                            raise Exception(f"HTTP Error {response.status}: {await response.text()}")
+                except Exception as e:
+                    print(f"Error processing your query: {e}")
+                    raise
                 await asyncio.sleep(poll_interval)
-
