@@ -12,6 +12,7 @@ from utils.defaults import (
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url, Config
 from utils.constants import Render, Domain, UserAgent, Source, Locale
+import utils.utils as utils
 import dataclasses
 import json
 
@@ -52,19 +53,12 @@ class YandexSearchOpts(BaseSearchOpts):
         """
         Checks the validity of YandexSearchOpts parameters.
         """
-        if self.domain and self.domain not in YandexSearchAcceptedDomainParameters:
-            raise ValueError(f"Invalid domain parameter: {self.domain}")
-
-        if self.locale and self.locale not in YandexSearchAcceptedLocaleParameters:
-            raise ValueError(f"Invalid locale parameter: {self.locale}")
-
-        if not UserAgent.is_user_agent_valid(self.user_agent_type):
-            raise ValueError(f"Invalid user agent parameter: {self.user_agent_type}")
-
-        if self.limit <= 0 or self.pages <= 0 or self.start_page <= 0:
-            raise ValueError(
-                "Limit, pages and start_page parameters must be greater than 0"
-            )
+        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_domain_validity(self.domain, YandexSearchAcceptedDomainParameters)
+        utils.check_locale_validity(self.locale, YandexSearchAcceptedLocaleParameters)
+        utils.check_limit_validity(self.limit)
+        utils.check_pages_validity(self.pages)
+        utils.check_start_page_validity(self.start_page)
 
 
 @dataclasses.dataclass
@@ -79,8 +73,7 @@ class YandexUrlOpts(BaseUrlOpts):
         """
         Checks the validity of YandexUrlOpts parameters.
         """
-        if self.render and not Render.is_render_valid(self.render):
-            raise ValueError(f"Invalid render parameter: {self.render}")
+        utils.check_render_validity(self.render)
 
 
 class Yandex:

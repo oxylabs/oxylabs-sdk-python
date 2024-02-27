@@ -134,3 +134,20 @@ def set_default_content_encoding(content_encoding: str) -> str:
         str: The content encoding if provided, otherwise "base64".
     """
     return content_encoding if content_encoding else "base64"
+
+
+def set_default_hotel_occupancy(ctx):
+    """
+    Sets the default hotel occupancy value.
+
+    Args:
+    - ctx (dict): The context object containing the configuration.
+
+    Returns:
+    - int: The default hotel occupancy value.
+    """
+    if ctx:
+        for key, value in ctx.items():
+            if key == "hotel_occupancy":
+                return value
+    return 2
