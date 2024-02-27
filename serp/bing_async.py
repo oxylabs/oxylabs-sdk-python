@@ -13,7 +13,7 @@ from utils.defaults import (
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url, Config
 from utils.constants import Render, Domain, UserAgent, Source
 import dataclasses
-
+from typing import Optional, Dict, Any
 
 BingSearchAcceptedDomainParameters = [
     Domain.DOMAIN_COM.value,
@@ -96,7 +96,46 @@ class BingAsync:
         # Poll for the job status until completion and return the results
         return await self.client.poll_job_status(job_id)
     
-    async def scrape_bing_search(self, query, opts=None):
+    async def scrape_bing_search(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, 
+        poll_interval: Optional[int] = None
+    ) -> Dict[str, Any]:
+
+        """
+        Asynchronously scrapes Bing search results for a given query.
+
+        Args:
+            query (str): The search query.
+            opts (dict, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": DEFAULT_DOMAIN,
+                    "start_page": DEFAULT_START_PAGE,
+                    "pages": DEFAULT_PAGES,
+                    "limit": DEFAULT_LIMIT_SERP,
+                    "user_agent_type": DEFAULT_USER_AGENT,
+                    "callback_url": None,
+                    "locale": None,
+                    "geo_location": None,
+                    "render": None,
+                    "parse": None,
+                }
+                This parameter allows customization of the search request.
+            poll_interval (int | None, optional): The interval in seconds between status checks for the asynchronous job. Defaults to None.
+
+        Returns:
+            The response from the server after the job is completed.
+        """
+        config = Config()
+
+        if poll_interval is not None:
+            config.set_polling(poll_interval)
+
+        if poll_interval is not None:
+            config.set_polling(poll_interval)
+            
+        else:
+            config.reset_polling()
+
         # Prepare your JSON payload based on the query and opts
         defaults = {
             "domain": DEFAULT_DOMAIN,
@@ -105,7 +144,6 @@ class BingAsync:
             "limit": DEFAULT_LIMIT_SERP,
             "user_agent_type": DEFAULT_USER_AGENT,
             "callback_url": None,
-            "poll_interval": None,
             "locale": None,
             "geo_location": None,
             "render": None,

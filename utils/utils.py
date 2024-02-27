@@ -1,7 +1,7 @@
 import dataclasses
 from utils.constants import UserAgent, Domain
 from urllib.parse import urlparse
-from utils.defaults import DEFAULT_TIMEOUT
+from utils.defaults import DEFAULT_TIMEOUT, DEFAULT_POLL_INTERVAL
 
 
 
@@ -18,7 +18,6 @@ class BaseSearchOpts:
         user_agent (UserAgent): The user agent to use for the search.
         callback_url (str): The URL to send the search results to.
         parse_instructions (dict): The instructions for parsing the search results.
-        poll_interval (int): The interval (in seconds) between polling for search results.
     """
 
     domain: Domain = None
@@ -28,8 +27,6 @@ class BaseSearchOpts:
     user_agent_type: UserAgent = UserAgent.UA_DESKTOP
     callback_url: str = None
     parse_instructions: dict = None
-    poll_interval: int = 0
-
 
 @dataclasses.dataclass
 class BaseUrlOpts:
@@ -40,13 +37,11 @@ class BaseUrlOpts:
         user_agent (UserAgent): The user agent to use for the search.
         callback_url (str): The URL to send the search results to.
         parse_instructions (dict): The instructions for parsing the search results.
-        poll_interval (int): The interval (in seconds) between polling for search results.
     """
 
     user_agent_type: UserAgent
     callback_url: str
     parse_instructions: dict
-    poll_interval: int
     
     
 class Config:
@@ -56,11 +51,25 @@ class Config:
         if not cls._instance:
             cls._instance = super(Config, cls).__new__(cls, *args, **kwargs)
             cls._instance.timeout = DEFAULT_TIMEOUT
+            cls._instance.poll_interval = DEFAULT_POLL_INTERVAL
         return cls._instance
 
     def set_timeout(self, timeout):
         self.timeout = timeout
         return self.timeout
+    
+    def set_polling(self, poll_interval):
+        if poll_interval < DEFAULT_POLL_INTERVAL:
+            self.poll_interval = DEFAULT_POLL_INTERVAL
+        else:
+            self.poll_interval = poll_interval
+        return self.poll_interval
+    
+    def reset_timeout(self):
+        self.timeout = DEFAULT_TIMEOUT
+
+    def reset_polling(self):
+        self.timeout = DEFAULT_POLL_INTERVAL
 
 def validate_url(input_url, host):
     # Check if the URL is empty
