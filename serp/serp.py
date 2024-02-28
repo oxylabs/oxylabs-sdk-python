@@ -20,16 +20,14 @@ class SerpClient:
         api_credentials = ApiCredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
-    def send_post_request_with_payload(self, payload):
+    def send_post_request_with_payload(self, payload, timeout):
         # remove empty or null values
         payload = {k: v for k, v in payload.items() if v is not None}
 
         # Convert payload to JSON
         json_payload = json.dumps(payload)
         
-        print(json_payload)
-
-        return self.client.req(json_payload, "POST")
+        return self.client.req(json_payload, "POST",timeout)
 
 
 class SerpClientAsync:

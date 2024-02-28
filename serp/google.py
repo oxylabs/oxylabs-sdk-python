@@ -3,7 +3,6 @@ from utils.defaults import (
     DEFAULT_LIMIT_SERP,
     DEFAULT_PAGES,
     DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -13,12 +12,12 @@ from utils.defaults import (
 )
 from utils.utils import (
     validate_url,
-    Config,
     BaseGoogleOpts,
 )
 from utils.constants import Render, Domain, Source, Locale
 import dataclasses
 import utils.utils as utils
+from typing import Optional, Dict, Any
 
 
 @dataclasses.dataclass
@@ -164,14 +163,37 @@ class Google:
         """
         self.client = client
 
-    def scrape_google_search(self, query, opts=None, timeout: int = None):
-        config = Config()
+    def scrape_google_search(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
+        """
+        Scrapes Google search results for a given query.
 
-        if timeout is not None:
-            config.set_timeout(timeout)
+        Args:
 
-        else:
-            config.reset_timeout()
+            query (str): The search query.
+            opts (GoogleSearchOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": "com",
+                    "start_page": 1,
+                    "pages": 1,
+                    "limit": 10,
+                    "user_agent_type": "desktop",
+                    "locale": None,
+                    "geo_location": None,
+                    "render": "html",
+                    "callback_url": None,
+                    "parse": False,
+                    "context": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
 
         opts = GoogleSearchOpts(**opts if opts is not None else {})
 
@@ -224,18 +246,30 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_google_url(self, url, opts=None, timeout=None):
-        config = Config()
+    def scrape_google_url(
+        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
+        """
+        Scrapes Google search results for a given URL.
 
-        if timeout is not None:
-            config.set_timeout(timeout)
+        Args:
+            url (str): The URL to be scraped.
+            opts (GoogleUrlOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "user_agent_type": desktop,
+                    "callback_url": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
 
-        else:
-            config.reset_timeout()
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
 
         validate_url(url, "google")
 
@@ -260,18 +294,37 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_google_ads(self, query, opts=None, timeout=None):
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
+    def scrape_google_ads(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+        """
+        Scrapes Google Ads search results for a given query.
+        
+        Args:
+            query (str): The search query.
+            opts (GoogleAdsOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": "com",
+                    "start_page": 1,
+                    "pages": 1,
+                    "user_agent_type": "desktop",
+                    "locale": None,
+                    "geo_location": None,
+                    "render": "html",
+                    "callback_url": None,
+                    "parse": False,
+                    "context": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        
 
         opts = GoogleAdsOpts(**opts if opts is not None else {})
 
@@ -294,25 +347,39 @@ class Google:
             "callback_url": opts.callback_url,
             "parse": opts.parse,
             "context": opts.context,
-
         }
 
         if opts.parse_instructions is not None:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_google_suggestions(self, query, opts=None, timeout=None):
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
+    def scrape_google_suggestions(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+        """
+        Scrapes Google suggestions for a given query.
+        
+        Args:
+            query (str): The search query.
+            opts (GoogleSuggestionsOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "locale": None,
+                    "user_agent_type": "desktop",
+                    "render": "html",
+                    "callback_url": None,
+                    "parse": False,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+                
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        
 
         opts = GoogleSuggestionsOpts(**opts if opts is not None else {})
 
@@ -336,18 +403,38 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_google_hotels(self, query, opts=None, timeout=None):
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
+    def scrape_google_hotels(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+        """
+        Scrapes Google Hotels search results for a given query.
+        
+        Args:
+            query (str): The search query.
+            opts (GoogleHotelsOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": "com",
+                    "start_page": 1,
+                    "pages": 1,
+                    "limit": 10,
+                    "user_agent_type": "desktop",
+                    "locale": None,
+                    "geo_location": None,
+                    "render": "html",
+                    "callback_url": None,
+                    "parse": False,
+                    "context": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        
 
         opts = GoogleHotelsOpts(**opts if opts is not None else {})
 
@@ -381,27 +468,45 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_google_travel_hotels(self, query, opts=None, timeout=None):
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
+    def scrape_google_travel_hotels(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+        """
+        Scrapes Google Travel Hotels search results for a given query.
+        
+        Args:
+            query (str): The search query.
+            opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": None,
+                    "start_page": None,
+                    "locale": None,
+                    "geo_location": None,
+                    "user_agent_type": "desktop",
+                    "render": None,
+                    "callback_url": None,
+                    "parse": False,
+                    "context": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        
 
         opts = GoogleTravelHotelsOpts(**opts if opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
-        if 'context' in opts and opts['context']:
-            for item in opts['context']:
-                if item['key'] == 'hotel_occupancy':
-                    item['value'] = set_default_hotel_occupancy(item.get('value'))
+        if "context" in opts and opts["context"]:
+            for item in opts["context"]:
+                if item["key"] == "hotel_occupancy":
+                    item["value"] = set_default_hotel_occupancy(item.get("value"))
 
         opts.check_parameter_validity()
 
@@ -424,19 +529,38 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_google_images(self, query, opts=None, timeout=None):
+    def scrape_google_images(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+        """
+        Scrapes Google Images search results for a given query.
 
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
+        Args:
+            query (str): The search query.
+            opts (GoogleImagesOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": None,
+                    "start_page": None,
+                    "pages": None,
+                    "user_agent_type": "desktop",
+                    "locale": None,
+                    "geo_location": None,
+                    "render": None,
+                    "callback_url": None,
+                    "parse": False,
+                    "context": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+                
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        
 
         opts = GoogleImagesOpts(**opts if opts is not None else {})
 
@@ -476,18 +600,29 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_google_trends_explore(self, query, opts=None, timeout=None):
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
+    def scrape_google_trends_explore(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+        """
+        Scrapes Google Trends Explore results for a given query.
+        
+        Args:
+            query (str): The search query.
+            opts (GoogleTrendsExploreOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "user_agent_type": "desktop",
+                    "callback_url": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        
 
         opts = GoogleTrendsExploreOpts(**opts if opts is not None else {})
 
@@ -510,6 +645,6 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
