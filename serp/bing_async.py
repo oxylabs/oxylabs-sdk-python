@@ -4,6 +4,8 @@ from utils.defaults import (
     DEFAULT_PAGES,
     DEFAULT_START_PAGE,
     DEFAULT_USER_AGENT,
+    DEFAULT_POLL_INTERVAL,
+    DEFAULT_TIMEOUT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -77,7 +79,7 @@ class BingAsync:
 
         return opts
     
-    async def get_payload_response(self, payload):
+    async def get_payload_response(self, payload, config):
         """
         Processes the payload asynchronously, starts a job, polls for its completion, and retrieves the results.
 
@@ -91,10 +93,10 @@ class BingAsync:
         payload = {k: v for k, v in payload.items() if v is not None}
 
         # Start the job and get its ID
-        job_id = await self.client.get_job_id(payload)
+        job_id = await self.client.get_job_id(payload, config)
 
         # Poll for the job status until completion and return the results
-        return await self.client.poll_job_status(job_id)
+        return await self.client.poll_job_status(job_id, config)
     
     async def scrape_bing_search(
         self, query: str, opts: Optional[Dict[str, Any]] = None, 
@@ -126,17 +128,10 @@ class BingAsync:
         Returns:
             The response from the server after the job is completed.
         """
-        config = Config()
-
-        if poll_interval is not None:
-            config.set_polling(poll_interval)    
-        else:
-            config.reset_polling()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-        else:
-            config.reset_timeout()
+        config = {
+            'timeout': timeout if timeout is not None else DEFAULT_TIMEOUT,
+            'poll_interval': poll_interval if poll_interval is not None else DEFAULT_POLL_INTERVAL
+        }
 
         # Prepare your JSON payload based on the query and opts
         defaults = {
@@ -186,6 +181,6 @@ class BingAsync:
         if opts.parse_instructions is not None:
             payload["parsing_instructions"] = opts.parse_instructions
 
-        resp = await self.get_payload_response(payload)
+        resp = await self.get_payload_response(payload, config)
         return resp
     

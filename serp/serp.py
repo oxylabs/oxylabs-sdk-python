@@ -40,7 +40,7 @@ class SerpClientAsync:
         api_credentials = ApiCredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, api_credentials)
 
-    async def get_job_id(self, json_payload):
+    async def get_job_id(self, json_payload, config):
         """
         Wrapper method to get a job ID for a given payload.
 
@@ -50,9 +50,9 @@ class SerpClientAsync:
         Returns:
             str: The job ID.
         """
-        return await self.client.get_job_id(json_payload)
+        return await self.client.get_job_id(json_payload, config)
 
-    async def poll_job_status(self, job_id):
+    async def poll_job_status(self, job_id, config):
         """
         Wrapper method to poll the status of a job until it's completed.
 
@@ -63,4 +63,4 @@ class SerpClientAsync:
         Returns:
             None: This method returns None but will raise an exception if the job is faulted.
         """
-        return await self.client.poll_job_status(job_id)
+        return await self.client.poll_job_status(job_id, config)

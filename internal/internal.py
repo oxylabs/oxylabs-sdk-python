@@ -40,7 +40,6 @@ class Client:
 
         config = Config()
         timeout = config.timeout
-        print(f"Timeout in internal: {timeout}")
 
         # Make the request
         try:
@@ -79,45 +78,53 @@ class ClientAsync:
         self.base_url = base_url
         self.api_credentials = api_credentials
 
-    async def get_job_id(self, json_payload):
+    async def get_job_id(self, json_payload, config):
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
         }
-        config = Config()
-        timeout = ClientTimeout(total=config.timeout)
-        async with aiohttp.ClientSession() as session:
-            async with session.post(self.base_url, headers=headers, json=json_payload, timeout=timeout) as response:
-                response.raise_for_status()
-                data = await response.json()
-                return data['id']
+        timeout = ClientTimeout(total=config['timeout'])
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.post(self.base_url, headers=headers, json=json_payload, timeout=timeout) as response:
+                    response.raise_for_status()
+                    data = await response.json()
+                    return data['id']
+        except aiohttp.ClientResponseError as e:
+            print(f"HTTP error occurred: {e.status}")
+        except aiohttp.ClientConnectionError as e:
+            print(f"Connection error occurred: {e}")
+        except asyncio.TimeoutError:
+            print(f"Timeout error. The request to {self.base_url} has timed out.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        return None
             
-    async def get_http_resp(self, job_id):
+    async def get_http_resp(self, job_id, config):
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
         }
-        config = Config()
-        timeout = ClientTimeout(total=config.timeout)
-        print("timeout", config.timeout)
+        timeout = ClientTimeout(total=config['timeout'])
         result_url = f"{self.base_url}/{job_id}/results"
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(result_url, headers=headers, timeout=timeout) as response:
                     response.raise_for_status()
                     return await response.json()
-        except aiohttp.ClientError as e:
-            print(f"Error fetching results: {e}")
-            return None
+        except aiohttp.ClientResponseError as e:
+            print(f"HTTP error occurred: {e.status}")
+        except aiohttp.ClientConnectionError as e:
+            print(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
             print(f"Timeout error. The request to {result_url} has timed out.")
-            return None
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        return None
 
-    async def poll_job_status(self, job_id):
-        config = Config()
-        poll_interval = config.poll_interval
-        timeout = ClientTimeout(total=config.timeout)
-        print("debug poll interval", poll_interval)
+    async def poll_job_status(self, job_id, config):
+        poll_interval = config['poll_interval']
+        timeout = ClientTimeout(total=config['timeout'])
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}"
@@ -129,14 +136,22 @@ class ClientAsync:
                     async with session.get(job_status_url, headers=headers, timeout=timeout) as response:
                         if response.status == 200:
                             job = await response.json()
-                            print("status", job['status'])
                             if job['status'] == 'done':
-                                return await self.get_http_resp(job_id)
+                                return await self.get_http_resp(job_id, config)
                             elif job['status'] == 'faulted':
                                 raise Exception("Job faulted")
                         else:
-                            raise Exception(f"HTTP Error {response.status}: {await response.text()}")
+                            raise aiohttp.ClientResponseError(response.request_info, response.history, status=response.status, message=f"HTTP Error {response.status}: {await response.text()}", headers=response.headers)
+                except aiohttp.ClientResponseError as e:
+                    print(f"HTTP error occurred: {e.status} - {e.message}")
+                    return None
+                except aiohttp.ClientConnectionError as e:
+                    print(f"Connection error occurred: {e}")
+                    return None
+                except asyncio.TimeoutError:
+                    print(f"Timeout error. The request to {job_status_url} has timed out.")
+                    return None
                 except Exception as e:
-                    print(f"Error processing your query: {e}")
-                    raise
+                    print(f"Unexpected error processing your query: {e}")
+                    return None
                 await asyncio.sleep(poll_interval)
