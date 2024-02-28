@@ -54,72 +54,31 @@ class BaiduUrlOpts(BaseUrlOpts):
         utils.check_user_agent_validity(self.user_agent_type)
 
 
-
 @dataclasses.dataclass
 class Baidu:
     def __init__(self, client):
         self.client = client
-
-    def set_or_update_opts(self, opts, defaults):
-        if opts is None:
-            opts = defaults
-        elif isinstance(opts, dict):
-            defaults.update(opts)
-            opts = defaults
-        else:
-            raise ValueError(
-                f"opts must be either None or a dictionary, not {type(opts).__name__}"
-            )
-
-        return opts
-
-    def get_payload_response(self, payload):
-        # remove empty or null values
-        payload = {k: v for k, v in payload.items() if v is not None}
-
-        # Convert payload to JSON
-        json_payload = json.dumps(payload)
-
-        # Make the request
-        http_resp = self.client.req(json_payload, "POST")
-
-        return http_resp
-
+        
     def scrape_baidu_search(self, query, opts=None, timeout=None):
         config = Config()
 
         if timeout is not None:
             config.set_timeout(timeout)
-            
+
         else:
             config.reset_timeout()
 
-            
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": DEFAULT_START_PAGE,
-            "pages": DEFAULT_PAGES,
-            "limit": DEFAULT_LIMIT_SERP,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "callback_url": None,
-            "parse_instructions": None,
-            "poll_interval": None,
-            "parse": False,
-        }
-        
-        opts = self.set_or_update_opts(opts, defaults)
-        
-        opts = BaiduSearchOpts(**opts)
-        
+        opts = BaiduSearchOpts(**opts if opts is not None else {})
+
         # Set defaults
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
         opts.pages = set_default_pages(opts.pages)
         opts.limit = set_default_limit(opts.limit, DEFAULT_LIMIT_SERP)
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-        
+
         opts.check_parameter_validity()
-        
+
         payload = {
             "source": Source.BaiduSearch.value,
             "domain": opts.domain,
@@ -130,60 +89,43 @@ class Baidu:
             "user_agent": opts.user_agent_type,
             "callback_url": opts.callback_url,
         }
-        
+
         if opts.parse_instructions:
             payload["parse"] = True
             payload["parse_instructions"] = opts.parse_instructions
-        
-        
-        response = self.get_payload_response(payload)
-        
-        return response
-    
-    
+
+        resp = self.client.send_post_request_with_payload(payload)
+
+        return resp
+
     def scrape_baidu_url(self, url, opts=None, timeout=None):
         config = Config()
 
         if timeout is not None:
             config.set_timeout(timeout)
-            
+
         else:
             config.reset_timeout()
 
-            
         validate_url(url, "baidu")
-            
-        defaults = {
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "callback_url": None,
-            "parse_instructions": None,
-            "poll_interval": None,
-        }
-        
-        opts = self.set_or_update_opts(opts, defaults)
-        
-        opts = BaiduUrlOpts(**opts)
-        
+
+        opts = BaiduUrlOpts(**opts if opts is not None else {})
+
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-        
+
         opts.check_parameter_validity()
-        
+
         payload = {
             "source": Source.BaiduUrl.value,
             "url": url,
             "user_agent": opts.user_agent_type,
             "callback_url": opts.callback_url,
         }
-        
+
         if opts.parse_instructions:
             payload["parse"] = True
             payload["parse_instructions"] = opts.parse_instructions
-        
-        response = self.get_payload_response(payload)
-        
-        return response
-        
 
-        
-        
-            
+        resp = self.client.send_post_request_with_payload(payload)
+
+        return resp

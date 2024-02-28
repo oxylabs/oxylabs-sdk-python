@@ -9,40 +9,16 @@ from utils.defaults import (
     set_default_pages,
     set_default_start_page,
     set_default_user_agent,
-    set_default_hotel_occupancy
+    set_default_hotel_occupancy,
 )
 from utils.utils import (
-    BaseSearchOpts,
-    BaseUrlOpts,
     validate_url,
     Config,
     BaseGoogleOpts,
 )
-from utils.constants import Render, Domain, UserAgent, Source, Locale
+from utils.constants import Render, Domain, Source, Locale
 import dataclasses
-import json
 import utils.utils as utils
-
-
-AcceptedTbmParameters = [
-    "app",
-    "bks",
-    "blg",
-    "dsc",
-    "isch",
-    "nws",
-    "pts",
-    "plcs",
-    "rcp",
-    "lcl",
-]
-
-AcceptedSearchTypeParameters = [
-    "web_search",
-    "image_search",
-    "google_shopping",
-    "youtube_search",
-]
 
 
 @dataclasses.dataclass
@@ -53,6 +29,15 @@ class GoogleSearchOpts(BaseGoogleOpts):
     limit: int = DEFAULT_LIMIT_SERP
     locale: Locale = None
 
+    AcceptedTbmParameters = [
+        "app",
+        "bks",
+        "isch",
+        "nws",
+        "pts",
+        "vid",
+    ]
+
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
@@ -60,10 +45,21 @@ class GoogleSearchOpts(BaseGoogleOpts):
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
 
+        # check if tbm parameter is valid
+        if self.context:
+            for opt in self.context:
+                if (
+                    opt.get("key") == "tbm"
+                    and opt.get("value") not in self.AcceptedTbmParameters
+                ):
+                    raise ValueError(
+                        f"Invalid tbm parameter value: {opt.get('value')}. Accepted values are: {', '.join(self.AcceptedTbmParameters)}"
+                    )
+
 
 @dataclasses.dataclass
 class GoogleUrlOpts(BaseGoogleOpts):
-    
+
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
@@ -76,10 +72,29 @@ class GoogleAdsOpts(BaseGoogleOpts):
     pages: int = None
     locale: str = None
 
+    AcceptedTbmParameters = [
+        "app",
+        "bks",
+        "isch",
+        "nws",
+        "pts",
+        "vid",
+    ]
+
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
+
+        if self.context:
+            for opt in self.context:
+                if (
+                    opt.get("key") == "tbm"
+                    and opt.get("value") not in self.AcceptedTbmParameters
+                ):
+                    raise ValueError(
+                        f"Invalid tbm parameter value: {opt.get('value')}. Accepted values are: {', '.join(self.AcceptedTbmParameters)}"
+                    )
 
 
 @dataclasses.dataclass
@@ -98,7 +113,6 @@ class GoogleHotelsOpts(BaseGoogleOpts):
     pages: int = DEFAULT_PAGES
     limit: int = DEFAULT_LIMIT_SERP
     locale: str = None
-    
 
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
@@ -150,31 +164,6 @@ class Google:
         """
         self.client = client
 
-    def set_or_update_opts(self, opts, defaults):
-        if opts is None:
-            opts = defaults
-        elif isinstance(opts, dict):
-            defaults.update(opts)
-            opts = defaults
-        else:
-            raise ValueError(
-                f"opts must be either None or a dictionary, not {type(opts).__name__}"
-            )
-
-        return opts
-
-    def get_payload_response(self, payload):
-        # remove empty or null values
-        payload = {k: v for k, v in payload.items() if v is not None}
-
-        # Convert payload to JSON
-        json_payload = json.dumps(payload)
-        print(json_payload)
-        # Make the request
-        http_resp = self.client.req(json_payload, "POST")
-
-        return http_resp
-
     def scrape_google_search(self, query, opts=None, timeout: int = None):
         config = Config()
 
@@ -184,22 +173,7 @@ class Google:
         else:
             config.reset_timeout()
 
-        # defaults = {
-        #     "domain": DEFAULT_DOMAIN,
-        #     "start_page": None,
-        #     "pages": None,
-        #     "limit": None,
-        #     "locale": None,
-        #     "geo_location": None,
-        #     "user_agent_type": DEFAULT_USER_AGENT,
-        #     "render": None,
-        #     "callback_url": None,
-        #     "parse": None,
-        #     "context": None,
-        # }
-
-        # opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleSearchOpts(**opts)
+        opts = GoogleSearchOpts(**opts if opts is not None else {})
 
         if (
             opts.limit is not None
@@ -250,7 +224,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
 
@@ -262,20 +236,11 @@ class Google:
 
         else:
             config.reset_timeout()
-            
+
         validate_url(url, "google")
 
-        defaults = {
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "render": None,
-            "callback_url": None,
-            "geo_location": None,
-            "parse": None,
-        }
+        opts = GoogleUrlOpts(**opts if opts is not None else {})
 
-        opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleUrlOpts(**opts)
-        
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
@@ -295,7 +260,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
 
@@ -308,23 +273,8 @@ class Google:
         else:
             config.reset_timeout()
 
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": None,
-            "pages": None,
-            "limit": None,
-            "locale": None,
-            "geo_location": None,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "render": None,
-            "callback_url": None,
-            "parse": None,
-            "context": None,
-        }
+        opts = GoogleAdsOpts(**opts if opts is not None else {})
 
-        opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleAdsOpts(**opts)
-        
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
         opts.pages = set_default_pages(opts.pages)
@@ -343,13 +293,15 @@ class Google:
             "render": opts.render,
             "callback_url": opts.callback_url,
             "parse": opts.parse,
+            "context": opts.context,
+
         }
 
         if opts.parse_instructions is not None:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
 
@@ -362,19 +314,8 @@ class Google:
         else:
             config.reset_timeout()
 
-        defaults = {
-            "locale": None,
-            "geo_location": None,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "render": None,
-            "callback_url": None,
-            "parse": None,
-            "context": None,
-        }
+        opts = GoogleSuggestionsOpts(**opts if opts is not None else {})
 
-        opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleSuggestionsOpts(**opts)
-        
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
@@ -395,7 +336,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
 
@@ -408,20 +349,7 @@ class Google:
         else:
             config.reset_timeout()
 
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": None,
-            "locale": None,
-            "geo_location": None,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "render": None,
-            "callback_url": None,
-            "parse": None,
-            "context": None,
-        }
-
-        opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleHotelsOpts(**opts)
+        opts = GoogleHotelsOpts(**opts if opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
@@ -453,10 +381,10 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
-    
+
     def scrape_google_travel_hotels(self, query, opts=None, timeout=None):
         config = Config()
 
@@ -466,23 +394,14 @@ class Google:
         else:
             config.reset_timeout()
 
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": None,
-            "locale": None,
-            "geo_location": None,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "render": None,
-            "callback_url": None,
-            "parse": None,
-            "context": None,
-        }
+        opts = GoogleTravelHotelsOpts(**opts if opts is not None else {})
 
-        opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleTravelHotelsOpts(**opts)
-        
         opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)  
+        opts.start_page = set_default_start_page(opts.start_page)
+        if 'context' in opts and opts['context']:
+            for item in opts['context']:
+                if item['key'] == 'hotel_occupancy':
+                    item['value'] = set_default_hotel_occupancy(item.get('value'))
 
         opts.check_parameter_validity()
 
@@ -505,11 +424,12 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
-    
+
     def scrape_google_images(self, query, opts=None, timeout=None):
+
         config = Config()
 
         if timeout is not None:
@@ -518,21 +438,7 @@ class Google:
         else:
             config.reset_timeout()
 
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": None,
-            'pages': None,
-            "locale": None,
-            "geo_location": None,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "render": None,
-            "callback_url": None,
-            "parse": None,
-            "context": None,
-        }
-
-        opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleImagesOpts(**opts)
+        opts = GoogleImagesOpts(**opts if opts is not None else {})
 
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.domain = set_default_domain(opts.domain)
@@ -540,10 +446,11 @@ class Google:
         opts.pages = set_default_pages(opts.pages)
 
         opts.check_parameter_validity()
-        
+
         # To scrape Google Image search, you must include the context:tbm parameter with the value set to isch.
         if opts.context is None or not any(
-            opt.get("key") == "tbm" and opt.get("value") == "isch" for opt in opts.context
+            opt.get("key") == "tbm" and opt.get("value") == "isch"
+            for opt in opts.context
         ):
             if opts.context is None:
                 opts.context = []
@@ -551,11 +458,11 @@ class Google:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleImages.value,
+            "source": Source.GoogleSearch.value,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
-            'pages': opts.pages,
+            "pages": opts.pages,
             "locale": opts.locale,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
@@ -569,10 +476,10 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
-    
+
     def scrape_google_trends_explore(self, query, opts=None, timeout=None):
         config = Config()
 
@@ -582,16 +489,7 @@ class Google:
         else:
             config.reset_timeout()
 
-        defaults = {
-            "geo_location": None,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "callback_url": None,
-            "parse": None,
-            "context": None,
-        }
-
-        opts = self.set_or_update_opts(opts, defaults)
-        opts = GoogleTrendsExploreOpts(**opts)
+        opts = GoogleTrendsExploreOpts(**opts if opts is not None else {})
 
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
@@ -612,6 +510,6 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
