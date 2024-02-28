@@ -1,6 +1,6 @@
 import requests
 import base64
-from utils.utils import Config
+from utils.defaults import DEFAULT_TIMEOUT
 
 
 class ApiCredentials:
@@ -28,23 +28,22 @@ class Client:
         self.base_url = base_url
         self.api_credentials = api_credentials
 
-    def req(self, json_payload, method):
+    def req(self, json_payload, method, timeout):
         # Prepare headers
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
 
-        config = Config()
-        timeout = config.timeout
-
         # Make the request
         try:
             if method == "POST":
                 response = requests.post(
-                    self.base_url, headers=headers, data=json_payload, timeout=timeout
+                    self.base_url,
+                    headers=headers,
+                    data=json_payload,
+                    timeout=timeout if timeout else DEFAULT_TIMEOUT,
                 )
-                print(response.status_code)
             elif method == "GET":
                 response = requests.get(self.base_url, headers=headers, timeout=timeout)
             else:

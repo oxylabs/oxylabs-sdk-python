@@ -63,24 +63,6 @@ class BaseGoogleOpts:
     context: list = None
 
 
-
-class Config:
-    _instance = None
-
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(Config, cls).__new__(cls, *args, **kwargs)
-            cls._instance.timeout = DEFAULT_TIMEOUT
-        return cls._instance
-
-    def set_timeout(self, timeout):
-        self.timeout = timeout
-        return self.timeout
-
-    def reset_timeout(self):
-        self.timeout = DEFAULT_TIMEOUT
-
-
 def validate_url(input_url, host):
     # Check if the URL is empty
     if not input_url:

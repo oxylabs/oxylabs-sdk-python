@@ -1,20 +1,17 @@
 from utils.defaults import (
-    DEFAULT_DOMAIN,
     DEFAULT_LIMIT_SERP,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
     set_default_start_page,
     set_default_user_agent,
 )
-from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url, Config
-from utils.constants import Render, Domain, UserAgent, Source, Locale
+from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
+from utils.constants import Render, Domain, Source, Locale
 import utils.utils as utils
 import dataclasses
 import json
+from typing import Optional, Dict, Any
 
 
 YandexSearchAcceptedDomainParameters = [
@@ -93,24 +90,35 @@ class Yandex:
 
         return http_resp
 
-    def scrape_yandex_search(self, query, opts=None, timeout=None):
+    def scrape_yandex_search(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes the search results from Yandex.
 
         Args:
             query (str): The search query.
-            opts (YandexSearchOpts): The search options.
+            opts (dict, optional): Configuration options for the search. Defaults to:
+
+                {
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "limit": 10,
+                    "user_agent_type": desktop,
+                    "callback_url": None,
+                    "locale": None,
+                    "geo_location": None,
+                    "parse": None,
+                }
+                This parameter allows customization of the search request.
+
+            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
 
         Returns:
-            dict: The search results.
+
+            dict: The response from the server after the job is completed.
         """
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
 
         opts = YandexSearchOpts(**opts if opts is not None else {})
 
@@ -140,18 +148,29 @@ class Yandex:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
 
-    def scrape_yandex_url(self, url, opts=None, timeout=None):
-        config = Config()
-
-        if timeout is not None:
-            config.set_timeout(timeout)
-
-        else:
-            config.reset_timeout()
+    def scrape_yandex_url(self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+        """
+        Scrapes Yandex search results for a given URL.
+        
+        Args:
+            url (str): The URL to be scraped.
+            opts (YandexUrlOpts, optional): Configuration options for the search. Defaults to:
+                {
+                    "user_agent_type": DEFAULT_USER_AGENT,
+                    "callback_url": None,
+                    "parse_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        
 
         # Check validity of url
         validate_url(url, "yandex")
@@ -179,6 +198,6 @@ class Yandex:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload)
+        resp = self.client.send_post_request_with_payload(payload, timeout)
 
         return resp
