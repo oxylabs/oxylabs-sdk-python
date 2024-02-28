@@ -77,31 +77,6 @@ class Bing:
         """
         self.client = client
 
-    def set_or_update_opts(self, opts, defaults):
-        if opts is None:
-            opts = defaults
-        elif isinstance(opts, dict):
-            defaults.update(opts)
-            opts = defaults
-        else:
-            raise ValueError(
-                f"opts must be either None or a dictionary, not {type(opts).__name__}"
-            )
-
-        return opts
-
-    def get_payload_response(self, payload):
-        # remove empty or null values
-        payload = {k: v for k, v in payload.items() if v is not None}
-
-        # Convert payload to JSON
-        json_payload = json.dumps(payload)
-
-        # Make the request
-        http_resp = self.client.req(json_payload, "POST")
-
-        return http_resp
-
     def scrape_bing_search(self, query, opts=None, timeout=None):
         config = Config()
 
@@ -110,22 +85,6 @@ class Bing:
 
         else:
             config.reset_timeout()
-
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": DEFAULT_START_PAGE,
-            "pages": DEFAULT_PAGES,
-            "limit": DEFAULT_LIMIT_SERP,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "callback_url": None,
-            "poll_interval": None,
-            "locale": None,
-            "geo_location": None,
-            "render": None,
-            "parse": None,
-        }
-
-        opts = self.set_or_update_opts(opts, defaults)
 
         opts = BingSearchOpts(**opts if opts is not None else {})
 
@@ -160,7 +119,7 @@ class Bing:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
 
@@ -176,19 +135,7 @@ class Bing:
         # Check validity of url
         validate_url(url, "bing")
 
-        defaults = {
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "callback_url": None,
-            "parse_instructions": None,
-            "poll_interval": None,
-            "geo_location": None,
-            "render": None,
-            "parse": False,
-        }
-
-        opts = self.set_or_update_opts(opts, defaults)
-
-        opts = BingUrlOpts(**opts)
+        opts = BingUrlOpts(**opts if opts is not None else {})
 
         # Set defaults
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -212,6 +159,6 @@ class Bing:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp

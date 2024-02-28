@@ -42,7 +42,6 @@ def set_default_start_page(start_page: int) -> int:
     return start_page if start_page is not None else DEFAULT_START_PAGE
 
 
-
 def set_default_pages(pages: int) -> int:
     """
     Sets the default number of pages.
@@ -84,19 +83,6 @@ def set_default_user_agent(user_agent):
     return user_agent if user_agent is not None else DEFAULT_USER_AGENT
 
 
-def set_default_hotel_occupancy(ctx: dict) -> int:
-    """
-    Sets the default hotel occupancy value.
-
-    Args:
-    - ctx (dict): The context object containing the configuration.
-
-    Returns:
-    - int: The default hotel occupancy value.
-    """
-    return ctx.get("hotel_occupancy", 2)
-
-
 def set_default_sort_by(ctx: dict) -> str:
     """
     Sets the default sort_by value based on the provided context.
@@ -136,18 +122,17 @@ def set_default_content_encoding(content_encoding: str) -> str:
     return content_encoding if content_encoding else "base64"
 
 
-def set_default_hotel_occupancy(ctx):
+def set_default_hotel_occupancy(occupancy):
     """
-    Sets the default hotel occupancy value.
+    Sets the default hotel occupancy if the provided occupancy is None.
 
     Args:
-    - ctx (dict): The context object containing the configuration.
+        occupancy (int): The occupancy value to be checked.
 
     Returns:
-    - int: The default hotel occupancy value.
+        int: The default occupancy value if the provided occupancy is None, otherwise returns the provided occupancy.
     """
-    if ctx:
-        for key, value in ctx.items():
-            if key == "hotel_occupancy":
-                return value
-    return 2
+    default_occupancy = 2
+    if occupancy is None:
+        return default_occupancy
+    return occupancy

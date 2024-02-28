@@ -81,19 +81,6 @@ class Yandex:
 
         self.client = client
 
-    def set_or_update_opts(self, opts, defaults):
-        if opts is None:
-            opts = defaults
-        elif isinstance(opts, dict):
-            defaults.update(opts)
-            opts = defaults
-        else:
-            raise ValueError(
-                f"opts must be either None or a dictionary, not {type(opts).__name__}"
-            )
-
-        return opts
-
     def get_payload_response(self, payload):
         # remove empty or null values
         payload = {k: v for k, v in payload.items() if v is not None}
@@ -125,23 +112,7 @@ class Yandex:
         else:
             config.reset_timeout()
 
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": DEFAULT_START_PAGE,
-            "pages": DEFAULT_PAGES,
-            "limit": DEFAULT_LIMIT_SERP,
-            "locale": None,
-            "geo_location": None,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "callback_url": None,
-            "parse_instructions": None,
-            "parse": False,
-            "poll_interval": 0,
-        }
-
-        opts = self.set_or_update_opts(opts, defaults)
-
-        opts = YandexSearchOpts(**opts)
+        opts = YandexSearchOpts(**opts if opts is not None else {})
 
         # Set defaults
         opts.domain = set_default_domain(opts.domain)
@@ -169,9 +140,9 @@ class Yandex:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        response = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
-        return response
+        return resp
 
     def scrape_yandex_url(self, url, opts=None, timeout=None):
         config = Config()
@@ -185,18 +156,7 @@ class Yandex:
         # Check validity of url
         validate_url(url, "yandex")
 
-        defaults = {
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "render": None,
-            "callback_url": None,
-            "parse_instructions": None,
-            "poll_interval": None,
-            "parse": False,
-        }
-
-        opts = self.set_or_update_opts(opts, defaults)
-
-        opts = YandexUrlOpts(**opts)
+        opts = YandexUrlOpts(**opts if opts is not None else {})
 
         # Set defaults
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -219,6 +179,6 @@ class Yandex:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.get_payload_response(payload)
+        resp = self.client.send_post_request_with_payload(payload)
 
         return resp
