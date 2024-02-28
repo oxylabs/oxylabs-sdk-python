@@ -116,10 +116,7 @@ class ClientAsync:
     async def poll_job_status(self, job_id):
         config = Config()
         poll_interval = config.poll_interval
-        # if poll_interval is not None and poll_interval >= DEFAULT_POLL_INTERVAL:
-        #     poll_interval = poll_interval
-        # else:
-        #     poll_interval = DEFAULT_POLL_INTERVAL
+        timeout = ClientTimeout(total=config.timeout)
         print("debug poll interval", poll_interval)
         headers = {
             "Content-Type": "application/json",
@@ -129,7 +126,7 @@ class ClientAsync:
         async with aiohttp.ClientSession() as session:
             while True:
                 try:
-                    async with session.get(job_status_url, headers=headers) as response:
+                    async with session.get(job_status_url, headers=headers, timeout=timeout) as response:
                         if response.status == 200:
                             job = await response.json()
                             print("status", job['status'])
