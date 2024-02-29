@@ -181,7 +181,7 @@ class Google:
                     "user_agent_type": "desktop",
                     "locale": None,
                     "geo_location": None,
-                    "render": "html",
+                    "render": "None",
                     "callback_url": None,
                     "parse": False,
                     "context": None,
@@ -262,6 +262,9 @@ class Google:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
+                    "geo_location": None,
+                    "parse": None,
                     "parse_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -312,9 +315,9 @@ class Google:
                     "user_agent_type": "desktop",
                     "locale": None,
                     "geo_location": None,
-                    "render": "html",
+                    "render": "None",
                     "callback_url": None,
-                    "parse": False,
+                    "parse": None,
                     "context": None,
                     "parse_instructions": None,
                 }
@@ -366,6 +369,7 @@ class Google:
             opts (GoogleSuggestionsOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "locale": None,
+                    "geo_location": None,
                     "user_agent_type": "desktop",
                     "render": "html",
                     "callback_url": None,
@@ -485,7 +489,7 @@ class Google:
                     "locale": None,
                     "geo_location": None,
                     "user_agent_type": "desktop",
-                    "render": None,
+                    "render": "html",
                     "callback_url": None,
                     "parse": False,
                     "context": None,
@@ -541,9 +545,9 @@ class Google:
             query (str): The search query.
             opts (GoogleImagesOpts, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": None,
-                    "start_page": None,
-                    "pages": None,
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
                     "user_agent_type": "desktop",
                     "locale": None,
                     "geo_location": None,
@@ -613,6 +617,7 @@ class Google:
             opts (GoogleTrendsExploreOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": "desktop",
+                    "geo_location": None,
                     "callback_url": None,
                     "parse_instructions": None,
                 }

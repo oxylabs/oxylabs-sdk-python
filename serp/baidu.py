@@ -62,11 +62,11 @@ class Baidu:
             query (str): The search query.
             opts (BaiduSearchOpts, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": DEFAULT_DOMAIN,
-                    "start_page": DEFAULT_START_PAGE,
-                    "pages": DEFAULT_PAGES,
-                    "limit": DEFAULT_LIMIT_SERP,
-                    "user_agent_type": DEFAULT_USER_AGENT,
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "limit": 10,
+                    "user_agent_type": desktop,
                     "callback_url": None,
                     "parse_instructions": None,
                 }
@@ -115,7 +115,7 @@ class Baidu:
             url (str): The URL to be scraped.
             opts (BaiduUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
-                    "user_agent_type": DEFAULT_USER_AGENT,
+                    "user_agent_type": desktop,
                     "callback_url": None,
                     "parse_instructions": None,
                 }
