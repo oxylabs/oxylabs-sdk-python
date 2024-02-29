@@ -85,11 +85,11 @@ class Bing:
                     "domain": "com",
                     "start_page": 1,
                     "pages": 1,
-                    "limit": 50,
+                    "limit": 10,
                     "user_agent_type": "desktop",
                     "callback_url": None,
                     "locale": None,
-                    "geo_location": None,
+                    "geo_location": None, (City,Region,Country, for example Harrisburg,Arkansas,United States)
                     "render": None,
                     "parse": None,
                     "parse_instructions": None,
@@ -147,7 +147,9 @@ class Bing:
             opts (BingUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
+                    "geo_location": None,
                     "callback_url": None,
+                    "render": None,
                     "parse_instructions": None,
                 }
                 This parameter allows customization of the search request.

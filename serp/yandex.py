@@ -162,6 +162,7 @@ class Yandex:
                 {
                     "user_agent_type": DEFAULT_USER_AGENT,
                     "callback_url": None,
+                    "render": None,
                     "parse_instructions": None,
                 }
                 This parameter allows customization of the search request.

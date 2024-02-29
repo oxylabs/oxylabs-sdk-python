@@ -2,7 +2,6 @@ import requests
 import base64
 from utils.defaults import DEFAULT_TIMEOUT
 
-
 class ApiCredentials:
     def __init__(self, username, password):
         """
@@ -41,7 +40,7 @@ class Client:
                 response = requests.post(
                     self.base_url,
                     headers=headers,
-                    data=json_payload,
+                    json=json_payload,
                     timeout=timeout if timeout else DEFAULT_TIMEOUT,
                 )
             elif method == "GET":
