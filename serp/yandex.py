@@ -78,18 +78,6 @@ class Yandex:
 
         self.client = client
 
-    def get_payload_response(self, payload):
-        # remove empty or null values
-        payload = {k: v for k, v in payload.items() if v is not None}
-
-        # Convert payload to JSON
-        json_payload = json.dumps(payload)
-
-        # Make the request
-        http_resp = self.client.req(json_payload, "POST")
-
-        return http_resp
-
     def scrape_yandex_search(
         self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
     ) -> Dict[str, Any]:
