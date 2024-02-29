@@ -1,5 +1,5 @@
-from internal.internal import Client, ApiCredentials
-from utils.defaults import SYNC_BASE_URL
+from internal.internal import Client, ApiCredentials, ClientAsync
+from utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import json
 import requests
 from urllib.parse import urljoin
@@ -26,8 +26,8 @@ class SerpClient:
 
         # Convert payload to JSON
         json_payload = json.dumps(payload)
-        
-        return self.client.req(json_payload, "POST",timeout)
+
+        return self.client.req(json_payload, "POST", timeout)
 
 
 class SerpClientAsync:
@@ -40,7 +40,32 @@ class SerpClientAsync:
             password (str): The password for API authentication.
         """
         api_credentials = ApiCredentials(username, password)
-        self.client = Client("AsyncBaseUrl", api_credentials)
+        self.client = ClientAsync(ASYNC_BASE_URL, api_credentials)
+
+    async def get_job_id(self, json_payload, config):
+        """
+        Wrapper method to get a job ID for a given payload.
+
+        Args:
+            json_payload (dict): The JSON payload for the job.
+
+        Returns:
+            str: The job ID.
+        """
+        return await self.client.get_job_id(json_payload, config)
+
+    async def poll_job_status(self, job_id, config):
+        """
+        Wrapper method to poll the status of a job until it's completed.
+
+        Args:
+            job_id (str): The job ID to poll.
+            poll_interval (int, optional): The interval between status checks. Defaults to 5 seconds.
+
+        Returns:
+            None: This method returns None but will raise an exception if the job is faulted.
+        """
+        return await self.client.poll_job_status(job_id, config)
 
 
 class TLSAdapter(HTTPAdapter):
