@@ -1,5 +1,10 @@
 from utils.defaults import (
     DEFAULT_LIMIT_SERP,
+    DEFAULT_DOMAIN,
+    DEFAULT_START_PAGE,
+    DEFAULT_USER_AGENT,
+    DEFAULT_PAGES,
+    DEFAULT_TIMEOUT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -8,8 +13,7 @@ from utils.defaults import (
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 import utils.utils as utils
-from utils.constants import Render, Domain, Source
-import dataclasses
+from utils.constants import Domain, Source
 from typing import Optional, Dict, Any
 
 
@@ -23,15 +27,35 @@ BingSearchAcceptedDomainParameters = [
 ]
 
 
-@dataclasses.dataclass
 class BingSearchOpts(BaseSearchOpts):
-    """
-    Represents the search options for Bing.
-    """
 
-    locale: str = None
-    geo_location: str = None
-    render: Render = None
+    def __init__(
+        self,
+        domain=DEFAULT_DOMAIN,
+        start_page=DEFAULT_START_PAGE,
+        pages=DEFAULT_PAGES,
+        limit=DEFAULT_LIMIT_SERP,
+        user_agent_type=DEFAULT_USER_AGENT,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        locale=None,
+        geo_location=None,
+        render=None,
+    ):
+        super().__init__(
+            domain,
+            start_page,
+            pages,
+            limit,
+            user_agent_type,
+            callback_url,
+            parse_instructions,
+            parse,
+        )
+        self.locale = locale
+        self.geo_location = geo_location
+        self.render = render
 
     def check_parameter_validity(self):
         """
@@ -45,14 +69,19 @@ class BingSearchOpts(BaseSearchOpts):
         utils.check_start_page_validity(self.start_page)
 
 
-@dataclasses.dataclass
 class BingUrlOpts(BaseUrlOpts):
-    """
-    Represents the URL options for Bing.
-    """
-
-    geo_location: str = None
-    render: Render = None
+    def __init__(
+        self,
+        user_agent_type=DEFAULT_USER_AGENT,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        geo_location=None,
+        render=None,
+    ):
+        super().__init__(user_agent_type, callback_url, parse_instructions, parse)
+        self.geo_location = geo_location
+        self.render = render
 
     def check_parameter_validity(self):
         """
@@ -73,8 +102,9 @@ class Bing:
         """
         self.client = client
 
-    def scrape_bing_search(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
-        
+    def scrape_bing_search(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Bing search results for a given query.
 
@@ -100,6 +130,9 @@ class Bing:
         Returns:
             dict: The response from the server after the job is completed.
         """
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = BingSearchOpts(**opts if opts is not None else {})
 
@@ -134,14 +167,16 @@ class Bing:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_bing_url(self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_bing_url(
+        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Bing search results for a given URL.
-        
+
         Args:
             url (str): The URL to be scraped.
             opts (BingUrlOpts, optional): Configuration options for the search. Defaults to:
@@ -154,11 +189,13 @@ class Bing:
                 }
                 This parameter allows customization of the search request.
             timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
-            
+
         Returns:
             dict: The response from the server after the job is completed.
         """
-
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
         # Check validity of url
         validate_url(url, "bing")
 
@@ -186,6 +223,6 @@ class Bing:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp

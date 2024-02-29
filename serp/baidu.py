@@ -1,5 +1,6 @@
 from utils.defaults import (
     DEFAULT_LIMIT_SERP,
+    DEFAULT_TIMEOUT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -9,7 +10,6 @@ from utils.defaults import (
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 from utils.constants import Domain, Source
 import utils.utils as utils
-import dataclasses
 from typing import Optional, Dict, Any
 
 
@@ -19,7 +19,6 @@ BaiduSearchAcceptedDomainParameters = [
 ]
 
 
-@dataclasses.dataclass
 class BaiduSearchOpts(BaseSearchOpts):
     """
     Represents the search options for Baidu.
@@ -36,7 +35,6 @@ class BaiduSearchOpts(BaseSearchOpts):
         utils.check_start_page_validity(self.start_page)
 
 
-@dataclasses.dataclass
 class BaiduUrlOpts(BaseUrlOpts):
     """
     Represents the URL options for Baidu.
@@ -52,8 +50,10 @@ class BaiduUrlOpts(BaseUrlOpts):
 class Baidu:
     def __init__(self, client):
         self.client = client
-        
-    def scrape_baidu_search(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+
+    def scrape_baidu_search(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Baidu search results for a given query.
 
@@ -75,6 +75,9 @@ class Baidu:
         Returns:
             dict: The response from the server after the job is completed.
         """
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = BaiduSearchOpts(**opts if opts is not None else {})
 
@@ -94,7 +97,7 @@ class Baidu:
             "start_page": opts.start_page,
             "pages": opts.pages,
             "limit": opts.limit,
-            "user_agent": opts.user_agent_type,
+            "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,
         }
 
@@ -102,14 +105,16 @@ class Baidu:
             payload["parse"] = True
             payload["parse_instructions"] = opts.parse_instructions
 
-        resp = self.client.send_post_request_with_payload(payload,timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_baidu_url(self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_baidu_url(
+        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Baidu search results for a given URL.
-        
+
         Args:
             url (str): The URL to be scraped.
             opts (BaiduUrlOpts, optional): Configuration options for the search. Defaults to:
@@ -124,6 +129,9 @@ class Baidu:
         Returns:
             dict: The response from the server after the job is completed.
         """
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         validate_url(url, "baidu")
 
@@ -136,7 +144,7 @@ class Baidu:
         payload = {
             "source": Source.BaiduUrl.value,
             "url": url,
-            "user_agent": opts.user_agent_type,
+            "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,
         }
 
@@ -144,6 +152,6 @@ class Baidu:
             payload["parse"] = True
             payload["parse_instructions"] = opts.parse_instructions
 
-        resp = self.client.send_post_request_with_payload(payload,timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
