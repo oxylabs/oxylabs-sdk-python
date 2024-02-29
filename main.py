@@ -49,14 +49,6 @@ def mainSync():
         timeout=45,
     )
 
-    results3 = client.scrape_bing_url(
-        "https://www.bing.com/search?q=nike",
-        {
-            "parse": True,
-        },
-        timeout=35,
-    )
-
 
 # Ensure the main coroutine is executed
 if __name__ == "__main__":
