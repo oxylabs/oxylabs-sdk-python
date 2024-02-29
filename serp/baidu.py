@@ -49,7 +49,6 @@ class BaiduUrlOpts(BaseUrlOpts):
         utils.check_user_agent_validity(self.user_agent_type)
 
 
-@dataclasses.dataclass
 class Baidu:
     def __init__(self, client):
         self.client = client
