@@ -12,7 +12,7 @@ from utils.defaults import (
     set_default_start_page,
     set_default_user_agent,
 )
-from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url, Config
+from utils.utils import BaseSearchOpts
 from utils.constants import Render, Domain, UserAgent, Source
 import dataclasses
 from typing import Optional, Dict, Any

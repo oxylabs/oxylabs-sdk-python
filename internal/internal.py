@@ -4,7 +4,6 @@ from utils.defaults import DEFAULT_TIMEOUT
 import aiohttp
 from aiohttp import ClientTimeout
 import asyncio
-from utils.utils import Config
 
 
 class ApiCredentials:
@@ -138,6 +137,7 @@ class ClientAsync:
                     async with session.get(job_status_url, headers=headers, timeout=timeout) as response:
                         if response.status == 200:
                             job = await response.json()
+                            print(poll_interval, job['status'])
                             if job['status'] == 'done':
                                 return await self.get_http_resp(job_id, config)
                             elif job['status'] == 'faulted':
