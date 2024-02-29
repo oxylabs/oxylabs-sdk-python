@@ -39,7 +39,7 @@ def set_default_start_page(start_page: int) -> int:
     Returns:
     - int: The start page that was set as the default, or the default start page if start_page is None.
     """
-    return start_page if start_page else DEFAULT_START_PAGE
+    return start_page if start_page is not None else DEFAULT_START_PAGE
 
 
 def set_default_pages(pages: int) -> int:
@@ -53,7 +53,7 @@ def set_default_pages(pages: int) -> int:
     - int: The default number of pages.
 
     """
-    return pages if pages else DEFAULT_PAGES
+    return pages if pages is not None else DEFAULT_PAGES
 
 
 def set_default_limit(limit: int, default_limit: int) -> int:
@@ -67,7 +67,7 @@ def set_default_limit(limit: int, default_limit: int) -> int:
     Returns:
     - int: The limit value if provided, otherwise the default limit value.
     """
-    return limit if limit else default_limit
+    return limit if limit is not None else default_limit
 
 
 def set_default_user_agent(user_agent):
@@ -80,20 +80,7 @@ def set_default_user_agent(user_agent):
     Returns:
         str: The default user agent.
     """
-    return user_agent if user_agent else DEFAULT_USER_AGENT
-
-
-def set_default_hotel_occupancy(ctx: dict) -> int:
-    """
-    Sets the default hotel occupancy value.
-
-    Args:
-    - ctx (dict): The context object containing the configuration.
-
-    Returns:
-    - int: The default hotel occupancy value.
-    """
-    return ctx.get("hotel_occupancy", 2)
+    return user_agent if user_agent is not None else DEFAULT_USER_AGENT
 
 
 def set_default_sort_by(ctx: dict) -> str:
@@ -133,3 +120,19 @@ def set_default_content_encoding(content_encoding: str) -> str:
         str: The content encoding if provided, otherwise "base64".
     """
     return content_encoding if content_encoding else "base64"
+
+
+def set_default_hotel_occupancy(occupancy):
+    """
+    Sets the default hotel occupancy if the provided occupancy is None.
+
+    Args:
+        occupancy (int): The occupancy value to be checked.
+
+    Returns:
+        int: The default occupancy value if the provided occupancy is None, otherwise returns the provided occupancy.
+    """
+    default_occupancy = 2
+    if occupancy is None:
+        return default_occupancy
+    return occupancy

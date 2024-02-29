@@ -1,5 +1,6 @@
 import requests
 import base64
+from utils.defaults import DEFAULT_TIMEOUT
 import aiohttp
 from aiohttp import ClientTimeout
 import asyncio
@@ -31,21 +32,21 @@ class Client:
         self.base_url = base_url
         self.api_credentials = api_credentials
 
-    def req(self, json_payload, method):
+    def req(self, json_payload, method, timeout):
         # Prepare headers
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
 
-        config = Config()
-        timeout = config.timeout
-
         # Make the request
         try:
             if method == "POST":
                 response = requests.post(
-                    self.base_url, headers=headers, data=json_payload, timeout=timeout
+                    self.base_url,
+                    headers=headers,
+                    json=json_payload,
+                    timeout=timeout if timeout else DEFAULT_TIMEOUT,
                 )
             elif method == "GET":
                 response = requests.get(self.base_url, headers=headers, timeout=timeout)
@@ -68,6 +69,7 @@ class Client:
             return None
         except requests.exceptions.HTTPError as err:
             print(f"HTTP error occurred: {err}")
+            print(response.text)
             return None
         except requests.exceptions.RequestException as err:
             print(f"Error occurred: {err}")
