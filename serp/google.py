@@ -806,7 +806,7 @@ class Google:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleImages.value,
+            "source": Source.GoogleTrendsExplore.value,
             "query": query,
             "geo_location": opts.geo_location,
             "context": opts.context,
