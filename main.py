@@ -27,8 +27,6 @@ async def mainAsync():
         ),
     )
 
-    print(result)
-
 
 def mainSync():
     serp_client = SerpClient(os.getenv("OXYLABS_USER"), os.getenv("OXYLABS_PASSWORD"))
@@ -115,5 +113,5 @@ def mainSync():
 
 # Ensure the main coroutine is executed
 if __name__ == "__main__":
-    # asyncio.run(mainAsync())
-    mainSync()
+    asyncio.run(mainAsync())
+    # mainSync()
