@@ -13,9 +13,8 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
-from utils.constants import Render, Domain, Source, Locale
+from utils.constants import Domain, Source, Locale
 import utils.utils as utils
-import dataclasses
 from typing import Optional, Dict, Any
 
 
@@ -167,7 +166,7 @@ class Yandex:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -223,6 +222,6 @@ class Yandex:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp

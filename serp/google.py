@@ -16,8 +16,7 @@ from utils.utils import (
     validate_url,
     BaseGoogleOpts,
 )
-from utils.constants import Render, Domain, Source, Locale
-import dataclasses
+from utils.constants import Render, Source
 import utils.utils as utils
 from typing import Optional, Dict, Any
 
@@ -387,7 +386,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -441,7 +440,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -504,7 +503,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -560,7 +559,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -629,7 +628,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -694,7 +693,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -769,7 +768,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -819,6 +818,6 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp

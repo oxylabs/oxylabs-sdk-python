@@ -167,7 +167,7 @@ class Bing:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -223,6 +223,6 @@ class Bing:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp

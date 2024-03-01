@@ -105,7 +105,7 @@ class Baidu:
             payload["parse"] = True
             payload["parse_instructions"] = opts.parse_instructions
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp
 
@@ -152,6 +152,6 @@ class Baidu:
             payload["parse"] = True
             payload["parse_instructions"] = opts.parse_instructions
 
-        resp = self.client.send_post_request_with_payload(payload, config)
+        resp = self.client.get_resp(payload, config)
 
         return resp

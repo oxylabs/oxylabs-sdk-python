@@ -1,8 +1,6 @@
 from internal.internal import Client, ApiCredentials, ClientAsync
 from utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
-import json
 import requests
-from urllib.parse import urljoin
 from requests.adapters import HTTPAdapter
 from urllib3.util.ssl_ import create_urllib3_context
 from urllib.parse import quote
@@ -20,7 +18,7 @@ class SerpClient:
         api_credentials = ApiCredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
-    def send_post_request_with_payload(self, payload, config):
+    def get_resp(self, payload, config):
         # remove empty or null values
         payload = {k: v for k, v in payload.items() if v is not None}
 
@@ -38,30 +36,24 @@ class SerpClientAsync:
         """
         api_credentials = ApiCredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, api_credentials)
-
-    async def get_job_id(self, json_payload, config):
+    
+    async def get_resp(self, payload, config):
         """
-        Wrapper method to get a job ID for a given payload.
+        Processes the payload asynchronously, starts a job, polls for its completion, and retrieves the results.
 
         Args:
-            json_payload (dict): The JSON payload for the job.
+            payload (dict): The payload for the request.
 
         Returns:
-            str: The job ID.
+            The response from the server after the job is completed.
         """
-        return await self.client.get_job_id(json_payload, config)
+        # Remove empty or null values from the payload
+        payload = {k: v for k, v in payload.items() if v is not None}
 
-    async def poll_job_status(self, job_id, config):
-        """
-        Wrapper method to poll the status of a job until it's completed.
+        # Start the job and get its ID
+        job_id = await self.client.get_job_id(payload, config)
 
-        Args:
-            job_id (str): The job ID to poll.
-            poll_interval (int, optional): The interval between status checks. Defaults to 5 seconds.
-
-        Returns:
-            None: This method returns None but will raise an exception if the job is faulted.
-        """
+        # Poll for the job status until completion and return the results
         return await self.client.poll_job_status(job_id, config)
 
 

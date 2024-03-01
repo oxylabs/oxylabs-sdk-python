@@ -144,6 +144,7 @@ class ClientAsync:
                     ) as response:
                         if response.status == 200:
                             job = await response.json()
+                            print("status", job['status'], config['timeout'])
                             if job["status"] == "done":
                                 return await self.get_http_resp(job_id, config)
                             elif job["status"] == "faulted":

@@ -78,25 +78,6 @@ class BingAsync:
         """
         self.client = client
     
-    async def get_payload_response(self, payload, config):
-        """
-        Processes the payload asynchronously, starts a job, polls for its completion, and retrieves the results.
-
-        Args:
-            payload (dict): The payload for the request.
-
-        Returns:
-            The response from the server after the job is completed.
-        """
-        # Remove empty or null values from the payload
-        payload = {k: v for k, v in payload.items() if v is not None}
-
-        # Start the job and get its ID
-        job_id = await self.client.get_job_id(payload, config)
-
-        # Poll for the job status until completion and return the results
-        return await self.client.poll_job_status(job_id, config)
-    
     async def scrape_bing_search(
         self, query: str, opts: Optional[Dict[str, Any]] = None, 
         poll_interval: Optional[int] = None, timeout: Optional[int] = None
@@ -132,20 +113,6 @@ class BingAsync:
             'poll_interval': poll_interval if poll_interval is not None else DEFAULT_POLL_INTERVAL
         }
 
-        # Prepare your JSON payload based on the query and opts
-        defaults = {
-            "domain": DEFAULT_DOMAIN,
-            "start_page": DEFAULT_START_PAGE,
-            "pages": DEFAULT_PAGES,
-            "limit": DEFAULT_LIMIT_SERP,
-            "user_agent_type": DEFAULT_USER_AGENT,
-            "callback_url": None,
-            "locale": None,
-            "geo_location": None,
-            "render": None,
-            "parse": None,
-        }
-
         opts = BingSearchOpts(**opts if opts is not None else {})
 
         # Set defaults
@@ -179,6 +146,7 @@ class BingAsync:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = await self.get_payload_response(payload, config)
+        resp = await self.client.get_resp(payload, config)
+        
         return resp
     
