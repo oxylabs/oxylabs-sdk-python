@@ -1,66 +1,68 @@
-import dataclasses
-from utils.constants import UserAgent, Domain, Render
+from utils.constants import UserAgent, Render
 from urllib.parse import urlparse
-from utils.defaults import DEFAULT_TIMEOUT
+from utils.defaults import (
+    DEFAULT_LIMIT_SERP,
+    DEFAULT_DOMAIN,
+    DEFAULT_START_PAGE,
+    DEFAULT_USER_AGENT,
+    DEFAULT_PAGES,
+)
 
 
-@dataclasses.dataclass
 class BaseSearchOpts:
-    """
-    Represents the base search options for performing a search.
-
-    Args:
-        domain (Domain): The domain to search on.
-        start_page (int): The starting page number.
-        pages (int): The number of pages to search.
-        limit (int): The maximum number of results to retrieve.
-        user_agent (UserAgent): The user agent to use for the search.
-        callback_url (str): The URL to send the search results to.
-        parse_instructions (dict): The instructions for parsing the search results.
-        poll_interval (int): The interval (in seconds) between polling for search results.
-        parse (bool): Whether to parse the search results.
-    """
-
-    domain: Domain = None
-    start_page: int = 1
-    pages: int = 1
-    limit: int = 10
-    user_agent_type: UserAgent = UserAgent.UA_DESKTOP.value
-    callback_url: str = None
-    parse_instructions: dict = None
-    poll_interval: int = 0
-    parse: bool = False
+    def __init__(
+        self,
+        domain=DEFAULT_DOMAIN,
+        start_page=DEFAULT_START_PAGE,
+        pages=DEFAULT_PAGES,
+        limit=DEFAULT_LIMIT_SERP,
+        user_agent_type=DEFAULT_USER_AGENT,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+    ):
+        self.domain = domain
+        self.start_page = start_page
+        self.pages = pages
+        self.limit = limit
+        self.user_agent_type = user_agent_type
+        self.callback_url = callback_url
+        self.parse_instructions = parse_instructions
+        self.parse = parse
 
 
-@dataclasses.dataclass
 class BaseUrlOpts:
-    """
-    Represents the options for the base URL.
-
-    Args:
-        user_agent (UserAgent): The user agent to use for the search.
-        callback_url (str): The URL to send the search results to.
-        parse_instructions (dict): The instructions for parsing the search results.
-        poll_interval (int): The interval (in seconds) between polling for search results.
-        parse (bool): Whether to parse the search results.
-    """
-
-    user_agent_type: UserAgent = UserAgent.UA_DESKTOP.value
-    callback_url: str = None
-    parse_instructions: dict = None
-    poll_interval: int = 0
-    parse: bool = False
+    def __init__(
+        self,
+        user_agent_type=DEFAULT_USER_AGENT,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+    ):
+        self.user_agent_type = user_agent_type
+        self.callback_url = callback_url
+        self.parse_instructions = parse_instructions
+        self.parse = parse
 
 
-@dataclasses.dataclass
 class BaseGoogleOpts:
-    geo_location: str = None
-    user_agent_type: UserAgent = UserAgent.UA_DESKTOP.value
-    render: Render = None
-    callback_url: str = None
-    parse_instructions: dict = None
-    parse: bool = False
-    context: list = None
+    def __init__(
+        self,
+        geo_location=None,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        context=None,
+    ):
+        self.geo_location = geo_location
+        self.user_agent_type = user_agent_type
+        self.render = render
+        self.callback_url = callback_url
+        self.parse_instructions = parse_instructions
+        self.parse = parse
+        self.context = context
 
 
 def validate_url(input_url, host):

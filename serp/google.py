@@ -3,6 +3,8 @@ from utils.defaults import (
     DEFAULT_LIMIT_SERP,
     DEFAULT_PAGES,
     DEFAULT_START_PAGE,
+    DEFAULT_USER_AGENT,
+    DEFAULT_TIMEOUT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -20,13 +22,36 @@ import utils.utils as utils
 from typing import Optional, Dict, Any
 
 
-@dataclasses.dataclass
 class GoogleSearchOpts(BaseGoogleOpts):
-    domain: Domain = DEFAULT_DOMAIN
-    start_page: int = DEFAULT_START_PAGE
-    pages: int = DEFAULT_PAGES
-    limit: int = DEFAULT_LIMIT_SERP
-    locale: Locale = None
+    def __init__(
+        self,
+        geo_location=None,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        context=None,
+        domain=DEFAULT_DOMAIN,
+        start_page=DEFAULT_START_PAGE,
+        pages=DEFAULT_PAGES,
+        limit=DEFAULT_LIMIT_SERP,
+        locale=None,
+    ):
+        super().__init__(
+            geo_location,
+            user_agent_type,
+            render,
+            callback_url,
+            parse_instructions,
+            parse,
+            context,
+        )
+        self.domain = domain
+        self.start_page = start_page
+        self.pages = pages
+        self.limit = limit
+        self.locale = locale
 
     AcceptedTbmParameters = [
         "app",
@@ -56,7 +81,6 @@ class GoogleSearchOpts(BaseGoogleOpts):
                     )
 
 
-@dataclasses.dataclass
 class GoogleUrlOpts(BaseGoogleOpts):
 
     def check_parameter_validity(self):
@@ -64,12 +88,36 @@ class GoogleUrlOpts(BaseGoogleOpts):
         utils.check_render_validity(self.render)
 
 
-@dataclasses.dataclass
 class GoogleAdsOpts(BaseGoogleOpts):
-    domain: Domain = None
-    start_page: int = None
-    pages: int = None
-    locale: str = None
+    def __init__(
+        self,
+        geo_location=None,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        context=None,
+        domain=DEFAULT_DOMAIN,
+        start_page=DEFAULT_START_PAGE,
+        pages=DEFAULT_PAGES,
+        limit=DEFAULT_LIMIT_SERP,
+        locale=None,
+    ):
+        super().__init__(
+            geo_location,
+            user_agent_type,
+            render,
+            callback_url,
+            parse_instructions,
+            parse,
+            context,
+        )
+        self.domain = domain
+        self.start_page = start_page
+        self.pages = pages
+        self.limit = limit
+        self.locale = locale
 
     AcceptedTbmParameters = [
         "app",
@@ -96,22 +144,64 @@ class GoogleAdsOpts(BaseGoogleOpts):
                     )
 
 
-@dataclasses.dataclass
 class GoogleSuggestionsOpts(BaseGoogleOpts):
-    locale: str = None
+    def __init__(
+        self,
+        geo_location=None,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        context=None,
+        locale=None,
+    ):
+        super().__init__(
+            geo_location,
+            user_agent_type,
+            render,
+            callback_url,
+            parse_instructions,
+            parse,
+            context,
+        )
+        self.locale = locale
 
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
 
 
-@dataclasses.dataclass
 class GoogleHotelsOpts(BaseGoogleOpts):
-    domain: Domain = DEFAULT_DOMAIN
-    start_page: int = DEFAULT_START_PAGE
-    pages: int = DEFAULT_PAGES
-    limit: int = DEFAULT_LIMIT_SERP
-    locale: str = None
+    def __init__(
+        self,
+        geo_location=None,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        context=None,
+        domain=DEFAULT_DOMAIN,
+        start_page=DEFAULT_START_PAGE,
+        pages=DEFAULT_PAGES,
+        limit=DEFAULT_LIMIT_SERP,
+        locale=None,
+    ):
+        super().__init__(
+            geo_location,
+            user_agent_type,
+            render,
+            callback_url,
+            parse_instructions,
+            parse,
+            context,
+        )
+        self.domain = domain
+        self.start_page = start_page
+        self.pages = pages
+        self.limit = limit
+        self.locale = locale
 
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
@@ -121,11 +211,32 @@ class GoogleHotelsOpts(BaseGoogleOpts):
         utils.check_start_page_validity(self.start_page)
 
 
-@dataclasses.dataclass
 class GoogleTravelHotelsOpts(BaseGoogleOpts):
-    domain: Domain = None
-    start_page: int = None
-    locale: str = None
+    def __init__(
+        self,
+        geo_location=None,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        context=None,
+        domain=DEFAULT_DOMAIN,
+        start_page=DEFAULT_START_PAGE,
+        locale=None,
+    ):
+        super().__init__(
+            geo_location,
+            user_agent_type,
+            render,
+            callback_url,
+            parse_instructions,
+            parse,
+            context,
+        )
+        self.domain = domain
+        self.start_page = start_page
+        self.locale = locale
 
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
@@ -133,19 +244,42 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
         utils.check_start_page_validity(self.start_page)
 
 
-@dataclasses.dataclass
 class GoogleImagesOpts(BaseGoogleOpts):
-    domain: Domain = None
-    start_page: int = None
-    pages: int = None
-    locale: str = None
+    def __init__(
+        self,
+        geo_location=None,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        parse_instructions=None,
+        parse=False,
+        context=None,
+        domain=DEFAULT_DOMAIN,
+        start_page=DEFAULT_START_PAGE,
+        pages=DEFAULT_PAGES,
+        limit=DEFAULT_LIMIT_SERP,
+        locale=None,
+    ):
+        super().__init__(
+            geo_location,
+            user_agent_type,
+            render,
+            callback_url,
+            parse_instructions,
+            parse,
+            context,
+        )
+        self.domain = domain
+        self.start_page = start_page
+        self.pages = pages
+        self.limit = limit
+        self.locale = locale
 
     def check_parameter_validity(self):
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
 
 
-@dataclasses.dataclass
 class GoogleTrendsExploreOpts(BaseGoogleOpts):
 
     def check_parameter_validity(self):
@@ -194,14 +328,21 @@ class Google:
         Returns:
             dict: The response from the server after the job is completed.
         """
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = GoogleSearchOpts(**opts if opts is not None else {})
 
         if (
-            opts.limit is not None
-            or opts.start_page is not None
-            or opts.pages is not None
-        ) and any(opt.get("key") == "limit_per_page" for opt in opts.context):
+            (
+                opts.limit is not None
+                or opts.start_page is not None
+                or opts.pages is not None
+            )
+            and opts.context
+            and any(opt.get("key") == "limit_per_page" for opt in opts.context)
+        ):
             raise ValueError(
                 "limit, start_page, and pages parameters cannot be used together with limit_per_page context parameter"
             )
@@ -246,7 +387,7 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
@@ -273,6 +414,9 @@ class Google:
         Returns:
             dict: The response from the server after the job is completed.
         """
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         validate_url(url, "google")
 
@@ -297,14 +441,16 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_google_ads(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_google_ads(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Google Ads search results for a given query.
-        
+
         Args:
             query (str): The search query.
             opts (GoogleAdsOpts, optional): Configuration options for the search. Defaults to:
@@ -323,11 +469,13 @@ class Google:
                 }
                 This parameter allows customization of the search request.
             timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
-            
+
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = GoogleAdsOpts(**opts if opts is not None else {})
 
@@ -356,14 +504,16 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_google_suggestions(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_google_suggestions(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Google suggestions for a given query.
-        
+
         Args:
             query (str): The search query.
             opts (GoogleSuggestionsOpts, optional): Configuration options for the search. Defaults to:
@@ -377,13 +527,16 @@ class Google:
                     "parse_instructions": None,
                 }
                 This parameter allows customization of the search request.
-                
+
             timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
-            
+
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = GoogleSuggestionsOpts(**opts if opts is not None else {})
 
@@ -407,14 +560,16 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_google_hotels(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_google_hotels(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Google Hotels search results for a given query.
-        
+
         Args:
             query (str): The search query.
             opts (GoogleHotelsOpts, optional): Configuration options for the search. Defaults to:
@@ -434,11 +589,13 @@ class Google:
                 }
                 This parameter allows customization of the search request.
             timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
-            
+
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = GoogleHotelsOpts(**opts if opts is not None else {})
 
@@ -472,14 +629,16 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_google_travel_hotels(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_google_travel_hotels(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Google Travel Hotels search results for a given query.
-        
+
         Args:
             query (str): The search query.
             opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
@@ -497,11 +656,13 @@ class Google:
                 }
                 This parameter allows customization of the search request.
             timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
-            
+
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = GoogleTravelHotelsOpts(**opts if opts is not None else {})
 
@@ -533,11 +694,13 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_google_images(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_google_images(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Google Images search results for a given query.
 
@@ -558,13 +721,15 @@ class Google:
                     "parse_instructions": None,
                 }
                 This parameter allows customization of the search request.
-                
+
             timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
-            
+
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = GoogleImagesOpts(**opts if opts is not None else {})
 
@@ -604,14 +769,16 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
 
-    def scrape_google_trends_explore(self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None) -> Dict[str, Any]:
+    def scrape_google_trends_explore(
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+    ) -> Dict[str, Any]:
         """
         Scrapes Google Trends Explore results for a given query.
-        
+
         Args:
             query (str): The search query.
             opts (GoogleTrendsExploreOpts, optional): Configuration options for the search. Defaults to:
@@ -623,11 +790,13 @@ class Google:
                 }
                 This parameter allows customization of the search request.
             timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
-            
+
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+        config = {
+            "timeout": timeout if timeout is not None else DEFAULT_TIMEOUT,
+        }
 
         opts = GoogleTrendsExploreOpts(**opts if opts is not None else {})
 
@@ -637,7 +806,7 @@ class Google:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleImages.value,
+            "source": Source.GoogleTrendsExplore.value,
             "query": query,
             "geo_location": opts.geo_location,
             "context": opts.context,
@@ -650,6 +819,6 @@ class Google:
             payload["parsing_instructions"] = opts.parse_instructions
             payload["parse"] = True
 
-        resp = self.client.send_post_request_with_payload(payload, timeout)
+        resp = self.client.send_post_request_with_payload(payload, config)
 
         return resp
