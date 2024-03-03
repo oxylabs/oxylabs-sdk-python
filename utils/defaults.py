@@ -1,5 +1,4 @@
 from utils.constants import UserAgent, Domain
-from datetime import timedelta
 
 # Constants
 DEFAULT_USER_AGENT = UserAgent.UA_DESKTOP.value
