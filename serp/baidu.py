@@ -1,13 +1,13 @@
 from serp.baidu_base import BaiduBase
-from serp.serp import SerpClient, SerpClientAsync
+from serp.serp import Serp, SerpAsync
 from utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 
 class Baidu(BaiduBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClient):
-            raise TypeError("Baidu requires a SerpClient instance")
+        if not isinstance(client, Serp):
+            raise TypeError("Baidu requires a Serp instance")
         self.client = client
 
     def scrape_baidu_search(
@@ -68,8 +68,8 @@ class Baidu(BaiduBase):
     
 class BaiduAsync(BaiduBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClientAsync):
-            raise TypeError("BaiduAsync requires a SerpClientAsync instance")
+        if not isinstance(client, SerpAsync):
+            raise TypeError("BaiduAsync requires a SerpAsync instance")
         self.client = client
 
     async def scrape_baidu_search(

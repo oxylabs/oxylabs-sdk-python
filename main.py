@@ -1,8 +1,9 @@
-from serp.serp import SerpClient, SerpClientAsync
+from serp.serp import Serp, SerpAsync
 from serp.baidu import Baidu
 from serp.google import Google
 from serp.yandex import Yandex
 from serp.bing import BingAsync, Bing
+from proxy.proxy import Proxy
 from dotenv import load_dotenv
 import os
 import asyncio
@@ -11,7 +12,7 @@ load_dotenv()
 
 
 async def mainAsync():
-    serp_client = SerpClientAsync(
+    serp_client = SerpAsync(
         os.getenv("OXYLABS_USER"), os.getenv("OXYLABS_PASSWORD")
     )
     client = BingAsync(serp_client)
@@ -29,7 +30,7 @@ async def mainAsync():
 
 
 def mainSync():
-    serp_client = SerpClient(os.getenv("OXYLABS_USER"), os.getenv("OXYLABS_PASSWORD"))
+    serp_client = Serp(os.getenv("OXYLABS_USER"), os.getenv("OXYLABS_PASSWORD"))
     # bing = Bing(serp_client)
 
     # result = bing.scrape_bing_search(
@@ -50,17 +51,17 @@ def mainSync():
     #     timeout=45,
     # )
     
-    baidu = Baidu(serp_client)
+    # baidu = Baidu(serp_client)
     
-    result = baidu.scrape_baidu_search(
-        "nike",
-        {
-            "start_page": 1,
-            'user_agent_type': 'desktop',
-            'parse': True,
-        },
-        timeout=15,
-    )
+    # result = baidu.scrape_baidu_search(
+    #     "nike",
+    #     {
+    #         "start_page": 1,
+    #         'user_agent_type': 'desktop',
+    #         'parse': True,
+    #     },
+    #     timeout=15,
+    # )
     
     # baidu.scrape_baidu_url(
     #     "https://www.baidu.com/s?wd=nike",
@@ -109,7 +110,14 @@ def mainSync():
     #     timeout=45,
     # )
 
-    print(result)
+    proxy = Proxy(os.getenv("OXYLABS_USER"), os.getenv("OXYLABS_PASSWORD"))
+
+    proxy.add_user_agent_header("desktop")
+    proxy.add_render_header("html")
+    # proxy.add_parse_header("google_ads")
+    result = proxy.get("https://www.google.com")
+
+    print(result.json())
     
 
 # Ensure the main coroutine is executed

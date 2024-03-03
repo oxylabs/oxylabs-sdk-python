@@ -1,12 +1,12 @@
 from serp.yandex_base import YandexBase
-from serp.serp import SerpClient, SerpClientAsync
+from serp.serp import Serp, SerpAsync
 from utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 class Yandex(YandexBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClient):
-            raise TypeError("Yandex requires a SerpClient instance")
+        if not isinstance(client, Serp):
+            raise TypeError("Yandex requires a Serp instance")
         self.client = client
 
     def scrape_yandex_search(
@@ -73,8 +73,8 @@ class Yandex(YandexBase):
     
 class YandexAsync(YandexBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClientAsync):
-            raise TypeError("YandexAsync requires a SerpClientAsync instance")
+        if not isinstance(client, SerpAsync):
+            raise TypeError("YandexAsync requires a SerpAsync instance")
         self.client = client
 
     async def scrape_yandex_search(

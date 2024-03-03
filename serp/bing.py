@@ -1,12 +1,12 @@
 from serp.bing_base import BingBase
 from typing import Optional, Dict, Any
-from serp.serp import SerpClient, SerpClientAsync
+from serp.serp import Serp, SerpAsync
 from utils.utils import prepare_config
 
 class Bing(BingBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClient):
-            raise TypeError("Bing requires a SerpClient instance")
+        if not isinstance(client, Serp):
+            raise TypeError("Bing requires a Serp instance")
         self.client = client
 
     def scrape_bing_search(
@@ -74,8 +74,8 @@ class Bing(BingBase):
     
 class BingAsync(BingBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClientAsync):
-            raise TypeError("BingAsync requires a SerpClientAsync instance")
+        if not isinstance(client, SerpAsync):
+            raise TypeError("BingAsync requires a SerpAsync instance")
         self.client = client
 
     async def scrape_bing_search(

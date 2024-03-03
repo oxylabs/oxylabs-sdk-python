@@ -1,12 +1,12 @@
 from utils.utils import prepare_config
 from serp.google_base import GoogleBase
-from serp.serp import SerpClient, SerpClientAsync
+from serp.serp import Serp, SerpAsync
 from typing import Optional, Dict, Any
 
 class Google(GoogleBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClient):
-            raise TypeError("Google requires a SerpClient instance")
+        if not isinstance(client, Serp):
+            raise TypeError("Google requires a Serp instance")
         self.client = client
 
     def scrape_google_search(
@@ -272,8 +272,8 @@ class Google(GoogleBase):
 
 class GoogleAsync(GoogleBase):
     def __init__(self, client):
-        if not isinstance(client, SerpClientAsync):
-            raise TypeError("GoogleAsync requires a SerpClientAsync instance")
+        if not isinstance(client, SerpAsync):
+            raise TypeError("GoogleAsync requires a SerpAsync instance")
         self.client = client
 
     async def scrape_google_search(

@@ -1,9 +1,5 @@
 from utils.defaults import (
-    DEFAULT_DOMAIN,
     DEFAULT_LIMIT_SERP,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -23,27 +19,6 @@ class BaiduSearchOpts(BaseSearchOpts):
     """
     Represents the search options for Baidu.
     """
-    def __init__(
-        self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_SERP,
-        user_agent_type=DEFAULT_USER_AGENT,
-        callback_url=None,
-        parse_instructions=None,
-        parse=False,
-    ):
-        super().__init__(
-            domain,
-            start_page,
-            pages,
-            limit,
-            user_agent_type,
-            callback_url,
-            parse_instructions,
-            parse,
-        )
 
     def check_parameter_validity(self):
         """
