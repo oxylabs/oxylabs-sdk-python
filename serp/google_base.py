@@ -457,8 +457,8 @@ class GoogleBase:
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
-        if "context" in opts and opts["context"]:
-            for item in opts["context"]:
+        if opts.context:
+            for item in opts.context:
                 if item["key"] == "hotel_occupancy":
                     item["value"] = set_default_hotel_occupancy(item.get("value"))
 
@@ -495,13 +495,20 @@ class GoogleBase:
         opts.pages = set_default_pages(opts.pages)
         opts.check_parameter_validity()
 
-        if opts.context is None or not any(
-            opt.get("key") == "tbm" and opt.get("value") == "isch"
-            for opt in opts.context
-        ):
-            if opts.context is None:
-                opts.context = []
+        # If context is None, initialize it as an empty list
+        if opts.context is None:
+            opts.context = []
+
+        # Find the index of the dictionary with 'tbm' as key
+        index = next((index for (index, d) in enumerate(opts.context) if d["key"] == "tbm"), None)
+
+        # If 'tbm' key exists, update its value to 'isch'
+        if index is not None:
+            opts.context[index]["value"] = "isch"
+        # If 'tbm' key doesn't exist, add it to the context with value 'isch'
+        else:
             opts.context.append({"key": "tbm", "value": "isch"})
+
 
         # Prepare payload
         payload = {

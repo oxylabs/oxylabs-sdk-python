@@ -80,7 +80,7 @@ class ClientAsync:
         self.base_url = base_url
         self.api_credentials = api_credentials
 
-    async def get_job_id(self, json_payload, config):
+    async def get_job_id(self, payload, config):
         headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
@@ -89,7 +89,7 @@ class ClientAsync:
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.post(
-                    self.base_url, headers=headers, json=json_payload, timeout=timeout
+                    self.base_url, headers=headers, json=payload, timeout=timeout
                 ) as response:
                     response.raise_for_status()
                     data = await response.json()

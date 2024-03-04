@@ -126,7 +126,7 @@ class YandexBase:
         return payload
     
     def prepare_url_payload(self, url, opts):
-        validate_url(url, "bing")
+        validate_url(url, "yandex")
         opts = YandexUrlOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
