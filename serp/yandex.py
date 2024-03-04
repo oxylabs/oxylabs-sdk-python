@@ -10,7 +10,7 @@ class Yandex(YandexBase):
         self.client = client
 
     def scrape_yandex_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
     ) -> Dict[str, Any]:
         """
         Scrapes the search results from Yandex.
@@ -32,7 +32,7 @@ class Yandex(YandexBase):
                 }
                 This parameter allows customization of the search request.
 
-            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
 
         Returns:
 
@@ -45,7 +45,7 @@ class Yandex(YandexBase):
         return response
 
     def scrape_yandex_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
     ) -> Dict[str, Any]:
         """
         Scrapes Yandex search results for a given URL.
@@ -54,13 +54,13 @@ class Yandex(YandexBase):
             url (str): The URL to be scraped.
             opts (YandexUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
-                    "user_agent_type": DEFAULT_USER_AGENT,
+                    "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -78,7 +78,7 @@ class YandexAsync(YandexBase):
         self.client = client
 
     async def scrape_yandex_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes the search results from Yandex.
@@ -100,20 +100,21 @@ class YandexAsync(YandexBase):
                 }
                 This parameter allows customization of the search request.
 
-            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            poll_interval (int, optional): The interval in seconds for the request to poll the server for the job completion status. Defaults to 2.
 
         Returns:
 
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_yandex_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
+        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Yandex search results for a given URL.
@@ -122,19 +123,20 @@ class YandexAsync(YandexBase):
             url (str): The URL to be scraped.
             opts (YandexUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
-                    "user_agent_type": DEFAULT_USER_AGENT,
+                    "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | None, optional): The interval in seconds for the request to time out if no response is returned. Defaults to None.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
 
         Returns:
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(timeout=timeout,poll_interval=poll_interval)
         payload = self.prepare_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response

@@ -68,10 +68,8 @@ class BaseGoogleOpts:
 
 def prepare_config(**kwargs):
         config = {}
-        if 'timeout' in kwargs:
-            config['timeout'] = kwargs['timeout'] if kwargs['timeout'] is not None else DEFAULT_TIMEOUT
-        if 'poll_interval' in kwargs:
-            config['poll_interval'] = kwargs['poll_interval'] if kwargs['poll_interval'] is not None else DEFAULT_POLL_INTERVAL
+        config['timeout'] = kwargs['timeout'] if kwargs.get('timeout') is not None else DEFAULT_TIMEOUT
+        config['poll_interval'] = kwargs['poll_interval'] if kwargs.get('poll_interval') is not None else DEFAULT_POLL_INTERVAL
         print("config", config)
         return config
 
