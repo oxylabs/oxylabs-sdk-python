@@ -1,24 +1,13 @@
 import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.ssl_ import create_urllib3_context
 from urllib.parse import quote
-
-
-class TLSAdapter(HTTPAdapter):
-    def init_poolmanager(self, *args, **kwargs):
-        context = create_urllib3_context()
-        kwargs["ssl_context"] = context
-        return super().init_poolmanager(*args, **kwargs)
-
 
 class Proxy:
     def __init__(self, username, password):
-        username = quote(username)
-        password = quote(password)
-        proxy_url = f"http://{username}:{password}@realtime.oxylabs.io:60000"
+        self.username = quote(username)
+        self.password = quote(password)
+        self.proxy_url = f"http://{self.username}:{self.password}@realtime.oxylabs.io:60000"
         self.session = requests.Session()
-        self.session.proxies = {"http": proxy_url, "https": proxy_url}
-        self.session.mount("https://", TLSAdapter())
+        self.session.proxies = {"http": self.proxy_url, "https": self.proxy_url}
         self.session.verify = False
 
     def get(self, url):
@@ -39,3 +28,6 @@ class Proxy:
     def add_parse_header(self, parser):
         self.session.headers["x-oxylabs-parse"] = "1"
         self.session.headers["x-oxylabs-parser"] = parser
+
+    def add_geo_location_header(self, geo_location):
+        self.session.headers["x-oxylabs-geo-location"] = geo_location
