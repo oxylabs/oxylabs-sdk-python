@@ -7,7 +7,7 @@ class Proxy:
         self.password = quote(password)
         self.proxy_url = f"http://{self.username}:{self.password}@realtime.oxylabs.io:60000"
         self.session = requests.Session()
-        self.session.proxies = {"http": self.proxy_url, "https": self.proxy_url}
+        self.session.proxies = {"http": self.proxy_url}
         self.session.verify = False
 
     def get(self, url):
