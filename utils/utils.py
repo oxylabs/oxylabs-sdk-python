@@ -66,13 +66,21 @@ class BaseGoogleOpts:
         self.parse = parse
         self.context = context
 
+
 def prepare_config(**kwargs):
-        config = {}
-        if 'timeout' in kwargs:
-            config['timeout'] = kwargs['timeout'] if kwargs['timeout'] is not None else DEFAULT_TIMEOUT
-        if 'poll_interval' in kwargs:
-            config['poll_interval'] = kwargs['poll_interval'] if kwargs['poll_interval'] is not None else DEFAULT_POLL_INTERVAL
-        return config
+    config = {}
+    if "timeout" in kwargs:
+        config["timeout"] = (
+            kwargs["timeout"] if kwargs["timeout"] is not None else DEFAULT_TIMEOUT
+        )
+    if "poll_interval" in kwargs:
+        config["poll_interval"] = (
+            kwargs["poll_interval"]
+            if kwargs["poll_interval"] is not None
+            else DEFAULT_POLL_INTERVAL
+        )
+    return config
+
 
 def validate_url(input_url, host):
     # Check if the URL is empty
