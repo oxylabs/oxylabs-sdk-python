@@ -3,6 +3,7 @@ from typing import Optional, Dict, Any
 from serp.serp import Serp, SerpAsync
 from utils.utils import prepare_config
 
+
 class Bing(BingBase):
     def __init__(self, client):
         if not isinstance(client, Serp):
@@ -10,10 +11,11 @@ class Bing(BingBase):
         self.client = client
 
     def scrape_bing_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, 
-        timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
-        
         """
         Scrapes Bing search results for a given query.
 
@@ -38,14 +40,17 @@ class Bing(BingBase):
         Returns:
             The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout)
         payload = self.prepare_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
-    
+
     def scrape_bing_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Bing search results for a given URL.
@@ -71,7 +76,8 @@ class Bing(BingBase):
         payload = self.prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
-    
+
+
 class BingAsync(BingBase):
     def __init__(self, client):
         if not isinstance(client, SerpAsync):
@@ -79,10 +85,12 @@ class BingAsync(BingBase):
         self.client = client
 
     async def scrape_bing_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, 
-        poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
-        
         """
         Asynchronously scrapes Bing search results for a given query.
 
@@ -108,15 +116,18 @@ class BingAsync(BingBase):
         Returns:
             The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(poll_interval=poll_interval, timeout=timeout)
         payload = self.prepare_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
-    
+
     async def scrape_bing_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, 
-        timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Bing search results for a given URL.
@@ -143,4 +154,3 @@ class BingAsync(BingBase):
         payload = self.prepare_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response
-    

@@ -3,6 +3,7 @@ from serp.google_base import GoogleBase
 from serp.serp import Serp, SerpAsync
 from typing import Optional, Dict, Any
 
+
 class Google(GoogleBase):
     def __init__(self, client):
         if not isinstance(client, Serp):
@@ -10,7 +11,10 @@ class Google(GoogleBase):
         self.client = client
 
     def scrape_google_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google search results for a given query.
@@ -47,7 +51,10 @@ class Google(GoogleBase):
         return response
 
     def scrape_google_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google search results for a given URL.
@@ -76,7 +83,10 @@ class Google(GoogleBase):
         return response
 
     def scrape_google_ads(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google Ads search results for a given query.
@@ -103,14 +113,17 @@ class Google(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout)
         payload = self.prepare_ads_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
     def scrape_google_suggestions(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google suggestions for a given query.
@@ -141,7 +154,10 @@ class Google(GoogleBase):
         return response
 
     def scrape_google_hotels(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google Hotels search results for a given query.
@@ -169,14 +185,17 @@ class Google(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout)
         payload = self.prepare_hotels_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
     def scrape_google_travel_hotels(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google Travel Hotels search results for a given query.
@@ -202,14 +221,17 @@ class Google(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout)
         payload = self.prepare_travel_hotels_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
     def scrape_google_images(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google Images search results for a given query.
@@ -237,14 +259,17 @@ class Google(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout)
         payload = self.prepare_images_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
     def scrape_google_trends_explore(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Google Trends Explore results for a given query.
@@ -264,11 +289,12 @@ class Google(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout)
         payload = self.prepare_trends_explore_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
+
 
 class GoogleAsync(GoogleBase):
     def __init__(self, client):
@@ -277,7 +303,11 @@ class GoogleAsync(GoogleBase):
         self.client = client
 
     async def scrape_google_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google search results for a given query.
@@ -315,7 +345,11 @@ class GoogleAsync(GoogleBase):
         return response
 
     async def scrape_google_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google search results for a given URL.
@@ -345,7 +379,11 @@ class GoogleAsync(GoogleBase):
         return response
 
     async def scrape_google_ads(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google Ads search results for a given query.
@@ -373,14 +411,18 @@ class GoogleAsync(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
-        config = prepare_config(timeout=timeout,poll_interval=poll_interval)
+
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_ads_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_google_suggestions(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google suggestions for a given query.
@@ -412,7 +454,11 @@ class GoogleAsync(GoogleBase):
         return response
 
     async def scrape_google_hotels(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google Hotels search results for a given query.
@@ -441,14 +487,18 @@ class GoogleAsync(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
-        config = prepare_config(timeout=timeout,poll_interval=poll_interval)
+
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_hotels_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_google_travel_hotels(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google Travel Hotels search results for a given query.
@@ -475,14 +525,18 @@ class GoogleAsync(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
-        config = prepare_config(timeout=timeout,poll_interval=poll_interval)
+
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_travel_hotels_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_google_images(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google Images search results for a given query.
@@ -511,14 +565,18 @@ class GoogleAsync(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
-        config = prepare_config(timeout=timeout,poll_interval=poll_interval)
+
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_images_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_google_trends_explore(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Google Trends Explore results for a given query.
@@ -539,8 +597,8 @@ class GoogleAsync(GoogleBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
-        config = prepare_config(timeout=timeout,poll_interval=poll_interval)
+
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_trends_explore_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response

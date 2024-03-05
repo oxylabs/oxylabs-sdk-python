@@ -3,6 +3,7 @@ from serp.serp import Serp, SerpAsync
 from utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
+
 class Yandex(YandexBase):
     def __init__(self, client):
         if not isinstance(client, Serp):
@@ -10,7 +11,10 @@ class Yandex(YandexBase):
         self.client = client
 
     def scrape_yandex_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes the search results from Yandex.
@@ -45,7 +49,10 @@ class Yandex(YandexBase):
         return response
 
     def scrape_yandex_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Yandex search results for a given URL.
@@ -70,7 +77,8 @@ class Yandex(YandexBase):
         payload = self.prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
-    
+
+
 class YandexAsync(YandexBase):
     def __init__(self, client):
         if not isinstance(client, SerpAsync):
@@ -78,7 +86,11 @@ class YandexAsync(YandexBase):
         self.client = client
 
     async def scrape_yandex_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes the search results from Yandex.
@@ -114,7 +126,11 @@ class YandexAsync(YandexBase):
         return response
 
     async def scrape_yandex_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Yandex search results for a given URL.
@@ -136,7 +152,7 @@ class YandexAsync(YandexBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout,poll_interval=poll_interval)
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response

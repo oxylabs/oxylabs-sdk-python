@@ -15,6 +15,7 @@ BaiduSearchAcceptedDomainParameters = [
     Domain.DOMAIN_CN.value,
 ]
 
+
 class BaiduSearchOpts(BaseSearchOpts):
     """
     Represents the search options for Baidu.
@@ -30,6 +31,7 @@ class BaiduSearchOpts(BaseSearchOpts):
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
 
+
 class BaiduUrlOpts(BaseUrlOpts):
     """
     Represents the URL options for Baidu.
@@ -40,6 +42,7 @@ class BaiduUrlOpts(BaseUrlOpts):
         Checks the validity of BaiduUrlOpts parameters.
         """
         utils.check_user_agent_validity(self.user_agent_type)
+
 
 class BaiduBase:
     def prepare_search_payload(self, query, opts):
@@ -69,7 +72,7 @@ class BaiduBase:
             payload["parse_instructions"] = opts.parse_instructions
 
         return payload
-    
+
     def prepare_url_payload(self, url, opts):
         validate_url(url, "baidu")
         opts = BaiduUrlOpts(**opts if opts is not None else {})

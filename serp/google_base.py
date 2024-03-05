@@ -15,6 +15,7 @@ from utils.utils import BaseGoogleOpts, validate_url
 from utils.constants import Source, Render
 import utils.utils as utils
 
+
 class GoogleSearchOpts(BaseGoogleOpts):
     def __init__(
         self,
@@ -335,7 +336,7 @@ class GoogleBase:
             payload["parse_instructions"] = opts.parse_instructions
 
         return payload
-    
+
     def prepare_url_payload(self, url, opts):
         validate_url(url, "google")
         opts = GoogleUrlOpts(**opts if opts is not None else {})
@@ -360,7 +361,7 @@ class GoogleBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_ads_payload(self, query, opts):
         opts = GoogleAdsOpts(**opts if opts is not None else {})
 
@@ -390,7 +391,7 @@ class GoogleBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_suggestions_payload(self, query, opts):
         opts = GoogleSuggestionsOpts(**opts if opts is not None else {})
 
@@ -415,7 +416,7 @@ class GoogleBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_hotels_payload(self, query, opts):
         opts = GoogleHotelsOpts(**opts if opts is not None else {})
 
@@ -450,7 +451,7 @@ class GoogleBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_travel_hotels_payload(self, query, opts):
         opts = GoogleTravelHotelsOpts(**opts if opts is not None else {})
 
@@ -484,7 +485,7 @@ class GoogleBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_images_payload(self, query, opts):
         opts = GoogleImagesOpts(**opts if opts is not None else {})
 
@@ -500,7 +501,9 @@ class GoogleBase:
             opts.context = []
 
         # Find the index of the dictionary with 'tbm' as key
-        index = next((index for (index, d) in enumerate(opts.context) if d["key"] == "tbm"), None)
+        index = next(
+            (index for (index, d) in enumerate(opts.context) if d["key"] == "tbm"), None
+        )
 
         # If 'tbm' key exists, update its value to 'isch'
         if index is not None:
@@ -508,7 +511,6 @@ class GoogleBase:
         # If 'tbm' key doesn't exist, add it to the context with value 'isch'
         else:
             opts.context.append({"key": "tbm", "value": "isch"})
-
 
         # Prepare payload
         payload = {
@@ -531,7 +533,7 @@ class GoogleBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_trends_explore_payload(self, query, opts):
         opts = GoogleTrendsExploreOpts(**opts if opts is not None else {})
 

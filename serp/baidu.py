@@ -11,7 +11,10 @@ class Baidu(BaiduBase):
         self.client = client
 
     def scrape_baidu_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Baidu search results for a given query.
@@ -41,7 +44,10 @@ class Baidu(BaiduBase):
         return response
 
     def scrape_baidu_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Scrapes Baidu search results for a given URL.
@@ -60,12 +66,13 @@ class Baidu(BaiduBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout)
         payload = self.prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
-    
+
+
 class BaiduAsync(BaiduBase):
     def __init__(self, client):
         if not isinstance(client, SerpAsync):
@@ -73,7 +80,11 @@ class BaiduAsync(BaiduBase):
         self.client = client
 
     async def scrape_baidu_search(
-        self, query: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Baidu search results for a given query.
@@ -104,7 +115,11 @@ class BaiduAsync(BaiduBase):
         return response
 
     async def scrape_baidu_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None, poll_interval: Optional[int] = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Baidu search results for a given URL.
@@ -124,7 +139,7 @@ class BaiduAsync(BaiduBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        
+
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self.prepare_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)

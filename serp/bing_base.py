@@ -23,10 +23,12 @@ BingSearchAcceptedDomainParameters = [
     Domain.DOMAIN_TR.value,
 ]
 
+
 class BingSearchOpts(BaseSearchOpts):
     """
     Represents the search options for Bing.
     """
+
     def __init__(
         self,
         domain=DEFAULT_DOMAIN,
@@ -66,10 +68,12 @@ class BingSearchOpts(BaseSearchOpts):
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
 
+
 class BingUrlOpts(BaseUrlOpts):
     """
     Represents the URL options for Bing.
     """
+
     def __init__(
         self,
         user_agent_type=DEFAULT_USER_AGENT,
@@ -89,6 +93,7 @@ class BingUrlOpts(BaseUrlOpts):
         """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
+
 
 class BingBase:
     def prepare_search_payload(self, query, opts):
@@ -122,7 +127,7 @@ class BingBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_url_payload(self, url, opts):
         validate_url(url, "bing")
         opts = BingUrlOpts(**opts if opts is not None else {})

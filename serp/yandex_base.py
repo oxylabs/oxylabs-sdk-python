@@ -36,6 +36,7 @@ YandexSearchAcceptedLocaleParameters = [
     Locale.LOCALE_UK.value,
 ]
 
+
 class YandexSearchOpts(BaseSearchOpts):
     def __init__(
         self,
@@ -93,6 +94,7 @@ class YandexUrlOpts(BaseUrlOpts):
         """
         utils.check_render_validity(self.render)
 
+
 class YandexBase:
     def prepare_search_payload(self, query, opts):
         opts = YandexSearchOpts(**opts if opts is not None else {})
@@ -124,7 +126,7 @@ class YandexBase:
             payload["parse"] = True
 
         return payload
-    
+
     def prepare_url_payload(self, url, opts):
         validate_url(url, "yandex")
         opts = YandexUrlOpts(**opts if opts is not None else {})

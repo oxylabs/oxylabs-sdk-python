@@ -1,11 +1,12 @@
 from internal.internal import Client, ApiCredentials, ClientAsync
 from utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 
+
 class Serp:
     def __init__(self, username, password):
         """
         Initializes a synchronous SERP client.
- 
+
         Args:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
@@ -31,7 +32,7 @@ class SerpAsync:
         """
         api_credentials = ApiCredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, api_credentials)
-    
+
     async def get_resp(self, payload, config):
         """
         Processes the payload asynchronously, starts a job, polls for its completion, and retrieves the results.
@@ -50,4 +51,3 @@ class SerpAsync:
 
         # Poll for the job status until completion and return the results
         return await self.client.poll_job_status(job_id, config)
-
