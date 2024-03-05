@@ -68,14 +68,13 @@ class Proxy:
 
         Args:
             parser (str): The parser to add. Must be one of the following:
-
-            - Google:               google, google_search, google_ads, google_images
-            - Google Shopping:      google_shopping, google_shopping_search, google_shopping_product, google_shopping_pricing
-            - Amazon:               amazon, amazon_search, amazon_product, amazon_pricing, amazon_reviews, amazon_questions, amazon_bestsellers, amazon_sellers
-            - Best Buy:             universal_ecommerce
-            - Etsy:                 universal_ecommerce
-            - Target:               universal_ecommerce
-            - Walmart:              universal_ecommerce
+            - For Google:               "google", "google_search", "google_ads", "google_images"
+            - For Google Shopping:      "google_shopping", "google_shopping_search", "google_shopping_product", "google_shopping_pricing"
+            - For Amazon:               "amazon", "amazon_search", "amazon_product", "amazon_pricing", "amazon_reviews", "amazon_questions", "amazon_bestsellers", "amazon_sellers"
+            - For Best Buy:             "universal_ecommerce"
+            - For Etsy:                 "universal_ecommerce"
+            - For Target:               "universal_ecommerce"
+            - For Walmart:              "universal_ecommerce"
 
         Returns:
             None
