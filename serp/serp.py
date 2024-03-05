@@ -15,7 +15,16 @@ class Serp:
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
     def get_resp(self, payload, config):
-        # remove empty or null values
+        """
+        Processes the payload synchronously and fetches api response.
+
+        Args:
+            payload (dict): The payload for the request.
+
+        Returns:
+            The response from the server after the job is completed.
+        """
+        # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
         return self.client.req(payload, "POST", config)
@@ -35,7 +44,7 @@ class SerpAsync:
 
     async def get_resp(self, payload, config):
         """
-        Processes the payload asynchronously, starts a job, polls for its completion, and retrieves the results.
+        Processes the payload asynchronously and fetches api response.
 
         Args:
             payload (dict): The payload for the request.
@@ -46,8 +55,4 @@ class SerpAsync:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        # Start the job and get its ID
-        job_id = await self.client.get_job_id(payload, config)
-
-        # Poll for the job status until completion and return the results
-        return await self.client.poll_job_status(job_id, config)
+        return await self.client.execute_with_timeout(payload, config)

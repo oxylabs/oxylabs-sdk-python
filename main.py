@@ -22,7 +22,7 @@ async def mainAsync():
         #     "nike", {"start_page": 1, "parse": True}, poll_interval=4, timeout=15
         # ),
         # client.scrape_bing_search("adidas", {"start_page": 1, "parse": True}),
-        client.scrape_bing_url("https://www.bing.com/search?q=nike",{"parse": True}, timeout=45, poll_interval=3
+        client.scrape_bing_url("https://www.bing.com/search?q=nike",{"parse": True}, timeout=5, poll_interval=10
     )
     )
 
@@ -123,5 +123,5 @@ def mainSync():
 
 # Ensure the main coroutine is executed
 if __name__ == "__main__":
-    # asyncio.run(mainAsync())
-    mainSync()
+    asyncio.run(mainAsync())
+    # mainSync()
