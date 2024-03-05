@@ -112,12 +112,13 @@ def mainSync():
 
     proxy = Proxy(os.getenv("OXYLABS_USER"), os.getenv("OXYLABS_PASSWORD"))
 
-    proxy.add_user_agent_header("desktop")
+    proxy.add_user_agent_header("mobile_android")
+    proxy.add_geo_location_header("Germany")
     proxy.add_render_header("html")
-    # proxy.add_parse_header("google_ads")
-    result = proxy.get("https://www.google.com")
+    # proxy.add_parse_header("google")
+    result = proxy.get("https://www.example.com")
 
-    print(result.json())
+    print(result.text)
     
 
 # Ensure the main coroutine is executed
