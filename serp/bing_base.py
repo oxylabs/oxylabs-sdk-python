@@ -96,7 +96,7 @@ class BingUrlOpts(BaseUrlOpts):
 
 
 class BingBase:
-    def prepare_search_payload(self, query, opts):
+    def _prepare_search_payload(self, query, opts):
         opts = BingSearchOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -128,7 +128,7 @@ class BingBase:
 
         return payload
 
-    def prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url, opts):
         validate_url(url, "bing")
         opts = BingUrlOpts(**opts if opts is not None else {})
 

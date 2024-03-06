@@ -28,25 +28,23 @@ class Client:
     def __init__(self, base_url, api_credentials):
         self.base_url = base_url
         self.api_credentials = api_credentials
-
-    def req(self, payload, method, config):
-        # Prepare headers
-        headers = {
+        self.headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
-        # Make the request
+
+    def req(self, payload, method, config):
         try:
             if method == "POST":
                 response = requests.post(
                     self.base_url,
-                    headers=headers,
+                    headers=self.headers,
                     json=payload,
                     timeout=config["timeout"],
                 )
             elif method == "GET":
                 response = requests.get(
-                    self.base_url, headers=headers, timeout=config["timeout"]
+                    self.base_url, headers=self.headers, timeout=config["timeout"]
                 )
             else:
                 print(f"Unsupported method: {method}")
@@ -150,7 +148,6 @@ class ClientAsync:
         return None
 
     async def execute_with_timeout(self, payload, config):
-
         job_id = await self.get_job_id(payload)
 
         await self.poll_job_status(job_id, config["poll_interval"])
