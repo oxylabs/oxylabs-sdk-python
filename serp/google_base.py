@@ -281,7 +281,7 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
 
 
 class GoogleBase:
-    def prepare_search_payload(self, query, opts):
+    def _prepare_search_payload(self, query, opts):
         opts = GoogleSearchOpts(**opts if opts is not None else {})
 
         if (
@@ -337,7 +337,7 @@ class GoogleBase:
 
         return payload
 
-    def prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url, opts):
         validate_url(url, "google")
         opts = GoogleUrlOpts(**opts if opts is not None else {})
 
@@ -362,7 +362,7 @@ class GoogleBase:
 
         return payload
 
-    def prepare_ads_payload(self, query, opts):
+    def _prepare_ads_payload(self, query, opts):
         opts = GoogleAdsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -392,7 +392,7 @@ class GoogleBase:
 
         return payload
 
-    def prepare_suggestions_payload(self, query, opts):
+    def _prepare_suggestions_payload(self, query, opts):
         opts = GoogleSuggestionsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -417,7 +417,7 @@ class GoogleBase:
 
         return payload
 
-    def prepare_hotels_payload(self, query, opts):
+    def _prepare_hotels_payload(self, query, opts):
         opts = GoogleHotelsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -452,7 +452,7 @@ class GoogleBase:
 
         return payload
 
-    def prepare_travel_hotels_payload(self, query, opts):
+    def _prepare_travel_hotels_payload(self, query, opts):
         opts = GoogleTravelHotelsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -486,7 +486,7 @@ class GoogleBase:
 
         return payload
 
-    def prepare_images_payload(self, query, opts):
+    def _prepare_images_payload(self, query, opts):
         opts = GoogleImagesOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -534,7 +534,7 @@ class GoogleBase:
 
         return payload
 
-    def prepare_trends_explore_payload(self, query, opts):
+    def _prepare_trends_explore_payload(self, query, opts):
         opts = GoogleTrendsExploreOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity

@@ -42,7 +42,7 @@ class Bing(BingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_search_payload(query, opts)
+        payload = self._prepare_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -73,7 +73,7 @@ class Bing(BingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_url_payload(url, opts)
+        payload = self._prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -118,7 +118,7 @@ class BingAsync(BingBase):
         """
 
         config = prepare_config(poll_interval=poll_interval, timeout=timeout)
-        payload = self.prepare_search_payload(query, opts)
+        payload = self._prepare_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -151,6 +151,6 @@ class BingAsync(BingBase):
         """
 
         config = prepare_config(poll_interval=poll_interval, timeout=timeout)
-        payload = self.prepare_url_payload(url, opts)
+        payload = self._prepare_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response

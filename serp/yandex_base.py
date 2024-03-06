@@ -96,7 +96,7 @@ class YandexUrlOpts(BaseUrlOpts):
 
 
 class YandexBase:
-    def prepare_search_payload(self, query, opts):
+    def _prepare_search_payload(self, query, opts):
         opts = YandexSearchOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -127,7 +127,7 @@ class YandexBase:
 
         return payload
 
-    def prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url, opts):
         validate_url(url, "yandex")
         opts = YandexUrlOpts(**opts if opts is not None else {})
 

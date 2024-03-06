@@ -46,7 +46,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_search_payload(query, opts)
+        payload = self._prepare_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -78,7 +78,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_url_payload(url, opts)
+        payload = self._prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -115,7 +115,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_ads_payload(query, opts)
+        payload = self._prepare_ads_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -149,7 +149,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_suggestions_payload(query, opts)
+        payload = self._prepare_suggestions_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -187,7 +187,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_hotels_payload(query, opts)
+        payload = self._prepare_hotels_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -223,7 +223,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_travel_hotels_payload(query, opts)
+        payload = self._prepare_travel_hotels_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -261,7 +261,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_images_payload(query, opts)
+        payload = self._prepare_images_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -291,7 +291,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_trends_explore_payload(query, opts)
+        payload = self._prepare_trends_explore_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -340,7 +340,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_search_payload(query, opts)
+        payload = self._prepare_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -374,7 +374,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_url_payload(url, opts)
+        payload = self._prepare_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -413,7 +413,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_ads_payload(query, opts)
+        payload = self._prepare_ads_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -449,7 +449,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_suggestions_payload(query, opts)
+        payload = self._prepare_suggestions_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -489,7 +489,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_hotels_payload(query, opts)
+        payload = self._prepare_hotels_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -527,7 +527,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_travel_hotels_payload(query, opts)
+        payload = self._prepare_travel_hotels_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -567,7 +567,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_images_payload(query, opts)
+        payload = self._prepare_images_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -599,6 +599,6 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_trends_explore_payload(query, opts)
+        payload = self._prepare_trends_explore_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
