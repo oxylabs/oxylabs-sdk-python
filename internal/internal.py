@@ -1,9 +1,8 @@
 import requests
 import base64
 import aiohttp
-from aiohttp import ClientTimeout
 import asyncio
-import time
+
 
 class ApiCredentials:
     def __init__(self, username, password):
@@ -29,25 +28,23 @@ class Client:
     def __init__(self, base_url, api_credentials):
         self.base_url = base_url
         self.api_credentials = api_credentials
-
-    def req(self, payload, method, config):
-        # Prepare headers
-        headers = {
+        self.headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
-        # Make the request
+
+    def req(self, payload, method, config):
         try:
             if method == "POST":
                 response = requests.post(
                     self.base_url,
-                    headers=headers,
+                    headers=self.headers,
                     json=payload,
                     timeout=config["timeout"],
                 )
             elif method == "GET":
                 response = requests.get(
-                    self.base_url, headers=headers, timeout=config["timeout"]
+                    self.base_url, headers=self.headers, timeout=config["timeout"]
                 )
             else:
                 print(f"Unsupported method: {method}")
@@ -74,6 +71,7 @@ class Client:
             print(f"Error occurred: {err}")
             return None
 
+
 class ClientAsync:
     def __init__(self, base_url, api_credentials):
         self.base_url = base_url
@@ -83,12 +81,11 @@ class ClientAsync:
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
 
-    async def get_job_id(self, payload, timeout):
-        api_timeout = ClientTimeout(total=timeout)
+    async def get_job_id(self, payload):
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.post(
-                    self.base_url, headers=self.headers, json=payload, timeout=api_timeout
+                    self.base_url, headers=self.headers, json=payload
                 ) as response:
                     response.raise_for_status()
                     data = await response.json()
@@ -102,15 +99,14 @@ class ClientAsync:
         except Exception as e:
             print(f"An error occurred: {e}")
         return None
-    
-    async def poll_job_status(self, job_id, poll_interval, timeout):
-        api_timeout = ClientTimeout(total=timeout)
+
+    async def poll_job_status(self, job_id, poll_interval):
         job_status_url = f"{self.base_url}/{job_id}"
         async with aiohttp.ClientSession() as session:
             while True:
                 try:
                     async with session.get(
-                        job_status_url, headers=self.headers, timeout=api_timeout
+                        job_status_url, headers=self.headers
                     ) as response:
                         response.raise_for_status()
                         job = await response.json()
@@ -125,21 +121,20 @@ class ClientAsync:
                     print(f"Connection error occurred: {e}")
                     return None
                 except asyncio.TimeoutError:
-                    print(f"Timeout error. The request to {job_status_url} has timed out.")
+                    print(
+                        f"Timeout error. The request to {job_status_url} has timed out."
+                    )
                     return None
                 except Exception as e:
                     print(f"Unexpected error processing your query: {e}")
                     return None
                 await asyncio.sleep(poll_interval)
 
-    async def get_http_resp(self, job_id, timeout):
-        api_timeout = ClientTimeout(total=timeout)
+    async def get_http_resp(self, job_id):
         result_url = f"{self.base_url}/{job_id}/results"
         try:
             async with aiohttp.ClientSession() as session:
-                async with session.get(
-                    result_url, headers=self.headers, timeout=api_timeout
-                ) as response:
+                async with session.get(result_url, headers=self.headers) as response:
                     response.raise_for_status()
                     return await response.json()
         except aiohttp.ClientResponseError as e:
@@ -153,26 +148,8 @@ class ClientAsync:
         return None
 
     async def execute_with_timeout(self, payload, config):
-        start_time = time.time()
-        
-        try:
-            remaining_time = config["timeout"] - (time.time() - start_time)
-            job_id = await self.manage_timeout(self.get_job_id(payload, remaining_time), start_time, config["timeout"])
-            
-            remaining_time = config["timeout"] - (time.time() - start_time)
-            await self.manage_timeout(self.poll_job_status(job_id, config["poll_interval"], remaining_time), start_time, config["timeout"])
-            
-            remaining_time = config["timeout"] - (time.time() - start_time)
-            result = await self.manage_timeout(self.get_http_resp(job_id, remaining_time), start_time, config["timeout"])
-            return result
-        except asyncio.TimeoutError:
-            print("Your request has been timed out.")
-        except Exception as e:
-            print(f"Error: {e}")
+        job_id = await self.get_job_id(payload)
 
-    async def manage_timeout(self, coroutine, start_time, total_timeout):
-        elapsed_time = time.time() - start_time
-        remaining_time = total_timeout - elapsed_time
-        if remaining_time <= 0:
-            raise asyncio.TimeoutError()
-        return await asyncio.wait_for(coroutine, timeout=remaining_time)
+        await self.poll_job_status(job_id, config["poll_interval"])
+
+        return await self.get_http_resp(job_id)

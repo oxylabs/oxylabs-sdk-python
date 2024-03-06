@@ -1,5 +1,6 @@
 from internal.internal import Client, ApiCredentials, ClientAsync
 from utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
+import asyncio
 
 
 class Serp:
@@ -55,4 +56,14 @@ class SerpAsync:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        return await self.client.execute_with_timeout(payload, config)
+        result = None
+
+        try:
+            result = await asyncio.wait_for(
+                self.client.execute_with_timeout(payload, config),
+                timeout=config["timeout"],
+            )
+        except asyncio.TimeoutError:
+            print("The request timed out")
+
+        return result
