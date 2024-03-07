@@ -1,11 +1,13 @@
 from internal.internal import Client, ApiCredentials, ClientAsync
 from utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
+import asyncio
+
 
 class Ecommerce:
     def __init__(self, username, password):
         """
         Initializes a synchronous Ecommerce client.
- 
+
         Args:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
@@ -14,7 +16,16 @@ class Ecommerce:
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
     def get_resp(self, payload, config):
-        # remove empty or null values
+        """
+        Processes the payload synchronously and fetches api response.
+
+        Args:
+            payload (dict): The payload for the request.
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
         return self.client.req(payload, "POST", config)
@@ -31,22 +42,28 @@ class EcommerceAsync:
         """
         api_credentials = ApiCredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, api_credentials)
-    
+
     async def get_resp(self, payload, config):
         """
-        Processes the payload asynchronously, starts a job, polls for its completion, and retrieves the results.
+        Processes the payload asynchronously and fetches api response.
 
         Args:
             payload (dict): The payload for the request.
 
         Returns:
-            The response from the server after the job is completed.
+            dict: The response from the server after the job is completed.
         """
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        # Start the job and get its ID
-        job_id = await self.client.get_job_id(payload, config)
+        result = None
 
-        # Poll for the job status until completion and return the results
-        return await self.client.poll_job_status(job_id, config)
+        try:
+            result = await asyncio.wait_for(
+                self.client.execute_with_timeout(payload, config),
+                timeout=config["timeout"],
+            )
+        except asyncio.TimeoutError:
+            print("The request timed out")
+
+        return result
