@@ -62,19 +62,12 @@ class UniversalUrlOpts(BaseUrlOpts):
 
 
 class UniversalBase:
-    def prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url, opts):
 
         opts = UniversalUrlOpts(**opts if opts is not None else {})
 
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-        if opts.context is None:
-            opts.context = [
-                {"key": "http_method", "value": set_default_http_method(None)}
-            ]
-        elif not any(d.get("key") == "http_method" for d in opts.context):
-            opts.context.append(
-                {"key": "http_method", "value": set_default_http_method(opts.context)}
-            )
+        opts.context = set_default_http_method(opts.context)
         opts.content_encoding = set_default_content_encoding(opts.content_encoding)
 
         opts.check_parameter_validity()

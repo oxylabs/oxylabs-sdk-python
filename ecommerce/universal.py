@@ -40,7 +40,7 @@ class Universal(UniversalBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self.prepare_url_payload(url, opts)
+        payload = self._prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -81,6 +81,6 @@ class UniversalAsync(UniversalBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self.prepare_url_payload(url, opts)
+        payload = self._prepare_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response

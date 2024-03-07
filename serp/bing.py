@@ -23,7 +23,7 @@ class Bing(BingBase):
             query (str): The search query.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": DEFAULT_DOMAIN,
+                    "domain": com,
                     "start_page": 1,
                     "pages": 1,
                     "limit": 10,
@@ -38,7 +38,7 @@ class Bing(BingBase):
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
 
         Returns:
-            The response from the server after the job is completed.
+            dict: The response from the server after the job is completed.
         """
 
         config = prepare_config(timeout=timeout)
@@ -114,7 +114,7 @@ class BingAsync(BingBase):
             poll_interval (int | 2, optional): The interval in seconds between status checks for the asynchronous job. Defaults to 2.
 
         Returns:
-            The response from the server after the job is completed.
+            dict: The response from the server after the job is completed.
         """
 
         config = prepare_config(poll_interval=poll_interval, timeout=timeout)

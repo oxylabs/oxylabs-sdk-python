@@ -67,6 +67,24 @@ class BaseGoogleOpts:
         self.context = context
 
 
+class BaseEcommerceOpts:
+    def __init__(
+        self,
+        user_agent_type=DEFAULT_USER_AGENT,
+        render=None,
+        callback_url=None,
+        geo_location=None,
+        parse=False,
+        parse_instructions=None,
+    ):
+        self.user_agent_type = user_agent_type
+        self.callback_url = callback_url
+        self.parse = parse
+        self.parse_instructions = parse_instructions
+        self.render = render
+        self.geo_location = geo_location
+
+
 def prepare_config(**kwargs):
     config = {}
     if "timeout" in kwargs:
@@ -130,6 +148,11 @@ def check_limit_validity(limit):
         raise ValueError("Limit parameter must be greater than 0")
 
 
+def check_limit_validity_ecom(limit):
+    if limit != 24 and limit != 48 and limit != 96:
+        raise ValueError("Limit parameter must be 24, 48, or 96")
+
+
 def check_pages_validity(pages):
     if pages <= 0:
         raise ValueError("Pages parameter must be greater than 0")
@@ -138,3 +161,22 @@ def check_pages_validity(pages):
 def check_start_page_validity(start_page):
     if start_page <= 0:
         raise ValueError("Start page parameter must be greater than 0")
+
+
+def check_sorting_parameter_validity(context, acceptable_sorting_parameters):
+    if context and any(
+        item.get("key") == "sort_by"
+        and item.get("value") not in acceptable_sorting_parameters
+        for item in context
+    ):
+        raise ValueError("Invalid sorting parameter")
+
+
+def check_price_range_validity(context):
+    if context and any(
+        item.get("key") in ("min_price", "max_price")
+        and item.get("value") is not None
+        and item.get("value") < 0
+        for item in context
+    ):
+        raise ValueError("Price range parameters must be greater than 0")

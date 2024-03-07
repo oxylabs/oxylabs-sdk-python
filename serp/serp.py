@@ -23,7 +23,7 @@ class Serp:
             payload (dict): The payload for the request.
 
         Returns:
-            The response from the server after the job is completed.
+            dict: The response from the server after the job is completed.
         """
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
@@ -51,7 +51,7 @@ class SerpAsync:
             payload (dict): The payload for the request.
 
         Returns:
-            The response from the server after the job is completed.
+            dict: The response from the server after the job is completed.
         """
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
