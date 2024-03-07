@@ -103,9 +103,9 @@ class ClientAsync:
             async with self.session.post(
                     self.base_url, headers=self.headers, json=payload
                 ) as response:
-                    response.raise_for_status()
-                    data = await response.json()
-                    return data["id"]
+                response.raise_for_status()
+                data = await response.json()
+                return data["id"]
         except aiohttp.ClientResponseError as e:
             print(f"HTTP error occurred: {e.status}")
         except aiohttp.ClientConnectionError as e:
