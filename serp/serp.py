@@ -40,8 +40,7 @@ class SerpAsync:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
         """
-        api_credentials = ApiCredentials(username, password)
-        self.client = ClientAsync(ASYNC_BASE_URL, api_credentials)
+        self.api_credentials = ApiCredentials(username, password)
 
     async def get_resp(self, payload, config):
         """
@@ -58,12 +57,16 @@ class SerpAsync:
 
         result = None
 
-        try:
-            result = await asyncio.wait_for(
-                self.client.execute_with_timeout(payload, config),
-                timeout=config["timeout"],
-            )
-        except asyncio.TimeoutError:
-            print("The request timed out")
-
-        return result
+        async with ClientAsync(ASYNC_BASE_URL, self.api_credentials) as client:
+            try:
+                result = await asyncio.wait_for(
+                    client.execute_with_timeout(payload, config),
+                    timeout=config["timeout"],
+                )
+                return result
+            except asyncio.TimeoutError:
+                print("The request timed out")
+            except Exception as e:
+                print(f"An error occurred: {e}")
+            return None
+        
