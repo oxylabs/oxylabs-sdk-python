@@ -46,7 +46,7 @@ class YandexSearchOpts(BaseSearchOpts):
         limit=DEFAULT_LIMIT_SERP,
         user_agent_type=DEFAULT_USER_AGENT,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         locale=None,
         geo_location=None,
@@ -58,7 +58,7 @@ class YandexSearchOpts(BaseSearchOpts):
             limit,
             user_agent_type,
             callback_url,
-            parse_instructions,
+            parsing_instructions,
             parse,
         )
         self.locale = locale
@@ -74,6 +74,7 @@ class YandexSearchOpts(BaseSearchOpts):
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class YandexUrlOpts(BaseUrlOpts):
@@ -81,11 +82,11 @@ class YandexUrlOpts(BaseUrlOpts):
         self,
         user_agent_type=DEFAULT_USER_AGENT,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         render=None,
     ):
-        super().__init__(user_agent_type, callback_url, parse_instructions, parse)
+        super().__init__(user_agent_type, callback_url, parsing_instructions, parse)
         self.render = render
 
     def check_parameter_validity(self):
@@ -93,6 +94,7 @@ class YandexUrlOpts(BaseUrlOpts):
         Checks the validity of YandexUrlOpts parameters.
         """
         utils.check_render_validity(self.render)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class YandexBase:
@@ -121,8 +123,8 @@ class YandexBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -144,8 +146,8 @@ class YandexBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload

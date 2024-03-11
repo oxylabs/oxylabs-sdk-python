@@ -30,6 +30,7 @@ class BaiduSearchOpts(BaseSearchOpts):
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class BaiduUrlOpts(BaseUrlOpts):
@@ -42,7 +43,7 @@ class BaiduUrlOpts(BaseUrlOpts):
         Checks the validity of BaiduUrlOpts parameters.
         """
         utils.check_user_agent_validity(self.user_agent_type)
-
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 class BaiduBase:
     def _prepare_search_payload(self, query, opts):
@@ -67,9 +68,9 @@ class BaiduBase:
             "callback_url": opts.callback_url,
         }
 
-        if opts.parse_instructions:
+        if opts.parsing_instructions:
             payload["parse"] = True
-            payload["parse_instructions"] = opts.parse_instructions
+            payload["parsing_instructions"] = opts.parsing_instructions
 
         return payload
 
@@ -88,8 +89,8 @@ class BaiduBase:
             "callback_url": opts.callback_url,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload

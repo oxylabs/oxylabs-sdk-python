@@ -23,7 +23,7 @@ class GoogleSearchOpts(BaseGoogleOpts):
         user_agent_type=DEFAULT_USER_AGENT,
         render=None,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         context=None,
         domain=DEFAULT_DOMAIN,
@@ -37,7 +37,7 @@ class GoogleSearchOpts(BaseGoogleOpts):
             user_agent_type,
             render,
             callback_url,
-            parse_instructions,
+            parsing_instructions,
             parse,
             context,
         )
@@ -62,6 +62,7 @@ class GoogleSearchOpts(BaseGoogleOpts):
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
         # check if tbm parameter is valid
         if self.context:
@@ -80,6 +81,7 @@ class GoogleUrlOpts(BaseGoogleOpts):
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleAdsOpts(BaseGoogleOpts):
@@ -89,7 +91,7 @@ class GoogleAdsOpts(BaseGoogleOpts):
         user_agent_type=DEFAULT_USER_AGENT,
         render=None,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         context=None,
         domain=DEFAULT_DOMAIN,
@@ -103,7 +105,7 @@ class GoogleAdsOpts(BaseGoogleOpts):
             user_agent_type,
             render,
             callback_url,
-            parse_instructions,
+            parsing_instructions,
             parse,
             context,
         )
@@ -126,6 +128,7 @@ class GoogleAdsOpts(BaseGoogleOpts):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
         if self.context:
             for opt in self.context:
@@ -145,7 +148,7 @@ class GoogleSuggestionsOpts(BaseGoogleOpts):
         user_agent_type=DEFAULT_USER_AGENT,
         render=None,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         context=None,
         locale=None,
@@ -155,7 +158,7 @@ class GoogleSuggestionsOpts(BaseGoogleOpts):
             user_agent_type,
             render,
             callback_url,
-            parse_instructions,
+            parsing_instructions,
             parse,
             context,
         )
@@ -164,6 +167,7 @@ class GoogleSuggestionsOpts(BaseGoogleOpts):
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleHotelsOpts(BaseGoogleOpts):
@@ -173,7 +177,7 @@ class GoogleHotelsOpts(BaseGoogleOpts):
         user_agent_type=DEFAULT_USER_AGENT,
         render=None,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         context=None,
         domain=DEFAULT_DOMAIN,
@@ -187,7 +191,7 @@ class GoogleHotelsOpts(BaseGoogleOpts):
             user_agent_type,
             render,
             callback_url,
-            parse_instructions,
+            parsing_instructions,
             parse,
             context,
         )
@@ -203,6 +207,7 @@ class GoogleHotelsOpts(BaseGoogleOpts):
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleTravelHotelsOpts(BaseGoogleOpts):
@@ -212,7 +217,7 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
         user_agent_type=DEFAULT_USER_AGENT,
         render=None,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         context=None,
         domain=DEFAULT_DOMAIN,
@@ -224,7 +229,7 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
             user_agent_type,
             render,
             callback_url,
-            parse_instructions,
+            parsing_instructions,
             parse,
             context,
         )
@@ -236,6 +241,7 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleImagesOpts(BaseGoogleOpts):
@@ -245,7 +251,7 @@ class GoogleImagesOpts(BaseGoogleOpts):
         user_agent_type=DEFAULT_USER_AGENT,
         render=None,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         context=None,
         domain=DEFAULT_DOMAIN,
@@ -259,7 +265,7 @@ class GoogleImagesOpts(BaseGoogleOpts):
             user_agent_type,
             render,
             callback_url,
-            parse_instructions,
+            parsing_instructions,
             parse,
             context,
         )
@@ -272,12 +278,14 @@ class GoogleImagesOpts(BaseGoogleOpts):
     def check_parameter_validity(self):
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleTrendsExploreOpts(BaseGoogleOpts):
 
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleBase:
@@ -331,9 +339,9 @@ class GoogleBase:
             payload["start_page"] = opts.start_page
             payload["pages"] = opts.pages
 
-        if opts.parse_instructions:
+        if opts.parsing_instructions:
             payload["parse"] = True
-            payload["parse_instructions"] = opts.parse_instructions
+            payload["parsing_instructions"] = opts.parsing_instructions
 
         return payload
 
@@ -356,8 +364,8 @@ class GoogleBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -386,8 +394,8 @@ class GoogleBase:
             "context": opts.context,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -411,8 +419,8 @@ class GoogleBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -446,8 +454,8 @@ class GoogleBase:
             "context": opts.context,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -480,8 +488,8 @@ class GoogleBase:
             "context": opts.context,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -528,8 +536,8 @@ class GoogleBase:
             "context": opts.context,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -552,8 +560,8 @@ class GoogleBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload

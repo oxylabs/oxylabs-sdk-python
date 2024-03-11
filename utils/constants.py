@@ -344,3 +344,30 @@ class Locale(Enum):
     LOCALE_TT = "tt"
     LOCALE_TR = "tr"
     LOCALE_UK = "uk"
+
+
+class FnName(Enum):
+    """
+    Enum class representing different Fns.
+    """
+
+    ElementText = "element_text"
+    Xpath = "xpath"
+    XpathOne = "xpath_one"
+    Css = "css"
+    CssOne = "css_one"
+    AmountFromString = "amount_from_string"
+    AmountRangeFromString = "amount_range_from_string"
+    Join = "join"
+    RegexFindAll = "regex_find_all"
+    RegexSearch = "regex_search"
+    RegexSubstring = "regex_substring"
+    Length = "length"
+    SelectNth = "select_nth"
+    ConvertToFloat = "convert_to_float"
+    ConvertToInt = "convert_to_int"
+    ConvertToStr = "convert_to_str"
+    Average = "average"
+    Max = "max"
+    Min = "min"
+    Product = "product"
