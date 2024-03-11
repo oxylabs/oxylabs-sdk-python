@@ -77,7 +77,6 @@ class ClientAsync:
     def __init__(self, base_url, api_credentials):
         self.base_url = base_url
         self.api_credentials = api_credentials
-        self.session = aiohttp.ClientSession()
         self.headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",

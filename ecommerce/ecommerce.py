@@ -45,8 +45,7 @@ class EcommerceAsync:
         """
         self.api_credentials = ApiCredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
-        self.session = self.client.session
-
+        self.session = None
 
     async def get_resp(self, payload, config):
         """
