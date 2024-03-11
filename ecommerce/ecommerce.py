@@ -4,10 +4,10 @@ import asyncio
 import utils.utils as utils
 
 
-class Serp:
+class Ecommerce:
     def __init__(self, username, password):
         """
-        Initializes a synchronous SERP client.
+        Initializes a synchronous Ecommerce client.
 
         Args:
             username (str): The username for API authentication.
@@ -32,11 +32,10 @@ class Serp:
         return self.client.req(payload, "POST", config)
 
 
-class SerpAsync:
-
+class EcommerceAsync:
     def __init__(self, username, password):
         """
-        Initializes an asynchronous SERP client.
+        Initializes an asynchronous Ecommerce client.
 
         Args:
             username (str): The username for API authentication.
@@ -64,6 +63,7 @@ class SerpAsync:
         self.requests += 1
 
         try:
+
             self.session = await utils.ensure_session(self.session)
 
             result = await asyncio.wait_for(

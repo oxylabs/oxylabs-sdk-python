@@ -82,30 +82,50 @@ def set_default_user_agent(user_agent):
     return user_agent if user_agent is not None else DEFAULT_USER_AGENT
 
 
-def set_default_sort_by(ctx: dict) -> str:
+def set_default_sort_by(context):
     """
-    Sets the default sort_by value based on the provided context.
+    Sets the default sort_by value if the provided value is None.
 
     Args:
-        ctx (dict): The context containing the sort_by value.
+        context (list): The context list of dictionaries to be checked and updated.
 
     Returns:
-        str: The default sort_by value. If not found in the context, "r" is returned.
+        list: The updated context list.
     """
-    return ctx.get("sort_by", "r")
+    if context is None:
+        context = []
+
+    default_sort_by = "r"
+    for item in context:
+        if item.get("key") == "sort_by":
+            item["value"] = item.get("value", default_sort_by)
+            break
+    else:
+        context.append({"key": "sort_by", "value": default_sort_by})
+    return context
 
 
-def set_default_http_method(ctx: dict) -> str:
+def set_default_http_method(context):
     """
-    Sets the default HTTP method for the given context.
+    Sets the default HTTP method if the provided method is None.
 
     Args:
-        ctx (dict): The context containing the HTTP method.
+        context (list): The context list of dictionaries to be checked and updated.
 
     Returns:
-        str: The default HTTP method. If not specified in the context, "get" is returned.
+        list: The updated context list.
     """
-    return ctx.get("http_method", "get")
+    if context is None:
+        context = []
+
+    default_http_method = "get"
+    for item in context:
+        if item.get("key") == "http_method":
+            item["value"] = item.get("value", default_http_method)
+            break
+    else:
+        context.append({"key": "http_method", "value": default_http_method})
+    return context
 
 
 def set_default_content_encoding(content_encoding: str) -> str:
@@ -121,17 +141,24 @@ def set_default_content_encoding(content_encoding: str) -> str:
     return content_encoding if content_encoding else "base64"
 
 
-def set_default_hotel_occupancy(occupancy):
+def set_default_hotel_occupancy(context):
     """
     Sets the default hotel occupancy if the provided occupancy is None.
 
     Args:
-        occupancy (int): The occupancy value to be checked.
+        context (list): The context list of dictionaries to be checked and updated.
 
     Returns:
-        int: The default occupancy value if the provided occupancy is None, otherwise returns the provided occupancy.
+        list: The updated context list.
     """
+    if context is None:
+        context = []
+
     default_occupancy = 2
-    if occupancy is None:
-        return default_occupancy
-    return occupancy
+    for item in context:
+        if item.get("key") == "hotel_occupancy":
+            item["value"] = item.get("value", default_occupancy)
+            break
+    else:
+        context.append({"key": "hotel_occupancy", "value": default_occupancy})
+    return context

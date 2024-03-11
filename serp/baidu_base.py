@@ -87,6 +87,7 @@ class BaiduBase:
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,
+            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:

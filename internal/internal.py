@@ -73,41 +73,25 @@ class Client:
 
 
 class ClientAsync:
+
     def __init__(self, base_url, api_credentials):
         self.base_url = base_url
         self.api_credentials = api_credentials
-        self.session = None
         self.headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
 
-    async def __aenter__(self):
-        await self.ensure_session()
-        return self
-
-    async def __aexit__(self, exc_type, exc_val, exc_tb):
-        await self.close()
-
-    async def ensure_session(self):
-        if self.session is None or self.session.closed:
-            self.session = aiohttp.ClientSession()
-
-    async def close(self):
-        if self.session:
-            await self.session.close()
-            self.session = None
-
-    async def get_job_id(self, payload):
+    async def get_job_id(self, payload, user_session):
         try:
-            async with self.session.post(
-                    self.base_url, headers=self.headers, json=payload
-                ) as response:
+            async with user_session.post(
+                self.base_url, headers=self.headers, json=payload
+            ) as response:
                 response.raise_for_status()
                 data = await response.json()
                 return data["id"]
         except aiohttp.ClientResponseError as e:
-            print(f"HTTP error occurred: {e.status}")
+            print(f"HTTP error occurred: {e.status} - {e.message}")
         except aiohttp.ClientConnectionError as e:
             print(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
@@ -116,11 +100,11 @@ class ClientAsync:
             print(f"An error occurred: {e}")
         return None
 
-    async def poll_job_status(self, job_id, poll_interval):
+    async def poll_job_status(self, job_id, poll_interval, user_session):
         job_status_url = f"{self.base_url}/{job_id}"
         while True:
             try:
-                async with self.session.get(
+                async with user_session.get(
                     job_status_url, headers=self.headers
                 ) as response:
                     response.raise_for_status()
@@ -136,23 +120,21 @@ class ClientAsync:
                 print(f"Connection error occurred: {e}")
                 return None
             except asyncio.TimeoutError:
-                print(
-                    f"Timeout error. The request to {job_status_url} has timed out."
-                )
+                print(f"Timeout error. The request to {job_status_url} has timed out.")
                 return None
             except Exception as e:
                 print(f"Unexpected error processing your query: {e}")
                 return None
             await asyncio.sleep(poll_interval)
 
-    async def get_http_resp(self, job_id):
+    async def get_http_resp(self, job_id, user_session):
         result_url = f"{self.base_url}/{job_id}/results"
         try:
-            async with self.session.get(result_url, headers=self.headers) as response:
+            async with user_session.get(result_url, headers=self.headers) as response:
                 response.raise_for_status()
                 return await response.json()
         except aiohttp.ClientResponseError as e:
-            print(f"HTTP error occurred: {e.status}")
+            print(f"HTTP error occurred: {e.status} - {e.message}")
         except aiohttp.ClientConnectionError as e:
             print(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
@@ -161,9 +143,11 @@ class ClientAsync:
             print(f"An error occurred: {e}")
         return None
 
-    async def execute_with_timeout(self, payload, config):
-        job_id = await self.get_job_id(payload)
+    async def execute_with_timeout(self, payload, config, user_session):
 
-        await self.poll_job_status(job_id, config["poll_interval"])
+        job_id = await self.get_job_id(payload, user_session)
 
-        return await self.get_http_resp(job_id)
+        await self.poll_job_status(job_id, config["poll_interval"], user_session)
+
+        result = await self.get_http_resp(job_id, user_session)
+        return result

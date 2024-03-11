@@ -466,10 +466,7 @@ class GoogleBase:
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
-        if opts.context:
-            for item in opts.context:
-                if item["key"] == "hotel_occupancy":
-                    item["value"] = set_default_hotel_occupancy(item.get("value"))
+        opts.context = set_default_hotel_occupancy(opts.context)
 
         opts.check_parameter_validity()
 
