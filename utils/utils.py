@@ -1,4 +1,4 @@
-from utils.constants import UserAgent, Render
+from utils.constants import UserAgent, Render, FnName
 from urllib.parse import urlparse
 import aiohttp
 from utils.defaults import (
@@ -21,7 +21,7 @@ class BaseSearchOpts:
         limit=DEFAULT_LIMIT_SERP,
         user_agent_type=DEFAULT_USER_AGENT,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
     ):
         self.domain = domain
@@ -30,7 +30,7 @@ class BaseSearchOpts:
         self.limit = limit
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
-        self.parse_instructions = parse_instructions
+        self.parsing_instructions = parsing_instructions
         self.parse = parse
 
 
@@ -39,12 +39,12 @@ class BaseUrlOpts:
         self,
         user_agent_type=DEFAULT_USER_AGENT,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
     ):
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
-        self.parse_instructions = parse_instructions
+        self.parsing_instructions = parsing_instructions
         self.parse = parse
 
 
@@ -55,7 +55,7 @@ class BaseGoogleOpts:
         user_agent_type=DEFAULT_USER_AGENT,
         render=None,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
         parse=False,
         context=None,
     ):
@@ -63,7 +63,7 @@ class BaseGoogleOpts:
         self.user_agent_type = user_agent_type
         self.render = render
         self.callback_url = callback_url
-        self.parse_instructions = parse_instructions
+        self.parsing_instructions = parsing_instructions
         self.parse = parse
         self.context = context
 
@@ -212,3 +212,118 @@ async def ensure_session(session):
 async def close(user_session):
     if user_session:
         await user_session.close()
+
+
+def check_parsing_instructions_validity(instructions):
+    if instructions is None:
+        return
+
+    if "_fns" in instructions:
+        validate_fns(instructions["_fns"])
+    else:
+        for key, value in instructions.items():
+            if isinstance(value, dict):
+                check_parsing_instructions_validity(value)
+            else:
+                raise Exception(f"Invalid structure for key: {key}")
+
+
+def validate_fns(fns):
+    if fns is None:
+        raise Exception("_fns cannot be nil")
+    if not isinstance(fns, list):
+        raise Exception("_fns must be a list")
+
+    for fn in fns:
+        validate_fn(fn)
+
+
+def validate_fn(fn):
+    if not isinstance(fn, dict):
+        raise ValueError("Each item in _fns must be a dictionary")
+    if "_fn" not in fn:
+        raise ValueError("_fn must be set in each function")
+    if fn["_fn"] not in [e.value for e in FnName]:
+        raise ValueError(f"_fn must be a valid function name, got {fn['_fn']}")
+
+    # Delegate to specific argument validators
+    validate_fn_args(fn["_fn"], fn.get("_args"))
+
+
+def validate_fn_args(fn_name, args):
+    # Map function name to validator function
+    validators = {
+        FnName.ElementText.value: validate_empty,
+        FnName.Length.value: validate_empty,
+        FnName.ConvertToFloat.value: validate_empty,
+        FnName.ConvertToInt.value: validate_empty,
+        FnName.ConvertToStr.value: validate_empty,
+        FnName.Max.value: validate_empty,
+        FnName.Min.value: validate_empty,
+        FnName.Product.value: validate_empty,
+        FnName.Xpath.value: validate_string_array,
+        FnName.XpathOne.value: validate_string_array,
+        FnName.Css.value: validate_string_array,
+        FnName.CssOne.value: validate_string_array,
+        FnName.AmountFromString.value: validate_string,
+        FnName.AmountRangeFromString.value: validate_string,
+        FnName.RegexFindAll.value: validate_string,
+        FnName.Join.value: validate_optional_string,
+        FnName.RegexSearch.value: validate_list_string_optional_int,
+        FnName.RegexSubstring.value: validate_list_string_optional_int,
+        FnName.SelectNth.value: validate_non_zero_int,
+        FnName.Average.value: validate_optional_int,
+    }
+
+    if fn_name not in validators:
+        raise ValueError(f"No validator for function name: {fn_name}")
+
+    # Call the appropriate validator
+    validator = validators[fn_name]
+    validator(args)
+
+
+def validate_empty(args):
+    if args:
+        raise ValueError("_args must be empty")
+
+
+def validate_string_array(args):
+    if not isinstance(args, list) or not all(
+        isinstance(elem, str) and elem for elem in args
+    ):
+        raise ValueError("_args must be a list of non-empty strings")
+
+
+def validate_string(args):
+    if not isinstance(args, str) or not args:
+        raise ValueError("_args must be a non-empty string")
+
+
+def validate_optional_string(args):
+    if args is not None and (not isinstance(args, str) or not args):
+        raise ValueError("_args must be a non-empty string or None")
+
+
+def validate_non_zero_int(args):
+    if not isinstance(args, int) or args == 0:
+        raise ValueError("_args must be a non-zero integer")
+
+
+def validate_optional_int(args):
+    if args is not None and (not isinstance(args, int) or args == 0):
+        raise ValueError("_args must be a non-zero integer or None")
+
+
+def validate_list_string_optional_int(args):
+    if (
+        not isinstance(args, list)
+        or len(args) < 1
+        or not isinstance(args[0], str)
+        or not args[0]
+    ):
+        raise ValueError("_args first argument must be a non-empty string")
+    if len(args) > 1 and (not isinstance(args[1], int) or args[1] == 0):
+        raise ValueError(
+            "_args second argument must be a non-zero integer when present"
+        )

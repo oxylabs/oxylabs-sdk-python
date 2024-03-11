@@ -29,7 +29,7 @@ class Baidu(BaiduBase):
                     "limit": 10,
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -58,7 +58,7 @@ class Baidu(BaiduBase):
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -99,7 +99,7 @@ class BaiduAsync(BaiduBase):
                     "limit": 10,
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -130,7 +130,7 @@ class BaiduAsync(BaiduBase):
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.

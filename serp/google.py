@@ -35,7 +35,7 @@ class Google(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
 
@@ -68,7 +68,7 @@ class Google(GoogleBase):
                     "render": None,
                     "geo_location": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -105,7 +105,7 @@ class Google(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -138,7 +138,7 @@ class Google(GoogleBase):
                     "render": "html",
                     "callback_url": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
 
@@ -177,7 +177,7 @@ class Google(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -213,7 +213,7 @@ class Google(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -250,7 +250,7 @@ class Google(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
 
@@ -281,7 +281,7 @@ class Google(GoogleBase):
                     "user_agent_type": "desktop",
                     "geo_location": None,
                     "callback_url": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -328,7 +328,7 @@ class GoogleAsync(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
 
@@ -363,7 +363,7 @@ class GoogleAsync(GoogleBase):
                     "render": None,
                     "geo_location": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -402,7 +402,7 @@ class GoogleAsync(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -437,7 +437,7 @@ class GoogleAsync(GoogleBase):
                     "render": "html",
                     "callback_url": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
 
@@ -478,7 +478,7 @@ class GoogleAsync(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -516,7 +516,7 @@ class GoogleAsync(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -555,7 +555,7 @@ class GoogleAsync(GoogleBase):
                     "callback_url": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
 
@@ -588,7 +588,7 @@ class GoogleAsync(GoogleBase):
                     "user_agent_type": "desktop",
                     "geo_location": None,
                     "callback_url": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
