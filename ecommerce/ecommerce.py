@@ -70,7 +70,6 @@ class EcommerceAsync:
                 self.client.execute_with_timeout(payload, config, self.session),
                 timeout=config["timeout"],
             )
-
             return result
         except asyncio.TimeoutError:
             print("The request timed out")

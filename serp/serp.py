@@ -70,8 +70,6 @@ class SerpAsync:
                 self.client.execute_with_timeout(payload, config, self.session),
                 timeout=config["timeout"],
             )
-            type(self)._requests -= 1
-
             return result
         except asyncio.TimeoutError:
             print("The request timed out")
@@ -79,6 +77,7 @@ class SerpAsync:
             print(f"An error occurred: {e}")
 
         finally:
+            type(self)._requests -= 1
             if type(self)._requests == 0:
                 await utils.close(self.session)
         return None
