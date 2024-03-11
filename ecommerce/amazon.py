@@ -549,6 +549,7 @@ class AmazonAsync(AmazonBase):
 
     async def scrape_amazon_bestsellers(
         self,
+        query,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
@@ -581,7 +582,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_bestseller_payload(opts)
+        payload = self._prepare_bestseller_payload(query,opts)
         response = await self.client.get_resp(payload, config)
         return response
 
