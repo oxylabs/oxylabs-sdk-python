@@ -33,8 +33,6 @@ class Ecommerce:
 
 
 class EcommerceAsync:
-    _requests = 0
-
     def __init__(self, username, password):
         """
         Initializes an asynchronous Ecommerce client.
@@ -46,6 +44,7 @@ class EcommerceAsync:
         self.api_credentials = ApiCredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
         self.session = None
+        self.requests = 0
 
     async def get_resp(self, payload, config):
         """
@@ -61,9 +60,10 @@ class EcommerceAsync:
         payload = {k: v for k, v in payload.items() if v is not None}
 
         result = None
-        type(self)._requests += 1
+        self.requests += 1
 
         try:
+
             self.session = await utils.ensure_session(self.session)
 
             result = await asyncio.wait_for(
@@ -77,7 +77,7 @@ class EcommerceAsync:
             print(f"An error occurred: {e}")
 
         finally:
-            type(self)._requests -= 1
-            if type(self)._requests == 0:
+            self.requests -= 1
+            if self.requests == 0:
                 await utils.close(self.session)
         return None
