@@ -151,6 +151,7 @@ class GoogleShoppingBase:
             "render": opts.render,
             "callback_url": opts.callback_url,
             "context": opts.context,
+            "parse": opts.parse,
         }
 
         if opts.parse_instructions is not None:
@@ -174,6 +175,7 @@ class GoogleShoppingBase:
             "render": opts.render,
             "callback_url": opts.callback_url,
             "geo_location": opts.geo_location,
+            "parse": opts.parse,
         }
 
         if opts.parse_instructions is not None:
@@ -200,6 +202,7 @@ class GoogleShoppingBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
+            "parse": opts.parse,
         }
 
         if opts.parse_instructions is not None:
@@ -230,6 +233,7 @@ class GoogleShoppingBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
+            "parse": opts.parse,
         }
 
         if opts.parse_instructions is not None:

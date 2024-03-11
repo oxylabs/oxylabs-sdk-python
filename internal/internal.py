@@ -91,7 +91,7 @@ class ClientAsync:
                 data = await response.json()
                 return data["id"]
         except aiohttp.ClientResponseError as e:
-            print(f"HTTP error occurred: {e.status}")
+            print(f"HTTP error occurred: {e.status} - {e.message}")
         except aiohttp.ClientConnectionError as e:
             print(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
@@ -134,7 +134,7 @@ class ClientAsync:
                 response.raise_for_status()
                 return await response.json()
         except aiohttp.ClientResponseError as e:
-            print(f"HTTP error occurred: {e.status}")
+            print(f"HTTP error occurred: {e.status} - {e.message}")
         except aiohttp.ClientConnectionError as e:
             print(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
