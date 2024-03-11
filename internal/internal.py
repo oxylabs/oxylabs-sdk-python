@@ -73,7 +73,6 @@ class Client:
 
 
 class ClientAsync:
-    _requests = 0
 
     def __init__(self, base_url, api_credentials):
         self.base_url = base_url
@@ -83,11 +82,6 @@ class ClientAsync:
             "Content-Type": "application/json",
             "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
         }
-
-    async def close(self, user_session):
-        print(f"Closing session: {user_session}")
-        if user_session:
-            await user_session.close()
 
     async def get_job_id(self, payload, user_session):
         try:
@@ -152,17 +146,9 @@ class ClientAsync:
 
     async def execute_with_timeout(self, payload, config, user_session):
 
-        print(f"User session: {user_session}")
-        type(self)._requests += 1
-        print(f"Requests: {type(self)._requests}")
-
         job_id = await self.get_job_id(payload, user_session)
 
         await self.poll_job_status(job_id, config["poll_interval"], user_session)
 
         result = await self.get_http_resp(job_id, user_session)
-        type(self)._requests -= 1
-        print(f"Requests: {type(self)._requests}")
-        if type(self)._requests == 0:
-            await self.close(user_session)
         return result

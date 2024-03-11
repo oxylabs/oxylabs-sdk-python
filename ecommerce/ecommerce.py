@@ -1,7 +1,7 @@
 from internal.internal import Client, ApiCredentials, ClientAsync
 from utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import asyncio
-import aiohttp
+import utils.utils as utils
 
 
 class Ecommerce:
@@ -33,6 +33,8 @@ class Ecommerce:
 
 
 class EcommerceAsync:
+    _requests = 0
+
     def __init__(self, username, password):
         """
         Initializes an asynchronous Ecommerce client.
@@ -45,9 +47,6 @@ class EcommerceAsync:
         self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
         self.session = self.client.session
 
-    async def ensure_session(self):
-        if self.session is None or self.session.closed:
-            self.session = aiohttp.ClientSession()
 
     async def get_resp(self, payload, config):
         """
@@ -63,13 +62,20 @@ class EcommerceAsync:
         payload = {k: v for k, v in payload.items() if v is not None}
 
         result = None
+        type(self)._requests += 1
+
         try:
-            await self.ensure_session()
+            self.session = await utils.ensure_session(self.session)
 
             result = await asyncio.wait_for(
                 self.client.execute_with_timeout(payload, config, self.session),
                 timeout=config["timeout"],
             )
+            type(self)._requests -= 1
+
+            if type(self)._requests == 0:
+                await utils.close(self.session)
+
             return result
         except asyncio.TimeoutError:
             print("The request timed out")

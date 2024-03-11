@@ -1,5 +1,6 @@
 from utils.constants import UserAgent, Render
 from urllib.parse import urlparse
+import aiohttp
 from utils.defaults import (
     DEFAULT_LIMIT_SERP,
     DEFAULT_DOMAIN,
@@ -180,3 +181,34 @@ def check_price_range_validity(context):
         for item in context
     ):
         raise ValueError("Price range parameters must be greater than 0")
+
+
+def check_http_method_validity(context):
+    if context and any(
+        item.get("key") == "http_method" and item.get("value") not in ["post", "get"]
+        for item in context
+    ):
+        raise ValueError("Invalid http method in context")
+
+
+def check_content_for_post_validity(context):
+    if (
+        context
+        and any(item.get("key") == "content" for item in context)
+        and not any(
+            item.get("key") == "http_method" and item.get("value") == "post"
+            for item in context
+        )
+    ):
+        raise ValueError("Content is only allowed for POST requests")
+
+
+async def ensure_session(session):
+    if session is None or session.closed:
+        session = aiohttp.ClientSession()
+    return session
+
+
+async def close(user_session):
+    if user_session:
+        await user_session.close()

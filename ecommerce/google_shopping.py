@@ -7,7 +7,7 @@ from utils.utils import prepare_config
 class GoogleShopping(GoogleShoppingBase):
     def __init__(self, client):
         if not isinstance(client, Ecommerce):
-            raise TypeError("Google Shopping requires an Ecommerce instance")
+            raise TypeError("GoogleShopping requires an Ecommerce instance")
         self.client = client
 
     def scrape_google_shopping_search(
@@ -145,7 +145,7 @@ class GoogleShopping(GoogleShoppingBase):
 class GoogleShoppingAsync(GoogleShoppingBase):
     def __init__(self, client):
         if not isinstance(client, EcommerceAsync):
-            raise TypeError("Google Shopping requires an EcommerceAsync instance")
+            raise TypeError("GoogleShoppingAsync requires an EcommerceAsync instance")
         self.client = client
 
     async def scrape_google_shopping_search(

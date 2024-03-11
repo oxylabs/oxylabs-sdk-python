@@ -310,7 +310,7 @@ class Amazon(AmazonBase):
 class AmazonAsync(AmazonBase):
     def __init__(self, client):
         if not isinstance(client, EcommerceAsync):
-            raise TypeError("Amazon requires an EcommerceAsync instance")
+            raise TypeError("AmazonAsync requires an EcommerceAsync instance")
         self.client = client
 
     async def scrape_amazon_search(
@@ -350,7 +350,7 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_search_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_amazon_url(
@@ -388,7 +388,7 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_url_payload(url, opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_amazon_product(
@@ -426,7 +426,7 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_product_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_amazon_pricing(
@@ -464,7 +464,7 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_pricing_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_amazon_reviews(
@@ -504,7 +504,7 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_reviews_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_amazon_questions(
@@ -544,7 +544,7 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_questions_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_amazon_bestsellers(
@@ -582,7 +582,7 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_bestseller_payload(opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response
 
     async def scrape_amazon_sellers(
@@ -622,5 +622,5 @@ class AmazonAsync(AmazonBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_seller_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = await self.client.get_resp(payload, config)
         return response

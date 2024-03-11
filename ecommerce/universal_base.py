@@ -16,18 +16,15 @@ class UniversalUrlOpts(BaseUrlOpts):
 
     def __init__(
         self,
-        user_agent_type=DEFAULT_USER_AGENT,
         geo_location=None,
         locale=None,
         render=None,
         content_encoding="base64",
         context=None,
-        callback_url=None,
-        parse=False,
         parser_type=None,
-        parse_instructions=None,
+        **kwargs,
     ):
-        super().__init__(user_agent_type, callback_url, parse_instructions, parse)
+        super().__init__(**kwargs)
         self.geo_location = geo_location
         self.locale = locale
         self.render = render
@@ -41,24 +38,8 @@ class UniversalUrlOpts(BaseUrlOpts):
         """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
-
-        if self.context and not any(
-            d.get("key") == "http_method" and d.get("value") in ["post", "get"]
-            for d in self.context
-        ):
-            raise ValueError("Invalid http method in context")
-
-        if (
-            self.context
-            # and self.context.get("content") is not None
-            # and self.context.get("http_method") != "post"
-            and any(d.get("key") == "content" for d in self.context)
-            and not any(
-                d.get("key") == "http_method" and d.get("value") == "post"
-                for d in self.context
-            )
-        ):
-            raise ValueError("Content is only allowed for POST requests")
+        utils.check_http_method_validity(self.context)
+        utils.check_content_for_post_validity(self.context)
 
 
 class UniversalBase:
