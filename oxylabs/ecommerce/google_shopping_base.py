@@ -26,6 +26,7 @@ class GoogleShoppingSearchOpts(BaseEcommerceOpts):
         locale=None,
         results_language=None,
         context=None,
+        parse=None,
         **kwargs
     ):
         super().__init__(**kwargs)
@@ -35,6 +36,7 @@ class GoogleShoppingSearchOpts(BaseEcommerceOpts):
         self.locale = locale
         self.results_language = results_language
         self.context = context
+        self.parse = parse
 
     ACCEPTED_SORT_BY_PARAMS = [
         "r",
@@ -62,8 +64,9 @@ class GoogleShoppingUrlOpts(BaseEcommerceOpts):
     Represents the URL options for GoogleShoppingUrl.
     """
 
-    def __init__(self, **kwargs):
+    def __init__(self, parse=None, **kwargs):
         super().__init__(**kwargs)
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -79,12 +82,18 @@ class GoogleShoppingProductOpts(BaseEcommerceOpts):
     """
 
     def __init__(
-        self, domain=DEFAULT_DOMAIN, locale=None, results_language=None, **kwargs
+        self,
+        domain=DEFAULT_DOMAIN,
+        locale=None,
+        results_language=None,
+        parse=None,
+        **kwargs
     ):
         super().__init__(**kwargs)
         self.domain = domain
         self.locale = locale
         self.results_language = results_language
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -106,6 +115,7 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
         pages=DEFAULT_PAGES,
         locale=None,
         results_language=None,
+        parse=None,
         **kwargs
     ):
         super().__init__(**kwargs)
@@ -114,6 +124,7 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
         self.pages = pages
         self.locale = locale
         self.results_language = results_language
+        self.parse = parse
 
     def check_parameter_validity(self):
         """

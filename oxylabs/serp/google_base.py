@@ -10,6 +10,7 @@ from utils.defaults import (
     set_default_start_page,
     set_default_user_agent,
     set_default_hotel_occupancy,
+    set_default_tbm_context,
 )
 from utils.utils import BaseGoogleOpts, validate_url
 from utils.constants import Source, Render
@@ -19,33 +20,23 @@ import utils.utils as utils
 class GoogleSearchOpts(BaseGoogleOpts):
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
         limit=DEFAULT_LIMIT_SERP,
         locale=None,
+        parse=False,
+        **kwargs,
     ):
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
         self.limit = limit
         self.locale = locale
+        self.parse = parse
 
     AcceptedTbmParameters = [
         "app",
@@ -63,20 +54,16 @@ class GoogleSearchOpts(BaseGoogleOpts):
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-
-        # check if tbm parameter is valid
-        if self.context:
-            for opt in self.context:
-                if (
-                    opt.get("key") == "tbm"
-                    and opt.get("value") not in self.AcceptedTbmParameters
-                ):
-                    raise ValueError(
-                        f"Invalid tbm parameter value: {opt.get('value')}. Accepted values are: {', '.join(self.AcceptedTbmParameters)}"
-                    )
+        utils.check_context_tbm_validity(self.context, self.AcceptedTbmParameters)
 
 
 class GoogleUrlOpts(BaseGoogleOpts):
+
+    def __init__(self, parse=False, **kwargs):
+        super().__init__(
+            **kwargs,
+        )
+        self.parse = parse
 
     def check_parameter_validity(self):
         utils.check_user_agent_validity(self.user_agent_type)
@@ -87,33 +74,23 @@ class GoogleUrlOpts(BaseGoogleOpts):
 class GoogleAdsOpts(BaseGoogleOpts):
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
         parse=False,
-        context=None,
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
         limit=DEFAULT_LIMIT_SERP,
         locale=None,
+        **kwargs,
     ):
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
         self.limit = limit
         self.locale = locale
+        self.parse = parse
 
     AcceptedTbmParameters = [
         "app",
@@ -129,38 +106,17 @@ class GoogleAdsOpts(BaseGoogleOpts):
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-
-        if self.context:
-            for opt in self.context:
-                if (
-                    opt.get("key") == "tbm"
-                    and opt.get("value") not in self.AcceptedTbmParameters
-                ):
-                    raise ValueError(
-                        f"Invalid tbm parameter value: {opt.get('value')}. Accepted values are: {', '.join(self.AcceptedTbmParameters)}"
-                    )
+        utils.check_context_tbm_validity(self.context, self.AcceptedTbmParameters)
 
 
 class GoogleSuggestionsOpts(BaseGoogleOpts):
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
         locale=None,
+        **kwargs,
     ):
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.locale = locale
 
@@ -173,27 +129,15 @@ class GoogleSuggestionsOpts(BaseGoogleOpts):
 class GoogleHotelsOpts(BaseGoogleOpts):
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
         limit=DEFAULT_LIMIT_SERP,
         locale=None,
+        **kwargs,
     ):
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
@@ -213,25 +157,13 @@ class GoogleHotelsOpts(BaseGoogleOpts):
 class GoogleTravelHotelsOpts(BaseGoogleOpts):
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         locale=None,
+        **kwargs,
     ):
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
@@ -247,33 +179,23 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
 class GoogleImagesOpts(BaseGoogleOpts):
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
         limit=DEFAULT_LIMIT_SERP,
         locale=None,
+        parse=False,
+        **kwargs,
     ):
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
         self.limit = limit
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
         utils.check_render_validity(self.render)
@@ -416,7 +338,6 @@ class GoogleBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:
@@ -450,7 +371,6 @@ class GoogleBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
             "context": opts.context,
         }
 
@@ -481,7 +401,6 @@ class GoogleBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render if opts.render else Render.HTML.value,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
             "context": opts.context,
         }
 
@@ -499,23 +418,8 @@ class GoogleBase:
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
         opts.pages = set_default_pages(opts.pages)
+        opts.context = set_default_tbm_context(opts.context)
         opts.check_parameter_validity()
-
-        # If context is None, initialize it as an empty list
-        if opts.context is None:
-            opts.context = []
-
-        # Find the index of the dictionary with 'tbm' as key
-        index = next(
-            (index for (index, d) in enumerate(opts.context) if d["key"] == "tbm"), None
-        )
-
-        # If 'tbm' key exists, update its value to 'isch'
-        if index is not None:
-            opts.context[index]["value"] = "isch"
-        # If 'tbm' key doesn't exist, add it to the context with value 'isch'
-        else:
-            opts.context.append({"key": "tbm", "value": "isch"})
 
         # Prepare payload
         payload = {
@@ -554,7 +458,6 @@ class GoogleBase:
             "context": opts.context,
             "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:

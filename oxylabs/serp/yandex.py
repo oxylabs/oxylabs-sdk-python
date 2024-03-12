@@ -32,7 +32,6 @@ class Yandex(YandexBase):
                     "callback_url": None,
                     "locale": None,
                     "geo_location": None,
-                    "parse": None,
                 }
                 This parameter allows customization of the search request.
 
@@ -108,7 +107,6 @@ class YandexAsync(YandexBase):
                     "callback_url": None,
                     "locale": None,
                     "geo_location": None,
-                    "parse": None,
                 }
                 This parameter allows customization of the search request.
 

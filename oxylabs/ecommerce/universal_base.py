@@ -22,6 +22,7 @@ class UniversalUrlOpts(BaseUrlOpts):
         content_encoding="base64",
         context=None,
         parser_type=None,
+        parse=None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -31,6 +32,7 @@ class UniversalUrlOpts(BaseUrlOpts):
         self.content_encoding = content_encoding
         self.context = context
         self.parser_type = parser_type
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -67,7 +69,9 @@ class UniversalBase:
             "parser_type": opts.parser_type,
         }
 
-        payload["parse"] = bool(opts.parsing_instructions or opts.parser_type)
+        payload["parse"] = (
+            True if opts.parsing_instructions or opts.parser_type else opts.parse
+        )
 
         if opts.parsing_instructions:
             payload["parsing_instructions"] = opts.parsing_instructions

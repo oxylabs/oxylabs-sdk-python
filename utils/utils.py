@@ -22,7 +22,6 @@ class BaseSearchOpts:
         user_agent_type=DEFAULT_USER_AGENT,
         callback_url=None,
         parsing_instructions=None,
-        parse=False,
     ):
         self.domain = domain
         self.start_page = start_page
@@ -31,7 +30,6 @@ class BaseSearchOpts:
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
         self.parsing_instructions = parsing_instructions
-        self.parse = parse
 
 
 class BaseUrlOpts:
@@ -40,12 +38,10 @@ class BaseUrlOpts:
         user_agent_type=DEFAULT_USER_AGENT,
         callback_url=None,
         parsing_instructions=None,
-        parse=False,
     ):
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
         self.parsing_instructions = parsing_instructions
-        self.parse = parse
 
 
 class BaseGoogleOpts:
@@ -56,7 +52,6 @@ class BaseGoogleOpts:
         render=None,
         callback_url=None,
         parsing_instructions=None,
-        parse=False,
         context=None,
     ):
         self.geo_location = geo_location
@@ -64,7 +59,7 @@ class BaseGoogleOpts:
         self.render = render
         self.callback_url = callback_url
         self.parsing_instructions = parsing_instructions
-        self.parse = parse
+
         self.context = context
 
 
@@ -75,12 +70,10 @@ class BaseEcommerceOpts:
         render=None,
         callback_url=None,
         geo_location=None,
-        parse=False,
         parsing_instructions=None,
     ):
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
-        self.parse = parse
         self.parsing_instructions = parsing_instructions
         self.render = render
         self.geo_location = geo_location
@@ -327,3 +320,11 @@ def validate_list_string_optional_int(args):
         raise ValueError(
             "_args second argument must be a non-zero integer when present"
         )
+
+
+def check_context_tbm_validity(context, acceptable_tbms):
+    if context and any(
+        item.get("key") == "tbm" and item.get("value") not in acceptable_tbms
+        for item in context
+    ):
+        raise ValueError("Invalid tbm parameter value in context")

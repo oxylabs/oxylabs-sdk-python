@@ -31,31 +31,19 @@ class BingSearchOpts(BaseSearchOpts):
 
     def __init__(
         self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_SERP,
-        user_agent_type=DEFAULT_USER_AGENT,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
         locale=None,
         geo_location=None,
         render=None,
+        parse=None,
+        **kwargs,
     ):
         super().__init__(
-            domain,
-            start_page,
-            pages,
-            limit,
-            user_agent_type,
-            callback_url,
-            parsing_instructions,
-            parse,
+            **kwargs,
         )
         self.locale = locale
         self.geo_location = geo_location
         self.render = render
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -77,16 +65,15 @@ class BingUrlOpts(BaseUrlOpts):
 
     def __init__(
         self,
-        user_agent_type=DEFAULT_USER_AGENT,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
         geo_location=None,
         render=None,
+        parse=None,
+        **kwargs,
     ):
-        super().__init__(user_agent_type, callback_url, parsing_instructions, parse)
+        super().__init__(**kwargs)
         self.geo_location = geo_location
         self.render = render
+        self.parse = parse
 
     def check_parameter_validity(self):
         """

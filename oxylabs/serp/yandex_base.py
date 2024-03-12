@@ -40,26 +40,12 @@ YandexSearchAcceptedLocaleParameters = [
 class YandexSearchOpts(BaseSearchOpts):
     def __init__(
         self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_SERP,
-        user_agent_type=DEFAULT_USER_AGENT,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
         locale=None,
         geo_location=None,
+        **kwargs,
     ):
         super().__init__(
-            domain,
-            start_page,
-            pages,
-            limit,
-            user_agent_type,
-            callback_url,
-            parsing_instructions,
-            parse,
+            **kwargs,
         )
         self.locale = locale
         self.geo_location = geo_location
@@ -80,13 +66,10 @@ class YandexSearchOpts(BaseSearchOpts):
 class YandexUrlOpts(BaseUrlOpts):
     def __init__(
         self,
-        user_agent_type=DEFAULT_USER_AGENT,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
         render=None,
+        **kwargs,
     ):
-        super().__init__(user_agent_type, callback_url, parsing_instructions, parse)
+        super().__init__(**kwargs)
         self.render = render
 
     def check_parameter_validity(self):
@@ -120,7 +103,6 @@ class YandexBase:
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:
@@ -143,7 +125,6 @@ class YandexBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:

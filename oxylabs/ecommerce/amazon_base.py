@@ -25,6 +25,7 @@ class AmazonSearchOpts(BaseEcommerceOpts):
         pages=DEFAULT_PAGES,
         locale=None,
         context=None,
+        parse=None,
         **kwargs
     ):
         super().__init__(**kwargs)
@@ -33,6 +34,7 @@ class AmazonSearchOpts(BaseEcommerceOpts):
         self.pages = pages
         self.locale = locale
         self.context = context
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -49,9 +51,10 @@ class AmazonUrlOpts(BaseEcommerceOpts):
     Represents the URL options for AmazonUrl.
     """
 
-    def __init__(self, locale=None, **kwargs):
+    def __init__(self, locale=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -66,11 +69,14 @@ class AmazonProductOpts(BaseEcommerceOpts):
     Represents the product options for AmazonProduct.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, locale=None, context=None, **kwargs):
+    def __init__(
+        self, domain=DEFAULT_DOMAIN, locale=None, context=None, parse=None, **kwargs
+    ):
         super().__init__(**kwargs)
         self.domain = domain
         self.locale = locale
         self.context = context
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -91,6 +97,7 @@ class AmazonPricingOpts(BaseEcommerceOpts):
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
         locale=None,
+        parse=None,
         **kwargs
     ):
         super().__init__(**kwargs)
@@ -98,6 +105,7 @@ class AmazonPricingOpts(BaseEcommerceOpts):
         self.start_page = start_page
         self.pages = pages
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -120,6 +128,7 @@ class AmazonReviewsOpts(BaseEcommerceOpts):
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
         locale=None,
+        parse=None,
         **kwargs
     ):
         super().__init__(**kwargs)
@@ -127,6 +136,7 @@ class AmazonReviewsOpts(BaseEcommerceOpts):
         self.start_page = start_page
         self.pages = pages
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -143,10 +153,11 @@ class AmazonQuestionsOpts(BaseEcommerceOpts):
     Represents the product questions options for AmazonQuestions.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, locale=None, **kwargs):
+    def __init__(self, domain=DEFAULT_DOMAIN, locale=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -167,6 +178,7 @@ class AmazonBestsellerOpts(BaseEcommerceOpts):
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
         locale=None,
+        parse=None,
         **kwargs
     ):
         super().__init__(**kwargs)
@@ -174,6 +186,7 @@ class AmazonBestsellerOpts(BaseEcommerceOpts):
         self.start_page = start_page
         self.pages = pages
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
         """
@@ -190,10 +203,11 @@ class AmazonSellerOpts(BaseEcommerceOpts):
     Represents the seller options for AmazonSeller.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, locale=None, **kwargs):
+    def __init__(self, domain=DEFAULT_DOMAIN, locale=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
         """

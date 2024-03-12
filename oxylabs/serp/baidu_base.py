@@ -45,6 +45,7 @@ class BaiduUrlOpts(BaseUrlOpts):
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
+
 class BaiduBase:
     def _prepare_search_payload(self, query, opts):
         opts = BaiduSearchOpts(**opts if opts is not None else {})
@@ -87,7 +88,6 @@ class BaiduBase:
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:

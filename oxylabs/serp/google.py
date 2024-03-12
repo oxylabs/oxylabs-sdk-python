@@ -137,7 +137,6 @@ class Google(GoogleBase):
                     "user_agent_type": "desktop",
                     "render": "html",
                     "callback_url": None,
-                    "parse": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -175,7 +174,6 @@ class Google(GoogleBase):
                     "geo_location": None,
                     "render": "html",
                     "callback_url": None,
-                    "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
@@ -211,7 +209,6 @@ class Google(GoogleBase):
                     "user_agent_type": "desktop",
                     "render": "html",
                     "callback_url": None,
-                    "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
@@ -436,7 +433,6 @@ class GoogleAsync(GoogleBase):
                     "user_agent_type": "desktop",
                     "render": "html",
                     "callback_url": None,
-                    "parse": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -476,7 +472,6 @@ class GoogleAsync(GoogleBase):
                     "geo_location": None,
                     "render": "html",
                     "callback_url": None,
-                    "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
@@ -514,7 +509,6 @@ class GoogleAsync(GoogleBase):
                     "user_agent_type": "desktop",
                     "render": "html",
                     "callback_url": None,
-                    "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
