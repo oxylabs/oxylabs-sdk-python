@@ -1,6 +1,6 @@
 from oxylabs import Serp, SerpAsync, Ecommerce, EcommerceAsync, Proxy
 from oxylabs.serp import Baidu, Google, GoogleAsync, Yandex, Bing, BingAsync
-from oxylabs.ecommerce import Amazon, AmazonAsync, GoogleShopping, GoogleShoppingAsync, Wayfair, Wa
+from oxylabs.ecommerce import Amazon, AmazonAsync, GoogleShopping, GoogleShoppingAsync, Wayfair, WayfairAsync
 from dotenv import load_dotenv
 import os
 import asyncio
