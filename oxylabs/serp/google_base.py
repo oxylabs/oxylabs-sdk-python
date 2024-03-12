@@ -10,42 +10,47 @@ from utils.defaults import (
     set_default_start_page,
     set_default_user_agent,
     set_default_hotel_occupancy,
+    set_default_tbm_context,
 )
 from utils.utils import BaseGoogleOpts, validate_url
 from utils.constants import Source, Render
 import utils.utils as utils
+from typing import Optional, Any
 
 
 class GoogleSearchOpts(BaseGoogleOpts):
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_SERP,
-        locale=None,
-    ):
+        domain: str = DEFAULT_DOMAIN,
+        start_page: int = DEFAULT_START_PAGE,
+        pages: int = DEFAULT_PAGES,
+        limit: int = DEFAULT_LIMIT_SERP,
+        locale: Optional[str] = None,
+        parse: bool = False,
+        **kwargs: Any,
+    ) -> None:
+        """
+        Initializes a new instance of the GoogleBase class.
+
+        Args:
+            domain (str): The domain to search on. Defaults to DEFAULT_DOMAIN.
+            start_page (int): The starting page number. Defaults to DEFAULT_START_PAGE.
+            pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
+            limit (int): The maximum number of search results per page. Defaults to DEFAULT_LIMIT_SERP.
+            locale (str): The locale to use for the search. Defaults to None.
+            parse (bool): Whether to parse the search results. Defaults to False.
+            **kwargs: Additional keyword arguments to pass to the base class.
+
+        """
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
         self.limit = limit
         self.locale = locale
+        self.parse = parse
 
     AcceptedTbmParameters = [
         "app",
@@ -57,63 +62,101 @@ class GoogleSearchOpts(BaseGoogleOpts):
     ]
 
     def check_parameter_validity(self):
+        """
+        Checks the validity of the parameters used for the Google SERP API request.
+
+        This method validates the user agent type, render option, limit, pages, start page,
+        parsing instructions, and context TBM parameters. It calls various utility functions
+        to perform the validation.
+
+        Raises:
+            ValueError: If any of the parameters are invalid.
+        """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-
-        # check if tbm parameter is valid
-        if self.context:
-            for opt in self.context:
-                if (
-                    opt.get("key") == "tbm"
-                    and opt.get("value") not in self.AcceptedTbmParameters
-                ):
-                    raise ValueError(
-                        f"Invalid tbm parameter value: {opt.get('value')}. Accepted values are: {', '.join(self.AcceptedTbmParameters)}"
-                    )
+        utils.check_context_tbm_validity(self.context, self.AcceptedTbmParameters)
 
 
 class GoogleUrlOpts(BaseGoogleOpts):
 
+    def __init__(self, parse: bool = False, **kwargs: Any) -> None:
+        """
+        Initializes a new instance of the GoogleBase class.
+
+        Args:
+            parse (bool, optional): Indicates whether to parse the response. Defaults to False.
+            **kwargs: Additional keyword arguments to be passed to the base class constructor.
+        """
+        super().__init__(
+            **kwargs,
+        )
+        self.parse = parse
+
     def check_parameter_validity(self):
+        """
+        Checks the validity of the parameters used in the GoogleBase class.
+
+        This method calls various utility functions to validate the user agent type,
+        render option, and parsing instructions. If any of these parameters are invalid,
+        an exception will be raised.
+
+        Parameters:
+            self (GoogleBase): The current instance of the GoogleBase class.
+
+        Raises:
+            InvalidUserAgentError: If the user agent type is invalid.
+            InvalidRenderError: If the render option is invalid.
+            InvalidParsingInstructionsError: If the parsing instructions are invalid.
+        """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleAdsOpts(BaseGoogleOpts):
+    """
+    Represents options for making Google Ads API requests.
+
+    Args:
+        parse (bool): Whether to parse the response. Defaults to False.
+        domain (str): The domain to search on. Defaults to DEFAULT_DOMAIN.
+        start_page (int): The starting page number. Defaults to DEFAULT_START_PAGE.
+        pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
+        limit (int): The maximum number of results to retrieve. Defaults to DEFAULT_LIMIT_SERP.
+        locale (str): The locale to use for the search. Defaults to None.
+        **kwargs: Additional keyword arguments.
+
+    Attributes:
+        AcceptedTbmParameters (list): A list of accepted TBM (To Be Matched) parameters.
+
+    Methods:
+        check_parameter_validity: Checks the validity of the parameters.
+
+    """
+
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_SERP,
-        locale=None,
-    ):
+        parse: bool = False,
+        domain: str = DEFAULT_DOMAIN,
+        start_page: int = DEFAULT_START_PAGE,
+        pages: int = DEFAULT_PAGES,
+        limit: int = DEFAULT_LIMIT_SERP,
+        locale: Optional[str] = None,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
         self.limit = limit
         self.locale = locale
+        self.parse = parse
 
     AcceptedTbmParameters = [
         "app",
@@ -125,75 +168,95 @@ class GoogleAdsOpts(BaseGoogleOpts):
     ]
 
     def check_parameter_validity(self):
+        """
+        Checks the validity of the parameters.
+
+        Raises:
+            ValueError: If any of the parameters are invalid.
+
+        """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-
-        if self.context:
-            for opt in self.context:
-                if (
-                    opt.get("key") == "tbm"
-                    and opt.get("value") not in self.AcceptedTbmParameters
-                ):
-                    raise ValueError(
-                        f"Invalid tbm parameter value: {opt.get('value')}. Accepted values are: {', '.join(self.AcceptedTbmParameters)}"
-                    )
+        utils.check_context_tbm_validity(self.context, self.AcceptedTbmParameters)
 
 
 class GoogleSuggestionsOpts(BaseGoogleOpts):
+    """
+    Options for making Google Suggestions API requests.
+
+    Args:
+        locale (str): The locale to use for the suggestions. Defaults to None.
+
+    Attributes:
+        locale (str): The locale to use for the suggestions.
+
+    Methods:
+        check_parameter_validity: Checks the validity of the parameters.
+
+    """
+
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
-        locale=None,
-    ):
+        locale: Optional[str] = None,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.locale = locale
 
     def check_parameter_validity(self):
+        """
+        Checks the validity of the parameters.
+
+        This method checks the validity of the user agent type, render, and parsing instructions.
+
+        Returns:
+            None
+
+        """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleHotelsOpts(BaseGoogleOpts):
+    """
+    Options for making requests to Google Hotels search engine.
+
+    Args:
+        domain (str): The domain to use for the search. Defaults to DEFAULT_DOMAIN.
+        start_page (int): The starting page number for the search. Defaults to DEFAULT_START_PAGE.
+        pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
+        limit (int): The maximum number of search results to retrieve. Defaults to DEFAULT_LIMIT_SERP.
+        locale (str): The locale to use for the search. Defaults to None.
+        **kwargs: Additional keyword arguments to pass to the parent class.
+
+    Attributes:
+        domain (str): The domain to use for the search.
+        start_page (int): The starting page number for the search.
+        pages (int): The number of pages to retrieve.
+        limit (int): The maximum number of search results to retrieve.
+        locale (str): The locale to use for the search.
+
+    Methods:
+        check_parameter_validity: Checks the validity of the search parameters.
+
+    """
+
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_SERP,
-        locale=None,
-    ):
+        domain: str = DEFAULT_DOMAIN,
+        start_page: int = DEFAULT_START_PAGE,
+        pages: int = DEFAULT_PAGES,
+        limit: int = DEFAULT_LIMIT_SERP,
+        locale: Optional[str] = None,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
@@ -202,6 +265,13 @@ class GoogleHotelsOpts(BaseGoogleOpts):
         self.locale = locale
 
     def check_parameter_validity(self):
+        """
+        Checks the validity of the search parameters.
+
+        Raises:
+            ValueError: If any of the search parameters are invalid.
+
+        """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_limit_validity(self.limit)
@@ -211,33 +281,47 @@ class GoogleHotelsOpts(BaseGoogleOpts):
 
 
 class GoogleTravelHotelsOpts(BaseGoogleOpts):
+    """
+    Options for retrieving hotel search results from Google Travel.
+
+    Args:
+        domain (str, optional): The domain to use for the search. Defaults to DEFAULT_DOMAIN.
+        start_page (int, optional): The starting page number for the search. Defaults to DEFAULT_START_PAGE.
+        locale (str, optional): The locale to use for the search. Defaults to None.
+        **kwargs: Additional keyword arguments to be passed to the parent class.
+
+    Attributes:
+        domain (str): The domain to use for the search.
+        start_page (int): The starting page number for the search.
+        locale (str): The locale to use for the search.
+
+    Methods:
+        check_parameter_validity(): Checks the validity of the parameters.
+
+    """
+
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        locale=None,
-    ):
+        domain: str = DEFAULT_DOMAIN,
+        start_page: int = DEFAULT_START_PAGE,
+        locale: Optional[str] = None,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
         self.locale = locale
 
     def check_parameter_validity(self):
+        """
+        Checks the validity of the parameters.
+
+        Raises:
+            ValueError: If any of the parameters are invalid.
+
+        """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
@@ -245,51 +329,110 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
 
 
 class GoogleImagesOpts(BaseGoogleOpts):
+    """
+    Options for making requests to the Google Images search engine.
+
+    Args:
+        domain (str): The domain to use for the search. Defaults to DEFAULT_DOMAIN.
+        start_page (int): The starting page number for the search. Defaults to DEFAULT_START_PAGE.
+        pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
+        limit (int): The maximum number of search results to retrieve. Defaults to DEFAULT_LIMIT_SERP.
+        locale (str): The locale to use for the search. Defaults to None.
+        parse (bool): Whether to parse the search results. Defaults to False.
+        **kwargs: Additional keyword arguments to pass to the parent class.
+
+    Attributes:
+        domain (str): The domain to use for the search.
+        start_page (int): The starting page number for the search.
+        pages (int): The number of pages to retrieve.
+        limit (int): The maximum number of search results to retrieve.
+        locale (str): The locale to use for the search.
+        parse (bool): Whether to parse the search results.
+
+    Methods:
+        check_parameter_validity: Checks the validity of the parameters.
+
+    """
+
     def __init__(
         self,
-        geo_location=None,
-        user_agent_type=DEFAULT_USER_AGENT,
-        render=None,
-        callback_url=None,
-        parsing_instructions=None,
-        parse=False,
-        context=None,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_SERP,
-        locale=None,
-    ):
+        domain: str = DEFAULT_DOMAIN,
+        start_page: int = DEFAULT_START_PAGE,
+        pages: int = DEFAULT_PAGES,
+        limit: int = DEFAULT_LIMIT_SERP,
+        locale: Optional[str] = None,
+        parse: bool = False,
+        **kwargs: Any,
+    ) -> None:
         super().__init__(
-            geo_location,
-            user_agent_type,
-            render,
-            callback_url,
-            parsing_instructions,
-            parse,
-            context,
+            **kwargs,
         )
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
         self.limit = limit
         self.locale = locale
+        self.parse = parse
 
     def check_parameter_validity(self):
+        """
+        Checks the validity of the parameters.
+
+        Raises:
+            ValueError: If any of the parameters are invalid.
+
+        """
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleTrendsExploreOpts(BaseGoogleOpts):
+    """
+    Represents options for exploring Google Trends.
+
+    This class provides methods to check the validity of parameters such as user agent type and parsing instructions.
+
+    Attributes:
+        user_agent_type (str): The type of user agent to be used.
+        parsing_instructions (str): The parsing instructions to be applied.
+
+    Methods:
+        check_parameter_validity: Checks the validity of the parameters.
+
+    """
 
     def check_parameter_validity(self):
+        """
+        Checks the validity of the parameters.
+
+        This method checks the validity of the user agent type and parsing instructions.
+        It calls utility functions to perform the validity checks.
+
+        Returns:
+            None
+
+        """
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
 class GoogleBase:
-    def _prepare_search_payload(self, query, opts):
+    def _prepare_search_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepares the search payload for a Google search.
+
+        Args:
+            query (str): The search query.
+            opts (dict): The options for the search.
+
+        Returns:
+            dict: The prepared search payload.
+
+        Raises:
+            ValueError: If the `limit`, `start_page`, and `pages` parameters are used together with the `limit_per_page` context parameter.
+
+        """
         opts = GoogleSearchOpts(**opts if opts is not None else {})
 
         if (
@@ -345,7 +488,17 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url: str, opts: dict) -> dict:
+        """
+        Prepares the payload for a Google URL request.
+
+        Args:
+            url (str): The URL to be requested.
+            opts (dict): Optional parameters for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
         validate_url(url, "google")
         opts = GoogleUrlOpts(**opts if opts is not None else {})
 
@@ -370,7 +523,17 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_ads_payload(self, query, opts):
+    def _prepare_ads_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepares the payload for the Google Ads request.
+
+        Args:
+            query (str): The search query.
+            opts (dict): The options for the Google Ads request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
         opts = GoogleAdsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -400,7 +563,17 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_suggestions_payload(self, query, opts):
+    def _prepare_suggestions_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepares the payload for making a suggestions request to Google.
+
+        Args:
+            query (str): The query for which suggestions are requested.
+            opts (dict): The options for the suggestions request.
+
+        Returns:
+            dict: The prepared payload for the suggestions request.
+        """
         opts = GoogleSuggestionsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -416,7 +589,6 @@ class GoogleBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:
@@ -425,7 +597,17 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_hotels_payload(self, query, opts):
+    def _prepare_hotels_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepares the payload for the hotels request.
+
+        Args:
+            query (str): The search query for hotels.
+            opts (dict): The options for the hotels request.
+
+        Returns:
+            dict: The prepared payload for the hotels request.
+        """
         opts = GoogleHotelsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -450,7 +632,6 @@ class GoogleBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
             "context": opts.context,
         }
 
@@ -460,7 +641,17 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_travel_hotels_payload(self, query, opts):
+    def _prepare_travel_hotels_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepares the payload for the travel hotels request.
+
+        Args:
+            query (str): The search query.
+            opts (dict): The options for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
         opts = GoogleTravelHotelsOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -481,7 +672,6 @@ class GoogleBase:
             "user_agent_type": opts.user_agent_type,
             "render": opts.render if opts.render else Render.HTML.value,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
             "context": opts.context,
         }
 
@@ -491,7 +681,17 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_images_payload(self, query, opts):
+    def _prepare_images_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepare the payload for the images search request.
+
+        Args:
+            query (str): The search query.
+            opts (dict): The options for the images search.
+
+        Returns:
+            dict: The prepared payload for the images search request.
+        """
         opts = GoogleImagesOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -499,23 +699,8 @@ class GoogleBase:
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
         opts.pages = set_default_pages(opts.pages)
+        opts.context = set_default_tbm_context(opts.context)
         opts.check_parameter_validity()
-
-        # If context is None, initialize it as an empty list
-        if opts.context is None:
-            opts.context = []
-
-        # Find the index of the dictionary with 'tbm' as key
-        index = next(
-            (index for (index, d) in enumerate(opts.context) if d["key"] == "tbm"), None
-        )
-
-        # If 'tbm' key exists, update its value to 'isch'
-        if index is not None:
-            opts.context[index]["value"] = "isch"
-        # If 'tbm' key doesn't exist, add it to the context with value 'isch'
-        else:
-            opts.context.append({"key": "tbm", "value": "isch"})
 
         # Prepare payload
         payload = {
@@ -539,7 +724,17 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_trends_explore_payload(self, query, opts):
+    def _prepare_trends_explore_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepares the payload for Google Trends Explore API request.
+
+        Args:
+            query (str): The query string for the Google Trends Explore API request.
+            opts (dict): Optional parameters for the Google Trends Explore API request.
+
+        Returns:
+            dict: The prepared payload for the Google Trends Explore API request.
+        """
         opts = GoogleTrendsExploreOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -554,7 +749,6 @@ class GoogleBase:
             "context": opts.context,
             "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,
-            "parse": opts.parse,
         }
 
         if opts.parsing_instructions is not None:

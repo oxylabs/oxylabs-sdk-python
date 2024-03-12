@@ -3,7 +3,14 @@ from urllib.parse import quote
 
 
 class Proxy:
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str) -> None:
+        """
+        Initializes a Proxy object with the provided username and password.
+
+        Args:
+            username (str): The username for the proxy authentication.
+            password (str): The password for the proxy authentication.
+        """
         self.username = quote(username)
         self.password = quote(password)
         self.proxy_url = (
@@ -13,7 +20,19 @@ class Proxy:
         self.session.proxies = {"http": self.proxy_url}
         self.session.verify = False
 
-    def get(self, url):
+    def get(self, url: str) -> requests.Response:
+        """
+        Sends a GET request to the specified URL using the session object.
+
+        Args:
+            url (str): The URL to send the GET request to.
+
+        Returns:
+            requests.Response: The response object returned by the GET request.
+
+        Raises:
+            requests.exceptions.RequestException: If the GET request encounters an error.
+        """
         try:
             response = self.session.get(url)
             response.raise_for_status()

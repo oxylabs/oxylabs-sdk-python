@@ -5,7 +5,7 @@ import utils.utils as utils
 
 
 class Serp:
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str) -> None:
         """
         Initializes a synchronous SERP client.
 
@@ -16,12 +16,13 @@ class Serp:
         api_credentials = ApiCredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
-    def get_resp(self, payload, config):
+    def get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload synchronously and fetches api response.
 
         Args:
             payload (dict): The payload for the request.
+            config (dict): The configuration for the request.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -34,7 +35,7 @@ class Serp:
 
 class SerpAsync:
 
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str) -> None:
         """
         Initializes an asynchronous SERP client.
 
@@ -47,12 +48,13 @@ class SerpAsync:
         self.session = None
         self.requests = 0
 
-    async def get_resp(self, payload, config):
+    async def get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload asynchronously and fetches api response.
 
         Args:
             payload (dict): The payload for the request.
+            config (dict): The configuration for the request.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -60,7 +62,7 @@ class SerpAsync:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        result = None
+        result: dict = None
         self.requests += 1
 
         try:

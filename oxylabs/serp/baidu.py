@@ -5,7 +5,16 @@ from typing import Optional, Dict, Any
 
 
 class Baidu(BaiduBase):
-    def __init__(self, client):
+    def __init__(self, client: Serp):
+        """
+        Initializes a Baidu object.
+
+        Args:
+            client (Serp): An instance of the Serp class.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of the Serp class.
+        """
         if not isinstance(client, Serp):
             raise TypeError("Baidu requires a Serp instance")
         self.client = client
@@ -75,6 +84,15 @@ class Baidu(BaiduBase):
 
 class BaiduAsync(BaiduBase):
     def __init__(self, client):
+        """
+        Initializes a BaiduAsync object.
+
+        Args:
+            client (SerpAsync): An instance of SerpAsync.
+
+        Raises:
+            TypeError: If the client is not an instance of SerpAsync.
+        """
         if not isinstance(client, SerpAsync):
             raise TypeError("BaiduAsync requires a SerpAsync instance")
         self.client = client

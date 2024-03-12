@@ -10,7 +10,6 @@ class Universal(UniversalBase):
             raise TypeError("Universal requires an Ecommerce instance")
         self.client = client
 
-
     def scrape_universal_url(
         self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
     ) -> Dict[str, Any]:
@@ -28,7 +27,7 @@ class Universal(UniversalBase):
                     "content_encoding": "base64",
                     "context": None,
                     "callback_url": None,
-                    "parse": False,
+                    "parse": None,
                     "parser_type": None,
                     "parsing_instructions": None,
                 }
@@ -52,7 +51,11 @@ class UniversalAsync(UniversalBase):
         self.client = client
 
     async def scrape_universal_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None, poll_interval: int = None
+        self,
+        url: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: int = None,
+        poll_interval: int = None,
     ) -> Dict[str, Any]:
         """
         Asynchronously scrapes Universal search results for a given URL.
@@ -68,7 +71,7 @@ class UniversalAsync(UniversalBase):
                     "content_encoding": "base64",
                     "context": None,
                     "callback_url": None,
-                    "parse": False,
+                    "parse": None,
                     "parser_type": None,
                     "parsing_instructions": None,
                 }
