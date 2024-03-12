@@ -42,32 +42,21 @@ pip install oxylabs
 ### Quick Start
 
 ```python
-package main
+from oxylabs import Serp
+from oxylabs.serp import Bing
 
-import (
-	"fmt"
+# Set your Oxylabs API Credentials.
+username = "username"
+password = "password"
 
-	"github.com/mslmio/oxylabs-sdk-go/serp"
-)
+# Initialize the SERP realtime client with your credentials.
+serp_client = Serp(username, password)
+bing = Bing(serp_client)
 
-func main() {
-	// Set your Oxylabs API Credentials.
-	const username = "username"
-	const password = "password"
+# Use `bing_search` as a source to scrape Bing with nike as a query.
+result = bing.scrape_bing_search("nike")
 
-	// Initialize the SERP realtime client with your credentials.
-	c := serp.Init(username, password)
-
-	// Use `google_search` as a source to scrape Google with adidas as a query.
-	res, err := c.ScrapeGoogleSearch(
-		"adidas",
-	)
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Printf("Results: %+v\n", res)
-}
+print(result)
 ```
 
 ### Integration Methods
