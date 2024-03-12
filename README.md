@@ -63,9 +63,9 @@ print(result)
 
 There are three integration method for the Oxylabs SERP API, each exposed via different packages:
 
-- Realtime (Sync) - `serp.Init(username, password)`
-- Push-Pull (Async) - `serp.InitAsync(username, password)`
-- Proxy Endpoint - `proxy.Init(username, password)`
+- Realtime (Sync) - `Serp(username, password)`
+- Push-Pull (Async) - `SerpAsync(username, password)`
+- Proxy Endpoint - `Proxy(username, password)`
 
 Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods) and how this SDK uses them [here](#integration-methods-1).
 
@@ -86,8 +86,10 @@ In the SDK you'll just need to call the relevant function name from the client.
 
 For example if you wish to scrape Yandex with `yandex_search` as a source:
 
-```go
-res, err := c.ScrapeYandexSearch("football")
+```python
+serp_client = Serp(username, password)
+yandex = Yandex(serp_client)
+result = yandex.scrape_yandex_search("football")
 ```
 
 ### Query Parameters
@@ -96,16 +98,16 @@ Each source has different accepted query parameters. For a detailed list of acce
 
 By default, scrape functions will use default parameters. If you need to send specific query parameters, here is an example of how to do it:
 
-```go
-res, err := c.ScrapeYandexSearch(
+```python
+result = yandex.scrape_yandex_search(
 	"football",
-	&serp.YandexSearchOpts{
-		StartPage: 1,
-		Pages:     3,
-		Limit:     4,
-		Domain:    "com",
-		Locale:    "en",
-	},
+	{
+		"start_page": 1,
+		"pages":      3,
+		"limit":      4,
+		"domain":     "com",
+		"locale":     "en",
+	}
 )
 ```
 
