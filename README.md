@@ -1,10 +1,10 @@
 # Oxylabs Python SDK
 
-This is a Go SDK for the [Oxylabs](https://oxylabs.io) [Scraper APIs](https://developers.oxylabs.io/scraper-apis/getting-started).
+This is a Python SDK for the [Oxylabs](https://oxylabs.io) [Scraper APIs](https://developers.oxylabs.io/scraper-apis/getting-started).
 
 This will help simplify integrating with Oxylabs's APIs, which can help you with retrieving search engine results (SERP), eCommerce data, real estate data, and more.
 
-The Go SDK provides you with several benefits over using the raw APIs directly:
+The Python SDK provides you with several benefits over using the raw APIs directly:
 
 - **Simplified Interface**: abstracts away complexities, offering a straightforward user interface for interacting with the Oxylabs SERP API.
 - **Automated Request Management**: streamlines the handling of API requests and responses for enhanced efficiency and reliability.
@@ -13,15 +13,21 @@ The Go SDK provides you with several benefits over using the raw APIs directly:
 
 ## Requirements
 
-- Go 1.21.0 or above.
+- Python 3.5 or above.
 
-You can check your go version by running the following command in your preferred terminal:
+You can check your Python version by running the following command in your preferred terminal:
 
 ```sh
-go version
-``` 
+python --version
+```
 
-If you need to install or update go you can do so by following the steps mentioned [here](https://go.dev/doc/install).
+Or, for systems with multiple Python versions installed:
+
+```sh
+python3 --version
+```
+
+If you need to install or update python you can do so by following the steps mentioned [here](https://www.python.org/downloads/).
 
 ## Authentication
 
@@ -30,26 +36,12 @@ You will need an Oxylabs API username and password which you can get by signing 
 ## Installation
 
 ```bash
-go get github.com/mslmio/oxylabs-sdk-go
-```
-
-## Usage
-
-Start a local Go project if you don't have one:
-
-```bash
-go mod init
-```
-
-Install the package:
-
-```bash
-go get github.com/mslmio/oxylabs-sdk-go
+pip install oxylabs
 ```
 
 ### Quick Start
 
-```go
+```python
 package main
 
 import (
