@@ -13,6 +13,7 @@ from utils.defaults import (
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 from utils.constants import Domain, Source
 import utils.utils as utils
+from typing import Optional, Any
 
 BingSearchAcceptedDomainParameters = [
     Domain.DOMAIN_COM.value,
@@ -31,12 +32,25 @@ class BingSearchOpts(BaseSearchOpts):
 
     def __init__(
         self,
-        locale=None,
-        geo_location=None,
-        render=None,
-        parse=None,
-        **kwargs,
-    ):
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        render: Optional[bool] = None,
+        parse: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        """
+        Initialize a new instance of the BingBase class.
+
+        Args:
+            locale (str): The locale to be used for the search results. Defaults to None.
+            geo_location (str): The geo location to be used for the search results. Defaults to None.
+            render (bool): Whether to render JavaScript on the page. Defaults to None.
+            parse (bool): Whether to parse the search results. Defaults to None.
+            **kwargs: Additional keyword arguments.
+
+        Returns:
+            None
+        """
         super().__init__(
             **kwargs,
         )
@@ -65,11 +79,21 @@ class BingUrlOpts(BaseUrlOpts):
 
     def __init__(
         self,
-        geo_location=None,
-        render=None,
-        parse=None,
-        **kwargs,
-    ):
+        geo_location: Optional[str] = None,
+        render: Optional[bool] = None,
+        parse: Optional[bool] = None,
+        **kwargs: Any,
+    ) -> None:
+        """
+        Initializes a new instance of the BingBase class.
+
+        Args:
+            geo_location (str): The geographic location for the search.
+            render (bool): Indicates whether to render JavaScript on the page.
+            parse (bool): Indicates whether to parse the search results.
+            **kwargs: Additional keyword arguments.
+
+        """
         super().__init__(**kwargs)
         self.geo_location = geo_location
         self.render = render
@@ -85,7 +109,18 @@ class BingUrlOpts(BaseUrlOpts):
 
 
 class BingBase:
-    def _prepare_search_payload(self, query, opts):
+    def _prepare_search_payload(self, query: str, opts: Optional[dict]) -> dict:
+        """
+        Prepares the search payload for the Bing search.
+
+        Args:
+            query (str): The search query.
+            opts (dict): The search options.
+
+        Returns:
+            dict: The prepared search payload.
+
+        """
         opts = BingSearchOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -117,7 +152,17 @@ class BingBase:
 
         return payload
 
-    def _prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url: str, opts: Optional[dict]) -> dict:
+        """
+        Prepares the payload for a Bing URL request.
+
+        Args:
+            url (str): The URL to be queried.
+            opts (dict): Optional parameters for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
         validate_url(url, "bing")
         opts = BingUrlOpts(**opts if opts is not None else {})
 

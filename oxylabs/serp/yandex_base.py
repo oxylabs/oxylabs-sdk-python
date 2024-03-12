@@ -40,10 +40,19 @@ YandexSearchAcceptedLocaleParameters = [
 class YandexSearchOpts(BaseSearchOpts):
     def __init__(
         self,
-        locale=None,
-        geo_location=None,
+        locale: str = None,
+        geo_location: str = None,
         **kwargs,
     ):
+        """
+        Initialize a YandexBase object.
+
+        Args:
+            locale (str, optional): The locale to be used for the Yandex search. Defaults to None.
+            geo_location (str, optional): The geo location to be used for the Yandex search. Defaults to None.
+            **kwargs: Additional keyword arguments to be passed to the parent class.
+
+        """
         super().__init__(
             **kwargs,
         )
@@ -81,7 +90,17 @@ class YandexUrlOpts(BaseUrlOpts):
 
 
 class YandexBase:
-    def _prepare_search_payload(self, query, opts):
+    def _prepare_search_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepare the search payload for Yandex search.
+
+        Args:
+            query (str): The search query.
+            opts (dict): The options for the search.
+
+        Returns:
+            dict: The prepared search payload.
+        """
         opts = YandexSearchOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -111,7 +130,17 @@ class YandexBase:
 
         return payload
 
-    def _prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url: str, opts: dict) -> dict:
+        """
+        Prepare the payload for a Yandex URL request.
+
+        Args:
+            url (str): The URL to be queried.
+            opts (dict): Optional parameters for the Yandex URL request.
+
+        Returns:
+            dict: The prepared payload for the Yandex URL request.
+        """
         validate_url(url, "yandex")
         opts = YandexUrlOpts(**opts if opts is not None else {})
 

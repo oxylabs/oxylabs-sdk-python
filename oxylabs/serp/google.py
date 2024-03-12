@@ -5,7 +5,16 @@ from typing import Optional, Dict, Any
 
 
 class Google(GoogleBase):
-    def __init__(self, client):
+    def __init__(self, client: Serp):
+        """
+        Initializes a Google object.
+
+        Args:
+            client (Serp): The Serp instance to be used for Google requests.
+
+        Raises:
+            TypeError: If the client is not an instance of Serp.
+        """
         if not isinstance(client, Serp):
             raise TypeError("Google requires a Serp instance")
         self.client = client
@@ -294,7 +303,16 @@ class Google(GoogleBase):
 
 
 class GoogleAsync(GoogleBase):
-    def __init__(self, client):
+    def __init__(self, client: SerpAsync):
+        """
+        Initializes a GoogleAsync instance.
+
+        Args:
+            client (SerpAsync): An instance of SerpAsync.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of SerpAsync.
+        """
         if not isinstance(client, SerpAsync):
             raise TypeError("GoogleAsync requires a SerpAsync instance")
         self.client = client

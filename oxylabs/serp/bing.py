@@ -5,7 +5,16 @@ from utils.utils import prepare_config
 
 
 class Bing(BingBase):
-    def __init__(self, client):
+    def __init__(self, client: Serp) -> None:
+        """
+        Initializes a Bing object.
+
+        Args:
+            client (Serp): An instance of the Serp class.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of the Serp class.
+        """
         if not isinstance(client, Serp):
             raise TypeError("Bing requires a Serp instance")
         self.client = client
@@ -80,7 +89,16 @@ class Bing(BingBase):
 
 
 class BingAsync(BingBase):
-    def __init__(self, client):
+    def __init__(self, client: SerpAsync) -> None:
+        """
+        Initializes a new instance of the BingAsync class.
+
+        Args:
+            client (SerpAsync): An instance of the SerpAsync class.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of SerpAsync.
+        """
         if not isinstance(client, SerpAsync):
             raise TypeError("BingAsync requires a SerpAsync instance")
         self.client = client

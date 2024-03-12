@@ -5,7 +5,16 @@ from typing import Optional, Dict, Any
 
 
 class Yandex(YandexBase):
-    def __init__(self, client):
+    def __init__(self, client: Serp):
+        """
+        Initializes a Yandex instance.
+
+        Args:
+            client (Serp): The Serp instance to be used for Yandex requests.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of Serp.
+        """
         if not isinstance(client, Serp):
             raise TypeError("Yandex requires a Serp instance")
         self.client = client
@@ -79,7 +88,16 @@ class Yandex(YandexBase):
 
 
 class YandexAsync(YandexBase):
-    def __init__(self, client):
+    def __init__(self, client: SerpAsync):
+        """
+        Initializes a YandexAsync instance.
+
+        Args:
+            client (SerpAsync): The SerpAsync instance to be used for making requests.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of SerpAsync.
+        """
         if not isinstance(client, SerpAsync):
             raise TypeError("YandexAsync requires a SerpAsync instance")
         self.client = client

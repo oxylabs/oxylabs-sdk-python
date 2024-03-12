@@ -47,7 +47,17 @@ class BaiduUrlOpts(BaseUrlOpts):
 
 
 class BaiduBase:
-    def _prepare_search_payload(self, query, opts):
+    def _prepare_search_payload(self, query: str, opts: dict) -> dict:
+        """
+        Prepares the search payload for Baidu search.
+
+        Args:
+            query (str): The search query.
+            opts (dict): The search options.
+
+        Returns:
+            dict: The prepared search payload.
+        """
         opts = BaiduSearchOpts(**opts if opts is not None else {})
 
         # Set defaults and check validity
@@ -75,7 +85,17 @@ class BaiduBase:
 
         return payload
 
-    def _prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url: str, opts: dict) -> dict:
+        """
+        Prepares the payload for a Baidu URL request.
+
+        Args:
+            url (str): The URL to be requested.
+            opts (dict): Optional parameters for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
         validate_url(url, "baidu")
         opts = BaiduUrlOpts(**opts if opts is not None else {})
 
