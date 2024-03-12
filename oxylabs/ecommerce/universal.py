@@ -1,6 +1,6 @@
-from ecommerce.universal_base import UniversalBase
+from .universal_base import UniversalBase
 from typing import Optional, Dict, Any
-from ecommerce.ecommerce import Ecommerce, EcommerceAsync
+from .ecommerce import Ecommerce, EcommerceAsync
 from utils.utils import prepare_config
 
 
@@ -30,7 +30,7 @@ class Universal(UniversalBase):
                     "callback_url": None,
                     "parse": False,
                     "parser_type": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -70,7 +70,7 @@ class UniversalAsync(UniversalBase):
                     "callback_url": None,
                     "parse": False,
                     "parser_type": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.

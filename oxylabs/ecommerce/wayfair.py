@@ -1,45 +1,38 @@
-from serp.yandex_base import YandexBase
-from serp.serp import Serp, SerpAsync
-from utils.utils import prepare_config
+from .wayfair_base import WayfairBase
 from typing import Optional, Dict, Any
+from .ecommerce import Ecommerce, EcommerceAsync
+from utils.utils import prepare_config
 
 
-class Yandex(YandexBase):
+class Wayfair(WayfairBase):
     def __init__(self, client):
-        if not isinstance(client, Serp):
-            raise TypeError("Yandex requires a Serp instance")
+        if not isinstance(client, Ecommerce):
+            raise TypeError("Wayfair requires a Ecommerce instance")
         self.client = client
 
-    def scrape_yandex_search(
+    def scrape_wayfair_search(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes the search results from Yandex.
+        Scrapes Wayfair search results for a given query.
 
         Args:
             query (str): The search query.
             opts (dict, optional): Configuration options for the search. Defaults to:
-
                 {
-                    "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "limit": 10,
+                    "limit": 48,
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "locale": None,
-                    "geo_location": None,
-                    "parse": None,
                 }
                 This parameter allows customization of the search request.
-
-            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
 
         Returns:
-
             dict: The response from the server after the job is completed.
         """
 
@@ -48,23 +41,21 @@ class Yandex(YandexBase):
         response = self.client.get_resp(payload, config)
         return response
 
-    def scrape_yandex_url(
+    def scrape_wayfair_url(
         self,
         url: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Yandex search results for a given URL.
+        Scrapes Wayfair search results for a given URL.
 
         Args:
             url (str): The URL to be scraped.
-            opts (YandexUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (WayfairUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "render": None,
-                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -79,13 +70,13 @@ class Yandex(YandexBase):
         return response
 
 
-class YandexAsync(YandexBase):
+class WayfairAsync(WayfairBase):
     def __init__(self, client):
-        if not isinstance(client, SerpAsync):
-            raise TypeError("YandexAsync requires a SerpAsync instance")
+        if not isinstance(client, EcommerceAsync):
+            raise TypeError("WayfairAsync requires a EcommerceAsync instance")
         self.client = client
 
-    async def scrape_yandex_search(
+    async def scrape_wayfair_search(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -93,30 +84,23 @@ class YandexAsync(YandexBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes the search results from Yandex.
+        Asynchronously scrapes Wayfair search results for a given query.
 
         Args:
             query (str): The search query.
             opts (dict, optional): Configuration options for the search. Defaults to:
-
                 {
-                    "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "limit": 10,
+                    "limit": 48,
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "locale": None,
-                    "geo_location": None,
-                    "parse": None,
                 }
                 This parameter allows customization of the search request.
-
-            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int, optional): The interval in seconds for the request to poll the server for the job completion status. Defaults to 2.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            poll_interval (int | 2, optional): The interval in seconds between status checks for the asynchronous job. Defaults to 2.
 
         Returns:
-
             dict: The response from the server after the job is completed.
         """
 
@@ -125,7 +109,7 @@ class YandexAsync(YandexBase):
         response = await self.client.get_resp(payload, config)
         return response
 
-    async def scrape_yandex_url(
+    async def scrape_wayfair_url(
         self,
         url: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -133,20 +117,21 @@ class YandexAsync(YandexBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes Yandex search results for a given URL.
+        Asynchronously scrapes Wayfair search results for a given URL.
 
         Args:
             url (str): The URL to be scraped.
-            opts (YandexUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (WayfairUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
+                    "geo_location": None,
                     "callback_url": None,
                     "render": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
+            poll_interval (int | 2, optional): The interval in seconds between status checks for the asynchronous job. Defaults to 2.
 
         Returns:
             dict: The response from the server after the job is completed.

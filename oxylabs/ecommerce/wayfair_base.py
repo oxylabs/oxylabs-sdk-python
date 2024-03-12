@@ -27,14 +27,14 @@ class WayfairSearchOpts:
         limit=DEFAULT_LIMIT_ECOMMERCE,
         user_agent_type=DEFAULT_USER_AGENT,
         callback_url=None,
-        parse_instructions=None,
+        parsing_instructions=None,
     ):
         self.start_page = start_page
         self.pages = pages
         self.limit = limit
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
-        self.parse_instructions = parse_instructions
+        self.parsing_instructions = parsing_instructions
 
     def check_parameter_validity(self):
         """
@@ -88,8 +88,8 @@ class WayfairBase:
             "callback_url": opts.callback_url,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload

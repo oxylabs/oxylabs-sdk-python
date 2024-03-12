@@ -1,5 +1,5 @@
-from serp.baidu_base import BaiduBase
-from serp.serp import Serp, SerpAsync
+from .baidu_base import BaiduBase
+from .serp import Serp, SerpAsync
 from utils.utils import prepare_config
 from typing import Optional, Dict, Any
 

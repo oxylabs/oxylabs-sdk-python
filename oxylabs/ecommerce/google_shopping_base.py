@@ -154,8 +154,8 @@ class GoogleShoppingBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -178,8 +178,8 @@ class GoogleShoppingBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -205,8 +205,8 @@ class GoogleShoppingBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload
@@ -236,8 +236,8 @@ class GoogleShoppingBase:
             "parse": opts.parse,
         }
 
-        if opts.parse_instructions is not None:
-            payload["parsing_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions is not None:
+            payload["parsing_instructions"] = opts.parsing_instructions
             payload["parse"] = True
 
         return payload

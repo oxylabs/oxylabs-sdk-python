@@ -1,44 +1,42 @@
-from utils.utils import prepare_config
-from serp.google_base import GoogleBase
-from serp.serp import Serp, SerpAsync
+from .amazon_base import AmazonBase
 from typing import Optional, Dict, Any
+from .ecommerce import Ecommerce, EcommerceAsync
+from utils.utils import prepare_config
 
 
-class Google(GoogleBase):
+class Amazon(AmazonBase):
     def __init__(self, client):
-        if not isinstance(client, Serp):
-            raise TypeError("Google requires a Serp instance")
+        if not isinstance(client, Ecommerce):
+            raise TypeError("Amazon requires an Ecommerce instance")
         self.client = client
 
-    def scrape_google_search(
+    def scrape_amazon_search(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google search results for a given query.
+        Scrapes Amazon search results for a given query.
 
         Args:
-
             query (str): The search query.
-            opts (GoogleSearchOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": "com",
+                    "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "limit": 10,
-                    "user_agent_type": "desktop",
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "render": "None",
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
 
         Returns:
@@ -50,24 +48,28 @@ class Google(GoogleBase):
         response = self.client.get_resp(payload, config)
         return response
 
-    def scrape_google_url(
+    def scrape_amazon_url(
         self,
         url: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google search results for a given URL.
+        Scrapes Amazon search results for a given URL.
 
         Args:
-            url (str): The URL to be scraped.
-            opts (GoogleUrlOpts, optional): Configuration options for the search. Defaults to:
+            url (str): The URL to scrape.
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
+                    "domain": com,
+                    "locale": None,
+                    "results_language": None,
+                    "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
-                    "geo_location": None,
                     "parse": None,
+                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -82,27 +84,26 @@ class Google(GoogleBase):
         response = self.client.get_resp(payload, config)
         return response
 
-    def scrape_google_ads(
+    def scrape_amazon_product(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google Ads search results for a given query.
+        Scrapes Amazon product details for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleAdsOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": "com",
-                    "start_page": 1,
-                    "pages": 1,
-                    "user_agent_type": "desktop",
+                    "domain": com,
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "render": "None",
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
@@ -115,66 +116,30 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_ads_payload(query, opts)
+        payload = self._prepare_product_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
-    def scrape_google_suggestions(
+    def scrape_amazon_pricing(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google suggestions for a given query.
+        Scrapes Amazon pricing details for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleSuggestionsOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
+                    "domain": com,
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "user_agent_type": "desktop",
-                    "render": "html",
+                    "user_agent_type": desktop,
                     "callback_url": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
-
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-
-        Returns:
-            dict: The response from the server after the job is completed.
-        """
-
-        config = prepare_config(timeout=timeout)
-        payload = self._prepare_suggestions_payload(query, opts)
-        response = self.client.get_resp(payload, config)
-        return response
-
-    def scrape_google_hotels(
-        self,
-        query: str,
-        opts: Optional[Dict[str, Any]] = None,
-        timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
-        """
-        Scrapes Google Hotels search results for a given query.
-
-        Args:
-            query (str): The search query.
-            opts (GoogleHotelsOpts, optional): Configuration options for the search. Defaults to:
-                {
-                    "domain": "com",
-                    "start_page": 1,
-                    "pages": 1,
-                    "limit": 10,
-                    "user_agent_type": "desktop",
-                    "locale": None,
-                    "geo_location": None,
-                    "render": "html",
-                    "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
@@ -187,73 +152,37 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_hotels_payload(query, opts)
+        payload = self._prepare_pricing_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
-    def scrape_google_travel_hotels(
+    def scrape_amazon_reviews(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google Travel Hotels search results for a given query.
+        Scrapes Amazon reviews for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
-                {
-                    "domain": None,
-                    "start_page": None,
-                    "locale": None,
-                    "geo_location": None,
-                    "user_agent_type": "desktop",
-                    "render": "html",
-                    "callback_url": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-
-        Returns:
-            dict: The response from the server after the job is completed.
-        """
-
-        config = prepare_config(timeout=timeout)
-        payload = self._prepare_travel_hotels_payload(query, opts)
-        response = self.client.get_resp(payload, config)
-        return response
-
-    def scrape_google_images(
-        self,
-        query: str,
-        opts: Optional[Dict[str, Any]] = None,
-        timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
-        """
-        Scrapes Google Images search results for a given query.
-
-        Args:
-            query (str): The search query.
-            opts (GoogleImagesOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "user_agent_type": "desktop",
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "render": None,
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
 
         Returns:
@@ -261,26 +190,34 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_images_payload(query, opts)
+        payload = self._prepare_reviews_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
-    def scrape_google_trends_explore(
+    def scrape_amazon_questions(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google Trends Explore results for a given query.
+        Scrapes Amazon questions for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleTrendsExploreOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
-                    "user_agent_type": "desktop",
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "locale": None,
+                    "results_language": None,
                     "geo_location": None,
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
+                    "parse": None,
+                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -291,18 +228,92 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_trends_explore_payload(query, opts)
+        payload = self._prepare_questions_payload(query, opts)
+        response = self.client.get_resp(payload, config)
+        return response
+
+    def scrape_amazon_bestsellers(
+        self,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Scrapes Amazon bestsellers.
+
+        Args:
+            opts (dict, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "locale": None,
+                    "results_language": None,
+                    "geo_location": None,
+                    "user_agent_type": desktop,
+                    "callback_url": None,
+                    "render": None,
+                    "parse": None,
+                    "context": None,
+                    "parsing_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(timeout=timeout)
+        payload = self._prepare_bestseller_payload(opts)
+        response = self.client.get_resp(payload, config)
+        return response
+
+    def scrape_amazon_sellers(
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Scrapes Amazon sellers for a given query.
+
+        Args:
+            query (str): The search query.
+            opts (dict, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "locale": None,
+                    "results_language": None,
+                    "geo_location": None,
+                    "user_agent_type": desktop,
+                    "callback_url": None,
+                    "render": None,
+                    "parse": None,
+                    "context": None,
+                    "parsing_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(timeout=timeout)
+        payload = self._prepare_seller_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
 
-class GoogleAsync(GoogleBase):
+class AmazonAsync(AmazonBase):
     def __init__(self, client):
-        if not isinstance(client, SerpAsync):
-            raise TypeError("GoogleAsync requires a SerpAsync instance")
+        if not isinstance(client, EcommerceAsync):
+            raise TypeError("AmazonAsync requires an EcommerceAsync instance")
         self.client = client
 
-    async def scrape_google_search(
+    async def scrape_amazon_search(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -310,30 +321,28 @@ class GoogleAsync(GoogleBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes Google search results for a given query.
+        Scrapes Amazon search results for a given query.
 
         Args:
-
             query (str): The search query.
-            opts (GoogleSearchOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": "com",
+                    "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "limit": 10,
-                    "user_agent_type": "desktop",
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "render": "None",
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -344,7 +353,7 @@ class GoogleAsync(GoogleBase):
         response = await self.client.get_resp(payload, config)
         return response
 
-    async def scrape_google_url(
+    async def scrape_amazon_url(
         self,
         url: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -352,22 +361,26 @@ class GoogleAsync(GoogleBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes Google search results for a given URL.
+        Scrapes Amazon search results for a given URL.
 
         Args:
-            url (str): The URL to be scraped.
-            opts (GoogleUrlOpts, optional): Configuration options for the search. Defaults to:
+            url (str): The URL to scrape.
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
+                    "domain": com,
+                    "locale": None,
+                    "results_language": None,
+                    "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
-                    "geo_location": None,
                     "parse": None,
+                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -378,7 +391,7 @@ class GoogleAsync(GoogleBase):
         response = await self.client.get_resp(payload, config)
         return response
 
-    async def scrape_google_ads(
+    async def scrape_amazon_product(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -386,38 +399,37 @@ class GoogleAsync(GoogleBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes Google Ads search results for a given query.
+        Scrapes Amazon product details for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleAdsOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": "com",
-                    "start_page": 1,
-                    "pages": 1,
-                    "user_agent_type": "desktop",
+                    "domain": com,
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "render": "None",
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
 
         Returns:
             dict: The response from the server after the job is completed.
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_ads_payload(query, opts)
+        payload = self._prepare_product_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
-    async def scrape_google_suggestions(
+    async def scrape_amazon_pricing(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -425,75 +437,37 @@ class GoogleAsync(GoogleBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes Google suggestions for a given query.
+        Scrapes Amazon pricing details for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleSuggestionsOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
+                    "domain": com,
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "user_agent_type": "desktop",
-                    "render": "html",
+                    "user_agent_type": desktop,
                     "callback_url": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
-
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
-
-        Returns:
-            dict: The response from the server after the job is completed.
-        """
-
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_suggestions_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
-        return response
-
-    async def scrape_google_hotels(
-        self,
-        query: str,
-        opts: Optional[Dict[str, Any]] = None,
-        timeout: Optional[int] = None,
-        poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
-        """
-        Asynchronously scrapes Google Hotels search results for a given query.
-
-        Args:
-            query (str): The search query.
-            opts (GoogleHotelsOpts, optional): Configuration options for the search. Defaults to:
-                {
-                    "domain": "com",
-                    "start_page": 1,
-                    "pages": 1,
-                    "limit": 10,
-                    "user_agent_type": "desktop",
-                    "locale": None,
-                    "geo_location": None,
-                    "render": "html",
-                    "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
 
         Returns:
             dict: The response from the server after the job is completed.
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_hotels_payload(query, opts)
+        payload = self._prepare_pricing_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
-    async def scrape_google_travel_hotels(
+    async def scrape_amazon_reviews(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -501,77 +475,39 @@ class GoogleAsync(GoogleBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes Google Travel Hotels search results for a given query.
+        Scrapes Amazon reviews for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
-                {
-                    "domain": None,
-                    "start_page": None,
-                    "locale": None,
-                    "geo_location": None,
-                    "user_agent_type": "desktop",
-                    "render": "html",
-                    "callback_url": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
-
-        Returns:
-            dict: The response from the server after the job is completed.
-        """
-
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_travel_hotels_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
-        return response
-
-    async def scrape_google_images(
-        self,
-        query: str,
-        opts: Optional[Dict[str, Any]] = None,
-        timeout: Optional[int] = None,
-        poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
-        """
-        Asynchronously scrapes Google Images search results for a given query.
-
-        Args:
-            query (str): The search query.
-            opts (GoogleImagesOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "user_agent_type": "desktop",
                     "locale": None,
+                    "results_language": None,
                     "geo_location": None,
-                    "render": None,
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
                     "parse": None,
                     "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
 
         Returns:
             dict: The response from the server after the job is completed.
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_images_payload(query, opts)
+        payload = self._prepare_reviews_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
-    async def scrape_google_trends_explore(
+    async def scrape_amazon_questions(
         self,
         query: str,
         opts: Optional[Dict[str, Any]] = None,
@@ -579,26 +515,113 @@ class GoogleAsync(GoogleBase):
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Asynchronously scrapes Google Trends Explore results for a given query.
+        Scrapes Amazon questions for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleTrendsExploreOpts, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. Defaults to:
                 {
-                    "user_agent_type": "desktop",
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "locale": None,
+                    "results_language": None,
                     "geo_location": None,
+                    "user_agent_type": desktop,
                     "callback_url": None,
+                    "render": None,
+                    "parse": None,
+                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for the job status. Defaults to 2.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
 
         Returns:
             dict: The response from the server after the job is completed.
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_trends_explore_payload(query, opts)
+        payload = self._prepare_questions_payload(query, opts)
+        response = await self.client.get_resp(payload, config)
+        return response
+
+    async def scrape_amazon_bestsellers(
+        self,
+        query,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Scrapes Amazon bestsellers.
+
+        Args:
+            opts (dict, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "locale": None,
+                    "results_language": None,
+                    "geo_location": None,
+                    "user_agent_type": desktop,
+                    "callback_url": None,
+                    "render": None,
+                    "parse": None,
+                    "context": None,
+                    "parsing_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        payload = self._prepare_bestseller_payload(query,opts)
+        response = await self.client.get_resp(payload, config)
+        return response
+
+    async def scrape_amazon_sellers(
+        self,
+        query: str,
+        opts: Optional[Dict[str, Any]] = None,
+        timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        """
+        Scrapes Amazon sellers for a given query.
+
+        Args:
+            query (str): The search query.
+            opts (dict, optional): Configuration options for the search. Defaults to:
+                {
+                    "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
+                    "locale": None,
+                    "results_language": None,
+                    "geo_location": None,
+                    "user_agent_type": desktop,
+                    "callback_url": None,
+                    "render": None,
+                    "parse": None,
+                    "context": None,
+                    "parsing_instructions": None,
+                }
+                This parameter allows customization of the search request.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            poll_interval (int | 2, optional): The interval in seconds to poll the server for a response. Defaults to 2
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        payload = self._prepare_seller_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response

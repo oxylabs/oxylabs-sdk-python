@@ -1,6 +1,6 @@
-from serp.bing_base import BingBase
+from .bing_base import BingBase
 from typing import Optional, Dict, Any
-from serp.serp import Serp, SerpAsync
+from .serp import Serp, SerpAsync
 from utils.utils import prepare_config
 
 

@@ -76,12 +76,12 @@ class BaseEcommerceOpts:
         callback_url=None,
         geo_location=None,
         parse=False,
-        parse_instructions=None,
+        parsing_instructions=None,
     ):
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
         self.parse = parse
-        self.parse_instructions = parse_instructions
+        self.parsing_instructions = parsing_instructions
         self.render = render
         self.geo_location = geo_location
 

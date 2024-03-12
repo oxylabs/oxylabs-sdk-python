@@ -1,6 +1,6 @@
-from ecommerce.google_shopping_base import GoogleShoppingBase
+from .google_shopping_base import GoogleShoppingBase
 from typing import Optional, Dict, Any
-from ecommerce.ecommerce import Ecommerce, EcommerceAsync
+from .ecommerce import Ecommerce, EcommerceAsync
 from utils.utils import prepare_config
 
 
@@ -34,7 +34,7 @@ class GoogleShopping(GoogleShoppingBase):
                     "render": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -66,7 +66,7 @@ class GoogleShopping(GoogleShoppingBase):
                     "callback_url": None,
                     "geo_location": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
         Returns:
             dict: The response from the server after the job is completed.
@@ -98,7 +98,7 @@ class GoogleShopping(GoogleShoppingBase):
                     "render": None,
                     "callback_url": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
         Returns:
             dict: The response from the server after the job is completed.
@@ -130,7 +130,7 @@ class GoogleShopping(GoogleShoppingBase):
                     "render": None,
                     "callback_url": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
         Returns:
             dict: The response from the server after the job is completed.
@@ -173,7 +173,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "render": None,
                     "parse": None,
                     "context": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -207,7 +207,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "callback_url": None,
                     "geo_location": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
                 timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
                 poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
@@ -242,7 +242,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "render": None,
                     "callback_url": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
             poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
@@ -277,7 +277,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "render": None,
                     "callback_url": None,
                     "parse": None,
-                    "parse_instructions": None,
+                    "parsing_instructions": None,
                 }
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
             poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.

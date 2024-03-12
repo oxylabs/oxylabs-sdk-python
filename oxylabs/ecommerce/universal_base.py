@@ -67,9 +67,9 @@ class UniversalBase:
             "parser_type": opts.parser_type,
         }
 
-        payload["parse"] = bool(opts.parse_instructions or opts.parser_type)
+        payload["parse"] = bool(opts.parsing_instructions or opts.parser_type)
 
-        if opts.parse_instructions:
-            payload["parse_instructions"] = opts.parse_instructions
+        if opts.parsing_instructions:
+            payload["parsing_instructions"] = opts.parsing_instructions
 
         return payload
