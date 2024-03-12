@@ -157,58 +157,34 @@ res, err := c.ScrapeGoogleSearch(
 
 ### Parse instructions
 
-SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser). 
-There are 2 ways to provide `parsing_instructions` `_fns`:
+SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser):
 
-```go
-package main
+```python
+from oxylabs import Serp
+from oxylabs.serp import Bing
 
-import (
-	"fmt"
-	"github.com/mslmio/oxylabs-sdk-go/ecommerce"
-	"github.com/mslmio/oxylabs-sdk-go/oxylabs"
-)
+# Set your Oxylabs API Credentials.
+username = "username"
+password = "password"
 
-func main() {
-	const username = "username"
-	const password = "password"
+# Initialize the SERP realtime client with your credentials.
+serp_client = Serp(username, password)
+bing = Bing(serp_client)
 
-	// Initialize the SERP push-pull client with your credentials.
-	c := ecommerce.InitAsync(username, password)
-
-	ch, err := c.ScrapeUniversalUrl(
-		"https://example.com",
-		&ecommerce.UniversalUrlOpts{
-			Parse: true,
-			ParseInstructions: &map[string]interface{}{
-				"title": map[string]interface{}{
-					// Providing `_fns` as a map[string]interface{}.
-					"_fns": []map[string]interface{}{
-						{
-							"_fn":   oxylabs.Xpath,
-							"_args": []string{"//h1/text()"},
-						},
-					},
-				},
-				"second_paragraph": map[string]interface{}{
-					// Providing `_fns` as a `[]oxylabs.Fn`.
-					"_fns": []oxylabs.Fn{
-						{
-							Name: oxylabs.Xpath,
-							Args: []string{"/html/body/div/p[2]"},
-						},
-					},
-				},
-			},
-		},
-	)
-	if err != nil {
-		fmt.Println(err)
-		return
+# Use `bing_search` as a source to scrape Bing using custom parsing instructions.
+result = bing.scrape_bing_url("https://www.bing.com/search?q=nike",{"parse": True, "parsing_instructions":
+	{
+		"number_of_results": {
+		"_fns": [
+			{
+				"_fn": "xpath_one",
+				"_args": [".//span[@class='sb_count']/text()"]
+			}
+		]
 	}
-	res := <-ch
-	fmt.Println(res)
-}
+	}})
+
+print(result)
 ```
 
 ## Integration Methods
@@ -225,37 +201,30 @@ Push-Pull is an asynchronous integration method. This SDK implements this integr
 
 Using it as straightforward as using the realtime integration. The only difference is that it will return a channel with the Response. Below is an example of this integration method:
 
-```go
-package main
+```python
+from oxylabs import SerpAsync
+from oxylabs.serp import BingAsync
 
-import (
-	"fmt"
+# Set your Oxylabs API Credentials.
+username = "username"
+password = "password"
 
-	"github.com/mslmio/oxylabs-sdk-go/oxylabs"
-	"github.com/mslmio/oxylabs-sdk-go/serp"
-)
+# Initialize the SERP async client with your credentials.
+serp_async_client = SerpAsync(username, password)
+bing = BingAsync(serp_async_client)
 
-func main() {
-	const username = "username"
-	const password = "password"
+# 'timeout' specifies the maximum time (in seconds) to wait for the scraping job to complete.
+# It is applicable for both realtime and push-pull integrations.
+# 'poll_interval' is used only in push-pull integrations to set the delay (in seconds) 
+# between consecutive status checks of the job.
+tasks = [
+        client.scrape_bing_url("https://www.bing.com/search?q=adidas",{"parse": True}, timeout=35, poll_interval=8),
+        client.scrape_bing_url("https://www.bing.com/search?q=puma",{"parse": True}, timeout=45, poll_interval=12),
+    ]
 
-	// Initialize the SERP push-pull client with your credentials.
-	c := serp.InitAsync(username, password)
-
-	ch, err := c.ScrapeGoogleAds(
-		"adidas shoes",
-		&serp.GoogleAdsOpts{
-			UserAgent: oxylabs.UA_DESKTOP,
-			Parse:     true,
-		},
-	)
-	if err != nil {
-		panic(err)
-	}
-
-	res := <-ch
-	fmt.Printf("Results: %+v\n", res)
-}
+for future in asyncio.as_completed(tasks):
+	result = await future 
+	print(result)
 ```
 
 ### Proxy Endpoint
@@ -265,44 +234,25 @@ This method is also synchronous (like Realtime), but instead of using our servic
 Since the parameters in this method are sent as as headers there are only a few parameters which this integration method accepts. You can find those parameters at
 https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods/proxy-endpoint#accepted-parameters.
 
-The proxy endpoint integration is very open ended allowing many different use cases. To cater this, the user is provided a pre-configured `http.Client` and they can use it as they deem fit:
+The proxy endpoint integration is very open ended allowing many different use cases:
 
-```go
-package main
+```python
+from oxylabs import Proxy
 
-import (
-	"fmt"
-	"io"
-	"net/http"
+# Set your Oxylabs API Credentials.
+username = "username"
+password = "password"
 
-	"github.com/mslmio/oxylabs-sdk-go/oxylabs"
-	"github.com/mslmio/oxylabs-sdk-go/proxy"
-)
+# Initialize the proxy client with your credentials.
+proxy = Proxy(username, password)
 
-func main() {
-	const username = "username"
-	const password = "password"
+proxy.add_user_agent_header("mobile_android")
+proxy.add_geo_location_header("Germany")
+proxy.add_render_header("html")
+proxy.add_parse_header("google")
+result = proxy.get("https://www.example.com")
 
-	// Init returns an http client pre configured with the proxy settings.
-	c, _ := proxy.Init(username, password)
-
-	request, _ := http.NewRequest(
-		"GET",
-		"https://www.example.com",
-		nil,
-	)
-
-	// Add relevant Headers.
-	proxy.AddUserAgentHeader(request, oxylabs.UA_DESKTOP)
-	proxy.AddRenderHeader(request, oxylabs.HTML)
-	proxy.AddParseHeader(request, "google_search")
-
-	request.SetBasicAuth(username, password)
-	response, _ := c.Do(request)
-
-	resp, _ := io.ReadAll(response.Body)
-	fmt.Println(string(resp))
-}
+print(result.text)
 ```
 
 ## Additional Resources

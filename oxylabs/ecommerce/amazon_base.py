@@ -6,10 +6,9 @@ from utils.defaults import (
     set_default_pages,
     set_default_start_page,
     set_default_user_agent,
-    set_default_sort_by,
 )
 from utils.utils import validate_url, BaseEcommerceOpts
-from utils.constants import Domain, Source
+from utils.constants import Source
 import utils.utils as utils
 
 
