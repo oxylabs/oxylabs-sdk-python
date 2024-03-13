@@ -1,6 +1,7 @@
-from utils.types import UserAgent, Render, FnName
 from urllib.parse import urlparse
 import aiohttp
+from utils import user_agent, render, fn_name, source, domain, locale
+
 from utils.defaults import (
     DEFAULT_LIMIT_SERP,
     DEFAULT_DOMAIN,
@@ -79,6 +80,18 @@ class BaseEcommerceOpts:
         self.geo_location = geo_location
 
 
+def get_valid_values(module):
+    return [getattr(module, name) for name in dir(module) if not name.startswith("__")]
+
+
+VALID_UAS = get_valid_values(user_agent)
+VALID_RENDERS = get_valid_values(render)
+VALID_FN_NAMES = get_valid_values(fn_name)
+VALID_SOURCES = get_valid_values(source)
+VALID_DOMAINS = get_valid_values(domain)
+VALID_LOCALES = get_valid_values(locale)
+
+
 def prepare_config(**kwargs):
     config = {}
     if "timeout" in kwargs:
@@ -118,12 +131,12 @@ def validate_url(input_url, host):
 
 
 def check_user_agent_validity(user_agent_type):
-    if not UserAgent.is_user_agent_valid(user_agent_type):
+    if user_agent_type and not user_agent_type in VALID_UAS:
         raise ValueError(f"Invalid user agent parameter: {user_agent_type}")
 
 
 def check_render_validity(render):
-    if render and not Render.is_render_valid(render):
+    if render and not render in VALID_RENDERS:
         raise ValueError(f"Invalid render parameter: {render}")
 
 
@@ -236,43 +249,43 @@ def validate_fn(fn):
         raise ValueError("Each item in _fns must be a dictionary")
     if "_fn" not in fn:
         raise ValueError("_fn must be set in each function")
-    if fn["_fn"] not in [e.value for e in FnName]:
+    if fn["_fn"] not in VALID_FN_NAMES:
         raise ValueError(f"_fn must be a valid function name, got {fn['_fn']}")
 
     # Delegate to specific argument validators
     validate_fn_args(fn["_fn"], fn.get("_args"))
 
 
-def validate_fn_args(fn_name, args):
+def validate_fn_args(function, args):
     # Map function name to validator function
     validators = {
-        FnName.ElementText.value: validate_empty,
-        FnName.Length.value: validate_empty,
-        FnName.ConvertToFloat.value: validate_empty,
-        FnName.ConvertToInt.value: validate_empty,
-        FnName.ConvertToStr.value: validate_empty,
-        FnName.Max.value: validate_empty,
-        FnName.Min.value: validate_empty,
-        FnName.Product.value: validate_empty,
-        FnName.Xpath.value: validate_string_array,
-        FnName.XpathOne.value: validate_string_array,
-        FnName.Css.value: validate_string_array,
-        FnName.CssOne.value: validate_string_array,
-        FnName.AmountFromString.value: validate_string,
-        FnName.AmountRangeFromString.value: validate_string,
-        FnName.RegexFindAll.value: validate_string,
-        FnName.Join.value: validate_optional_string,
-        FnName.RegexSearch.value: validate_list_string_optional_int,
-        FnName.RegexSubstring.value: validate_list_string_optional_int,
-        FnName.SelectNth.value: validate_non_zero_int,
-        FnName.Average.value: validate_optional_int,
+        fn_name.ELEMENT_TEXT: validate_empty,
+        fn_name.LENGTH: validate_empty,
+        fn_name.CONVERT_TO_FLOAT: validate_empty,
+        fn_name.CONVERT_TO_INT: validate_empty,
+        fn_name.CONVERT_TO_STR: validate_empty,
+        fn_name.MAX: validate_empty,
+        fn_name.MIN: validate_empty,
+        fn_name.PRODUCT: validate_empty,
+        fn_name.XPATH: validate_string_array,
+        fn_name.XPATH_ONE: validate_string_array,
+        fn_name.CSS: validate_string_array,
+        fn_name.CSS_ONE: validate_string_array,
+        fn_name.AMOUNT_FROM_STRING: validate_string,
+        fn_name.AMOUNT_RANGE_FROM_STRING: validate_string,
+        fn_name.REGEX_FIND_ALL: validate_string,
+        fn_name.JOIN: validate_optional_string,
+        fn_name.REGEX_SEARCH: validate_list_string_optional_int,
+        fn_name.REGEX_SUBSTRING: validate_list_string_optional_int,
+        fn_name.SELECT_NTH: validate_non_zero_int,
+        fn_name.AVERAGE: validate_optional_int,
     }
 
-    if fn_name not in validators:
-        raise ValueError(f"No validator for function name: {fn_name}")
+    if function not in validators:
+        raise ValueError(f"No validator for function name: {function}")
 
     # Call the appropriate validator
-    validator = validators[fn_name]
+    validator = validators[function]
     validator(args)
 
 

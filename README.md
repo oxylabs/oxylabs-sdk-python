@@ -116,7 +116,7 @@ result = yandex.scrape_yandex_search(
 For consistency and ease of use, this SDK provides a list of pre-defined commonly used parameter values as constants in our library. You can use them by importing the oxylabs type modue.
 
 ```python
-from oxylabs.types import UserAgent, Render, Domain
+from oxylabs.types import user_agent, render, domain
 ```
 
 For the full list you can check `utils/types.py`. You can send in these values as strings too.
@@ -129,9 +129,9 @@ google = Google(serp_client)
 result = google.scrape_google_search(
 	"adidas",
 	{
-		"user_agent_type": UserAgent.UA_DESKTOP_CHROME.value,
-		"render":          Render.HTML.value,
-		"domain":          Domain.DOMAIN_COM.value,
+		"user_agent_type": user_agent.UA_DESKTOP_CHROME,
+		"render":          render.HTML,
+		"domain":          domain.COM,
 	}
 )
 ```

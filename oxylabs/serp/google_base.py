@@ -12,7 +12,7 @@ from utils.defaults import (
     set_default_tbm_context,
 )
 from utils.utils import BaseGoogleOpts, validate_url
-from utils.types import Source, Render
+from utils import source, render
 import utils.utils as utils
 from typing import Optional, Any
 
@@ -460,7 +460,7 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleSearch.value,
+            "source": source.GOOGLE_SEARCH,
             "domain": opts.domain,
             "query": query,
             "locale": opts.locale,
@@ -510,7 +510,7 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleUrl.value,
+            "source": source.GOOGLE_URL,
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
@@ -547,7 +547,7 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleAds.value,
+            "source": source.GOOGLE_ADS,
             "domain": opts.domain,
             "query": query,
             "locale": opts.locale,
@@ -586,7 +586,7 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleSuggestions.value,
+            "source": source.GOOGLE_SUGGESTIONS,
             "query": query,
             "locale": opts.locale,
             "geo_location": opts.geo_location,
@@ -625,7 +625,7 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleHotels.value,
+            "source": source.GOOGLE_HOTELS,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -669,14 +669,14 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleTravelHotels.value,
+            "source": source.GOOGLE_TRAVEL_HOTELS,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
             "locale": opts.locale,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
-            "render": opts.render if opts.render else Render.HTML.value,
+            "render": opts.render if opts.render else render.HTML,
             "callback_url": opts.callback_url,
             "context": opts.context,
         }
@@ -710,7 +710,7 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleSearch.value,
+            "source": source.GOOGLE_SEARCH,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -751,7 +751,7 @@ class GoogleBase:
 
         # Prepare payload
         payload = {
-            "source": Source.GoogleTrendsExplore.value,
+            "source": source.GOOGLE_TRENDS_EXPLORE,
             "query": query,
             "geo_location": opts.geo_location,
             "context": opts.context,

@@ -7,17 +7,17 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
-from utils.types import Domain, Source
+from utils import source, domain
 import utils.utils as utils
 from typing import Optional, Any
 
 BingSearchAcceptedDomainParameters = [
-    Domain.DOMAIN_COM.value,
-    Domain.DOMAIN_RU.value,
-    Domain.DOMAIN_UA.value,
-    Domain.DOMAIN_BY.value,
-    Domain.DOMAIN_KZ.value,
-    Domain.DOMAIN_TR.value,
+    domain.COM,
+    domain.RU,
+    domain.UA,
+    domain.BY,
+    domain.KZ,
+    domain.TR,
 ]
 
 
@@ -128,7 +128,7 @@ class BingBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.BingSearch.value,
+            "source": source.BING_SEARCH,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -167,7 +167,7 @@ class BingBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.BingUrl.value,
+            "source": source.BING_URL,
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "geo_location": opts.geo_location,

@@ -7,13 +7,13 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
-from utils.types import Domain, Source
+from utils import source, domain
 import utils.utils as utils
 from typing import Optional
 
 BaiduSearchAcceptedDomainParameters = [
-    Domain.DOMAIN_COM.value,
-    Domain.DOMAIN_CN.value,
+    domain.COM,
+    domain.CN
 ]
 
 
@@ -70,7 +70,7 @@ class BaiduBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.BaiduSearch.value,
+            "source": source.BAIDU_SEARCH,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -105,7 +105,7 @@ class BaiduBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.BaiduUrl.value,
+            "source": source.BAIDU_URL,
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,

@@ -9,7 +9,7 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import validate_url
-from utils.types import Domain, Source
+from utils import source
 import utils.utils as utils
 
 
@@ -83,7 +83,7 @@ class WayfairBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.WayfairSearch.value,
+            "source": source.WAYFAIR_SEARCH,
             "query": query,
             "start_page": opts.start_page,
             "pages": opts.pages,
@@ -121,7 +121,7 @@ class WayfairBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.Wayfair.value,
+            "source": source.WAYFAIR,
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "callback_url": opts.callback_url,

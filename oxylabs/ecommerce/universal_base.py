@@ -4,7 +4,7 @@ from utils.defaults import (
     set_default_content_encoding,
 )
 from utils.utils import BaseUrlOpts
-from utils.types import Source
+from utils import source
 import utils.utils as utils
 from typing import Optional
 
@@ -69,7 +69,7 @@ class UniversalBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.Universal.value,
+            "source": source.UNIVERSAL,
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "geo_location": opts.geo_location,

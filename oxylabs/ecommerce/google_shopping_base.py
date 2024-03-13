@@ -9,7 +9,7 @@ from utils.defaults import (
     set_default_sort_by,
 )
 from utils.utils import validate_url, BaseEcommerceOpts
-from utils.types import Source
+from utils import source
 import utils.utils as utils
 
 
@@ -161,7 +161,7 @@ class GoogleShoppingBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.GoogleShoppingSearch.value,
+            "source": source.GOOGLE_SHOPPING_SEARCH,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -201,7 +201,7 @@ class GoogleShoppingBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.GoogleShoppingUrl.value,
+            "source": source.GOOGLE_SHOPPING_URL,
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "render": opts.render,
@@ -235,7 +235,7 @@ class GoogleShoppingBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.GoogleShoppingProduct.value,
+            "source": source.GOOGLE_SHOPPING_PRODUCT,
             "query": query,
             "domain": opts.domain,
             "locale": opts.locale,
@@ -274,7 +274,7 @@ class GoogleShoppingBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.GoogleShoppingPricing.value,
+            "source": source.GOOGLE_SHOPPING_PRICING,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,

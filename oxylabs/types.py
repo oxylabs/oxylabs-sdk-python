@@ -1,1 +1,1 @@
-from utils.types import Domain, Source, UserAgent, Render, FnName, Locale
+from utils import domain, source, user_agent,render, locale

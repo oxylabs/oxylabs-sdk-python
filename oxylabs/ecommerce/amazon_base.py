@@ -8,7 +8,7 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import validate_url, BaseEcommerceOpts
-from utils.types import Source
+from utils import source
 import utils.utils as utils
 
 
@@ -244,7 +244,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonSearch.value,
+            "source": source.AMAZON_SEARCH,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -287,7 +287,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonUrl.value,
+            "source": source.AMAZON_URL,
             "url": url,
             "user_agent_type": opts.user_agent_type,
             "locale": opts.locale,
@@ -322,7 +322,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonProduct.value,
+            "source": source.AMAZON_PRODUCT,
             "domain": opts.domain,
             "query": query,
             "geo_location": opts.geo_location,
@@ -362,7 +362,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonPricing.value,
+            "source": source.AMAZON_PRICING,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -402,7 +402,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonReviews.value,
+            "source": source.AMAZON_REVIEWS,
             "domain": opts.domain,
             "query": query,
             "geo_location": opts.geo_location,
@@ -443,7 +443,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonQuestions.value,
+            "source": source.AMAZON_QUESTIONS,
             "domain": opts.domain,
             "query": query,
             "geo_location": opts.geo_location,
@@ -481,7 +481,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonBestsellers.value,
+            "source": source.AMAZON_BEST_SELLERS,
             "domain": opts.domain,
             "query": query,
             "start_page": opts.start_page,
@@ -519,7 +519,7 @@ class AmazonBase:
         opts.check_parameter_validity()
 
         payload = {
-            "source": Source.AmazonSellers.value,
+            "source": source.AMAZON_SELLERS,
             "domain": opts.domain,
             "query": query,
             "geo_location": opts.geo_location,

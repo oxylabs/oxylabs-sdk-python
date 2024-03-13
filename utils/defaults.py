@@ -1,8 +1,8 @@
-from utils.types import UserAgent, Domain
+from utils import user_agent, domain
 
 # Constants
-DEFAULT_USER_AGENT = UserAgent.UA_DESKTOP.value
-DEFAULT_DOMAIN = Domain.DOMAIN_COM.value
+DEFAULT_USER_AGENT = user_agent.DESKTOP
+DEFAULT_DOMAIN = domain.COM
 DEFAULT_START_PAGE = 1
 DEFAULT_PAGES = 1
 DEFAULT_LIMIT_SERP = 10
