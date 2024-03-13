@@ -113,26 +113,26 @@ result = yandex.scrape_yandex_search(
 
 ### Configurable Options
 
-For consistency and ease of use, this SDK provides a list of pre-defined commonly used parameter values as constants in our library. You can use them by importing the oxylabs package.
+For consistency and ease of use, this SDK provides a list of pre-defined commonly used parameter values as constants in our library. You can use them by importing the oxylabs type modue.
 
-```go
-import (
-	"github.com/mslmio/oxylabs-sdk-go/oxylabs"
-)
+```python
+from oxylabs.types import UserAgent, Render, Domain
 ```
 
-Currently these are available for the `Render` and`UserAgent` parameters. For the full list you can check `oxylabs/types.go`. You can send in these values as strings too.
+For the full list you can check `utils/types.py`. You can send in these values as strings too.
 
 These can be used as follows:
 
-```go
-res, err := c.ScrapeGoogleSearch(
+```python
+serp_client = Serp(username, password)
+google = Google(serp_client)
+result = google.scrape_google_search(
 	"adidas",
-	&serp.GoogleSearchOpts{
-		UserAgent: oxylabs.UA_DESKTOP_CHROME, // desktop_chrome
-		Render:    oxylabs.HTML,              // html
-		Domain:    oxylabs.DOMAIN_COM,        // com
-	},
+	{
+		"user_agent_type": UserAgent.UA_DESKTOP_CHROME.value,
+		"render":          Render.HTML.value,
+		"domain":          Domain.DOMAIN_COM.value,
+	}
 )
 ```
 
@@ -172,17 +172,23 @@ serp_client = Serp(username, password)
 bing = Bing(serp_client)
 
 # Use `bing_search` as a source to scrape Bing using custom parsing instructions.
-result = bing.scrape_bing_url("https://www.bing.com/search?q=nike",{"parse": True, "parsing_instructions":
+result = bing.scrape_bing_url("https://www.bing.com/search?q=nike",
 	{
-		"number_of_results": {
-		"_fns": [
-			{
-				"_fn": "xpath_one",
-				"_args": [".//span[@class='sb_count']/text()"]
-			}
-		]
-	}
-	}})
+		"parse": True, 
+		"parsing_instructions":
+		{
+			"number_of_results": 
+				{
+				"_fns": 
+					[
+						{
+							"_fn": "xpath_one",
+							"_args": [".//span[@class='sb_count']/text()"]
+						}
+					]
+				}
+		}
+	})
 
 print(result)
 ```
@@ -246,10 +252,11 @@ password = "password"
 # Initialize the proxy client with your credentials.
 proxy = Proxy(username, password)
 
-proxy.add_user_agent_header("mobile_android")
+# Add necessary headers.
+proxy.add_user_agent_header("desktop_chrome")
 proxy.add_geo_location_header("Germany")
 proxy.add_render_header("html")
-proxy.add_parse_header("google")
+
 result = proxy.get("https://www.example.com")
 
 print(result.text)

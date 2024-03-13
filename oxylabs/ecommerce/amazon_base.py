@@ -8,7 +8,7 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import validate_url, BaseEcommerceOpts
-from utils.constants import Source
+from utils.types import Source
 import utils.utils as utils
 
 

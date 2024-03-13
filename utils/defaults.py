@@ -1,4 +1,4 @@
-from utils.constants import UserAgent, Domain
+from utils.types import UserAgent, Domain
 
 # Constants
 DEFAULT_USER_AGENT = UserAgent.UA_DESKTOP.value

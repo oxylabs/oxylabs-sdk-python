@@ -11,7 +11,7 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
-from utils.constants import Domain, Source, Locale
+from utils.types import Domain, Source, Locale
 import utils.utils as utils
 
 YandexSearchAcceptedDomainParameters = [

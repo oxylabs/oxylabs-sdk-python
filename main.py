@@ -1,4 +1,5 @@
 from oxylabs import Serp, SerpAsync, Ecommerce, EcommerceAsync, Proxy
+from oxylabs.types import UserAgent, Render, Domain
 from oxylabs.serp import Baidu, Google, GoogleAsync, Yandex, Bing, BingAsync
 from oxylabs.ecommerce import Amazon, AmazonAsync, GoogleShopping, GoogleShoppingAsync, Wayfair, WayfairAsync
 from dotenv import load_dotenv
@@ -27,7 +28,7 @@ async def mainAsync():
 
 
 def mainSync():
-    # serp_client = Serp(os.getenv("OXYLABS_USER_SERP"), os.getenv("OXYLABS_PASSWORD_SERP"))
+    serp_client = Serp(os.getenv("OXYLABS_USER_SERP"), os.getenv("OXYLABS_PASSWORD_SERP"))
     # bing = Bing(serp_client)
 
     # result = bing.scrape_bing_search(
@@ -89,17 +90,20 @@ def mainSync():
     # )
     
     
-    # google = Google(serp_client)
+    google = Google(serp_client)
     
-    # google.scrape_google_search(
-    #     "nike",
-    #     {
-    #         "start_page": 1,
-    #         "parse": True,
-    #     },
-    #     timeout=15,
-    # )
-    
+    result = google.scrape_google_search(
+        "nike",
+        {
+            "user_agent_type": UserAgent.UA_DESKTOP_CHROME.value,
+            "render": Render.HTML.value,
+            "domain": Domain.DOMAIN_COM.value,
+            "parse": True,
+        },
+        # timeout=15,
+    )
+
+    print(result)
     
     # google.scrape_google_url(
     #     "https://www.google.com/search?q=nike",
@@ -109,15 +113,15 @@ def mainSync():
     #     timeout=45,
     # )
 
-    proxy = Proxy(os.getenv("OXYLABS_USER_SERP"), os.getenv("OXYLABS_PASSWORD_SERP"))
-
-    proxy.add_user_agent_header("mobile_android")
-    proxy.add_geo_location_header("Germany")
-    proxy.add_render_header("html")
+    # proxy = Proxy(os.getenv("OXYLABS_USER_SERP"), os.getenv("OXYLABS_PASSWORD_SERP"))
+    # print(UserAgent.UA_MOBILE_ANDROID.value, type(UserAgent.UA_MOBILE_ANDROID.value))
+    # proxy.add_user_agent_header(UserAgent.UA_MOBILE_ANDROID.value)
+    # proxy.add_geo_location_header("Germany")
+    # proxy.add_render_header("html")
     # proxy.add_parse_header("google")
-    result = proxy.get("https://www.example.com")
+    # result = proxy.get("https://www.example.com")
 
-    print(result.text)
+    # print(result.text)
     
 
 # Ensure the main coroutine is executed

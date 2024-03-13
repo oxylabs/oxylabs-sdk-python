@@ -9,7 +9,7 @@ from utils.defaults import (
     set_default_sort_by,
 )
 from utils.utils import validate_url, BaseEcommerceOpts
-from utils.constants import Domain, Source
+from utils.types import Source
 import utils.utils as utils
 
 

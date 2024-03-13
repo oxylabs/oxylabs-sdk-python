@@ -348,7 +348,8 @@ class Locale(Enum):
 
 class FnName(Enum):
     """
-    Enum class representing different Fns.
+    Enum class representing different Fns available for
+    parsing_instructions.
     """
 
     ElementText = "element_text"

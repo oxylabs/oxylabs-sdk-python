@@ -5,7 +5,7 @@ from utils.defaults import (
     set_default_content_encoding,
 )
 from utils.utils import BaseUrlOpts
-from utils.constants import Source
+from utils.types import Source
 import utils.utils as utils
 
 

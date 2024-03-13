@@ -11,7 +11,7 @@ from utils.defaults import (
     set_default_user_agent,
 )
 from utils.utils import validate_url
-from utils.constants import Domain, Source
+from utils.types import Domain, Source
 import utils.utils as utils
 
 

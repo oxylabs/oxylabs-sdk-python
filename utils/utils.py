@@ -1,4 +1,4 @@
-from utils.constants import UserAgent, Render, FnName
+from utils.types import UserAgent, Render, FnName
 from urllib.parse import urlparse
 import aiohttp
 from utils.defaults import (
