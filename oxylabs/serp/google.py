@@ -208,7 +208,8 @@ class Google(GoogleBase):
         Scrapes Google Travel Hotels search results for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): UTF-encoded keyword. "query": "hotels" will result list hotels in a given geo_location; "query": "hotels in <Location>" will result in a list hotels for <Location>. Eg hotels in Paris will list hotels in Paris, no matter what geo_location is given.
+
             opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": None,
@@ -517,7 +518,8 @@ class GoogleAsync(GoogleBase):
         Asynchronously scrapes Google Travel Hotels search results for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): UTF-encoded keyword. "query": "hotels" will result list hotels in a given geo_location; "query": "hotels in <Location>" will result in a list hotels for <Location>. Eg hotels in Paris will list hotels in Paris, no matter what geo_location is given.
+
             opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": None,

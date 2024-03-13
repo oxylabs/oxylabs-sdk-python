@@ -5,7 +5,7 @@ import utils.utils as utils
 
 
 class Ecommerce:
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str) -> None:
         """
         Initializes a synchronous Ecommerce client.
 
@@ -16,12 +16,13 @@ class Ecommerce:
         api_credentials = ApiCredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
-    def get_resp(self, payload, config):
+    def get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload synchronously and fetches api response.
 
         Args:
             payload (dict): The payload for the request.
+            config (dict): The configuration for the request.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -33,7 +34,7 @@ class Ecommerce:
 
 
 class EcommerceAsync:
-    def __init__(self, username, password):
+    def __init__(self, username: str, password: str) -> None:
         """
         Initializes an asynchronous Ecommerce client.
 
@@ -46,12 +47,13 @@ class EcommerceAsync:
         self.session = None
         self.requests = 0
 
-    async def get_resp(self, payload, config):
+    async def get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload asynchronously and fetches api response.
 
         Args:
             payload (dict): The payload for the request.
+            config (dict): The configuration for the request.
 
         Returns:
             dict: The response from the server after the job is completed.

@@ -5,7 +5,16 @@ from utils.utils import prepare_config
 
 
 class Amazon(AmazonBase):
-    def __init__(self, client):
+    def __init__(self, client: Ecommerce) -> None:
+        """
+        Initializes an Amazon instance.
+
+        Args:
+            client (Ecommerce): An instance of the Ecommerce class.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of Ecommerce.
+        """
         if not isinstance(client, Ecommerce):
             raise TypeError("Amazon requires an Ecommerce instance")
         self.client = client
@@ -94,7 +103,7 @@ class Amazon(AmazonBase):
         Scrapes Amazon product details for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -130,7 +139,7 @@ class Amazon(AmazonBase):
         Scrapes Amazon pricing details for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -166,7 +175,7 @@ class Amazon(AmazonBase):
         Scrapes Amazon reviews for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -204,7 +213,7 @@ class Amazon(AmazonBase):
         Scrapes Amazon questions for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -234,6 +243,7 @@ class Amazon(AmazonBase):
 
     def scrape_amazon_bestsellers(
         self,
+        query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
@@ -241,6 +251,7 @@ class Amazon(AmazonBase):
         Scrapes Amazon bestsellers.
 
         Args:
+            query (str): Browse node ID.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -264,7 +275,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_bestseller_payload(opts)
+        payload = self._prepare_bestseller_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -278,7 +289,7 @@ class Amazon(AmazonBase):
         Scrapes Amazon sellers for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 13-character seller ID.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -308,7 +319,16 @@ class Amazon(AmazonBase):
 
 
 class AmazonAsync(AmazonBase):
-    def __init__(self, client):
+    def __init__(self, client: EcommerceAsync) -> None:
+        """
+        Initializes an instance of AmazonAsync.
+
+        Args:
+            client (EcommerceAsync): An instance of EcommerceAsync.
+
+        Raises:
+            TypeError: If the client parameter is not an instance of EcommerceAsync.
+        """
         if not isinstance(client, EcommerceAsync):
             raise TypeError("AmazonAsync requires an EcommerceAsync instance")
         self.client = client
@@ -402,7 +422,7 @@ class AmazonAsync(AmazonBase):
         Scrapes Amazon product details for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -440,7 +460,7 @@ class AmazonAsync(AmazonBase):
         Scrapes Amazon pricing details for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -478,7 +498,7 @@ class AmazonAsync(AmazonBase):
         Scrapes Amazon reviews for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -518,7 +538,7 @@ class AmazonAsync(AmazonBase):
         Scrapes Amazon questions for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 10-symbol ASIN code.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -558,6 +578,7 @@ class AmazonAsync(AmazonBase):
         Scrapes Amazon bestsellers.
 
         Args:
+            query (str): Browse node ID.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -582,7 +603,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_bestseller_payload(query,opts)
+        payload = self._prepare_bestseller_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -597,7 +618,7 @@ class AmazonAsync(AmazonBase):
         Scrapes Amazon sellers for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): 13-character seller ID.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,

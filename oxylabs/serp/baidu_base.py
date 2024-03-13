@@ -9,6 +9,7 @@ from utils.defaults import (
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 from utils.types import Domain, Source
 import utils.utils as utils
+from typing import Optional
 
 BaiduSearchAcceptedDomainParameters = [
     Domain.DOMAIN_COM.value,
@@ -47,7 +48,7 @@ class BaiduUrlOpts(BaseUrlOpts):
 
 
 class BaiduBase:
-    def _prepare_search_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_search_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the search payload for Baidu search.
 
@@ -58,7 +59,7 @@ class BaiduBase:
         Returns:
             dict: The prepared search payload.
         """
-        opts = BaiduSearchOpts(**opts if opts is not None else {})
+        opts = BaiduSearchOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -85,7 +86,7 @@ class BaiduBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, opts: dict) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for a Baidu URL request.
 
@@ -97,7 +98,7 @@ class BaiduBase:
             dict: The prepared payload for the request.
         """
         validate_url(url, "baidu")
-        opts = BaiduUrlOpts(**opts if opts is not None else {})
+        opts = BaiduUrlOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)

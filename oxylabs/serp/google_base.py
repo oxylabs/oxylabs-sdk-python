@@ -3,7 +3,6 @@ from utils.defaults import (
     DEFAULT_LIMIT_SERP,
     DEFAULT_PAGES,
     DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -418,7 +417,7 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
 
 
 class GoogleBase:
-    def _prepare_search_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_search_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the search payload for a Google search.
 
@@ -433,7 +432,7 @@ class GoogleBase:
             ValueError: If the `limit`, `start_page`, and `pages` parameters are used together with the `limit_per_page` context parameter.
 
         """
-        opts = GoogleSearchOpts(**opts if opts is not None else {})
+        opts = GoogleSearchOpts(**user_opts if user_opts is not None else {})
 
         if (
             (
@@ -488,7 +487,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, opts: dict) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for a Google URL request.
 
@@ -500,7 +499,7 @@ class GoogleBase:
             dict: The prepared payload for the request.
         """
         validate_url(url, "google")
-        opts = GoogleUrlOpts(**opts if opts is not None else {})
+        opts = GoogleUrlOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -523,7 +522,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_ads_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_ads_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for the Google Ads request.
 
@@ -534,7 +533,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the request.
         """
-        opts = GoogleAdsOpts(**opts if opts is not None else {})
+        opts = GoogleAdsOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -563,7 +562,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_suggestions_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_suggestions_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for making a suggestions request to Google.
 
@@ -574,7 +573,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the suggestions request.
         """
-        opts = GoogleSuggestionsOpts(**opts if opts is not None else {})
+        opts = GoogleSuggestionsOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -597,7 +596,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_hotels_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_hotels_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for the hotels request.
 
@@ -608,7 +607,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the hotels request.
         """
-        opts = GoogleHotelsOpts(**opts if opts is not None else {})
+        opts = GoogleHotelsOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -641,7 +640,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_travel_hotels_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_travel_hotels_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for the travel hotels request.
 
@@ -652,7 +651,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the request.
         """
-        opts = GoogleTravelHotelsOpts(**opts if opts is not None else {})
+        opts = GoogleTravelHotelsOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -681,7 +680,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_images_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_images_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepare the payload for the images search request.
 
@@ -692,7 +691,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the images search request.
         """
-        opts = GoogleImagesOpts(**opts if opts is not None else {})
+        opts = GoogleImagesOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -724,7 +723,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_trends_explore_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_trends_explore_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for Google Trends Explore API request.
 
@@ -735,7 +734,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the Google Trends Explore API request.
         """
-        opts = GoogleTrendsExploreOpts(**opts if opts is not None else {})
+        opts = GoogleTrendsExploreOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
