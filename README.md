@@ -138,21 +138,30 @@ result = google.scrape_google_search(
 
 ### Context Options for Google sources
 
-You can send in context options relevant to `google` sources. Here's an example for Google Search scraping:
+You can send in context options relevant to `google` and `amazon` sources. [supported context values for google search](https://developers.oxylabs.io/scraper-apis/serp-scraper-api/google/search).
+Here's an example for Google Search scraping:
 
-```go
-res, err := c.ScrapeGoogleSearch(
-	"adidas",
-	&serp.GoogleSearchOpts{
-		Parse: true,
-		Context: []func(oxylabs.ContextOption){
-			oxylabs.ResultsLanguage("en"),
-			oxylabs.Filter(1),
-			oxylabs.Tbm("isch"),
-			oxylabs.LimitPerPage([]serp.PageLimit{{Page: 1, Limit: 1}, {Page: 2, Limit: 6}}),
-		},
-	},
-)
+```python
+serp_client = SERP(username,password)
+google = Google(serp_client)
+google.scrape_google_search(
+        "adidas",
+        {
+            "parse": True,
+            "context": [
+                {"key": "results_language", "value": "en"},
+                {"key": "filter", "value": 0},
+                {"key": "tbm", "value": "isch"},
+                {
+                    "key": "limit_per_page",
+                    "value": [
+                        {"page": 1, "limit": 10},
+                        {"page": 2, "limit": 10},
+                    ],
+                },
+            ],
+        },
+    )
 ```
 
 ### Parse instructions
