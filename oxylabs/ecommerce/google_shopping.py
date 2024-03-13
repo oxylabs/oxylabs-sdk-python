@@ -20,7 +20,7 @@ class GoogleShopping(GoogleShoppingBase):
         Scrapes Google Shopping search results for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): UTF-encoded keyword
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -58,7 +58,7 @@ class GoogleShopping(GoogleShoppingBase):
         Scrapes Google Shopping search results for a given URL.
 
         Args:
-            url (str): The URL to be scraped.
+            url (str): Direct URL (link) to Google page
             opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
@@ -87,7 +87,7 @@ class GoogleShopping(GoogleShoppingBase):
         Scrapes Google Shopping product results for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): UTF-encoded product code.
             opts (GoogleShoppingProductOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -111,15 +111,15 @@ class GoogleShopping(GoogleShoppingBase):
 
     def scrape_google_product_pricing(
         self,
-        url: str,
+        query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google Shopping product pricing results for a given URL.
+        Scrapes Google Shopping product pricing results for a given product code.
 
         Args:
-            url (str): The URL to be scraped.
+            query (str): UTF-encoded product code.
             opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -137,7 +137,7 @@ class GoogleShopping(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_product_pricing_payload(url, opts)
+        payload = self._prepare_product_pricing_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -159,7 +159,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         Scrapes Google Shopping search results for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): UTF-encoded keyword.
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -199,7 +199,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         Scrapes Google Shopping search results for a given URL.
 
         Args:
-            url (str): The URL to be scraped.
+            url (str): Direct URL (link) to Google page.
             opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
@@ -231,7 +231,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         Scrapes Google Shopping product results for a given query.
 
         Args:
-            query (str): The search query.
+            query (str): UTF-encoded product code.
             opts (GoogleShoppingProductOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -257,16 +257,16 @@ class GoogleShoppingAsync(GoogleShoppingBase):
 
     async def scrape_google_product_pricing(
         self,
-        url: str,
+        query: str,
         opts: Optional[Dict[str, Any]] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Scrapes Google Shopping product pricing results for a given URL.
+        Scrapes Google Shopping product pricing results for a given product code.
 
         Args:
-            url (str): The URL to be scraped.
+            url (str): UTF-encoded product code.
             opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
@@ -286,6 +286,6 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_product_pricing_payload(url, opts)
+        payload = self._prepare_product_pricing_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response

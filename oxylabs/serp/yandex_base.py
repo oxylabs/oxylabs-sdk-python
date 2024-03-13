@@ -1,9 +1,5 @@
 from utils.defaults import (
-    DEFAULT_DOMAIN,
     DEFAULT_LIMIT_SERP,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -13,6 +9,7 @@ from utils.defaults import (
 from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 from utils.types import Domain, Source, Locale
 import utils.utils as utils
+from typing import Optional
 
 YandexSearchAcceptedDomainParameters = [
     Domain.DOMAIN_COM.value,
@@ -90,7 +87,7 @@ class YandexUrlOpts(BaseUrlOpts):
 
 
 class YandexBase:
-    def _prepare_search_payload(self, query: str, opts: dict) -> dict:
+    def _prepare_search_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepare the search payload for Yandex search.
 
@@ -101,7 +98,7 @@ class YandexBase:
         Returns:
             dict: The prepared search payload.
         """
-        opts = YandexSearchOpts(**opts if opts is not None else {})
+        opts = YandexSearchOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -130,7 +127,7 @@ class YandexBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, opts: dict) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
         """
         Prepare the payload for a Yandex URL request.
 
@@ -142,7 +139,7 @@ class YandexBase:
             dict: The prepared payload for the Yandex URL request.
         """
         validate_url(url, "yandex")
-        opts = YandexUrlOpts(**opts if opts is not None else {})
+        opts = YandexUrlOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)

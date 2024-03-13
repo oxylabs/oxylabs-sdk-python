@@ -217,8 +217,23 @@ class AmazonSellerOpts(BaseEcommerceOpts):
 
 
 class AmazonBase:
-    def _prepare_search_payload(self, query, opts):
-        opts = AmazonSearchOpts(**opts if opts is not None else {})
+    def _prepare_search_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepares the search payload for Amazon search.
+
+        Args:
+            query (str): The search query.
+            user_opts (dict): User options for the search.
+
+        Returns:
+            dict: The prepared search payload.
+
+        Raises:
+            None
+
+        """
+
+        opts = AmazonSearchOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -249,9 +264,23 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url: str, user_opts: dict) -> dict:
+        """
+        Prepares the payload for making a request to Amazon URL.
+
+        Args:
+            url (str): The URL to be requested.
+            user_opts (dict): Optional user-defined options.
+
+        Returns:
+            dict: The prepared payload for the request.
+
+        Raises:
+            ValueError: If the URL is invalid.
+
+        """
         validate_url(url, "amazon")
-        opts = AmazonUrlOpts(**opts if opts is not None else {})
+        opts = AmazonUrlOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -274,8 +303,18 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_product_payload(self, query, opts):
-        opts = AmazonProductOpts(**opts if opts is not None else {})
+    def _prepare_product_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepare the payload for the Amazon product request.
+
+        Args:
+            query (str): The search query for the product.
+            user_opts (dict): User options for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
+        opts = AmazonProductOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -301,8 +340,19 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_pricing_payload(self, query, opts):
-        opts = AmazonPricingOpts(**opts if opts is not None else {})
+    def _prepare_pricing_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepares the payload for pricing request to Amazon.
+
+        Args:
+            query (str): The search query.
+            user_opts (dict): User options for pricing request.
+
+        Returns:
+            dict: The prepared payload for pricing request.
+        """
+
+        opts = AmazonPricingOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
@@ -331,8 +381,18 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_reviews_payload(self, query, opts):
-        opts = AmazonReviewsOpts(**opts if opts is not None else {})
+    def _prepare_reviews_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepare the payload for retrieving Amazon reviews.
+
+        Args:
+            query (str): The search query for the reviews.
+            user_opts (dict): User-defined options for retrieving the reviews.
+
+        Returns:
+            dict: The prepared payload for retrieving Amazon reviews.
+        """
+        opts = AmazonReviewsOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
@@ -361,8 +421,21 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_questions_payload(self, query, opts):
-        opts = AmazonQuestionsOpts(**opts if opts is not None else {})
+    def _prepare_questions_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepare the payload for sending a request to retrieve Amazon questions.
+
+        Args:
+            query (str): The query string for the Amazon questions.
+            user_opts (dict): Optional user-defined options for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+
+        Raises:
+            ValueError: If the provided options are invalid.
+        """
+        opts = AmazonQuestionsOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -387,8 +460,18 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_bestseller_payload(self, query, opts):
-        opts = AmazonBestsellerOpts(**opts if opts is not None else {})
+    def _prepare_bestseller_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepares the payload for retrieving Amazon bestsellers.
+
+        Args:
+            query (str): The search query.
+            user_opts (dict): The user options for customizing the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
+        opts = AmazonBestsellerOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)
@@ -417,8 +500,18 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_seller_payload(self, query, opts):
-        opts = AmazonSellerOpts(**opts if opts is not None else {})
+    def _prepare_seller_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepare the payload for the Amazon seller request.
+
+        Args:
+            query (str): The query string.
+            user_opts (dict): The user options for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
+        opts = AmazonSellerOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)

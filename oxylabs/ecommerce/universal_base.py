@@ -1,5 +1,4 @@
 from utils.defaults import (
-    DEFAULT_USER_AGENT,
     set_default_user_agent,
     set_default_http_method,
     set_default_content_encoding,
@@ -7,6 +6,7 @@ from utils.defaults import (
 from utils.utils import BaseUrlOpts
 from utils.types import Source
 import utils.utils as utils
+from typing import Optional
 
 
 class UniversalUrlOpts(BaseUrlOpts):
@@ -45,9 +45,22 @@ class UniversalUrlOpts(BaseUrlOpts):
 
 
 class UniversalBase:
-    def _prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+        """
+        Prepares the payload for a URL request.
 
-        opts = UniversalUrlOpts(**opts if opts is not None else {})
+        Args:
+            url (str): The URL to be requested.
+            user_opts (dict): Optional user-defined options.
+
+        Returns:
+            dict: The prepared payload.
+
+        Raises:
+            ValueError: If any of the options are invalid.
+        """
+
+        opts = UniversalUrlOpts(**user_opts if user_opts is not None else {})
 
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.context = set_default_http_method(opts.context)

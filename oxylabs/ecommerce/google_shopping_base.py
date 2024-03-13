@@ -137,8 +137,19 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
 
 
 class GoogleShoppingBase:
-    def _prepare_search_payload(self, query, opts):
-        opts = GoogleShoppingSearchOpts(**opts if opts is not None else {})
+    def _prepare_search_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepare the search payload for Google Shopping.
+
+        Args:
+            query (str): The search query.
+            user_opts (dict): User options for the search.
+
+        Returns:
+            dict: The prepared search payload.
+
+        """
+        opts = GoogleShoppingSearchOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.context = set_default_sort_by(opts.context)
@@ -171,9 +182,19 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_url_payload(self, url, opts):
+    def _prepare_url_payload(self, url: str, user_opts: dict) -> dict:
+        """
+        Prepares the payload for a Google Shopping URL request.
+
+        Args:
+            url (str): The URL to be used for the request.
+            user_opts (dict): Optional user-defined options.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
         validate_url(url, "google")
-        opts = GoogleShoppingUrlOpts(**opts if opts is not None else {})
+        opts = GoogleShoppingUrlOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -195,8 +216,18 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_product_payload(self, query, opts):
-        opts = GoogleShoppingProductOpts(**opts if opts is not None else {})
+    def _prepare_product_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepare the payload for the Google Shopping product request.
+
+        Args:
+            query (str): The search query.
+            user_opts (dict): User options for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
+        opts = GoogleShoppingProductOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
@@ -222,8 +253,18 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_product_pricing_payload(self, query, opts):
-        opts = GoogleProductPricingOpts(**opts if opts is not None else {})
+    def _prepare_product_pricing_payload(self, query: str, user_opts: dict) -> dict:
+        """
+        Prepares the payload for retrieving product pricing from Google Shopping.
+
+        Args:
+            query (str): The search query for the products.
+            user_opts (dict): User-defined options for the request.
+
+        Returns:
+            dict: The prepared payload for the request.
+        """
+        opts = GoogleProductPricingOpts(**user_opts if user_opts is not None else {})
 
         opts.domain = set_default_domain(opts.domain)
         opts.start_page = set_default_start_page(opts.start_page)

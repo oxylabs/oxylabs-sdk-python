@@ -1,9 +1,5 @@
 from utils.defaults import (
-    DEFAULT_DOMAIN,
     DEFAULT_LIMIT_SERP,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
     set_default_domain,
     set_default_limit,
     set_default_pages,
@@ -109,7 +105,7 @@ class BingUrlOpts(BaseUrlOpts):
 
 
 class BingBase:
-    def _prepare_search_payload(self, query: str, opts: Optional[dict]) -> dict:
+    def _prepare_search_payload(self, query: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the search payload for the Bing search.
 
@@ -121,7 +117,7 @@ class BingBase:
             dict: The prepared search payload.
 
         """
-        opts = BingSearchOpts(**opts if opts is not None else {})
+        opts = BingSearchOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -152,7 +148,7 @@ class BingBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, opts: Optional[dict]) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for a Bing URL request.
 
@@ -164,7 +160,7 @@ class BingBase:
             dict: The prepared payload for the request.
         """
         validate_url(url, "bing")
-        opts = BingUrlOpts(**opts if opts is not None else {})
+        opts = BingUrlOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
