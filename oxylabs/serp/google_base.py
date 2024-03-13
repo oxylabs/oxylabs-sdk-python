@@ -432,20 +432,23 @@ class GoogleBase:
             ValueError: If the `limit`, `start_page`, and `pages` parameters are used together with the `limit_per_page` context parameter.
 
         """
-        opts = GoogleSearchOpts(**user_opts if user_opts is not None else {})
 
         if (
             (
-                opts.limit is not None
-                or opts.start_page is not None
-                or opts.pages is not None
+                user_opts.get("limit") is not None
+                or user_opts.get("start_page") is not None
+                or user_opts.get("pages") is not None
             )
-            and opts.context
-            and any(opt.get("key") == "limit_per_page" for opt in opts.context)
+            and user_opts.get("context")
+            and any(
+                item.get("key") == "limit_per_page" for item in user_opts["context"]
+            )
         ):
             raise ValueError(
                 "limit, start_page, and pages parameters cannot be used together with limit_per_page context parameter"
             )
+            
+        opts = GoogleSearchOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
         opts.domain = set_default_domain(opts.domain)
@@ -562,7 +565,9 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_suggestions_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_suggestions_payload(
+        self, query: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the payload for making a suggestions request to Google.
 
@@ -640,7 +645,9 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_travel_hotels_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_travel_hotels_payload(
+        self, query: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the payload for the travel hotels request.
 
@@ -723,7 +730,9 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_trends_explore_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_trends_explore_payload(
+        self, query: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the payload for Google Trends Explore API request.
 
