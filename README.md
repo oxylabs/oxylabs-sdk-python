@@ -138,7 +138,7 @@ result = google.scrape_google_search(
 
 ### Context Options for Google sources
 
-You can send in context options relevant to `google` and `amazon` sources. [supported context values for google search](https://developers.oxylabs.io/scraper-apis/serp-scraper-api/google/search).
+You can send in context options relevant to `google` and `amazon` sources. [supported context values for google search](https://developers.oxylabs.io/scraper-apis/serp-scraper-api/google/search). Similarly you can find supported context values for other sources in the documentation.
 Here's an example for Google Search scraping:
 
 ```python
