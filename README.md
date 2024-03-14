@@ -6,10 +6,10 @@ This will help simplify integrating with Oxylabs's APIs, which can help you with
 
 The Python SDK provides you with several benefits over using the raw APIs directly:
 
-- **Simplified Interface**: abstracts away complexities, offering a straightforward user interface for interacting with the Oxylabs SERP API.
+- **Simplified Interface**: abstracts away complexities, offering a straightforward user interface for interacting with the Oxylabs SERP and Ecommerce API.
 - **Automated Request Management**: streamlines the handling of API requests and responses for enhanced efficiency and reliability.
 - **Error Handling**: provides meaningful error messages and handles common API errors, simplifying troubleshooting.
-- **Result Parsing**: streamlines the process of extracting relevant data from SERP results, allowing developers to focus on application logic.
+- **Result Parsing**: streamlines the process of extracting relevant data from SERP and Ecommerce results, allowing developers to focus on application logic.
 
 ## Requirements
 
@@ -42,19 +42,17 @@ pip install oxylabs
 ### Quick Start
 
 ```python
-from oxylabs import Serp
-from oxylabs.serp import Bing
+from oxylabs import InitSerp
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
 # Initialize the SERP realtime client with your credentials.
-serp_client = Serp(username, password)
-bing = Bing(serp_client)
+c = InitSerp(username, password)
 
 # Use `bing_search` as a source to scrape Bing with nike as a query.
-result = bing.scrape_bing_search("nike")
+result = c.scrape_bing_search("nike")
 
 print(result)
 ```
@@ -87,9 +85,8 @@ In the SDK you'll just need to call the relevant function name from the client.
 For example if you wish to scrape Yandex with `yandex_search` as a source:
 
 ```python
-serp_client = Serp(username, password)
-yandex = Yandex(serp_client)
-result = yandex.scrape_yandex_search("football")
+c = InitSerp(username, password)
+result = c.scrape_yandex_search("football")
 ```
 
 ### Query Parameters
@@ -99,7 +96,7 @@ Each source has different accepted query parameters. For a detailed list of acce
 By default, scrape functions will use default parameters. If you need to send specific query parameters, here is an example of how to do it:
 
 ```python
-result = yandex.scrape_yandex_search(
+result = c.scrape_yandex_search(
 	"football",
 	{
 		"start_page": 1,
@@ -119,17 +116,19 @@ For consistency and ease of use, this SDK provides a list of pre-defined commonl
 from oxylabs.types import user_agent, render, domain
 ```
 
-For the full list you can check `utils/types.py`. You can send in these values as strings too.
+For the full list you can check the `utils` directory. You can send in these values as strings too.
 
 These can be used as follows:
 
 ```python
-serp_client = Serp(username, password)
-google = Google(serp_client)
-result = google.scrape_google_search(
+from utils import user_agent, render, domain
+
+c = InitSerp(username, password)
+
+result = c.scrape_google_search(
 	"adidas",
 	{
-		"user_agent_type": user_agent.UA_DESKTOP_CHROME,
+		"user_agent_type": user_agent.DESKTOP,
 		"render":          render.HTML,
 		"domain":          domain.COM,
 	}
@@ -142,26 +141,27 @@ You can send in context options relevant to `google`, `amazon` and `universal` s
 Here's an example for Google Search scraping:
 
 ```python
-serp_client = Serp(username,password)
-google = Google(serp_client)
-google.scrape_google_search(
-        "adidas",
-        {
-            "parse": True,
-            "context": [
-                {"key": "results_language", "value": "en"},
-                {"key": "filter", "value": 0},
-                {"key": "tbm", "value": "isch"},
-                {
-                    "key": "limit_per_page",
-                    "value": [
-                        {"page": 1, "limit": 10},
-                        {"page": 2, "limit": 10},
-                    ],
-                },
-            ],
-        },
-    )
+c = InitSerp(username, password)
+
+c.scrape_google_search(
+    "adidas",
+    {
+        "parse": True,
+        "context": [
+            {"key": "results_language", "value": "en"},
+            {"key": "filter", "value": 0},
+            {"key": "tbm", "value": "isch"},
+            {
+                "key": "limit_per_page",
+                "value": [
+                    {"page": 1, "limit": 10},
+                    {"page": 2, "limit": 10},
+                ],
+            },
+        ],
+    },
+)
+
 ```
 
 ### Parse instructions
@@ -169,35 +169,30 @@ google.scrape_google_search(
 SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser):
 
 ```python
-from oxylabs import Serp
-from oxylabs.serp import Bing
+from oxylabs import InitSerp
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
 # Initialize the SERP realtime client with your credentials.
-serp_client = Serp(username, password)
-bing = Bing(serp_client)
+c = InitSerp(username, password)
 
 # Use `bing_search` as a source to scrape Bing using custom parsing instructions.
-result = bing.scrape_bing_url("https://www.bing.com/search?q=nike",
-	{
-		"parse": True, 
-		"parsing_instructions":
-		{
-			"number_of_results": 
-				{
-				"_fns": 
-					[
-						{
-							"_fn": "xpath_one",
-							"_args": [".//span[@class='sb_count']/text()"]
-						}
-					]
-				}
-		}
-	})
+result = c.scrape_bing_url(
+    "https://www.bing.com/search?q=nike",
+    {
+        "parse": True,
+        "parsing_instructions": {
+            "number_of_results": {
+                "_fns": [
+                    {"_fn": "xpath_one", "_args": [".//span[@class='sb_count']/text()"]}
+                ]
+            }
+        },
+    },
+)
+
 
 print(result)
 ```
@@ -217,29 +212,43 @@ Push-Pull is an asynchronous integration method. This SDK implements this integr
 Using it as straightforward as using the realtime integration. The only difference is that it will return a channel with the Response. Below is an example of this integration method:
 
 ```python
-from oxylabs import SerpAsync
-from oxylabs.serp import BingAsync
+import asyncio
+from oxylabs import InitSerpAsync
 
-# Set your Oxylabs API Credentials.
-username = "username"
-password = "password"
+async def main():
+    # Set your Oxylabs API Credentials.
+    username = "username"
+    password = "password"
 
-# Initialize the SERP async client with your credentials.
-serp_async_client = SerpAsync(username, password)
-bing = BingAsync(serp_async_client)
+    # Initialize the SERP async client with your credentials.
+    c = InitSerpAsync(username, password)
 
-# 'timeout' specifies the maximum time (in seconds) to wait for the scraping job to complete.
-# It is applicable for both realtime and push-pull integrations.
-# 'poll_interval' is used only in push-pull integrations to set the delay (in seconds) 
-# between consecutive status checks of the job.
-tasks = [
-        client.scrape_bing_url("https://www.bing.com/search?q=adidas",{"parse": True}, timeout=35, poll_interval=8),
-        client.scrape_bing_url("https://www.bing.com/search?q=puma",{"parse": True}, timeout=45, poll_interval=12),
+    # 'timeout' specifies the maximum time (in seconds) to wait for the scraping job to complete.
+    # It is applicable for both realtime and push-pull integrations.
+    # 'poll_interval' is used only in push-pull integrations to set the delay (in seconds)
+    # between consecutive status checks of the job.
+    tasks = [
+        c.scrape_bing_url(
+            "https://www.bing.com/search?q=adidas",
+            {"parse": True},
+            timeout=35,
+            poll_interval=3,
+        ),
+        c.scrape_bing_url(
+            "https://www.bing.com/search?q=puma",
+            {"parse": True},
+            timeout=45,
+            poll_interval=5,
+        ),
     ]
 
-for future in asyncio.as_completed(tasks):
-	result = await future 
-	print(result)
+    for future in asyncio.as_completed(tasks):
+        result = await future
+        print(result)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 ```
 
 ### Proxy Endpoint
