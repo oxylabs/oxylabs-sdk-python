@@ -48,7 +48,7 @@ class Baidu(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_baidu_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -77,7 +77,7 @@ class Baidu(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_baidu_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -128,7 +128,7 @@ class BaiduAsync(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_baidu_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -159,6 +159,6 @@ class BaiduAsync(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_baidu_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response

@@ -105,7 +105,9 @@ class BingUrlOpts(BaseUrlOpts):
 
 
 class BingBase:
-    def _prepare_search_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_bing_search_payload(
+        self, query: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the search payload for the Bing search.
 
@@ -148,7 +150,7 @@ class BingBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_bing_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for a Bing URL request.
 

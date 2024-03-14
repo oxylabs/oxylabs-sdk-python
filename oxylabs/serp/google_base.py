@@ -417,7 +417,9 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
 
 
 class GoogleBase:
-    def _prepare_search_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_google_search_payload(
+        self, query: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the search payload for a Google search.
 
@@ -447,7 +449,7 @@ class GoogleBase:
             raise ValueError(
                 "limit, start_page, and pages parameters cannot be used together with limit_per_page context parameter"
             )
-            
+
         opts = GoogleSearchOpts(**user_opts if user_opts is not None else {})
 
         # Set defaults and check validity
@@ -490,7 +492,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_google_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for a Google URL request.
 

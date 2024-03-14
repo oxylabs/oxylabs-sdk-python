@@ -55,7 +55,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_google_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -87,7 +87,7 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_google_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -356,7 +356,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_google_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -390,7 +390,7 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_google_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response
 

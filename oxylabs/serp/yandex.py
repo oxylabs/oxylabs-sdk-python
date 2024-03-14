@@ -52,7 +52,7 @@ class Yandex(YandexBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_yandex_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -82,7 +82,7 @@ class Yandex(YandexBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_yandex_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -137,7 +137,7 @@ class YandexAsync(YandexBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_yandex_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -169,6 +169,6 @@ class YandexAsync(YandexBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_yandex_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response

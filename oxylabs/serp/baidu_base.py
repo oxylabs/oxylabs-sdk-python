@@ -11,10 +11,7 @@ from utils import source, domain
 import utils.utils as utils
 from typing import Optional
 
-BaiduSearchAcceptedDomainParameters = [
-    domain.COM,
-    domain.CN
-]
+BaiduSearchAcceptedDomainParameters = [domain.COM, domain.CN]
 
 
 class BaiduSearchOpts(BaseSearchOpts):
@@ -48,7 +45,9 @@ class BaiduUrlOpts(BaseUrlOpts):
 
 
 class BaiduBase:
-    def _prepare_search_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_baidu_search_payload(
+        self, query: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the search payload for Baidu search.
 
@@ -86,7 +85,7 @@ class BaiduBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_baidu_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
         """
         Prepares the payload for a Baidu URL request.
 
