@@ -1,4 +1,4 @@
-from oxylabs import Serp, SerpAsync, Ecommerce, EcommerceAsync
+from oxylabs import InitSerp, InitSerpAsync, InitEcommerce, InitEcommerceAsync
 from oxylabs.serp import (
     Bing,
     BingAsync,
@@ -21,7 +21,7 @@ from oxylabs.ecommerce import (
 )
 
 
-class InitSerp(Bing, Baidu, Yandex, Google):
+class Serp(Bing, Baidu, Yandex, Google):
     """
     Initializes the Serp class with the provided username and password.
 
@@ -31,10 +31,10 @@ class InitSerp(Bing, Baidu, Yandex, Google):
     """
 
     def __init__(self, username: str, password: str) -> None:
-        self.client = Serp(username, password)
+        self.client = InitSerp(username, password)
 
 
-class InitSerpAsync(BingAsync, BaiduAsync, YandexAsync, GoogleAsync):
+class SerpAsync(BingAsync, BaiduAsync, YandexAsync, GoogleAsync):
     """
     Initializes the SerpAsync client with the provided username and password.
 
@@ -44,10 +44,10 @@ class InitSerpAsync(BingAsync, BaiduAsync, YandexAsync, GoogleAsync):
     """
 
     def __init__(self, username: str, password: str) -> None:
-        self.client = SerpAsync(username, password)
+        self.client = InitSerpAsync(username, password)
 
 
-class InitEcommerce(Amazon, GoogleShopping, Wayfair, Universal):
+class Ecommerce(Amazon, GoogleShopping, Wayfair, Universal):
     """
     Initializes the Ecommerce client with the provided username and password.
 
@@ -57,12 +57,10 @@ class InitEcommerce(Amazon, GoogleShopping, Wayfair, Universal):
     """
 
     def __init__(self, username: str, password: str) -> None:
-        self.client = Ecommerce(username, password)
+        self.client = InitEcommerce(username, password)
 
 
-class InitEcommerceAsync(
-    AmazonAsync, GoogleShoppingAsync, WayfairAsync, UniversalAsync
-):
+class EcommerceAsync(AmazonAsync, GoogleShoppingAsync, WayfairAsync, UniversalAsync):
     """
     Initializes the EcommerceAsync client with the provided username and password.
 
@@ -72,4 +70,4 @@ class InitEcommerceAsync(
     """
 
     def __init__(self, username: str, password: str) -> None:
-        self.client = EcommerceAsync(username, password)
+        self.client = InitEcommerceAsync(username, password)

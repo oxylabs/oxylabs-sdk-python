@@ -361,7 +361,7 @@ def check_sorting_parameter_validity(
         and item.get("value") not in acceptable_sorting_parameters
         for item in context
     ):
-        raise ValueError("Invalid sorting parameter")
+        raise ValueError(f"Invalid sorting parameter, must be one of {acceptable_sorting_parameters}")
 
 
 def check_price_range_validity(context: List[dict]) -> None:
@@ -397,7 +397,7 @@ def check_http_method_validity(context: List[dict]) -> None:
         item.get("key") == "http_method" and item.get("value") not in ["post", "get"]
         for item in context
     ):
-        raise ValueError("Invalid HTTP method in context")
+        raise ValueError("Invalid HTTP method in context, must be one of ['post', 'get']")
 
 
 def check_content_for_post_validity(context: list) -> None:

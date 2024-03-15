@@ -1,11 +1,11 @@
 from .amazon_base import AmazonBase
 from typing import Optional, Dict, Any
-from .ecommerce import Ecommerce, EcommerceAsync
+from .ecommerce import InitEcommerce, InitEcommerceAsync
 from utils.utils import prepare_config
 
 
 class Amazon(AmazonBase):
-    def __init__(self, client: Ecommerce) -> None:
+    def __init__(self, client: InitEcommerce) -> None:
         """
         Initializes an Amazon instance.
 
@@ -15,7 +15,7 @@ class Amazon(AmazonBase):
         Raises:
             TypeError: If the client parameter is not an instance of Ecommerce.
         """
-        if not isinstance(client, Ecommerce):
+        if not isinstance(client, InitEcommerce):
             raise TypeError("Amazon requires an Ecommerce instance")
         self.client = client
 
@@ -319,7 +319,7 @@ class Amazon(AmazonBase):
 
 
 class AmazonAsync(AmazonBase):
-    def __init__(self, client: EcommerceAsync) -> None:
+    def __init__(self, client: InitEcommerceAsync) -> None:
         """
         Initializes an instance of AmazonAsync.
 
@@ -329,7 +329,7 @@ class AmazonAsync(AmazonBase):
         Raises:
             TypeError: If the client parameter is not an instance of EcommerceAsync.
         """
-        if not isinstance(client, EcommerceAsync):
+        if not isinstance(client, InitEcommerceAsync):
             raise TypeError("AmazonAsync requires an EcommerceAsync instance")
         self.client = client
 

@@ -4,7 +4,7 @@ import asyncio
 import utils.utils as utils
 
 
-class Ecommerce:
+class InitEcommerce:
     def __init__(self, username: str, password: str) -> None:
         """
         Initializes a synchronous Ecommerce client.
@@ -33,7 +33,7 @@ class Ecommerce:
         return self.client.req(payload, "POST", config)
 
 
-class EcommerceAsync:
+class InitEcommerceAsync:
     def __init__(self, username: str, password: str) -> None:
         """
         Initializes an asynchronous Ecommerce client.

@@ -1,12 +1,12 @@
 from .google_shopping_base import GoogleShoppingBase
 from typing import Optional, Dict, Any
-from .ecommerce import Ecommerce, EcommerceAsync
+from .ecommerce import InitEcommerce, InitEcommerceAsync
 from utils.utils import prepare_config
 
 
 class GoogleShopping(GoogleShoppingBase):
     def __init__(self, client):
-        if not isinstance(client, Ecommerce):
+        if not isinstance(client, InitEcommerce):
             raise TypeError("GoogleShopping requires an Ecommerce instance")
         self.client = client
 
@@ -144,7 +144,7 @@ class GoogleShopping(GoogleShoppingBase):
 
 class GoogleShoppingAsync(GoogleShoppingBase):
     def __init__(self, client):
-        if not isinstance(client, EcommerceAsync):
+        if not isinstance(client, InitEcommerceAsync):
             raise TypeError("GoogleShoppingAsync requires an EcommerceAsync instance")
         self.client = client
 

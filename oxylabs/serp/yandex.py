@@ -1,11 +1,11 @@
 from .yandex_base import YandexBase
-from .serp import Serp, SerpAsync
+from .serp import InitSerp, InitSerpAsync
 from utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 
 class Yandex(YandexBase):
-    def __init__(self, client: Serp):
+    def __init__(self, client: InitSerp):
         """
         Initializes a Yandex instance.
 
@@ -15,7 +15,7 @@ class Yandex(YandexBase):
         Raises:
             TypeError: If the client parameter is not an instance of Serp.
         """
-        if not isinstance(client, Serp):
+        if not isinstance(client, InitSerp):
             raise TypeError("Yandex requires a Serp instance")
         self.client = client
 
@@ -88,7 +88,7 @@ class Yandex(YandexBase):
 
 
 class YandexAsync(YandexBase):
-    def __init__(self, client: SerpAsync):
+    def __init__(self, client: InitSerpAsync):
         """
         Initializes a YandexAsync instance.
 
@@ -98,7 +98,7 @@ class YandexAsync(YandexBase):
         Raises:
             TypeError: If the client parameter is not an instance of SerpAsync.
         """
-        if not isinstance(client, SerpAsync):
+        if not isinstance(client, InitSerpAsync):
             raise TypeError("YandexAsync requires a SerpAsync instance")
         self.client = client
 

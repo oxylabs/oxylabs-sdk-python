@@ -4,7 +4,7 @@ import asyncio
 import utils.utils as utils
 
 
-class Serp:
+class InitSerp:
     def __init__(self, username: str, password: str) -> None:
         """
         Initializes a synchronous SERP client.
@@ -33,7 +33,7 @@ class Serp:
         return self.client.req(payload, "POST", config)
 
 
-class SerpAsync:
+class InitSerpAsync:
 
     def __init__(self, username: str, password: str) -> None:
         """

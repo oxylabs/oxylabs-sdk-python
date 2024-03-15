@@ -42,14 +42,14 @@ pip install oxylabs
 ### Quick Start
 
 ```python
-from oxylabs import InitSerp
+from oxylabs import Serp
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
 # Initialize the SERP realtime client with your credentials.
-c = InitSerp(username, password)
+c = Serp(username, password)
 
 # Use `bing_search` as a source to scrape Bing with nike as a query.
 result = c.scrape_bing_search("nike")
@@ -61,8 +61,8 @@ print(result)
 
 There are three integration method for the Oxylabs SERP API, each exposed via different packages:
 
-- Realtime (Sync) - `InitSerp(username, password)`
-- Push-Pull (Async) - `InitSerpAsync(username, password)`
+- Realtime (Sync) - `Serp(username, password)`
+- Push-Pull (Async) - `SerpAsync(username, password)`
 - Proxy Endpoint - `Proxy(username, password)`
 
 Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods) and how this SDK uses them [here](#integration-methods-1).
@@ -85,7 +85,7 @@ In the SDK you'll just need to call the relevant function name from the client.
 For example if you wish to scrape Yandex with `yandex_search` as a source:
 
 ```python
-c = InitSerp(username, password)
+c = Serp(username, password)
 result = c.scrape_yandex_search("football")
 ```
 
@@ -123,7 +123,7 @@ These can be used as follows:
 ```python
 from utils import user_agent, render, domain
 
-c = InitSerp(username, password)
+c = Serp(username, password)
 
 result = c.scrape_google_search(
 	"adidas",
@@ -141,7 +141,7 @@ You can send in context options relevant to `google`, `amazon` and `universal` s
 Here's an example for Google Search scraping:
 
 ```python
-c = InitSerp(username, password)
+c = Serp(username, password)
 
 c.scrape_google_search(
     "adidas",
@@ -169,14 +169,14 @@ c.scrape_google_search(
 SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser):
 
 ```python
-from oxylabs import InitSerp
+from oxylabs import Serp
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
 # Initialize the SERP realtime client with your credentials.
-c = InitSerp(username, password)
+c = Serp(username, password)
 
 # Use `bing_search` as a source to scrape Bing using custom parsing instructions.
 result = c.scrape_bing_url(
@@ -213,7 +213,7 @@ Using it as straightforward as using the realtime integration. The only differen
 
 ```python
 import asyncio
-from oxylabs import InitSerpAsync
+from oxylabs import SerpAsync
 
 async def main():
     # Set your Oxylabs API Credentials.
@@ -221,7 +221,7 @@ async def main():
     password = "password"
 
     # Initialize the SERP async client with your credentials.
-    c = InitSerpAsync(username, password)
+    c = SerpAsync(username, password)
 
     # 'timeout' specifies the maximum time (in seconds) to wait for the scraping job to complete.
     # It is applicable for both realtime and push-pull integrations.
