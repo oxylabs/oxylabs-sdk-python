@@ -61,8 +61,8 @@ print(result)
 
 There are three integration method for the Oxylabs SERP API, each exposed via different packages:
 
-- Realtime (Sync) - `Serp(username, password)`
-- Push-Pull (Async) - `SerpAsync(username, password)`
+- Realtime (Sync) - `InitSerp(username, password)`
+- Push-Pull (Async) - `InitSerpAsync(username, password)`
 - Proxy Endpoint - `Proxy(username, password)`
 
 Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods) and how this SDK uses them [here](#integration-methods-1).
@@ -113,7 +113,7 @@ result = c.scrape_yandex_search(
 For consistency and ease of use, this SDK provides a list of pre-defined commonly used parameter values as constants in our library. You can use them by importing the oxylabs type modue.
 
 ```python
-from oxylabs.types import user_agent, render, domain
+from utils import user_agent, render, domain
 ```
 
 For the full list you can check the `utils` directory. You can send in these values as strings too.
