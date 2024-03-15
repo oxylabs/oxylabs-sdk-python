@@ -61,7 +61,7 @@ class WayfairUrlOpts:
 
 
 class WayfairBase:
-    def _prepare_search_payload(self, query: str, user_opts: dict) -> dict:
+    def _prepare_wayfair_search_payload(self, query: str, user_opts: dict) -> dict:
         """
         Prepare the search payload for Wayfair.
 
@@ -98,7 +98,7 @@ class WayfairBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, user_opts: dict) -> dict:
+    def _prepare_wayfair_url_payload(self, url: str, user_opts: dict) -> dict:
         """
         Prepare the payload for a Wayfair URL request.
 

@@ -137,7 +137,9 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
 
 
 class GoogleShoppingBase:
-    def _prepare_search_payload(self, query: str, user_opts: dict) -> dict:
+    def _prepare_google_shopping_search_payload(
+        self, query: str, user_opts: dict
+    ) -> dict:
         """
         Prepare the search payload for Google Shopping.
 
@@ -182,7 +184,7 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, user_opts: dict) -> dict:
+    def _prepare_google_shopping_url_payload(self, url: str, user_opts: dict) -> dict:
         """
         Prepares the payload for a Google Shopping URL request.
 
@@ -216,7 +218,9 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_product_payload(self, query: str, user_opts: dict) -> dict:
+    def _prepare_google_shopping_product_payload(
+        self, query: str, user_opts: dict
+    ) -> dict:
         """
         Prepare the payload for the Google Shopping product request.
 
@@ -253,7 +257,9 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_product_pricing_payload(self, query: str, user_opts: dict) -> dict:
+    def _prepare_google_shopping_product_pricing_payload(
+        self, query: str, user_opts: dict
+    ) -> dict:
         """
         Prepares the payload for retrieving product pricing from Google Shopping.
 

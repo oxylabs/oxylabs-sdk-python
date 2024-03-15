@@ -53,7 +53,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_amazon_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -89,7 +89,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_amazon_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -125,7 +125,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_product_payload(query, opts)
+        payload = self._prepare_amazon_product_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -161,7 +161,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_pricing_payload(query, opts)
+        payload = self._prepare_amazon_pricing_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -199,7 +199,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_reviews_payload(query, opts)
+        payload = self._prepare_amazon_reviews_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -237,7 +237,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_questions_payload(query, opts)
+        payload = self._prepare_amazon_questions_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -275,7 +275,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_bestseller_payload(query, opts)
+        payload = self._prepare_amazon_bestseller_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -313,7 +313,7 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_seller_payload(query, opts)
+        payload = self._prepare_amazon_seller_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -369,7 +369,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_amazon_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -407,7 +407,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_amazon_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -445,7 +445,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_product_payload(query, opts)
+        payload = self._prepare_amazon_product_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -483,7 +483,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_pricing_payload(query, opts)
+        payload = self._prepare_amazon_pricing_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -523,7 +523,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_reviews_payload(query, opts)
+        payload = self._prepare_amazon_reviews_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -563,7 +563,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_questions_payload(query, opts)
+        payload = self._prepare_amazon_questions_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -603,7 +603,7 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_bestseller_payload(query, opts)
+        payload = self._prepare_amazon_bestseller_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -643,6 +643,6 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_seller_payload(query, opts)
+        payload = self._prepare_amazon_seller_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response

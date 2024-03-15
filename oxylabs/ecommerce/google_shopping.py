@@ -44,7 +44,7 @@ class GoogleShopping(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_google_shopping_search_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -73,7 +73,7 @@ class GoogleShopping(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_google_shopping_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -105,7 +105,7 @@ class GoogleShopping(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_product_payload(query, opts)
+        payload = self._prepare_google_shopping_product_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -137,7 +137,7 @@ class GoogleShopping(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_product_pricing_payload(query, opts)
+        payload = self._prepare_google_shopping_product_pricing_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -184,7 +184,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_search_payload(query, opts)
+        payload = self._prepare_google_shopping_search_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -216,7 +216,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_url_payload(url, opts)
+        payload = self._prepare_google_shopping_url_payload(url, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -251,7 +251,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_product_payload(query, opts)
+        payload = self._prepare_google_shopping_product_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
 
@@ -286,6 +286,6 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_product_pricing_payload(query, opts)
+        payload = self._prepare_google_shopping_product_pricing_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response
