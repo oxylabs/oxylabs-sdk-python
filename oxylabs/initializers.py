@@ -1,5 +1,6 @@
-from oxylabs import InitSerp, InitSerpAsync, InitEcommerce, InitEcommerceAsync
-from oxylabs.serp import (
+from .serp import (
+    InitSerp,
+    InitSerpAsync,
     Bing,
     BingAsync,
     Baidu,
@@ -9,7 +10,9 @@ from oxylabs.serp import (
     Google,
     GoogleAsync,
 )
-from oxylabs.ecommerce import (
+from .ecommerce import (
+    InitEcommerce,
+    InitEcommerceAsync,
     Amazon,
     AmazonAsync,
     GoogleShopping,

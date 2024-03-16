@@ -113,7 +113,7 @@ result = c.scrape_yandex_search(
 For consistency and ease of use, this SDK provides a list of pre-defined commonly used parameter values as constants in our library. You can use them by importing the oxylabs type modue.
 
 ```python
-from utils import user_agent, render, domain
+from oxylabs.types import user_agent, render, domain
 ```
 
 For the full list you can check the `utils` directory. You can send in these values as strings too.
@@ -121,7 +121,7 @@ For the full list you can check the `utils` directory. You can send in these val
 These can be used as follows:
 
 ```python
-from utils import user_agent, render, domain
+from oxylabs.types import user_agent, render, domain
 
 c = Serp(username, password)
 

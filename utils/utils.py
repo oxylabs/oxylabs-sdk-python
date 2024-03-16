@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 import aiohttp
-from utils import user_agent, render, fn_name, source, domain, locale
+from . import user_agent, render, fn_name, source, domain, locale
 from typing import Any, List
 from utils.defaults import (
     DEFAULT_LIMIT_SERP,
@@ -447,7 +447,6 @@ async def close(user_session: aiohttp.ClientSession) -> None:
     Returns:
         None
     """
-    print("Closing", user_session)
 
     if user_session:
         await user_session.close()

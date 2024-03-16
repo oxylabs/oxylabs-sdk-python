@@ -1,4 +1,4 @@
-from utils import user_agent, domain
+from . import user_agent, domain
 
 # Constants
 DEFAULT_USER_AGENT = user_agent.DESKTOP
