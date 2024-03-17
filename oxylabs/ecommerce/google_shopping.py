@@ -1,7 +1,7 @@
 from .google_shopping_base import GoogleShoppingBase
 from typing import Optional, Dict, Any
 from .ecommerce import InitEcommerce, InitEcommerceAsync
-from utils.utils import prepare_config
+from oxylabs.utils.utils import prepare_config
 
 
 class GoogleShopping(GoogleShoppingBase):

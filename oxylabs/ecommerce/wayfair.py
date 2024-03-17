@@ -1,7 +1,7 @@
 from .wayfair_base import WayfairBase
 from typing import Optional, Dict, Any
 from .ecommerce import InitEcommerce, InitEcommerceAsync
-from utils.utils import prepare_config
+from oxylabs.utils.utils import prepare_config
 
 
 class Wayfair(WayfairBase):

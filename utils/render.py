@@ -1,2 +1,0 @@
-PNG = "png"
-HTML = "html"

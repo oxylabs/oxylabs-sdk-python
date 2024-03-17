@@ -1,7 +1,7 @@
-from internal.internal import Client, ApiCredentials, ClientAsync
-from utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
+from oxylabs.internal import Client, ApiCredentials, ClientAsync
+from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import asyncio
-import utils.utils as utils
+import oxylabs.utils.utils as utils
 
 
 class InitEcommerce:

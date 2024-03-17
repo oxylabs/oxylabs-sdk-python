@@ -1,11 +1,11 @@
-from utils.defaults import (
+from oxylabs.utils.defaults import (
     set_default_user_agent,
     set_default_http_method,
     set_default_content_encoding,
 )
-from utils.utils import BaseUrlOpts
-from utils import source
-import utils.utils as utils
+from oxylabs.utils.utils import BaseUrlOpts
+from oxylabs.utils import source
+import oxylabs.utils.utils as utils
 from typing import Optional
 
 

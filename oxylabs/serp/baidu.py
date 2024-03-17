@@ -1,6 +1,6 @@
 from .baidu_base import BaiduBase
 from .serp import InitSerp, InitSerpAsync
-from utils.utils import prepare_config
+from oxylabs.utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 

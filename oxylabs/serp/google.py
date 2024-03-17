@@ -1,4 +1,4 @@
-from utils.utils import prepare_config
+from oxylabs.utils.utils import prepare_config
 from .google_base import GoogleBase
 from .serp import InitSerp, InitSerpAsync
 from typing import Optional, Dict, Any

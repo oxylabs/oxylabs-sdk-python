@@ -1,4 +1,4 @@
-from utils.defaults import (
+from oxylabs.utils.defaults import (
     DEFAULT_DOMAIN,
     DEFAULT_LIMIT_SERP,
     DEFAULT_PAGES,
@@ -11,9 +11,9 @@ from utils.defaults import (
     set_default_hotel_occupancy,
     set_default_tbm_context,
 )
-from utils.utils import BaseGoogleOpts, validate_url
-from utils import source, render
-import utils.utils as utils
+from oxylabs.utils.utils import BaseGoogleOpts, validate_url
+from oxylabs.utils import source, render
+import oxylabs.utils.utils as utils
 from typing import Optional, Any
 
 

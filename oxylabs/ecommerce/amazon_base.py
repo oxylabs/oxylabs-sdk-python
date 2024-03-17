@@ -1,4 +1,4 @@
-from utils.defaults import (
+from oxylabs.utils.defaults import (
     DEFAULT_DOMAIN,
     DEFAULT_PAGES,
     DEFAULT_START_PAGE,
@@ -7,9 +7,9 @@ from utils.defaults import (
     set_default_start_page,
     set_default_user_agent,
 )
-from utils.utils import validate_url, BaseEcommerceOpts
-from utils import source
-import utils.utils as utils
+from oxylabs.utils.utils import validate_url, BaseEcommerceOpts
+from oxylabs.utils import source
+import oxylabs.utils.utils as utils
 
 
 class AmazonSearchOpts(BaseEcommerceOpts):

@@ -1,4 +1,4 @@
-from utils.defaults import (
+from oxylabs.utils.defaults import (
     DEFAULT_LIMIT_SERP,
     set_default_domain,
     set_default_limit,
@@ -6,9 +6,9 @@ from utils.defaults import (
     set_default_start_page,
     set_default_user_agent,
 )
-from utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
-from utils import source, domain, locale
-import utils.utils as utils
+from oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
+from oxylabs.utils import source, domain, locale
+import oxylabs.utils.utils as utils
 from typing import Optional
 
 YandexSearchAcceptedDomainParameters = [
