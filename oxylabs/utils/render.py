@@ -1,0 +1,2 @@
+PNG = "png"
+HTML = "html"
