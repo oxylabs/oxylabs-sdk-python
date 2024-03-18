@@ -552,6 +552,8 @@ class GoogleBase:
             "source": source.GOOGLE_ADS,
             "domain": opts.domain,
             "query": query,
+            "start_page": opts.start_page,
+            "pages": opts.pages,
             "locale": opts.locale,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
