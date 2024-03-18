@@ -124,6 +124,8 @@ class GoogleShopping(GoogleShoppingBase):
                 {
                     "domain": com,
                     "locale": None,
+                    "start_page": 1,
+                    "pages": 1,
                     "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
@@ -270,6 +272,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
+                    "start_page": 1,
+                    "pages": 1,
                     "locale": None,
                     "results_language": None,
                     "geo_location": None,

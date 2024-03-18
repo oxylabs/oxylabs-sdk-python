@@ -35,8 +35,6 @@ class Amazon(AmazonBase):
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
@@ -71,14 +69,10 @@ class Amazon(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "locale": None,
-                    "results_language": None,
-                    "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -107,8 +101,6 @@ class Amazon(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
@@ -143,14 +135,13 @@ class Amazon(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "locale": None,
-                    "results_language": None,
+                    "start_page": 1,
+                    "pages": 1,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -181,14 +172,11 @@ class Amazon(AmazonBase):
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -217,16 +205,11 @@ class Amazon(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -257,14 +240,11 @@ class Amazon(AmazonBase):
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -293,16 +273,11 @@ class Amazon(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -350,8 +325,6 @@ class AmazonAsync(AmazonBase):
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
@@ -388,14 +361,10 @@ class AmazonAsync(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "locale": None,
-                    "results_language": None,
-                    "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -426,8 +395,6 @@ class AmazonAsync(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
@@ -464,14 +431,13 @@ class AmazonAsync(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "locale": None,
-                    "results_language": None,
+                    "start_page": 1,
+                    "pages": 1,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -504,14 +470,11 @@ class AmazonAsync(AmazonBase):
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -542,16 +505,11 @@ class AmazonAsync(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -584,14 +542,11 @@ class AmazonAsync(AmazonBase):
                     "domain": com,
                     "start_page": 1,
                     "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -622,16 +577,11 @@ class AmazonAsync(AmazonBase):
             opts (dict, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "locale": None,
-                    "results_language": None,
                     "geo_location": None,
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "render": None,
                     "parse": None,
-                    "context": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.

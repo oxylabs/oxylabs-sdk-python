@@ -28,6 +28,7 @@ class Wayfair(WayfairBase):
                     "limit": 48,
                     "user_agent_type": desktop,
                     "callback_url": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -56,6 +57,7 @@ class Wayfair(WayfairBase):
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -95,6 +97,7 @@ class WayfairAsync(WayfairBase):
                     "limit": 48,
                     "user_agent_type": desktop,
                     "callback_url": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
             timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
@@ -124,9 +127,7 @@ class WayfairAsync(WayfairBase):
             opts (WayfairUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
-                    "geo_location": None,
                     "callback_url": None,
-                    "render": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.

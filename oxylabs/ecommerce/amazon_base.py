@@ -22,7 +22,6 @@ class AmazonSearchOpts(BaseEcommerceOpts):
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
-        locale=None,
         context=None,
         parse=None,
         **kwargs
@@ -31,7 +30,6 @@ class AmazonSearchOpts(BaseEcommerceOpts):
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
-        self.locale = locale
         self.context = context
         self.parse = parse
 
@@ -50,9 +48,8 @@ class AmazonUrlOpts(BaseEcommerceOpts):
     Represents the URL options for AmazonUrl.
     """
 
-    def __init__(self, locale=None, parse=None, **kwargs):
+    def __init__(self, parse=None, **kwargs):
         super().__init__(**kwargs)
-        self.locale = locale
         self.parse = parse
 
     def check_parameter_validity(self):
@@ -68,12 +65,9 @@ class AmazonProductOpts(BaseEcommerceOpts):
     Represents the product options for AmazonProduct.
     """
 
-    def __init__(
-        self, domain=DEFAULT_DOMAIN, locale=None, context=None, parse=None, **kwargs
-    ):
+    def __init__(self, domain=DEFAULT_DOMAIN, context=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
-        self.locale = locale
         self.context = context
         self.parse = parse
 
@@ -95,7 +89,6 @@ class AmazonPricingOpts(BaseEcommerceOpts):
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
-        locale=None,
         parse=None,
         **kwargs
     ):
@@ -103,7 +96,6 @@ class AmazonPricingOpts(BaseEcommerceOpts):
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
-        self.locale = locale
         self.parse = parse
 
     def check_parameter_validity(self):
@@ -126,7 +118,6 @@ class AmazonReviewsOpts(BaseEcommerceOpts):
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
-        locale=None,
         parse=None,
         **kwargs
     ):
@@ -134,7 +125,6 @@ class AmazonReviewsOpts(BaseEcommerceOpts):
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
-        self.locale = locale
         self.parse = parse
 
     def check_parameter_validity(self):
@@ -152,10 +142,9 @@ class AmazonQuestionsOpts(BaseEcommerceOpts):
     Represents the product questions options for AmazonQuestions.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, locale=None, parse=None, **kwargs):
+    def __init__(self, domain=DEFAULT_DOMAIN, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
-        self.locale = locale
         self.parse = parse
 
     def check_parameter_validity(self):
@@ -176,7 +165,6 @@ class AmazonBestsellerOpts(BaseEcommerceOpts):
         domain=DEFAULT_DOMAIN,
         start_page=DEFAULT_START_PAGE,
         pages=DEFAULT_PAGES,
-        locale=None,
         parse=None,
         **kwargs
     ):
@@ -184,7 +172,6 @@ class AmazonBestsellerOpts(BaseEcommerceOpts):
         self.domain = domain
         self.start_page = start_page
         self.pages = pages
-        self.locale = locale
         self.parse = parse
 
     def check_parameter_validity(self):
@@ -202,10 +189,9 @@ class AmazonSellerOpts(BaseEcommerceOpts):
     Represents the seller options for AmazonSeller.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, locale=None, parse=None, **kwargs):
+    def __init__(self, domain=DEFAULT_DOMAIN, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
-        self.locale = locale
         self.parse = parse
 
     def check_parameter_validity(self):
@@ -251,7 +237,6 @@ class AmazonBase:
             "pages": opts.pages,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "render": opts.render,
             "callback_url": opts.callback_url,
             "context": opts.context,
@@ -290,10 +275,8 @@ class AmazonBase:
             "source": source.AMAZON_URL,
             "url": url,
             "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "render": opts.render,
             "callback_url": opts.callback_url,
-            "geo_location": opts.geo_location,
             "parse": opts.parse,
         }
 
@@ -327,7 +310,6 @@ class AmazonBase:
             "query": query,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "render": opts.render,
             "callback_url": opts.callback_url,
             "context": opts.context,
@@ -369,7 +351,6 @@ class AmazonBase:
             "pages": opts.pages,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "render": opts.render,
             "callback_url": opts.callback_url,
             "parse": opts.parse,
@@ -405,11 +386,10 @@ class AmazonBase:
             "source": source.AMAZON_REVIEWS,
             "domain": opts.domain,
             "query": query,
-            "geo_location": opts.geo_location,
-            "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "start_page": opts.start_page,
             "pages": opts.pages,
+            "geo_location": opts.geo_location,
+            "user_agent_type": opts.user_agent_type,
             "render": opts.render,
             "callback_url": opts.callback_url,
             "parse": opts.parse,
@@ -448,7 +428,6 @@ class AmazonBase:
             "query": query,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "render": opts.render,
             "callback_url": opts.callback_url,
             "parse": opts.parse,
@@ -488,7 +467,6 @@ class AmazonBase:
             "pages": opts.pages,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "render": opts.render,
             "callback_url": opts.callback_url,
             "parse": opts.parse,
@@ -524,7 +502,6 @@ class AmazonBase:
             "query": query,
             "geo_location": opts.geo_location,
             "user_agent_type": opts.user_agent_type,
-            "locale": opts.locale,
             "render": opts.render,
             "callback_url": opts.callback_url,
             "parse": opts.parse,
