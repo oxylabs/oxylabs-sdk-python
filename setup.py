@@ -3,7 +3,7 @@ from setuptools import setup
 from oxylabs.version import SDK_VERSION
 
 long_description = """
-The official Python library for Oxylabs.
+The official Python library for the Oxylabs Scraper APIs.
 
 Collect public data at scale with industry-leading web scraping solutions and the world's largest ethical proxy network.
 Documentation can be found at [https://github.com/mslmio/oxylabs-sdk-python](https://github.com/mslmio/oxylabs-sdk-python).
@@ -12,7 +12,7 @@ Documentation can be found at [https://github.com/mslmio/oxylabs-sdk-python](htt
 setup(
     name="oxylabs",
     version=SDK_VERSION,
-    description="Official Python library for Oxylabs",
+    description="Official Python library for Oxylabs Scraper APIs",
     long_description=long_description,
     url="https://oxylabs.io/",
     author="Oxylabs",
