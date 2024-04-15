@@ -11,7 +11,7 @@ SYNC_BASE_URL = "https://realtime.oxylabs.io/v1/queries"
 ASYNC_BASE_URL = "https://data.oxylabs.io/v1/queries"
 
 DEFAULT_TIMEOUT = 50
-DEFAULT_POLL_INTERVAL = 2
+DEFAULT_POLL_INTERVAL = 5
 
 
 # Functions to set default values
