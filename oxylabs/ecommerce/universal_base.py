@@ -45,7 +45,9 @@ class UniversalUrlOpts(BaseUrlOpts):
 
 
 class UniversalBase:
-    def _prepare_universal_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_universal_url_payload(
+        self, url: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the payload for a URL request.
 
@@ -62,7 +64,6 @@ class UniversalBase:
 
         opts = UniversalUrlOpts(**user_opts if user_opts is not None else {})
 
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.context = set_default_http_method(opts.context)
         opts.content_encoding = set_default_content_encoding(opts.content_encoding)
 

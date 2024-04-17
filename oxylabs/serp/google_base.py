@@ -20,10 +20,10 @@ from typing import Optional, Any
 class GoogleSearchOpts(BaseGoogleOpts):
     def __init__(
         self,
-        domain: str = DEFAULT_DOMAIN,
-        start_page: int = DEFAULT_START_PAGE,
-        pages: int = DEFAULT_PAGES,
-        limit: int = DEFAULT_LIMIT_SERP,
+        domain: str = None,
+        start_page: int = None,
+        pages: int = None,
+        limit: int = None,
         locale: Optional[str] = None,
         parse: bool = False,
         **kwargs: Any,
@@ -140,10 +140,10 @@ class GoogleAdsOpts(BaseGoogleOpts):
     def __init__(
         self,
         parse: bool = False,
-        domain: str = DEFAULT_DOMAIN,
-        start_page: int = DEFAULT_START_PAGE,
-        pages: int = DEFAULT_PAGES,
-        limit: int = DEFAULT_LIMIT_SERP,
+        domain: str = None,
+        start_page: int = None,
+        pages: int = None,
+        limit: int = None,
         locale: Optional[str] = None,
         **kwargs: Any,
     ) -> None:
@@ -247,10 +247,10 @@ class GoogleHotelsOpts(BaseGoogleOpts):
 
     def __init__(
         self,
-        domain: str = DEFAULT_DOMAIN,
-        start_page: int = DEFAULT_START_PAGE,
-        pages: int = DEFAULT_PAGES,
-        limit: int = DEFAULT_LIMIT_SERP,
+        domain: str = None,
+        start_page: int = None,
+        pages: int = None,
+        limit: int = None,
         locale: Optional[str] = None,
         **kwargs: Any,
     ) -> None:
@@ -301,8 +301,8 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
 
     def __init__(
         self,
-        domain: str = DEFAULT_DOMAIN,
-        start_page: int = DEFAULT_START_PAGE,
+        domain: str = None,
+        start_page: int = None,
         locale: Optional[str] = None,
         **kwargs: Any,
     ) -> None:
@@ -355,10 +355,10 @@ class GoogleImagesOpts(BaseGoogleOpts):
 
     def __init__(
         self,
-        domain: str = DEFAULT_DOMAIN,
-        start_page: int = DEFAULT_START_PAGE,
-        pages: int = DEFAULT_PAGES,
-        limit: int = DEFAULT_LIMIT_SERP,
+        domain: str = None,
+        start_page: int = None,
+        pages: int = None,
+        limit: int = None,
         locale: Optional[str] = None,
         parse: bool = False,
         **kwargs: Any,
@@ -452,12 +452,6 @@ class GoogleBase:
 
         opts = GoogleSearchOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.limit = set_default_limit(opts.limit, DEFAULT_LIMIT_SERP)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         # Prepare payload
@@ -506,8 +500,6 @@ class GoogleBase:
         validate_url(url, "google")
         opts = GoogleUrlOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         # Prepare payload
@@ -540,11 +532,6 @@ class GoogleBase:
         """
         opts = GoogleAdsOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         # Prepare payload
@@ -584,8 +571,6 @@ class GoogleBase:
         """
         opts = GoogleSuggestionsOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         # Prepare payload
@@ -618,13 +603,6 @@ class GoogleBase:
         """
         opts = GoogleHotelsOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.limit = set_default_limit(opts.limit, DEFAULT_LIMIT_SERP)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-        opts.context = set_default_hotel_occupancy(opts.context)
         opts.check_parameter_validity()
 
         # Prepare payload
@@ -664,11 +642,6 @@ class GoogleBase:
         """
         opts = GoogleTravelHotelsOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.context = set_default_hotel_occupancy(opts.context)
-
         opts.check_parameter_validity()
 
         # Prepare payload
@@ -704,11 +677,6 @@ class GoogleBase:
         """
         opts = GoogleImagesOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
         opts.context = set_default_tbm_context(opts.context)
         opts.check_parameter_validity()
 
@@ -749,8 +717,6 @@ class GoogleBase:
         """
         opts = GoogleTrendsExploreOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         # Prepare payload

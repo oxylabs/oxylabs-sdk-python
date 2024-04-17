@@ -7,25 +7,29 @@ DEFAULT_START_PAGE = 1
 DEFAULT_PAGES = 1
 DEFAULT_LIMIT_SERP = 10
 DEFAULT_LIMIT_ECOMMERCE = 48
+
 SYNC_BASE_URL = "https://realtime.oxylabs.io/v1/queries"
 ASYNC_BASE_URL = "https://data.oxylabs.io/v1/queries"
+
+PROXY_BASE_URL = "realtime.oxylabs.io"
+PROXY_PORT = 60000
 
 DEFAULT_TIMEOUT = 50
 DEFAULT_POLL_INTERVAL = 5
 
 
 # Functions to set default values
-def set_default_domain(domain: str) -> str:
+def set_default_domain(default_domain: str) -> str:
     """
     Sets the default domain for the application.
 
     Parameters:
-    - domain (str): The domain to be set as the default.
+    - default_domain (str): The domain to be set as the default.
 
     Returns:
     - str: The updated default domain.
     """
-    return domain if domain else DEFAULT_DOMAIN
+    return default_domain if default_domain else DEFAULT_DOMAIN
 
 
 def set_default_start_page(start_page: int) -> int:

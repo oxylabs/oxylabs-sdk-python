@@ -60,12 +60,6 @@ class BaiduBase:
         """
         opts = BaiduSearchOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
-        opts.limit = set_default_limit(opts.limit, DEFAULT_LIMIT_SERP)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         payload = {
@@ -99,8 +93,6 @@ class BaiduBase:
         validate_url(url, "baidu")
         opts = BaiduUrlOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         payload = {

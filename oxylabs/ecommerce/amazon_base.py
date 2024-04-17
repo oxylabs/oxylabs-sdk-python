@@ -1,15 +1,6 @@
-from oxylabs.utils.defaults import (
-    DEFAULT_DOMAIN,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    set_default_domain,
-    set_default_pages,
-    set_default_start_page,
-    set_default_user_agent,
-)
-from oxylabs.utils.utils import validate_url, BaseEcommerceOpts
-from oxylabs.utils import source
 import oxylabs.utils.utils as utils
+from oxylabs.utils import source
+from oxylabs.utils.utils import BaseEcommerceOpts, validate_url
 
 
 class AmazonSearchOpts(BaseEcommerceOpts):
@@ -19,9 +10,9 @@ class AmazonSearchOpts(BaseEcommerceOpts):
 
     def __init__(
         self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
+        domain=None,
+        start_page=None,
+        pages=None,
         context=None,
         parse=None,
         **kwargs
@@ -65,7 +56,7 @@ class AmazonProductOpts(BaseEcommerceOpts):
     Represents the product options for AmazonProduct.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, context=None, parse=None, **kwargs):
+    def __init__(self, domain=None, context=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.context = context
@@ -84,14 +75,7 @@ class AmazonPricingOpts(BaseEcommerceOpts):
     Represents the product pricing options for AmazonPricing.
     """
 
-    def __init__(
-        self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        parse=None,
-        **kwargs
-    ):
+    def __init__(self, domain=None, start_page=None, pages=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.start_page = start_page
@@ -113,14 +97,7 @@ class AmazonReviewsOpts(BaseEcommerceOpts):
     Represents the product review options for AmazonReview.
     """
 
-    def __init__(
-        self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        parse=None,
-        **kwargs
-    ):
+    def __init__(self, domain=None, start_page=None, pages=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.start_page = start_page
@@ -142,7 +119,7 @@ class AmazonQuestionsOpts(BaseEcommerceOpts):
     Represents the product questions options for AmazonQuestions.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, parse=None, **kwargs):
+    def __init__(self, domain=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.parse = parse
@@ -160,14 +137,7 @@ class AmazonBestsellerOpts(BaseEcommerceOpts):
     Represents the bestseller options for AmazonBestseller.
     """
 
-    def __init__(
-        self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        parse=None,
-        **kwargs
-    ):
+    def __init__(self, domain=None, start_page=None, pages=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.start_page = start_page
@@ -189,7 +159,7 @@ class AmazonSellerOpts(BaseEcommerceOpts):
     Represents the seller options for AmazonSeller.
     """
 
-    def __init__(self, domain=DEFAULT_DOMAIN, parse=None, **kwargs):
+    def __init__(self, domain=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.parse = parse
@@ -220,12 +190,6 @@ class AmazonBase:
         """
 
         opts = AmazonSearchOpts(**user_opts if user_opts is not None else {})
-
-        # Set defaults and check validity
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 
@@ -267,8 +231,6 @@ class AmazonBase:
         validate_url(url, "amazon")
         opts = AmazonUrlOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         payload = {
@@ -298,9 +260,6 @@ class AmazonBase:
             dict: The prepared payload for the request.
         """
         opts = AmazonProductOpts(**user_opts if user_opts is not None else {})
-
-        opts.domain = set_default_domain(opts.domain)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 
@@ -336,11 +295,6 @@ class AmazonBase:
 
         opts = AmazonPricingOpts(**user_opts if user_opts is not None else {})
 
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-
         opts.check_parameter_validity()
 
         payload = {
@@ -374,11 +328,6 @@ class AmazonBase:
             dict: The prepared payload for retrieving Amazon reviews.
         """
         opts = AmazonReviewsOpts(**user_opts if user_opts is not None else {})
-
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 
@@ -417,9 +366,6 @@ class AmazonBase:
         """
         opts = AmazonQuestionsOpts(**user_opts if user_opts is not None else {})
 
-        opts.domain = set_default_domain(opts.domain)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-
         opts.check_parameter_validity()
 
         payload = {
@@ -451,11 +397,6 @@ class AmazonBase:
             dict: The prepared payload for the request.
         """
         opts = AmazonBestsellerOpts(**user_opts if user_opts is not None else {})
-
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 
@@ -490,9 +431,6 @@ class AmazonBase:
             dict: The prepared payload for the request.
         """
         opts = AmazonSellerOpts(**user_opts if user_opts is not None else {})
-
-        opts.domain = set_default_domain(opts.domain)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 

@@ -20,9 +20,9 @@ class GoogleShoppingSearchOpts(BaseEcommerceOpts):
 
     def __init__(
         self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
+        domain=None,
+        start_page=None,
+        pages=None,
         locale=None,
         results_language=None,
         context=None,
@@ -82,12 +82,7 @@ class GoogleShoppingProductOpts(BaseEcommerceOpts):
     """
 
     def __init__(
-        self,
-        domain=DEFAULT_DOMAIN,
-        locale=None,
-        results_language=None,
-        parse=None,
-        **kwargs
+        self, domain=None, locale=None, results_language=None, parse=None, **kwargs
     ):
         super().__init__(**kwargs)
         self.domain = domain
@@ -110,9 +105,9 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
 
     def __init__(
         self,
-        domain=DEFAULT_DOMAIN,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
+        domain=None,
+        start_page=None,
+        pages=None,
         locale=None,
         results_language=None,
         parse=None,
@@ -153,13 +148,6 @@ class GoogleShoppingBase:
         """
         opts = GoogleShoppingSearchOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.context = set_default_sort_by(opts.context)
-        opts.pages = set_default_pages(opts.pages)
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
-
         opts.check_parameter_validity()
 
         payload = {
@@ -198,8 +186,6 @@ class GoogleShoppingBase:
         validate_url(url, "google")
         opts = GoogleShoppingUrlOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         payload = {
@@ -232,9 +218,6 @@ class GoogleShoppingBase:
             dict: The prepared payload for the request.
         """
         opts = GoogleShoppingProductOpts(**user_opts if user_opts is not None else {})
-
-        opts.domain = set_default_domain(opts.domain)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 
@@ -271,11 +254,6 @@ class GoogleShoppingBase:
             dict: The prepared payload for the request.
         """
         opts = GoogleProductPricingOpts(**user_opts if user_opts is not None else {})
-
-        opts.domain = set_default_domain(opts.domain)
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 

@@ -16,11 +16,11 @@ from .defaults import (
 class BaseSearchOpts:
     def __init__(
         self,
-        domain: str = DEFAULT_DOMAIN,
-        start_page: int = DEFAULT_START_PAGE,
-        pages: int = DEFAULT_PAGES,
-        limit: int = DEFAULT_LIMIT_SERP,
-        user_agent_type: str = DEFAULT_USER_AGENT,
+        domain: str = None,
+        start_page: int = None,
+        pages: int = None,
+        limit: int = None,
+        user_agent_type: str = None,
         callback_url: str = None,
         parsing_instructions: str = None,
     ):
@@ -50,7 +50,7 @@ class BaseUrlOpts:
 
     def __init__(
         self,
-        user_agent_type: str = DEFAULT_USER_AGENT,
+        user_agent_type: str = None,
         callback_url: str = None,
         parsing_instructions: str = None,
     ):
@@ -71,7 +71,7 @@ class BaseGoogleOpts:
     def __init__(
         self,
         geo_location: str = None,
-        user_agent_type: str = DEFAULT_USER_AGENT,
+        user_agent_type: str = None,
         render: bool = None,
         callback_url: str = None,
         parsing_instructions: dict = None,
@@ -110,7 +110,7 @@ class BaseEcommerceOpts:
 
     def __init__(
         self,
-        user_agent_type: str = DEFAULT_USER_AGENT,
+        user_agent_type: str = None,
         render: str = None,
         callback_url: str = None,
         geo_location: str = None,
@@ -297,7 +297,7 @@ def check_limit_validity(limit: int) -> None:
     Raises:
         ValueError: If the limit parameter is less than or equal to 0.
     """
-    if limit <= 0:
+    if limit and limit <= 0:
         raise ValueError("Limit parameter must be greater than 0")
 
 
@@ -311,7 +311,7 @@ def check_limit_validity_ecom(limit: int) -> None:
     Raises:
         ValueError: If the limit parameter is not 24, 48, or 96.
     """
-    if limit != 24 and limit != 48 and limit != 96:
+    if limit and limit != 24 and limit != 48 and limit != 96:
         raise ValueError("Limit parameter must be 24, 48, or 96")
 
 
@@ -325,7 +325,7 @@ def check_pages_validity(pages: int) -> None:
     Raises:
         ValueError: If pages is less than or equal to 0.
     """
-    if pages <= 0:
+    if pages and pages <= 0:
         raise ValueError("Pages parameter must be greater than 0")
 
 
@@ -339,7 +339,7 @@ def check_start_page_validity(start_page: int) -> None:
     Raises:
         ValueError: If the start page parameter is less than or equal to 0.
     """
-    if start_page <= 0:
+    if start_page and start_page <= 0:
         raise ValueError("Start page parameter must be greater than 0")
 
 

@@ -20,10 +20,10 @@ class WayfairSearchOpts:
 
     def __init__(
         self,
-        start_page=DEFAULT_START_PAGE,
-        pages=DEFAULT_PAGES,
-        limit=DEFAULT_LIMIT_ECOMMERCE,
-        user_agent_type=DEFAULT_USER_AGENT,
+        start_page=None,
+        pages=None,
+        limit=None,
+        user_agent_type=None,
         callback_url=None,
         parsing_instructions=None,
     ):
@@ -49,7 +49,7 @@ class WayfairUrlOpts:
     Represents the URL options for Wayfair.
     """
 
-    def __init__(self, user_agent_type=DEFAULT_USER_AGENT, callback_url=None):
+    def __init__(self, user_agent_type=None, callback_url=None):
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
 
@@ -73,12 +73,6 @@ class WayfairBase:
             dict: The prepared search payload.
         """
         opts = WayfairSearchOpts(**user_opts if user_opts is not None else {})
-
-        # Set defaults and check validity
-        opts.start_page = set_default_start_page(opts.start_page)
-        opts.limit = set_default_limit(opts.limit, DEFAULT_LIMIT_ECOMMERCE)
-        opts.pages = set_default_pages(opts.pages)
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
 
         opts.check_parameter_validity()
 
@@ -116,8 +110,6 @@ class WayfairBase:
         validate_url(url, "wayfair")
         opts = WayfairUrlOpts(**user_opts if user_opts is not None else {})
 
-        # Set defaults and check validity
-        opts.user_agent_type = set_default_user_agent(opts.user_agent_type)
         opts.check_parameter_validity()
 
         payload = {

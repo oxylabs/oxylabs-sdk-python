@@ -1,5 +1,7 @@
-import requests
 from urllib.parse import quote
+from oxylabs.utils.defaults import PROXY_BASE_URL, PROXY_PORT
+
+import requests
 
 
 class Proxy:
@@ -13,12 +15,19 @@ class Proxy:
         """
         self.username = quote(username)
         self.password = quote(password)
-        self.proxy_url = (
-            f"http://{self.username}:{self.password}@realtime.oxylabs.io:60000"
-        )
+        self.proxy_url = self._build_proxy_url()
         self.session = requests.Session()
-        self.session.proxies = {"http": self.proxy_url}
+        self.session.proxies = {"http": self.proxy_url, "https": self.proxy_url}
         self.session.verify = False
+
+    def _build_proxy_url(self) -> str:
+        """
+        Build the proxy URL using configured constants.
+
+        Returns:
+            str: The constructed proxy URL.
+        """
+        return f"http://{self.username}:{self.password}@{PROXY_BASE_URL}:{PROXY_PORT}"
 
     def get(self, url: str) -> requests.Response:
         """
@@ -80,7 +89,7 @@ class Proxy:
         """
         self.session.headers["x-oxylabs-render"] = render
 
-    def add_parse_header(self, parser: str) -> None:
+    def add_parse_header(self, parser_type: str) -> None:
         """
         Adds a parse header to the session headers.
         Setting this will return parsed data for the targets for which we have dedicated parsers.
@@ -99,7 +108,7 @@ class Proxy:
             None
         """
         self.session.headers["x-oxylabs-parse"] = "1"
-        self.session.headers["x-oxylabs-parser"] = parser
+        self.session.headers["x-oxylabs-parser-type"] = parser_type
 
     def add_geo_location_header(self, geo_location: str) -> None:
         """
