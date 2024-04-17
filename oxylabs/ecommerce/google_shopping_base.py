@@ -1,3 +1,4 @@
+from typing import Optional
 from oxylabs.utils.defaults import (
     DEFAULT_DOMAIN,
     DEFAULT_PAGES,
@@ -133,14 +134,14 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
 
 class GoogleShoppingBase:
     def _prepare_google_shopping_search_payload(
-        self, query: str, user_opts: dict
+        self, query: str, user_opts: Optional[dict]
     ) -> dict:
         """
         Prepare the search payload for Google Shopping.
 
         Args:
             query (str): The search query.
-            user_opts (dict): User options for the search.
+            user_opts (dict): Optional user-defined options.
 
         Returns:
             dict: The prepared search payload.
@@ -172,7 +173,9 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_google_shopping_url_payload(self, url: str, user_opts: dict) -> dict:
+    def _prepare_google_shopping_url_payload(
+        self, url: str, user_opts: Optional[dict]
+    ) -> dict:
         """
         Prepares the payload for a Google Shopping URL request.
 
@@ -205,7 +208,7 @@ class GoogleShoppingBase:
         return payload
 
     def _prepare_google_shopping_product_payload(
-        self, query: str, user_opts: dict
+        self, query: str, user_opts: Optional[dict]
     ) -> dict:
         """
         Prepare the payload for the Google Shopping product request.
@@ -241,7 +244,7 @@ class GoogleShoppingBase:
         return payload
 
     def _prepare_google_shopping_product_pricing_payload(
-        self, query: str, user_opts: dict
+        self, query: str, user_opts: Optional[dict]
     ) -> dict:
         """
         Prepares the payload for retrieving product pricing from Google Shopping.
