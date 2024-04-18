@@ -9,7 +9,7 @@ from oxylabs.utils.defaults import (
 from oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 from oxylabs.utils import source, domain, locale
 import oxylabs.utils.utils as utils
-from typing import Optional
+from typing import Optional, Dict, Any
 
 YandexSearchAcceptedDomainParameters = [
     domain.COM,
@@ -88,7 +88,7 @@ class YandexUrlOpts(BaseUrlOpts):
 
 class YandexBase:
     def _prepare_yandex_search_payload(
-        self, query: str, user_opts: Optional[dict]
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepare the search payload for Yandex search.
@@ -123,7 +123,9 @@ class YandexBase:
 
         return payload
 
-    def _prepare_yandex_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_yandex_url_payload(
+        self, url: str, user_opts: Optional[Dict[str, Any]] = None
+    ) -> dict:
         """
         Prepare the payload for a Yandex URL request.
 

@@ -14,7 +14,7 @@ from oxylabs.utils.defaults import (
 from oxylabs.utils.utils import BaseGoogleOpts, validate_url
 from oxylabs.utils import source, render
 import oxylabs.utils.utils as utils
-from typing import Optional, Any
+from typing import Optional, Any, Dict
 
 
 class GoogleSearchOpts(BaseGoogleOpts):
@@ -418,7 +418,7 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
 
 class GoogleBase:
     def _prepare_google_search_payload(
-        self, query: str, user_opts: Optional[dict]
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepares the search payload for a Google search.
@@ -486,7 +486,9 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_google_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_google_url_payload(
+        self, url: str, user_opts: Optional[Dict[str, Any]] = None
+    ) -> dict:
         """
         Prepares the payload for a Google URL request.
 
@@ -519,7 +521,9 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_ads_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_ads_payload(
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+    ) -> dict:
         """
         Prepares the payload for the Google Ads request.
 
@@ -557,7 +561,7 @@ class GoogleBase:
         return payload
 
     def _prepare_suggestions_payload(
-        self, query: str, user_opts: Optional[dict]
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepares the payload for making a suggestions request to Google.
@@ -590,7 +594,9 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_hotels_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_hotels_payload(
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+    ) -> dict:
         """
         Prepares the payload for the hotels request.
 
@@ -628,7 +634,7 @@ class GoogleBase:
         return payload
 
     def _prepare_travel_hotels_payload(
-        self, query: str, user_opts: Optional[dict]
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepares the payload for the travel hotels request.
@@ -664,7 +670,9 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_images_payload(self, query: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_images_payload(
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+    ) -> dict:
         """
         Prepare the payload for the images search request.
 
@@ -703,7 +711,7 @@ class GoogleBase:
         return payload
 
     def _prepare_trends_explore_payload(
-        self, query: str, user_opts: Optional[dict]
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepares the payload for Google Trends Explore API request.

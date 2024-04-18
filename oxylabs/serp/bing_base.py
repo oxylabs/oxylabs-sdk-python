@@ -9,7 +9,7 @@ from oxylabs.utils.defaults import (
 from oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 from oxylabs.utils import source, domain
 import oxylabs.utils.utils as utils
-from typing import Optional, Any
+from typing import Optional, Any, Dict
 
 BingSearchAcceptedDomainParameters = [
     domain.COM,
@@ -106,7 +106,7 @@ class BingUrlOpts(BaseUrlOpts):
 
 class BingBase:
     def _prepare_bing_search_payload(
-        self, query: str, user_opts: Optional[dict]
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepares the search payload for the Bing search.
@@ -144,7 +144,9 @@ class BingBase:
 
         return payload
 
-    def _prepare_bing_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_bing_url_payload(
+        self, url: str, user_opts: Optional[Dict[str, Any]] = None
+    ) -> dict:
         """
         Prepares the payload for a Bing URL request.
 

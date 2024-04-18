@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Dict, Any
 from oxylabs.utils.defaults import (
     DEFAULT_LIMIT_ECOMMERCE,
     DEFAULT_PAGES,
@@ -63,7 +63,7 @@ class WayfairUrlOpts:
 
 class WayfairBase:
     def _prepare_wayfair_search_payload(
-        self, query: str, user_opts: Optional[dict]
+        self, query: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepare the search payload for Wayfair.
@@ -95,7 +95,9 @@ class WayfairBase:
 
         return payload
 
-    def _prepare_wayfair_url_payload(self, url: str, user_opts: Optional[dict]) -> dict:
+    def _prepare_wayfair_url_payload(
+        self, url: str, user_opts: Optional[Dict[str, Any]] = None
+    ) -> dict:
         """
         Prepare the payload for a Wayfair URL request.
 

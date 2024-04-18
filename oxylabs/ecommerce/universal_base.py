@@ -6,7 +6,7 @@ from oxylabs.utils.defaults import (
 from oxylabs.utils.utils import BaseUrlOpts
 from oxylabs.utils import source
 import oxylabs.utils.utils as utils
-from typing import Optional
+from typing import Optional, Dict, Any
 
 
 class UniversalUrlOpts(BaseUrlOpts):
@@ -46,7 +46,7 @@ class UniversalUrlOpts(BaseUrlOpts):
 
 class UniversalBase:
     def _prepare_universal_url_payload(
-        self, url: str, user_opts: Optional[dict]
+        self, url: str, user_opts: Optional[Dict[str, Any]] = None
     ) -> dict:
         """
         Prepares the payload for a URL request.
