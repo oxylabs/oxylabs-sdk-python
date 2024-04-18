@@ -1,4 +1,5 @@
-from . import user_agent, domain
+from .constants import domain
+from .constants import user_agent
 
 # Constants
 DEFAULT_USER_AGENT = user_agent.DESKTOP

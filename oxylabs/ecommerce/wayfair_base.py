@@ -10,7 +10,7 @@ from oxylabs.utils.defaults import (
     set_default_user_agent,
 )
 from oxylabs.utils.utils import validate_url
-from oxylabs.utils import source
+from oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 
 

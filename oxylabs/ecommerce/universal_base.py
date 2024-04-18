@@ -4,7 +4,7 @@ from oxylabs.utils.defaults import (
     set_default_content_encoding,
 )
 from oxylabs.utils.utils import BaseUrlOpts
-from oxylabs.utils import source
+from oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 from typing import Optional, Dict, Any
 

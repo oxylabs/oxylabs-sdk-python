@@ -1,3 +1,4 @@
+from typing import Optional
 from urllib.parse import quote
 from oxylabs.utils.defaults import PROXY_BASE_URL, PROXY_PORT
 
@@ -29,7 +30,7 @@ class Proxy:
         """
         return f"http://{self.username}:{self.password}@{PROXY_BASE_URL}:{PROXY_PORT}"
 
-    def get(self, url: str) -> requests.Response:
+    def get(self, url: str) -> Optional[requests.Response]:
         """
         Sends a GET request to the specified URL using the session object.
 
@@ -37,7 +38,7 @@ class Proxy:
             url (str): The URL to send the GET request to.
 
         Returns:
-            requests.Response: The response object returned by the GET request.
+            Optional[requests.Response]: The response object returned by the GET request, or None if an error occurred.
 
         Raises:
             requests.exceptions.RequestException: If the GET request encounters an error.
@@ -89,26 +90,52 @@ class Proxy:
         """
         self.session.headers["x-oxylabs-render"] = render
 
-    def add_parse_header(self, parser_type: str) -> None:
-        """
-        Adds a parse header to the session headers.
-        Setting this will return parsed data for the targets for which we have dedicated parsers.
 
-        Args:
-            parser (str): The parser to add. Must be one of the following:
+def add_parse_header(self, parser_type: str) -> None:
+    """
+    Adds a parse header to the session headers if a valid parser type is provided.
+    Setting this will return parsed data for the targets for which we have dedicated parsers.
+
+    Args:
+        parser_type (str): The parser type to add. Must be one of the supported types:
             - For Google:               "google", "google_search", "google_ads", "google_images"
             - For Google Shopping:      "google_shopping", "google_shopping_search", "google_shopping_product", "google_shopping_pricing"
             - For Amazon:               "amazon", "amazon_search", "amazon_product", "amazon_pricing", "amazon_reviews", "amazon_questions", "amazon_bestsellers", "amazon_sellers"
-            - For Best Buy:             "universal_ecommerce"
-            - For Etsy:                 "universal_ecommerce"
-            - For Target:               "universal_ecommerce"
-            - For Walmart:              "universal_ecommerce"
+            - For Best Buy, Etsy, Target, Walmart: "universal_ecommerce"
 
-        Returns:
-            None
-        """
-        self.session.headers["x-oxylabs-parse"] = "1"
-        self.session.headers["x-oxylabs-parser-type"] = parser_type
+    Raises:
+        ValueError: If an invalid parser_type is provided.
+
+    Returns:
+        None
+    """
+    supported_parser_types = {
+        "google",
+        "google_search",
+        "google_ads",
+        "google_images",
+        "google_shopping",
+        "google_shopping_search",
+        "google_shopping_product",
+        "google_shopping_pricing",
+        "amazon",
+        "amazon_search",
+        "amazon_product",
+        "amazon_pricing",
+        "amazon_reviews",
+        "amazon_questions",
+        "amazon_bestsellers",
+        "amazon_sellers",
+        "universal_ecommerce",
+    }
+
+    if parser_type not in supported_parser_types:
+        raise ValueError(
+            f"Invalid parser_type '{parser_type}'. Must be one of: {', '.join(supported_parser_types)}"
+        )
+
+    self.session.headers["x-oxylabs-parse"] = "1"
+    self.session.headers["x-oxylabs-parser-type"] = parser_type
 
     def add_geo_location_header(self, geo_location: str) -> None:
         """

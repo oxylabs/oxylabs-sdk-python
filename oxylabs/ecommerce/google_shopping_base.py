@@ -10,7 +10,7 @@ from oxylabs.utils.defaults import (
     set_default_sort_by,
 )
 from oxylabs.utils.utils import validate_url, BaseEcommerceOpts
-from oxylabs.utils import source
+from oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 
 

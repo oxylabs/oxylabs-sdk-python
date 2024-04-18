@@ -1,6 +1,8 @@
 from urllib.parse import urlparse
 import aiohttp
-from . import user_agent, render, fn_name, source, domain, locale
+
+from .constants import domain, fn_name, locale, render, source
+from .constants import user_agent
 from typing import Any, List
 from .defaults import (
     DEFAULT_LIMIT_SERP,

@@ -1,3 +1,4 @@
+from oxylabs.utils.constants import render
 from oxylabs.utils.defaults import (
     DEFAULT_DOMAIN,
     DEFAULT_LIMIT_SERP,
@@ -12,7 +13,7 @@ from oxylabs.utils.defaults import (
     set_default_tbm_context,
 )
 from oxylabs.utils.utils import BaseGoogleOpts, validate_url
-from oxylabs.utils import source, render
+from oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 from typing import Optional, Any, Dict
 

@@ -2,6 +2,8 @@ from oxylabs.internal import Client, ApiCredentials, ClientAsync
 from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import asyncio
 import oxylabs.utils.utils as utils
+from oxylabs.internal import ApiCredentials, Client, ClientAsync
+from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
 
 class InitSerp:
@@ -18,7 +20,7 @@ class InitSerp:
 
     def get_resp(self, payload: dict, config: dict) -> dict:
         """
-        Processes the payload synchronously and fetches api response.
+        Processes the payload synchronously and fetches API response.
 
         Args:
             payload (dict): The payload for the request.
@@ -50,7 +52,7 @@ class InitSerpAsync:
 
     async def get_resp(self, payload: dict, config: dict) -> dict:
         """
-        Processes the payload asynchronously and fetches api response.
+        Processes the payload asynchronously and fetches API response.
 
         Args:
             payload (dict): The payload for the request.

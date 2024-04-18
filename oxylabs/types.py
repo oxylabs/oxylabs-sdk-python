@@ -1,1 +1,2 @@
-from .utils import domain, source, user_agent, render, locale, fn_name
+from .utils.constants import domain, fn_name, locale, render, source
+from .utils.constants import user_agent

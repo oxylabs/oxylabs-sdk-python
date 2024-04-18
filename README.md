@@ -75,8 +75,8 @@ There are currently four search engines you can scrape with the Oxylabs SERP API
 
 | Search Engine | Sources
 | ------------- | --------------
-| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, `google_travel_hotels`, `google_images`, `google_suggest`, `google_trends_explore`  
-| **Yandex**    | `yandex`, `yandex_search`  
+| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, `google_travel_hotels`, `google_images`, `google_suggest`, `google_trends_explore`
+| **Yandex**    | `yandex`, `yandex_search`
 | **Bing**      | `bing`, `bing_search`
 | **Baidu**     | `baidu`, `baidu_search`
 
@@ -270,11 +270,12 @@ password = "password"
 # Initialize the proxy client with your credentials.
 proxy = Proxy(username, password)
 
-# Add necessary headers.
+# Customize headers for specific requirements (optional).
 proxy.add_user_agent_header("desktop_chrome")
 proxy.add_geo_location_header("Germany")
 proxy.add_render_header("html")
 
+# Use the proxy to make a request.
 result = proxy.get("https://www.example.com")
 
 print(result.text)

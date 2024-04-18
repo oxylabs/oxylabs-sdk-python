@@ -1,5 +1,5 @@
 import oxylabs.utils.utils as utils
-from oxylabs.utils import source
+from oxylabs.utils.constants import source
 from oxylabs.utils.utils import BaseEcommerceOpts, validate_url
 from typing import Any, Dict, Optional
 

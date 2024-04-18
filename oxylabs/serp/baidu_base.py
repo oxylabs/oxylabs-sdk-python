@@ -1,3 +1,4 @@
+from oxylabs.utils.constants import domain
 from oxylabs.utils.defaults import (
     DEFAULT_LIMIT_SERP,
     set_default_domain,
@@ -7,7 +8,7 @@ from oxylabs.utils.defaults import (
     set_default_user_agent,
 )
 from oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
-from oxylabs.utils import source, domain
+from oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 from typing import Optional, Dict, Any
 
