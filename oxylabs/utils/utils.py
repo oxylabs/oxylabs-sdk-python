@@ -208,23 +208,6 @@ def validate_url(input_url: str, host: str) -> None:
 
 def check_user_agent_validity(user_agent_type: str) -> None:
     """
-    Check the validity of the user agent type.
-
-    Args:
-        user_agent_type (str): The user agent type to be checked.
-
-    Raises:
-        ValueError: If the user agent type is invalid.
-
-    Returns:
-        None
-    """
-    if user_agent_type and user_agent_type not in VALID_UAS:
-        raise ValueError(f"Invalid user agent parameter: {user_agent_type}")
-
-
-def check_user_agent_validity(user_agent_type: str) -> None:
-    """
     Check the validity of a user agent type.
 
     Args:
@@ -361,7 +344,9 @@ def check_sorting_parameter_validity(
         and item.get("value") not in acceptable_sorting_parameters
         for item in context
     ):
-        raise ValueError(f"Invalid sorting parameter, must be one of {acceptable_sorting_parameters}")
+        raise ValueError(
+            f"Invalid sorting parameter, must be one of {acceptable_sorting_parameters}"
+        )
 
 
 def check_price_range_validity(context: List[dict]) -> None:
@@ -397,7 +382,9 @@ def check_http_method_validity(context: List[dict]) -> None:
         item.get("key") == "http_method" and item.get("value") not in ["post", "get"]
         for item in context
     ):
-        raise ValueError("Invalid HTTP method in context, must be one of ['post', 'get']")
+        raise ValueError(
+            "Invalid HTTP method in context, must be one of ['post', 'get']"
+        )
 
 
 def check_content_for_post_validity(context: list) -> None:
