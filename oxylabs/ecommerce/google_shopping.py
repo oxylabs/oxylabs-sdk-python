@@ -13,9 +13,9 @@ class GoogleShopping(GoogleShoppingBase):
     def scrape_google_shopping_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping search results for a given query.
 
@@ -51,9 +51,9 @@ class GoogleShopping(GoogleShoppingBase):
     def scrape_google_shopping_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping search results for a given URL.
 
@@ -80,9 +80,9 @@ class GoogleShopping(GoogleShoppingBase):
     def scrape_google_shopping_products(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping product results for a given query.
 
@@ -112,9 +112,9 @@ class GoogleShopping(GoogleShoppingBase):
     def scrape_google_product_pricing(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping product pricing results for a given product code.
 
@@ -153,10 +153,10 @@ class GoogleShoppingAsync(GoogleShoppingBase):
     async def scrape_google_shopping_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping search results for a given query.
 
@@ -193,10 +193,10 @@ class GoogleShoppingAsync(GoogleShoppingBase):
     async def scrape_google_shopping_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping search results for a given URL.
 
@@ -225,10 +225,10 @@ class GoogleShoppingAsync(GoogleShoppingBase):
     async def scrape_google_shopping_products(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping product results for a given query.
 
@@ -260,10 +260,10 @@ class GoogleShoppingAsync(GoogleShoppingBase):
     async def scrape_google_product_pricing(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Shopping product pricing results for a given product code.
 

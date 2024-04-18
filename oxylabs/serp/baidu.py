@@ -22,9 +22,9 @@ class Baidu(BaiduBase):
     def scrape_baidu_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Baidu search results for a given query.
 
@@ -55,9 +55,9 @@ class Baidu(BaiduBase):
     def scrape_baidu_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Baidu search results for a given URL.
 
@@ -100,10 +100,10 @@ class BaiduAsync(BaiduBase):
     async def scrape_baidu_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Baidu search results for a given query.
 
@@ -135,10 +135,10 @@ class BaiduAsync(BaiduBase):
     async def scrape_baidu_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Baidu search results for a given URL.
 

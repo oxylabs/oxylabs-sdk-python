@@ -13,9 +13,9 @@ class Wayfair(WayfairBase):
     def scrape_wayfair_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Wayfair search results for a given query.
 
@@ -45,9 +45,9 @@ class Wayfair(WayfairBase):
     def scrape_wayfair_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Wayfair search results for a given URL.
 
@@ -81,10 +81,10 @@ class WayfairAsync(WayfairBase):
     async def scrape_wayfair_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Wayfair search results for a given query.
 
@@ -115,10 +115,10 @@ class WayfairAsync(WayfairBase):
     async def scrape_wayfair_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Wayfair search results for a given URL.
 

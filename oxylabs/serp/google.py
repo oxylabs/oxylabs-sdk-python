@@ -22,9 +22,9 @@ class Google(GoogleBase):
     def scrape_google_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google search results for a given query.
 
@@ -62,9 +62,9 @@ class Google(GoogleBase):
     def scrape_google_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google search results for a given URL.
 
@@ -94,9 +94,9 @@ class Google(GoogleBase):
     def scrape_google_ads(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Ads search results for a given query.
 
@@ -131,9 +131,9 @@ class Google(GoogleBase):
     def scrape_google_suggestions(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google suggestions for a given query.
 
@@ -164,9 +164,9 @@ class Google(GoogleBase):
     def scrape_google_hotels(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Hotels search results for a given query.
 
@@ -201,9 +201,9 @@ class Google(GoogleBase):
     def scrape_google_travel_hotels(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Travel Hotels search results for a given query.
 
@@ -237,9 +237,9 @@ class Google(GoogleBase):
     def scrape_google_images(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Images search results for a given query.
 
@@ -275,9 +275,9 @@ class Google(GoogleBase):
     def scrape_google_trends_explore(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Google Trends Explore results for a given query.
 
@@ -321,10 +321,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google search results for a given query.
 
@@ -363,10 +363,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google search results for a given URL.
 
@@ -397,10 +397,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_ads(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google Ads search results for a given query.
 
@@ -436,10 +436,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_suggestions(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google suggestions for a given query.
 
@@ -471,10 +471,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_hotels(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google Hotels search results for a given query.
 
@@ -510,10 +510,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_travel_hotels(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google Travel Hotels search results for a given query.
 
@@ -548,10 +548,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_images(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google Images search results for a given query.
 
@@ -588,10 +588,10 @@ class GoogleAsync(GoogleBase):
     async def scrape_google_trends_explore(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Google Trends Explore results for a given query.
 

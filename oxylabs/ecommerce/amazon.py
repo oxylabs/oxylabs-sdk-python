@@ -22,9 +22,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon search results for a given query.
 
@@ -58,9 +58,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon search results for a given URL.
 
@@ -90,9 +90,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_product(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon product details for a given query.
 
@@ -124,9 +124,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_pricing(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon pricing details for a given query.
 
@@ -159,9 +159,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_reviews(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon reviews for a given query.
 
@@ -194,9 +194,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_questions(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon questions for a given query.
 
@@ -227,9 +227,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_bestsellers(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon bestsellers.
 
@@ -262,9 +262,9 @@ class Amazon(AmazonBase):
     def scrape_amazon_sellers(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon sellers for a given query.
 
@@ -311,10 +311,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon search results for a given query.
 
@@ -349,10 +349,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon search results for a given URL.
 
@@ -383,10 +383,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_product(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon product details for a given query.
 
@@ -419,10 +419,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_pricing(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon pricing details for a given query.
 
@@ -456,10 +456,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_reviews(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon reviews for a given query.
 
@@ -493,10 +493,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_questions(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon questions for a given query.
 
@@ -528,10 +528,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_bestsellers(
         self,
         query,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon bestsellers.
 
@@ -565,10 +565,10 @@ class AmazonAsync(AmazonBase):
     async def scrape_amazon_sellers(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Amazon sellers for a given query.
 

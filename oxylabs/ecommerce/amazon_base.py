@@ -175,7 +175,7 @@ class AmazonSellerOpts(BaseEcommerceOpts):
 
 class AmazonBase:
     def _prepare_amazon_search_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepares the search payload for Amazon search.
@@ -217,7 +217,7 @@ class AmazonBase:
         return payload
 
     def _prepare_amazon_url_payload(
-        self, url: str, user_opts: Optional[Dict[str, Any]] = None
+        self, url: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepares the payload for making a request to Amazon URL.
@@ -254,7 +254,7 @@ class AmazonBase:
         return payload
 
     def _prepare_amazon_product_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepare the payload for the Amazon product request.
@@ -289,7 +289,7 @@ class AmazonBase:
         return payload
 
     def _prepare_amazon_pricing_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepares the payload for pricing request to Amazon.
@@ -326,7 +326,7 @@ class AmazonBase:
         return payload
 
     def _prepare_amazon_reviews_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepare the payload for retrieving Amazon reviews.
@@ -362,7 +362,7 @@ class AmazonBase:
         return payload
 
     def _prepare_amazon_questions_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepare the payload for sending a request to retrieve Amazon questions.
@@ -399,7 +399,7 @@ class AmazonBase:
         return payload
 
     def _prepare_amazon_bestseller_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepares the payload for retrieving Amazon bestsellers.
@@ -435,7 +435,7 @@ class AmazonBase:
         return payload
 
     def _prepare_amazon_seller_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepare the payload for the Amazon seller request.

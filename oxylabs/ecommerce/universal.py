@@ -11,8 +11,8 @@ class Universal(UniversalBase):
         self.client = client
 
     def scrape_universal_url(
-        self, url: str, opts: Optional[Dict[str, Any]] = None, timeout: int = None
-    ) -> Dict[str, Any]:
+        self, url: str, opts: Optional[dict] = None, timeout: int = None
+    ) -> dict:
         """
         Scrapes Universal search results for a given URL.
 
@@ -53,10 +53,10 @@ class UniversalAsync(UniversalBase):
     async def scrape_universal_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: int = None,
         poll_interval: int = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Universal search results for a given URL.
 

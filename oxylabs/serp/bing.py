@@ -22,9 +22,9 @@ class Bing(BingBase):
     def scrape_bing_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Bing search results for a given query.
 
@@ -58,9 +58,9 @@ class Bing(BingBase):
     def scrape_bing_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Bing search results for a given URL.
 
@@ -106,10 +106,10 @@ class BingAsync(BingBase):
     async def scrape_bing_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Bing search results for a given query.
 
@@ -144,10 +144,10 @@ class BingAsync(BingBase):
     async def scrape_bing_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Bing search results for a given URL.
 

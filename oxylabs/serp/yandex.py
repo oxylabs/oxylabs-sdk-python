@@ -22,9 +22,9 @@ class Yandex(YandexBase):
     def scrape_yandex_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes the search results from Yandex.
 
@@ -59,9 +59,9 @@ class Yandex(YandexBase):
     def scrape_yandex_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Scrapes Yandex search results for a given URL.
 
@@ -105,10 +105,10 @@ class YandexAsync(YandexBase):
     async def scrape_yandex_search(
         self,
         query: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes the search results from Yandex.
 
@@ -144,10 +144,10 @@ class YandexAsync(YandexBase):
     async def scrape_yandex_url(
         self,
         url: str,
-        opts: Optional[Dict[str, Any]] = None,
+        opts: Optional[dict] = None,
         timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
-    ) -> Dict[str, Any]:
+    ) -> dict:
         """
         Asynchronously scrapes Yandex search results for a given URL.
 

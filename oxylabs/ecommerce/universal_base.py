@@ -46,7 +46,7 @@ class UniversalUrlOpts(BaseUrlOpts):
 
 class UniversalBase:
     def _prepare_universal_url_payload(
-        self, url: str, user_opts: Optional[Dict[str, Any]] = None
+        self, url: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepares the payload for a URL request.

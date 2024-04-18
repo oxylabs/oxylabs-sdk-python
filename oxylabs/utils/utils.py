@@ -216,7 +216,7 @@ def check_user_agent_validity(user_agent_type: str) -> None:
     Raises:
         ValueError: If the user agent type is invalid.
     """
-    if user_agent_type and not user_agent_type in VALID_UAS:
+    if user_agent_type and user_agent_type not in VALID_UAS:
         raise ValueError(f"Invalid user agent parameter: {user_agent_type}")
 
 

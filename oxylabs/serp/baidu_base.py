@@ -46,7 +46,7 @@ class BaiduUrlOpts(BaseUrlOpts):
 
 class BaiduBase:
     def _prepare_baidu_search_payload(
-        self, query: str, user_opts: Optional[Dict[str, Any]] = None
+        self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepares the search payload for Baidu search.
@@ -80,7 +80,7 @@ class BaiduBase:
         return payload
 
     def _prepare_baidu_url_payload(
-        self, url: str, user_opts: Optional[Dict[str, Any]] = None
+        self, url: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
         Prepares the payload for a Baidu URL request.
