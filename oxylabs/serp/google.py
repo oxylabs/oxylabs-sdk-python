@@ -1,11 +1,11 @@
 from oxylabs.utils.utils import prepare_config
 from .google_base import GoogleBase
-from .serp import InitSerp, InitSerpAsync
+from .serp import InitSERP, InitSERPAsync
 from typing import Optional, Dict, Any
 
 
 class Google(GoogleBase):
-    def __init__(self, client: InitSerp):
+    def __init__(self, client: InitSERP):
         """
         Initializes a Google object.
 
@@ -15,7 +15,7 @@ class Google(GoogleBase):
         Raises:
             TypeError: If the client is not an instance of Serp.
         """
-        if not isinstance(client, InitSerp):
+        if not isinstance(client, InitSERP):
             raise TypeError("Google requires a Serp instance")
         self.client = client
 
@@ -304,7 +304,7 @@ class Google(GoogleBase):
 
 
 class GoogleAsync(GoogleBase):
-    def __init__(self, client: InitSerpAsync):
+    def __init__(self, client: InitSERPAsync):
         """
         Initializes a GoogleAsync instance.
 
@@ -314,7 +314,7 @@ class GoogleAsync(GoogleBase):
         Raises:
             TypeError: If the client parameter is not an instance of SerpAsync.
         """
-        if not isinstance(client, InitSerpAsync):
+        if not isinstance(client, InitSERPAsync):
             raise TypeError("GoogleAsync requires a SerpAsync instance")
         self.client = client
 

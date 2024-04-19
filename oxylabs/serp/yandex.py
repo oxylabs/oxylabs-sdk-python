@@ -1,11 +1,11 @@
 from .yandex_base import YandexBase
-from .serp import InitSerp, InitSerpAsync
+from .serp import InitSERP, InitSERPAsync
 from oxylabs.utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 
 class Yandex(YandexBase):
-    def __init__(self, client: InitSerp):
+    def __init__(self, client: InitSERP):
         """
         Initializes a Yandex instance.
 
@@ -15,7 +15,7 @@ class Yandex(YandexBase):
         Raises:
             TypeError: If the client parameter is not an instance of Serp.
         """
-        if not isinstance(client, InitSerp):
+        if not isinstance(client, InitSERP):
             raise TypeError("Yandex requires a Serp instance")
         self.client = client
 
@@ -88,7 +88,7 @@ class Yandex(YandexBase):
 
 
 class YandexAsync(YandexBase):
-    def __init__(self, client: InitSerpAsync):
+    def __init__(self, client: InitSERPAsync):
         """
         Initializes a YandexAsync instance.
 
@@ -98,7 +98,7 @@ class YandexAsync(YandexBase):
         Raises:
             TypeError: If the client parameter is not an instance of SerpAsync.
         """
-        if not isinstance(client, InitSerpAsync):
+        if not isinstance(client, InitSERPAsync):
             raise TypeError("YandexAsync requires a SerpAsync instance")
         self.client = client
 

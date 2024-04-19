@@ -1,12 +1,10 @@
-from oxylabs.internal import Client, ApiCredentials, ClientAsync
-from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import asyncio
 import oxylabs.utils.utils as utils
-from oxylabs.internal import ApiCredentials, Client, ClientAsync
+from oxylabs.internal import APICredentials, Client, ClientAsync
 from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
 
-class InitSerp:
+class InitSERP:
     def __init__(self, username: str, password: str) -> None:
         """
         Initializes a synchronous SERP client.
@@ -15,7 +13,7 @@ class InitSerp:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
         """
-        api_credentials = ApiCredentials(username, password)
+        api_credentials = APICredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
     def get_resp(self, payload: dict, config: dict) -> dict:
@@ -35,7 +33,7 @@ class InitSerp:
         return self.client.req(payload, "POST", config)
 
 
-class InitSerpAsync:
+class InitSERPAsync:
 
     def __init__(self, username: str, password: str) -> None:
         """
@@ -45,7 +43,7 @@ class InitSerpAsync:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
         """
-        self.api_credentials = ApiCredentials(username, password)
+        self.api_credentials = APICredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
         self.session = None
         self.requests = 0

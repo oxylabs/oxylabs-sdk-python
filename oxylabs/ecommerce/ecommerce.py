@@ -1,4 +1,4 @@
-from oxylabs.internal import Client, ApiCredentials, ClientAsync
+from oxylabs.internal import Client, APICredentials, ClientAsync
 from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import asyncio
 import oxylabs.utils.utils as utils
@@ -13,7 +13,7 @@ class InitEcommerce:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
         """
-        api_credentials = ApiCredentials(username, password)
+        api_credentials = APICredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
 
     def get_resp(self, payload: dict, config: dict) -> dict:
@@ -42,7 +42,7 @@ class InitEcommerceAsync:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
         """
-        self.api_credentials = ApiCredentials(username, password)
+        self.api_credentials = APICredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
         self.session = None
         self.requests = 0

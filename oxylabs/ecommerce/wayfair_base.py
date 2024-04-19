@@ -7,7 +7,7 @@ from oxylabs.utils.defaults import (
     set_default_limit,
     set_default_pages,
     set_default_start_page,
-    set_default_user_agent,
+    set_default_user_agent_type,
 )
 from oxylabs.utils.utils import validate_url
 from oxylabs.utils.constants import source

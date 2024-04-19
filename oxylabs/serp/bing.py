@@ -1,11 +1,11 @@
 from .bing_base import BingBase
 from typing import Optional, Dict, Any
-from .serp import InitSerp, InitSerpAsync
+from .serp import InitSERP, InitSERPAsync
 from oxylabs.utils.utils import prepare_config
 
 
 class Bing(BingBase):
-    def __init__(self, client: InitSerp) -> None:
+    def __init__(self, client: InitSERP) -> None:
         """
         Initializes a Bing object.
 
@@ -15,7 +15,7 @@ class Bing(BingBase):
         Raises:
             TypeError: If the client parameter is not an instance of the Serp class.
         """
-        if not isinstance(client, InitSerp):
+        if not isinstance(client, InitSERP):
             raise TypeError("Bing requires a Serp instance")
         self.client = client
 
@@ -89,7 +89,7 @@ class Bing(BingBase):
 
 
 class BingAsync(BingBase):
-    def __init__(self, client: InitSerpAsync) -> None:
+    def __init__(self, client: InitSERPAsync) -> None:
         """
         Initializes a new instance of the BingAsync class.
 
@@ -99,7 +99,7 @@ class BingAsync(BingBase):
         Raises:
             TypeError: If the client parameter is not an instance of SerpAsync.
         """
-        if not isinstance(client, InitSerpAsync):
+        if not isinstance(client, InitSERPAsync):
             raise TypeError("BingAsync requires a SerpAsync instance")
         self.client = client
 

@@ -51,13 +51,13 @@ class Proxy:
             print(f"Request failed: {e}")
             return None
 
-    def add_user_agent_header(self, user_agent: str) -> None:
+    def add_user_agent_header(self, user_agent_type: str) -> None:
         """
         Adds a user agent header to the session headers.
         There is no way to indicate a specific User-Agent, but you can let us know which user-agent type you would like us to use.
 
         Args:
-            user_agent (str): The user agent to add. Must be one of the following:
+            user_agent_type (str): The user agent to add. Must be one of the following:
             - "desktop"         - A User-Agent of a desktop browser.
             - "desktop_chrome"  - A User-Agent of one of the latest versions of a desktop Chrome browser.
             - "desktop_edge"    - A User-Agent of one of the latest versions of a desktop Edge browser.
@@ -74,7 +74,7 @@ class Proxy:
         Returns:
             None
         """
-        self.session.headers["x-oxylabs-user-agent-type"] = user_agent
+        self.session.headers["x-oxylabs-user-agent-type"] = user_agent_type
 
     def add_render_header(self, render: str) -> None:
         """
@@ -90,62 +90,61 @@ class Proxy:
         """
         self.session.headers["x-oxylabs-render"] = render
 
-
-def add_parse_header(self, parser_type: str) -> None:
-    """
-    Adds a parse header to the session headers if a valid parser type is provided.
-    Setting this will return parsed data for the targets for which we have dedicated parsers.
-
-    Args:
-        parser_type (str): The parser type to add. Must be one of the supported types:
-            - For Google:               "google", "google_search", "google_ads", "google_images"
-            - For Google Shopping:      "google_shopping", "google_shopping_search", "google_shopping_product", "google_shopping_pricing"
-            - For Amazon:               "amazon", "amazon_search", "amazon_product", "amazon_pricing", "amazon_reviews", "amazon_questions", "amazon_bestsellers", "amazon_sellers"
-            - For Best Buy, Etsy, Target, Walmart: "universal_ecommerce"
-
-    Raises:
-        ValueError: If an invalid parser_type is provided.
-
-    Returns:
-        None
-    """
-    supported_parser_types = {
-        "google",
-        "google_search",
-        "google_ads",
-        "google_images",
-        "google_shopping",
-        "google_shopping_search",
-        "google_shopping_product",
-        "google_shopping_pricing",
-        "amazon",
-        "amazon_search",
-        "amazon_product",
-        "amazon_pricing",
-        "amazon_reviews",
-        "amazon_questions",
-        "amazon_bestsellers",
-        "amazon_sellers",
-        "universal_ecommerce",
-    }
-
-    if parser_type not in supported_parser_types:
-        raise ValueError(
-            f"Invalid parser_type '{parser_type}'. Must be one of: {', '.join(supported_parser_types)}"
-        )
-
-    self.session.headers["x-oxylabs-parse"] = "1"
-    self.session.headers["x-oxylabs-parser-type"] = parser_type
-
-    def add_geo_location_header(self, geo_location: str) -> None:
+    def add_parse_header(self, parser_type: str) -> None:
         """
-        Adds a geo location header to the session headers.
-        In some cases, you may need to indicate the geographical location that the result should be adapted for.
+        Adds a parse header to the session headers if a valid parser type is provided.
+        Setting this will return parsed data for the targets for which we have dedicated parsers.
 
         Args:
-            geo_location (str): The geo location to add. Accepted values depend on the URL you would like us to scrape.
+            parser_type (str): The parser type to add. Must be one of the supported types:
+                - For Google:               "google", "google_search", "google_ads", "google_images"
+                - For Google Shopping:      "google_shopping", "google_shopping_search", "google_shopping_product", "google_shopping_pricing"
+                - For Amazon:               "amazon", "amazon_search", "amazon_product", "amazon_pricing", "amazon_reviews", "amazon_questions", "amazon_bestsellers", "amazon_sellers"
+                - For Best Buy, Etsy, Target, Walmart: "universal_ecommerce"
+
+        Raises:
+            ValueError: If an invalid parser_type is provided.
 
         Returns:
             None
         """
-        self.session.headers["x-oxylabs-geo-location"] = geo_location
+        supported_parser_types = {
+            "google",
+            "google_search",
+            "google_ads",
+            "google_images",
+            "google_shopping",
+            "google_shopping_search",
+            "google_shopping_product",
+            "google_shopping_pricing",
+            "amazon",
+            "amazon_search",
+            "amazon_product",
+            "amazon_pricing",
+            "amazon_reviews",
+            "amazon_questions",
+            "amazon_bestsellers",
+            "amazon_sellers",
+            "universal_ecommerce",
+        }
+
+        if parser_type not in supported_parser_types:
+            raise ValueError(
+                f"Invalid parser_type '{parser_type}'. Must be one of: {', '.join(supported_parser_types)}"
+            )
+
+        self.session.headers["x-oxylabs-parse"] = "1"
+        self.session.headers["x-oxylabs-parser-type"] = parser_type
+
+        def add_geo_location_header(self, geo_location: str) -> None:
+            """
+            Adds a geo location header to the session headers.
+            In some cases, you may need to indicate the geographical location that the result should be adapted for.
+
+            Args:
+                geo_location (str): The geo location to add. Accepted values depend on the URL you would like us to scrape.
+
+            Returns:
+                None
+            """
+            self.session.headers["x-oxylabs-geo-location"] = geo_location

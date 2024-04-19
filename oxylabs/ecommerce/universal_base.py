@@ -1,5 +1,5 @@
 from oxylabs.utils.defaults import (
-    set_default_user_agent,
+    set_default_user_agent_type,
     set_default_http_method,
     set_default_content_encoding,
 )

@@ -8,7 +8,7 @@ from oxylabs.utils.defaults import (
     set_default_limit,
     set_default_pages,
     set_default_start_page,
-    set_default_user_agent,
+    set_default_user_agent_type,
     set_default_hotel_occupancy,
     set_default_tbm_context,
 )

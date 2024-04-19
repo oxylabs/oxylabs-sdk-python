@@ -1,11 +1,11 @@
 from .baidu_base import BaiduBase
-from .serp import InitSerp, InitSerpAsync
+from .serp import InitSERP, InitSERPAsync
 from oxylabs.utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 
 class Baidu(BaiduBase):
-    def __init__(self, client: InitSerp):
+    def __init__(self, client: InitSERP):
         """
         Initializes a Baidu object.
 
@@ -15,7 +15,7 @@ class Baidu(BaiduBase):
         Raises:
             TypeError: If the client parameter is not an instance of the Serp class.
         """
-        if not isinstance(client, InitSerp):
+        if not isinstance(client, InitSERP):
             raise TypeError("Baidu requires a Serp instance")
         self.client = client
 
@@ -83,7 +83,7 @@ class Baidu(BaiduBase):
 
 
 class BaiduAsync(BaiduBase):
-    def __init__(self, client):
+    def __init__(self, client: InitSERPAsync):
         """
         Initializes a BaiduAsync object.
 
@@ -93,7 +93,7 @@ class BaiduAsync(BaiduBase):
         Raises:
             TypeError: If the client is not an instance of SerpAsync.
         """
-        if not isinstance(client, InitSerpAsync):
+        if not isinstance(client, InitSERPAsync):
             raise TypeError("BaiduAsync requires a SerpAsync instance")
         self.client = client
 

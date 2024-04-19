@@ -1,6 +1,6 @@
 from .serp import (
-    InitSerp,
-    InitSerpAsync,
+    InitSERP,
+    InitSERPAsync,
     Bing,
     BingAsync,
     Baidu,
@@ -24,7 +24,7 @@ from .ecommerce import (
 )
 
 
-class Serp(Bing, Baidu, Yandex, Google):
+class SERP(Bing, Baidu, Yandex, Google):
     """
     Initializes the Serp class with the provided username and password.
 
@@ -34,10 +34,10 @@ class Serp(Bing, Baidu, Yandex, Google):
     """
 
     def __init__(self, username: str, password: str) -> None:
-        self.client = InitSerp(username, password)
+        self.client = InitSERP(username, password)
 
 
-class SerpAsync(BingAsync, BaiduAsync, YandexAsync, GoogleAsync):
+class SERPAsync(BingAsync, BaiduAsync, YandexAsync, GoogleAsync):
     """
     Initializes the SerpAsync client with the provided username and password.
 
@@ -47,7 +47,7 @@ class SerpAsync(BingAsync, BaiduAsync, YandexAsync, GoogleAsync):
     """
 
     def __init__(self, username: str, password: str) -> None:
-        self.client = InitSerpAsync(username, password)
+        self.client = InitSERPAsync(username, password)
 
 
 class Ecommerce(Amazon, GoogleShopping, Wayfair, Universal):

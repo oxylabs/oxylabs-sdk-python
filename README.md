@@ -209,7 +209,7 @@ The **TTL** of Realtime connections is **150 seconds**. There may be rare cases 
 
 Push-Pull is an asynchronous integration method. This SDK implements this integration with a polling technique to poll the endpoint for results after a set interval of time.
 
-Using it as straightforward as using the realtime integration. The only difference is that it will return a channel with the Response. Below is an example of this integration method:
+Using it is as straightforward as using the realtime integration. The only difference is that it will return an asyncio Task that will eventually contain the Response. Below is an example of this integration method:"
 
 ```python
 import asyncio

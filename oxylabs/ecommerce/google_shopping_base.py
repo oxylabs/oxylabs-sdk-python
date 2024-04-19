@@ -6,7 +6,7 @@ from oxylabs.utils.defaults import (
     set_default_domain,
     set_default_pages,
     set_default_start_page,
-    set_default_user_agent,
+    set_default_user_agent_type,
     set_default_sort_by,
 )
 from oxylabs.utils.utils import validate_url, BaseEcommerceOpts

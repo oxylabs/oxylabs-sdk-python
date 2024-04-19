@@ -74,17 +74,17 @@ def set_default_limit(limit: int, default_limit: int) -> int:
     return limit if limit is not None else default_limit
 
 
-def set_default_user_agent(user_agent):
+def set_default_user_agent_type(user_agent_type):
     """
     Sets the default user agent if provided, otherwise returns the default user agent.
 
     Args:
-        user_agent (str): The user agent string to set as the default.
+        user_agent_type (str): The user agent string to set as the default.
 
     Returns:
         str: The default user agent.
     """
-    return user_agent if user_agent is not None else DEFAULT_USER_AGENT
+    return user_agent_type if user_agent_type is not None else DEFAULT_USER_AGENT
 
 
 def set_default_sort_by(context):

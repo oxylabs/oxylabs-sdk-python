@@ -4,7 +4,7 @@ import aiohttp
 import asyncio
 
 
-class ApiCredentials:
+class APICredentials:
     def __init__(self, username: str, password: str) -> None:
         """
         Initializes an instance of ApiCredentials.
@@ -25,7 +25,7 @@ class ApiCredentials:
 
 
 class Client:
-    def __init__(self, base_url: str, api_credentials: ApiCredentials) -> None:
+    def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
         """
         Initializes a new instance of the Internal class.
 
@@ -101,7 +101,7 @@ class Client:
 
 class ClientAsync:
 
-    def __init__(self, base_url: str, api_credentials: ApiCredentials) -> None:
+    def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
         """
         Initializes a new instance of the Internal class.
 

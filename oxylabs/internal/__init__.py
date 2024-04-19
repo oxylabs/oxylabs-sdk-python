@@ -1,1 +1,1 @@
-from .internal import ApiCredentials, Client, ClientAsync
+from .internal import APICredentials, Client, ClientAsync
