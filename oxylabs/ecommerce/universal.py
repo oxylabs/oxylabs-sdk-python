@@ -47,7 +47,9 @@ class Universal(UniversalBase):
 class UniversalAsync(UniversalBase):
     def __init__(self, client):
         if not isinstance(client, InitEcommerceAsync):
-            raise TypeError("UniversalAsync requires an EcommerceAsync instance")
+            raise TypeError(
+                "UniversalAsync requires an EcommerceAsync instance"
+            )
         self.client = client
 
     async def scrape_universal_url(

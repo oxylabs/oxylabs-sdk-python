@@ -60,7 +60,9 @@ class BingSearchOpts(BaseSearchOpts):
         """
         Checks the validity of BingSearchOpts parameters.
         """
-        utils.check_domain_validity(self.domain, BingSearchAcceptedDomainParameters)
+        utils.check_domain_validity(
+            self.domain, BingSearchAcceptedDomainParameters
+        )
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_limit_validity(self.limit)

@@ -83,7 +83,12 @@ class GoogleShoppingProductOpts(BaseEcommerceOpts):
     """
 
     def __init__(
-        self, domain=None, locale=None, results_language=None, parse=None, **kwargs
+        self,
+        domain=None,
+        locale=None,
+        results_language=None,
+        parse=None,
+        **kwargs
     ):
         super().__init__(**kwargs)
         self.domain = domain
@@ -147,7 +152,9 @@ class GoogleShoppingBase:
             dict: The prepared search payload.
 
         """
-        opts = GoogleShoppingSearchOpts(**user_opts if user_opts is not None else {})
+        opts = GoogleShoppingSearchOpts(
+            **user_opts if user_opts is not None else {}
+        )
 
         opts.check_parameter_validity()
 
@@ -187,7 +194,9 @@ class GoogleShoppingBase:
             dict: The prepared payload for the request.
         """
         validate_url(url, "google")
-        opts = GoogleShoppingUrlOpts(**user_opts if user_opts is not None else {})
+        opts = GoogleShoppingUrlOpts(
+            **user_opts if user_opts is not None else {}
+        )
 
         opts.check_parameter_validity()
 
@@ -220,7 +229,9 @@ class GoogleShoppingBase:
         Returns:
             dict: The prepared payload for the request.
         """
-        opts = GoogleShoppingProductOpts(**user_opts if user_opts is not None else {})
+        opts = GoogleShoppingProductOpts(
+            **user_opts if user_opts is not None else {}
+        )
 
         opts.check_parameter_validity()
 
@@ -256,7 +267,9 @@ class GoogleShoppingBase:
         Returns:
             dict: The prepared payload for the request.
         """
-        opts = GoogleProductPricingOpts(**user_opts if user_opts is not None else {})
+        opts = GoogleProductPricingOpts(
+            **user_opts if user_opts is not None else {}
+        )
 
         opts.check_parameter_validity()
 

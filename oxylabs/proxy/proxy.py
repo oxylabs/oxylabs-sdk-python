@@ -18,7 +18,10 @@ class Proxy:
         self.password = quote(password)
         self.proxy_url = self._build_proxy_url()
         self.session = requests.Session()
-        self.session.proxies = {"http": self.proxy_url, "https": self.proxy_url}
+        self.session.proxies = {
+            "http": self.proxy_url,
+            "https": self.proxy_url,
+        }
         self.session.verify = False
 
     def _build_proxy_url(self) -> str:
@@ -96,10 +99,16 @@ class Proxy:
         Setting this will return parsed data for the targets for which we have dedicated parsers.
 
         Args:
-            parser_type (str): The parser type to add. Must be one of the supported types:
-                - For Google:               "google", "google_search", "google_ads", "google_images"
-                - For Google Shopping:      "google_shopping", "google_shopping_search", "google_shopping_product", "google_shopping_pricing"
-                - For Amazon:               "amazon", "amazon_search", "amazon_product", "amazon_pricing", "amazon_reviews", "amazon_questions", "amazon_bestsellers", "amazon_sellers"
+            parser_type (str): The parser type to add. Must be one of the
+            supported types:
+                - For Google: "google", "google_search", "google_ads",
+                "google_images"
+                - For Google Shopping: "google_shopping",
+                "google_shopping_search", "google_shopping_product",
+                "google_shopping_pricing"
+                - For Amazon: "amazon", "amazon_search", "amazon_product",
+                "amazon_pricing", "amazon_reviews", "amazon_questions",
+                "amazon_bestsellers", "amazon_sellers"
                 - For Best Buy, Etsy, Target, Walmart: "universal_ecommerce"
 
         Raises:
