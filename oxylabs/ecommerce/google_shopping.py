@@ -139,9 +139,7 @@ class GoogleShopping(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_google_shopping_product_pricing_payload(
-            query, opts
-        )
+        payload = self._prepare_google_shopping_product_pricing_payload(query, opts)
         response = self.client.get_resp(payload, config)
         return response
 
@@ -149,9 +147,7 @@ class GoogleShopping(GoogleShoppingBase):
 class GoogleShoppingAsync(GoogleShoppingBase):
     def __init__(self, client):
         if not isinstance(client, InitEcommerceAsync):
-            raise TypeError(
-                "GoogleShoppingAsync requires an EcommerceAsync instance"
-            )
+            raise TypeError("GoogleShoppingAsync requires an EcommerceAsync instance")
         self.client = client
 
     async def scrape_google_shopping_search(
@@ -294,8 +290,6 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_google_shopping_product_pricing_payload(
-            query, opts
-        )
+        payload = self._prepare_google_shopping_product_pricing_payload(query, opts)
         response = await self.client.get_resp(payload, config)
         return response

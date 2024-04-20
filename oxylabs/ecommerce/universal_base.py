@@ -65,9 +65,7 @@ class UniversalBase:
         opts = UniversalUrlOpts(**user_opts if user_opts is not None else {})
 
         opts.context = set_default_http_method(opts.context)
-        opts.content_encoding = set_default_content_encoding(
-            opts.content_encoding
-        )
+        opts.content_encoding = set_default_content_encoding(opts.content_encoding)
 
         opts.check_parameter_validity()
 
@@ -86,9 +84,7 @@ class UniversalBase:
         }
 
         payload["parse"] = (
-            True
-            if opts.parsing_instructions or opts.parser_type
-            else opts.parse
+            True if opts.parsing_instructions or opts.parser_type else opts.parse
         )
 
         if opts.parsing_instructions:

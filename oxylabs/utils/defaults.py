@@ -84,9 +84,7 @@ def set_default_user_agent_type(user_agent_type):
     Returns:
         str: The default user agent.
     """
-    return (
-        user_agent_type if user_agent_type is not None else DEFAULT_USER_AGENT
-    )
+    return user_agent_type if user_agent_type is not None else DEFAULT_USER_AGENT
 
 
 def set_default_sort_by(context):

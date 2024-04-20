@@ -76,9 +76,7 @@ class AmazonPricingOpts(BaseEcommerceOpts):
     Represents the product pricing options for AmazonPricing.
     """
 
-    def __init__(
-        self, domain=None, start_page=None, pages=None, parse=None, **kwargs
-    ):
+    def __init__(self, domain=None, start_page=None, pages=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.start_page = start_page
@@ -100,9 +98,7 @@ class AmazonReviewsOpts(BaseEcommerceOpts):
     Represents the product review options for AmazonReview.
     """
 
-    def __init__(
-        self, domain=None, start_page=None, pages=None, parse=None, **kwargs
-    ):
+    def __init__(self, domain=None, start_page=None, pages=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.start_page = start_page
@@ -142,9 +138,7 @@ class AmazonBestsellerOpts(BaseEcommerceOpts):
     Represents the bestseller options for AmazonBestseller.
     """
 
-    def __init__(
-        self, domain=None, start_page=None, pages=None, parse=None, **kwargs
-    ):
+    def __init__(self, domain=None, start_page=None, pages=None, parse=None, **kwargs):
         super().__init__(**kwargs)
         self.domain = domain
         self.start_page = start_page
@@ -383,9 +377,7 @@ class AmazonBase:
         Raises:
             ValueError: If the provided options are invalid.
         """
-        opts = AmazonQuestionsOpts(
-            **user_opts if user_opts is not None else {}
-        )
+        opts = AmazonQuestionsOpts(**user_opts if user_opts is not None else {})
 
         opts.check_parameter_validity()
 
@@ -419,9 +411,7 @@ class AmazonBase:
         Returns:
             dict: The prepared payload for the request.
         """
-        opts = AmazonBestsellerOpts(
-            **user_opts if user_opts is not None else {}
-        )
+        opts = AmazonBestsellerOpts(**user_opts if user_opts is not None else {})
 
         opts.check_parameter_validity()
 

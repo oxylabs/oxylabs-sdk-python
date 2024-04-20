@@ -26,7 +26,7 @@ from .ecommerce import (
 
 class SERP(Bing, Baidu, Yandex, Google):
     """
-    Initializes the SERP class with the provided username and password.
+    Initializes the SERP client with the provided username and password.
 
     Args:
         username (str): The username for authentication.
@@ -63,9 +63,7 @@ class Ecommerce(Amazon, GoogleShopping, Wayfair, Universal):
         self.client = InitEcommerce(username, password)
 
 
-class EcommerceAsync(
-    AmazonAsync, GoogleShoppingAsync, WayfairAsync, UniversalAsync
-):
+class EcommerceAsync(AmazonAsync, GoogleShoppingAsync, WayfairAsync, UniversalAsync):
     """
     Initializes the EcommerceAsync client with the provided username and password.
 

@@ -69,9 +69,7 @@ class InitSERPAsync:
             self.session = await utils.ensure_session(self.session)
 
             result = await asyncio.wait_for(
-                self.client.execute_with_timeout(
-                    payload, config, self.session
-                ),
+                self.client.execute_with_timeout(payload, config, self.session),
                 timeout=config["timeout"],
             )
             return result

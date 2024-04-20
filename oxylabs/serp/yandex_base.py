@@ -62,12 +62,8 @@ class YandexSearchOpts(BaseSearchOpts):
         Checks the validity of YandexSearchOpts parameters.
         """
         utils.check_user_agent_validity(self.user_agent_type)
-        utils.check_domain_validity(
-            self.domain, YandexSearchAcceptedDomainParameters
-        )
-        utils.check_locale_validity(
-            self.locale, YandexSearchAcceptedLocaleParameters
-        )
+        utils.check_domain_validity(self.domain, YandexSearchAcceptedDomainParameters)
+        utils.check_locale_validity(self.locale, YandexSearchAcceptedLocaleParameters)
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)

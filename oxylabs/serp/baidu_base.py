@@ -24,9 +24,7 @@ class BaiduSearchOpts(BaseSearchOpts):
         """
         Checks the validity of BaiduSearchOpts parameters.
         """
-        utils.check_domain_validity(
-            self.domain, BaiduSearchAcceptedDomainParameters
-        )
+        utils.check_domain_validity(self.domain, BaiduSearchAcceptedDomainParameters)
         utils.check_user_agent_validity(self.user_agent_type)
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)

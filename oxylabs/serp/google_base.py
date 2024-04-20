@@ -78,9 +78,7 @@ class GoogleSearchOpts(BaseGoogleOpts):
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-        utils.check_context_tbm_validity(
-            self.context, self.AcceptedTbmParameters
-        )
+        utils.check_context_tbm_validity(self.context, self.AcceptedTbmParameters)
 
 
 class GoogleUrlOpts(BaseGoogleOpts):
@@ -181,9 +179,7 @@ class GoogleAdsOpts(BaseGoogleOpts):
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-        utils.check_context_tbm_validity(
-            self.context, self.AcceptedTbmParameters
-        )
+        utils.check_context_tbm_validity(self.context, self.AcceptedTbmParameters)
 
 
 class GoogleSuggestionsOpts(BaseGoogleOpts):
@@ -448,8 +444,7 @@ class GoogleBase:
             )
             and user_opts.get("context")
             and any(
-                item.get("key") == "limit_per_page"
-                for item in user_opts["context"]
+                item.get("key") == "limit_per_page" for item in user_opts["context"]
             )
         ):
             raise ValueError(
@@ -579,9 +574,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the suggestions request.
         """
-        opts = GoogleSuggestionsOpts(
-            **user_opts if user_opts is not None else {}
-        )
+        opts = GoogleSuggestionsOpts(**user_opts if user_opts is not None else {})
 
         opts.check_parameter_validity()
 
@@ -654,9 +647,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the request.
         """
-        opts = GoogleTravelHotelsOpts(
-            **user_opts if user_opts is not None else {}
-        )
+        opts = GoogleTravelHotelsOpts(**user_opts if user_opts is not None else {})
 
         opts.check_parameter_validity()
 
@@ -733,9 +724,7 @@ class GoogleBase:
         Returns:
             dict: The prepared payload for the Google Trends Explore API request.
         """
-        opts = GoogleTrendsExploreOpts(
-            **user_opts if user_opts is not None else {}
-        )
+        opts = GoogleTrendsExploreOpts(**user_opts if user_opts is not None else {})
 
         opts.check_parameter_validity()
 
