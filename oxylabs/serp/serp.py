@@ -3,18 +3,27 @@ import oxylabs.utils.utils as utils
 from oxylabs.internal import APICredentials, Client, ClientAsync
 from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
+from . import (
+    Bing,
+    Baidu,
+    Yandex,
+    Google,
+    BingAsync,
+    BaiduAsync,
+    YandexAsync,
+    GoogleAsync,
+)
 
-class InitSERP:
+
+class SERP:
     def __init__(self, username: str, password: str) -> None:
-        """
-        Initializes a synchronous SERP client.
 
-        Args:
-            username (str): The username for API authentication.
-            password (str): The password for API authentication.
-        """
         api_credentials = APICredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
+        self.bing = Bing(self)
+        self.baidu = Baidu(self)
+        self.yandex = Yandex(self)
+        self.google = Google(self)
 
     def get_resp(self, payload: dict, config: dict) -> dict:
         """
@@ -33,7 +42,7 @@ class InitSERP:
         return self.client.req(payload, "POST", config)
 
 
-class InitSERPAsync:
+class SERPAsync:
 
     def __init__(self, username: str, password: str) -> None:
         """
@@ -45,6 +54,10 @@ class InitSERPAsync:
         """
         self.api_credentials = APICredentials(username, password)
         self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
+        self.bing_async = BingAsync(self)
+        self.baidu_async = BaiduAsync(self)
+        self.yandex_async = YandexAsync(self)
+        self.google_async = GoogleAsync(self)
         self.session = None
         self.requests = 0
 

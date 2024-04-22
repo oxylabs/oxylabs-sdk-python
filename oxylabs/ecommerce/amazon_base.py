@@ -1,7 +1,7 @@
 import oxylabs.utils.utils as utils
 from oxylabs.utils.constants import source
 from oxylabs.utils.utils import BaseEcommerceOpts, validate_url
-from typing import Any, Dict, Optional
+from typing import Optional
 
 
 class AmazonSearchOpts(BaseEcommerceOpts):
@@ -174,7 +174,7 @@ class AmazonSellerOpts(BaseEcommerceOpts):
 
 
 class AmazonBase:
-    def _prepare_amazon_search_payload(
+    def _prepare_search_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -216,9 +216,7 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_amazon_url_payload(
-        self, url: str, user_opts: Optional[dict] = None
-    ) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
         """
         Prepares the payload for making a request to Amazon URL.
 
@@ -253,7 +251,7 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_amazon_product_payload(
+    def _prepare_product_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -288,7 +286,7 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_amazon_pricing_payload(
+    def _prepare_pricing_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -325,7 +323,7 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_amazon_reviews_payload(
+    def _prepare_reviews_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -361,7 +359,7 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_amazon_questions_payload(
+    def _prepare_questions_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -398,7 +396,7 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_amazon_bestseller_payload(
+    def _prepare_bestseller_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -434,7 +432,7 @@ class AmazonBase:
 
         return payload
 
-    def _prepare_amazon_seller_payload(
+    def _prepare_seller_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """

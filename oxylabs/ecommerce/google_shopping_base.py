@@ -133,7 +133,7 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
 
 
 class GoogleShoppingBase:
-    def _prepare_google_shopping_search_payload(
+    def _prepare_shopping_search_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -173,7 +173,7 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_google_shopping_url_payload(
+    def _prepare_shopping_url_payload(
         self, url: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -207,7 +207,7 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_google_shopping_product_payload(
+    def _prepare_shopping_product_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -243,7 +243,7 @@ class GoogleShoppingBase:
 
         return payload
 
-    def _prepare_google_shopping_product_pricing_payload(
+    def _prepare_shopping_product_pricing_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """

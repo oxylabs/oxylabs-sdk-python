@@ -88,7 +88,7 @@ class YandexUrlOpts(BaseUrlOpts):
 
 
 class YandexBase:
-    def _prepare_yandex_search_payload(
+    def _prepare_search_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -124,9 +124,7 @@ class YandexBase:
 
         return payload
 
-    def _prepare_yandex_url_payload(
-        self, url: str, user_opts: Optional[dict] = None
-    ) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
         """
         Prepare the payload for a Yandex URL request.
 

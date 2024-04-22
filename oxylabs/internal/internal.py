@@ -27,7 +27,7 @@ class APICredentials:
 class Client:
     def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
         """
-        Initializes a new instance of the Internal class.
+        Initializes an instance of the Internal class.
 
         Args:
             base_url (str): The base URL of the API.
@@ -105,7 +105,7 @@ class ClientAsync:
 
     def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
         """
-        Initializes a new instance of the Internal class.
+        Initializes an instance of the Internal class.
 
         Args:
             base_url (str): The base URL of the API.

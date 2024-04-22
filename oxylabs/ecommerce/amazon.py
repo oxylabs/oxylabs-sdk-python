@@ -1,25 +1,19 @@
 from .amazon_base import AmazonBase
-from typing import Optional, Dict, Any
-from .ecommerce import InitEcommerce, InitEcommerceAsync
+from typing import Optional
 from oxylabs.utils.utils import prepare_config
 
 
 class Amazon(AmazonBase):
-    def __init__(self, client: InitEcommerce) -> None:
+    def __init__(self, ecommerce_instance) -> None:
         """
-        Initializes an Amazon instance.
+        Initializes an instance of the Amazon class.
 
         Args:
-            client (Ecommerce): An instance of the Ecommerce class.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of Ecommerce.
+            ecommerce_instance: The Ecommerce instance associated with the Amazon class.
         """
-        if not isinstance(client, InitEcommerce):
-            raise TypeError("Amazon requires an Ecommerce instance")
-        self.client = client
+        self._ecommerce_instance = ecommerce_instance
 
-    def scrape_amazon_search(
+    def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -51,11 +45,11 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_search_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_amazon_url(
+    def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -83,11 +77,11 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_url_payload(url, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_amazon_product(
+    def scrape_product(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -117,11 +111,11 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_product_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_product_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_amazon_pricing(
+    def scrape_pricing(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -152,11 +146,11 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_pricing_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_pricing_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_amazon_reviews(
+    def scrape_reviews(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -187,11 +181,11 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_reviews_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_reviews_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_amazon_questions(
+    def scrape_questions(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -220,11 +214,11 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_questions_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_questions_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_amazon_bestsellers(
+    def scrape_bestsellers(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -255,11 +249,11 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_bestseller_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_bestseller_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_amazon_sellers(
+    def scrape_sellers(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -288,27 +282,22 @@ class Amazon(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_amazon_seller_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_seller_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
 
 class AmazonAsync(AmazonBase):
-    def __init__(self, client: InitEcommerceAsync) -> None:
+    def __init__(self, ecommerce_async_instance) -> None:
         """
-        Initializes an instance of AmazonAsync.
+        Initializes an instance of the AmazonAsync class.
 
         Args:
-            client (EcommerceAsync): An instance of EcommerceAsync.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of EcommerceAsync.
+            ecommerce_async_instance: The EcommerceAsync instance associated with the AmazonAsync class.
         """
-        if not isinstance(client, InitEcommerceAsync):
-            raise TypeError("AmazonAsync requires an EcommerceAsync instance")
-        self.client = client
+        self._ecommerce_async_instance = ecommerce_async_instance
 
-    async def scrape_amazon_search(
+    async def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -342,11 +331,11 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_search_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_amazon_url(
+    async def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -376,11 +365,11 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_url_payload(url, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_amazon_product(
+    async def scrape_product(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -412,11 +401,11 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_product_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_product_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_amazon_pricing(
+    async def scrape_pricing(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -449,11 +438,11 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_pricing_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_pricing_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_amazon_reviews(
+    async def scrape_reviews(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -486,11 +475,11 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_reviews_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_reviews_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_amazon_questions(
+    async def scrape_questions(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -521,11 +510,11 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_questions_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_questions_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_amazon_bestsellers(
+    async def scrape_bestsellers(
         self,
         query,
         opts: Optional[dict] = None,
@@ -558,11 +547,11 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_bestseller_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_bestseller_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_amazon_sellers(
+    async def scrape_sellers(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -593,6 +582,6 @@ class AmazonAsync(AmazonBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_amazon_seller_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_seller_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response

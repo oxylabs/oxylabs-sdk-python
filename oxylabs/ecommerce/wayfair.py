@@ -1,16 +1,19 @@
 from .wayfair_base import WayfairBase
 from typing import Optional, Dict, Any
-from .ecommerce import InitEcommerce, InitEcommerceAsync
 from oxylabs.utils.utils import prepare_config
 
 
 class Wayfair(WayfairBase):
-    def __init__(self, client):
-        if not isinstance(client, InitEcommerce):
-            raise TypeError("Wayfair requires a Ecommerce instance")
-        self.client = client
+    def __init__(self, ecommerce_instance) -> None:
+        """
+        Initializes an instance of the Wayfair class.
 
-    def scrape_wayfair_search(
+        Args:
+            ecommerce_instance: The Ecommerce instance associated with the Wayfair class.
+        """
+        self._ecommerce_instance = ecommerce_instance
+
+    def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -38,11 +41,11 @@ class Wayfair(WayfairBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_wayfair_search_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
-    def scrape_wayfair_url(
+    def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -67,18 +70,22 @@ class Wayfair(WayfairBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_wayfair_url_payload(url, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = self._ecommerce_instance.get_resp(payload, config)
         return response
 
 
 class WayfairAsync(WayfairBase):
-    def __init__(self, client):
-        if not isinstance(client, InitEcommerceAsync):
-            raise TypeError("WayfairAsync requires a EcommerceAsync instance")
-        self.client = client
+    def __init__(self, ecommerce_async_instance) -> None:
+        """
+        Initializes an instance of the WayfairAsync class.
 
-    async def scrape_wayfair_search(
+        Args:
+            ecommerce_async_instance: The EcommerceAsync instance associated with the WayfairAsync class.
+        """
+        self._ecommerce_async_instance = ecommerce_async_instance
+
+    async def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -108,11 +115,11 @@ class WayfairAsync(WayfairBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_wayfair_search_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_wayfair_url(
+    async def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -139,6 +146,6 @@ class WayfairAsync(WayfairBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_wayfair_url_payload(url, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response

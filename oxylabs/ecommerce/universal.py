@@ -1,16 +1,19 @@
 from .universal_base import UniversalBase
 from typing import Optional, Dict, Any
-from .ecommerce import InitEcommerce, InitEcommerceAsync
 from oxylabs.utils.utils import prepare_config
 
 
 class Universal(UniversalBase):
-    def __init__(self, client):
-        if not isinstance(client, InitEcommerce):
-            raise TypeError("Universal requires an Ecommerce instance")
-        self.client = client
+    def __init__(self, ecommerce_instance) -> None:
+        """
+        Initializes an instance of the Universal class.
 
-    def scrape_universal_url(
+        Args:
+            ecommerce_instance: The Ecommerce instance associated with the Universal class.
+        """
+        self._ecommerce_instance = ecommerce_instance
+
+    def scrape_url(
         self, url: str, opts: Optional[dict] = None, timeout: int = None
     ) -> dict:
         """
@@ -39,18 +42,22 @@ class Universal(UniversalBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_universal_url_payload(url, opts)
+        payload = self._prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
 
 
 class UniversalAsync(UniversalBase):
-    def __init__(self, client):
-        if not isinstance(client, InitEcommerceAsync):
-            raise TypeError("UniversalAsync requires an EcommerceAsync instance")
-        self.client = client
+    def __init__(self, ecommerce_async_instance) -> None:
+        """
+        Initializes an instance of the UniversalAsync class.
 
-    async def scrape_universal_url(
+        Args:
+            ecommerce_async_instance: The EcommerceAsync instance associated with the UniversalAsync class.
+        """
+        self._ecommerce_async_instance = ecommerce_async_instance
+
+    async def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -84,6 +91,6 @@ class UniversalAsync(UniversalBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_universal_url_payload(url, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response

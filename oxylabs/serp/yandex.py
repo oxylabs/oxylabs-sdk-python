@@ -1,25 +1,21 @@
 from .yandex_base import YandexBase
-from .serp import InitSERP, InitSERPAsync
+
+# from .serp import SERP, SERPAsync
 from oxylabs.utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 
 class Yandex(YandexBase):
-    def __init__(self, client: InitSERP):
+    def __init__(self, serp_instance) -> None:
         """
-        Initializes a Yandex instance.
+        Initializes an instance of the Yandex class.
 
         Args:
-            client (Serp): The Serp instance to be used for Yandex requests.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of Serp.
+            serp_instance: The SERP instance associated with the Yandex class.
         """
-        if not isinstance(client, InitSERP):
-            raise TypeError("Yandex requires a Serp instance")
-        self.client = client
+        self._serp_instance = serp_instance
 
-    def scrape_yandex_search(
+    def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -52,11 +48,11 @@ class Yandex(YandexBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_yandex_search_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_yandex_url(
+    def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -82,27 +78,22 @@ class Yandex(YandexBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_yandex_url_payload(url, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
 
 class YandexAsync(YandexBase):
-    def __init__(self, client: InitSERPAsync):
+    def __init__(self, serp_async_instance):
         """
-        Initializes a YandexAsync instance.
+        Initializes an asynchronous Yandex client.
 
         Args:
-            client (SerpAsync): The SerpAsync instance to be used for making requests.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of SerpAsync.
+            serp_async_instance (SERPAsync): The SERPAsync instance to be used for Yandex requests.
         """
-        if not isinstance(client, InitSERPAsync):
-            raise TypeError("YandexAsync requires a SerpAsync instance")
-        self.client = client
+        self._serp_async_instance = serp_async_instance
 
-    async def scrape_yandex_search(
+    async def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -137,11 +128,11 @@ class YandexAsync(YandexBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_yandex_search_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_yandex_url(
+    async def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -169,6 +160,6 @@ class YandexAsync(YandexBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_yandex_url_payload(url, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response

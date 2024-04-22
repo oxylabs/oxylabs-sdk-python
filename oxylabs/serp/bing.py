@@ -1,25 +1,21 @@
 from .bing_base import BingBase
 from typing import Optional, Dict, Any
-from .serp import InitSERP, InitSERPAsync
+
+# from .serp import SERP, SERPAsync
 from oxylabs.utils.utils import prepare_config
 
 
 class Bing(BingBase):
-    def __init__(self, client: InitSERP) -> None:
+    def __init__(self, serp_instance) -> None:
         """
-        Initializes a Bing object.
+        Initializes an instance of the Bing class.
 
         Args:
-            client (Serp): An instance of the Serp class.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of the Serp class.
+            serp_instance: The SERP instance associated with the Bing class.
         """
-        if not isinstance(client, InitSERP):
-            raise TypeError("Bing requires a Serp instance")
-        self.client = client
+        self._serp_instance = serp_instance
 
-    def scrape_bing_search(
+    def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -49,13 +45,12 @@ class Bing(BingBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_bing_search_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_bing_url(
+    def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -83,27 +78,22 @@ class Bing(BingBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_bing_url_payload(url, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
 
 class BingAsync(BingBase):
-    def __init__(self, client: InitSERPAsync) -> None:
+    def __init__(self, serp_async_instance) -> None:
         """
-        Initializes a new instance of the BingAsync class.
+        Initializes an instance of the BingAsync class.
 
         Args:
-            client (SerpAsync): An instance of the SerpAsync class.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of SerpAsync.
+            serp_async_instance: The SERPAsync instance associated with the BingAsync class.
         """
-        if not isinstance(client, InitSERPAsync):
-            raise TypeError("BingAsync requires a SerpAsync instance")
-        self.client = client
+        self._serp_async_instance = serp_async_instance
 
-    async def scrape_bing_search(
+    async def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -137,11 +127,11 @@ class BingAsync(BingBase):
         """
 
         config = prepare_config(poll_interval=poll_interval, timeout=timeout)
-        payload = self._prepare_bing_search_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_bing_url(
+    async def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -171,6 +161,6 @@ class BingAsync(BingBase):
         """
 
         config = prepare_config(poll_interval=poll_interval, timeout=timeout)
-        payload = self._prepare_bing_url_payload(url, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response

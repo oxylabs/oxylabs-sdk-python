@@ -1,25 +1,21 @@
 from .baidu_base import BaiduBase
-from .serp import InitSERP, InitSERPAsync
+
+# from .serp import SERP, SERPAsync
 from oxylabs.utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 
 class Baidu(BaiduBase):
-    def __init__(self, client: InitSERP):
+    def __init__(self, serp_instance) -> None:
         """
-        Initializes a Baidu object.
+        Initializes an instance of the Baidu class.
 
         Args:
-            client (Serp): An instance of the Serp class.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of the Serp class.
+            serp_instance: The SERP instance associated with the Baidu class.
         """
-        if not isinstance(client, InitSERP):
-            raise TypeError("Baidu requires a Serp instance")
-        self.client = client
+        self._serp_instance = serp_instance
 
-    def scrape_baidu_search(
+    def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -48,11 +44,11 @@ class Baidu(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_baidu_search_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_baidu_url(
+    def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -77,27 +73,22 @@ class Baidu(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_baidu_url_payload(url, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
 
 class BaiduAsync(BaiduBase):
-    def __init__(self, client: InitSERPAsync):
+    def __init__(self, serp_async_instance) -> None:
         """
-        Initializes a BaiduAsync object.
+        Initializes an instance of the BaiduAsync class.
 
         Args:
-            client (SerpAsync): An instance of SerpAsync.
-
-        Raises:
-            TypeError: If the client is not an instance of SerpAsync.
+            serp_async_instance: The SERPAsync instance associated with the BaiduAsync class.
         """
-        if not isinstance(client, InitSERPAsync):
-            raise TypeError("BaiduAsync requires a SerpAsync instance")
-        self.client = client
+        self._serp_async_instance = serp_async_instance
 
-    async def scrape_baidu_search(
+    async def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -128,11 +119,11 @@ class BaiduAsync(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_baidu_search_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_baidu_url(
+    async def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -159,6 +150,6 @@ class BaiduAsync(BaiduBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_baidu_url_payload(url, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response

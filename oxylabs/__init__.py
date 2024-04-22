@@ -1,2 +1,3 @@
 from .proxy.proxy import Proxy
-from .initializers import SERP, SERPAsync, Ecommerce, EcommerceAsync
+from .serp.serp import SERP, SERPAsync
+from .ecommerce.ecommerce import Ecommerce, EcommerceAsync

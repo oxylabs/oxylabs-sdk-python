@@ -30,7 +30,7 @@ class GoogleSearchOpts(BaseGoogleOpts):
         **kwargs: Any,
     ) -> None:
         """
-        Initializes a new instance of the GoogleBase class.
+        Initializes an instance of the GoogleBase class.
 
         Args:
             domain (str): The domain to search on. Defaults to DEFAULT_DOMAIN.
@@ -85,7 +85,7 @@ class GoogleUrlOpts(BaseGoogleOpts):
 
     def __init__(self, parse: bool = False, **kwargs: Any) -> None:
         """
-        Initializes a new instance of the GoogleBase class.
+        Initializes an instance of the GoogleBase class.
 
         Args:
             parse (bool, optional): Indicates whether to parse the response. Defaults to False.
@@ -418,7 +418,7 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
 
 
 class GoogleBase:
-    def _prepare_google_search_payload(
+    def _prepare_search_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -487,9 +487,7 @@ class GoogleBase:
 
         return payload
 
-    def _prepare_google_url_payload(
-        self, url: str, user_opts: Optional[dict] = None
-    ) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
         """
         Prepares the payload for a Google URL request.
 

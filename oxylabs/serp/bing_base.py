@@ -36,7 +36,7 @@ class BingSearchOpts(BaseSearchOpts):
         **kwargs: Any,
     ) -> None:
         """
-        Initialize a new instance of the BingBase class.
+        Initialize an instance of the BingBase class.
 
         Args:
             locale (str): The locale to be used for the search results. Defaults to None.
@@ -82,7 +82,7 @@ class BingUrlOpts(BaseUrlOpts):
         **kwargs: Any,
     ) -> None:
         """
-        Initializes a new instance of the BingBase class.
+        Initializes an instance of the BingBase class.
 
         Args:
             geo_location (str): The geographic location for the search.
@@ -106,7 +106,7 @@ class BingUrlOpts(BaseUrlOpts):
 
 
 class BingBase:
-    def _prepare_bing_search_payload(
+    def _prepare_search_payload(
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
@@ -145,9 +145,7 @@ class BingBase:
 
         return payload
 
-    def _prepare_bing_url_payload(
-        self, url: str, user_opts: Optional[dict] = None
-    ) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
         """
         Prepares the payload for a Bing URL request.
 

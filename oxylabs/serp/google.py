@@ -1,25 +1,19 @@
 from oxylabs.utils.utils import prepare_config
 from .google_base import GoogleBase
-from .serp import InitSERP, InitSERPAsync
 from typing import Optional, Dict, Any
 
 
 class Google(GoogleBase):
-    def __init__(self, client: InitSERP):
+    def __init__(self, serp_instance) -> None:
         """
-        Initializes a Google object.
+        Initializes an instance of the Google class.
 
         Args:
-            client (Serp): The Serp instance to be used for Google requests.
-
-        Raises:
-            TypeError: If the client is not an instance of Serp.
+            serp_instance: The SERP instance associated with the Google class.
         """
-        if not isinstance(client, InitSERP):
-            raise TypeError("Google requires a Serp instance")
-        self.client = client
+        self._serp_instance = serp_instance
 
-    def scrape_google_search(
+    def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -55,11 +49,11 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_google_search_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_google_url(
+    def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -87,11 +81,11 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout)
-        payload = self._prepare_google_url_payload(url, opts)
-        response = self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_google_ads(
+    def scrape_ads(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -125,10 +119,10 @@ class Google(GoogleBase):
 
         config = prepare_config(timeout=timeout)
         payload = self._prepare_ads_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_google_suggestions(
+    def scrape_suggestions(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -158,10 +152,10 @@ class Google(GoogleBase):
 
         config = prepare_config(timeout=timeout)
         payload = self._prepare_suggestions_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_google_hotels(
+    def scrape_hotels(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -195,10 +189,10 @@ class Google(GoogleBase):
 
         config = prepare_config(timeout=timeout)
         payload = self._prepare_hotels_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_google_travel_hotels(
+    def scrape_travel_hotels(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -231,10 +225,10 @@ class Google(GoogleBase):
 
         config = prepare_config(timeout=timeout)
         payload = self._prepare_travel_hotels_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_google_images(
+    def scrape_images(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -269,10 +263,10 @@ class Google(GoogleBase):
 
         config = prepare_config(timeout=timeout)
         payload = self._prepare_images_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
-    def scrape_google_trends_explore(
+    def scrape_trends_explore(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -299,26 +293,22 @@ class Google(GoogleBase):
 
         config = prepare_config(timeout=timeout)
         payload = self._prepare_trends_explore_payload(query, opts)
-        response = self.client.get_resp(payload, config)
+        response = self._serp_instance.get_resp(payload, config)
         return response
 
 
 class GoogleAsync(GoogleBase):
-    def __init__(self, client: InitSERPAsync):
+    def __init__(self, serp_async_instance) -> None:
         """
-        Initializes a GoogleAsync instance.
+        Initializes an asynchronous Google object.
 
         Args:
-            client (SerpAsync): An instance of SerpAsync.
-
-        Raises:
-            TypeError: If the client parameter is not an instance of SerpAsync.
+            serp_async_instance: The SERP instance to be used for Google requests.
         """
-        if not isinstance(client, InitSERPAsync):
-            raise TypeError("GoogleAsync requires a SerpAsync instance")
-        self.client = client
 
-    async def scrape_google_search(
+        self._serp_async_instance = serp_async_instance
+
+    async def scrape_search(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -356,11 +346,11 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_google_search_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_search_payload(query, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_google_url(
+    async def scrape_url(
         self,
         url: str,
         opts: Optional[dict] = None,
@@ -390,11 +380,11 @@ class GoogleAsync(GoogleBase):
         """
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
-        payload = self._prepare_google_url_payload(url, opts)
-        response = await self.client.get_resp(payload, config)
+        payload = self._prepare_url_payload(url, opts)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_google_ads(
+    async def scrape_ads(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -430,10 +420,10 @@ class GoogleAsync(GoogleBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_ads_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_google_suggestions(
+    async def scrape_suggestions(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -465,10 +455,10 @@ class GoogleAsync(GoogleBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_suggestions_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_google_hotels(
+    async def scrape_hotels(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -504,10 +494,10 @@ class GoogleAsync(GoogleBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_hotels_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_google_travel_hotels(
+    async def scrape_travel_hotels(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -542,10 +532,10 @@ class GoogleAsync(GoogleBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_travel_hotels_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_google_images(
+    async def scrape_images(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -582,10 +572,10 @@ class GoogleAsync(GoogleBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_images_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response
 
-    async def scrape_google_trends_explore(
+    async def scrape_trends_explore(
         self,
         query: str,
         opts: Optional[dict] = None,
@@ -614,5 +604,5 @@ class GoogleAsync(GoogleBase):
 
         config = prepare_config(timeout=timeout, poll_interval=poll_interval)
         payload = self._prepare_trends_explore_payload(query, opts)
-        response = await self.client.get_resp(payload, config)
+        response = await self._serp_async_instance.get_resp(payload, config)
         return response

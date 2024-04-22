@@ -2,12 +2,22 @@ from oxylabs.internal import Client, APICredentials, ClientAsync
 from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import asyncio
 import oxylabs.utils.utils as utils
+from . import (
+    Amazon,
+    AmazonAsync,
+    GoogleShopping,
+    GoogleShoppingAsync,
+    Universal,
+    UniversalAsync,
+    Wayfair,
+    WayfairAsync,
+)
 
 
-class InitEcommerce:
+class Ecommerce:
     def __init__(self, username: str, password: str) -> None:
         """
-        Initializes a synchronous Ecommerce client.
+        Initializes an instance of the Ecommerce class.
 
         Args:
             username (str): The username for API authentication.
@@ -15,6 +25,10 @@ class InitEcommerce:
         """
         api_credentials = APICredentials(username, password)
         self.client = Client(SYNC_BASE_URL, api_credentials)
+        self.amazon = Amazon(self)
+        self.google_shopping = GoogleShopping(self)
+        self.universal = Universal(self)
+        self.wayfair = Wayfair(self)
 
     def get_resp(self, payload: dict, config: dict) -> dict:
         """
@@ -33,16 +47,24 @@ class InitEcommerce:
         return self.client.req(payload, "POST", config)
 
 
-class InitEcommerceAsync:
+class EcommerceAsync:
     def __init__(self, username: str, password: str) -> None:
         """
-        Initializes an asynchronous Ecommerce client.
+        Initializes an instance of the EcommerceAsync class.
 
         Args:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
+
+        Returns:
+            None
         """
+
         self.api_credentials = APICredentials(username, password)
+        self.amazon_async = AmazonAsync(self)
+        self.google_shopping_async = GoogleShoppingAsync(self)
+        self.universal_async = UniversalAsync(self)
+        self.wayfair_async = WayfairAsync(self)
         self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
         self.session = None
         self.requests = 0
