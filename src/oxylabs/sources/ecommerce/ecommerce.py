@@ -1,7 +1,7 @@
-from src.oxylabs.internal import Client, APICredentials, ClientAsync
-from src.oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
-import asyncio
 import oxylabs.utils.utils as utils
+from src.oxylabs.internal import APICredentials, Client, ClientAsync
+from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
+
 from . import (
     Amazon,
     AmazonAsync,

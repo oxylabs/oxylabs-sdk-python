@@ -1,7 +1,8 @@
-from .bing_base import BingBase
-from typing import Optional, Dict, Any
+from typing import Optional
 
 from src.oxylabs.utils.utils import prepare_config
+
+from .bing_base import BingBase
 
 
 class Bing(BingBase):

@@ -1,6 +1,8 @@
-from .google_shopping_base import GoogleShoppingBase
-from typing import Optional, Dict, Any
+from typing import Optional
+
 from src.oxylabs.utils.utils import prepare_config
+
+from .google_shopping_base import GoogleShoppingBase
 
 
 class GoogleShopping(GoogleShoppingBase):

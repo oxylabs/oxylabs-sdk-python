@@ -1,12 +1,8 @@
-from src.oxylabs.utils.defaults import (
-    set_default_user_agent_type,
-    set_default_http_method,
-    set_default_content_encoding,
-)
-from src.oxylabs.utils.utils import BaseUrlOpts
-from src.oxylabs.utils.constants import source
+from typing import Optional
+
 import oxylabs.utils.utils as utils
-from typing import Optional, Dict, Any
+from src.oxylabs.utils.constants import source
+from src.oxylabs.utils.utils import BaseUrlOpts
 
 
 class UniversalUrlOpts(BaseUrlOpts):
@@ -61,9 +57,6 @@ class UniversalBase:
         """
 
         opts = UniversalUrlOpts(**user_opts if user_opts is not None else {})
-
-        opts.context = set_default_http_method(opts.context)
-        opts.content_encoding = set_default_content_encoding(opts.content_encoding)
 
         opts.check_parameter_validity()
 

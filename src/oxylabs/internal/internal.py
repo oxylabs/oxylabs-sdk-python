@@ -1,12 +1,8 @@
-import requests
-import base64
-import aiohttp
 import asyncio
-from src.oxylabs.utils.defaults import (
-    DEFAULT_REQUEST_TIMEOUT_ASYNC,
-    DEFAULT_JOB_COMPLETION_TIMEOUT,
-    DEFAULT_POLL_INTERVAL,
-)
+import base64
+
+import aiohttp
+import requests
 
 
 class APICredentials:

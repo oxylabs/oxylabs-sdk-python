@@ -1,14 +1,14 @@
+from typing import Any, List
 from urllib.parse import urlparse
+
 import aiohttp
 
-from .constants import domain, fn_name, locale, render, source
-from .constants import user_agent
-from typing import Any, List
+from .constants import domain, fn_name, locale, render, source, user_agent
 from .defaults import (
+    DEFAULT_JOB_COMPLETION_TIMEOUT,
     DEFAULT_POLL_INTERVAL,
     DEFAULT_REQUEST_TIMEOUT,
     DEFAULT_REQUEST_TIMEOUT_ASYNC,
-    DEFAULT_JOB_COMPLETION_TIMEOUT,
 )
 
 

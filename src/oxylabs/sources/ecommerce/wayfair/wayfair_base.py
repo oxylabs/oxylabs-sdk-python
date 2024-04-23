@@ -1,17 +1,8 @@
-from typing import Optional, Dict, Any
-from src.oxylabs.utils.defaults import (
-    DEFAULT_LIMIT_ECOMMERCE,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
-    set_default_limit,
-    set_default_pages,
-    set_default_start_page,
-    set_default_user_agent_type,
-)
-from src.oxylabs.utils.utils import validate_url
-from src.oxylabs.utils.constants import source
+from typing import Optional
+
 import oxylabs.utils.utils as utils
+from src.oxylabs.utils.constants import source
+from src.oxylabs.utils.utils import validate_url
 
 
 class WayfairSearchOpts:

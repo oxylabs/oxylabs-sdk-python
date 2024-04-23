@@ -1,13 +1,15 @@
-from setuptools import setup, find_packages
+from setuptools import find_packages, setup
+
 
 def get_version(rel_path):
-    with open(rel_path, 'r') as file:
+    with open(rel_path, "r") as file:
         for line in file.read().splitlines():
-            if line.startswith('__version__'):
+            if line.startswith("__version__"):
                 delim = '"' if '"' in line else "'"
                 return line.split(delim)[1]
         else:
             raise RuntimeError("Unable to find version string.")
+
 
 long_description = """
 The official Python library for the Oxylabs Scraper APIs.

@@ -1,21 +1,9 @@
-from src.oxylabs.utils.constants import render
-from src.oxylabs.utils.defaults import (
-    DEFAULT_DOMAIN,
-    DEFAULT_LIMIT_SERP,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    set_default_domain,
-    set_default_limit,
-    set_default_pages,
-    set_default_start_page,
-    set_default_user_agent_type,
-    set_default_hotel_occupancy,
-    set_default_tbm_context,
-)
-from src.oxylabs.utils.utils import BaseGoogleOpts, validate_url
-from src.oxylabs.utils.constants import source
+from typing import Any, Optional
+
 import oxylabs.utils.utils as utils
-from typing import Optional, Any, Dict
+from src.oxylabs.utils.constants import render, source
+from src.oxylabs.utils.defaults import set_default_tbm_context
+from src.oxylabs.utils.utils import BaseGoogleOpts, validate_url
 
 
 class GoogleSearchOpts(BaseGoogleOpts):

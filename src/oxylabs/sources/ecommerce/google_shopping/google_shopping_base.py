@@ -1,17 +1,8 @@
-from typing import Optional, Dict, Any
-from src.oxylabs.utils.defaults import (
-    DEFAULT_DOMAIN,
-    DEFAULT_PAGES,
-    DEFAULT_START_PAGE,
-    set_default_domain,
-    set_default_pages,
-    set_default_start_page,
-    set_default_user_agent_type,
-    set_default_sort_by,
-)
-from src.oxylabs.utils.utils import validate_url, BaseEcommerceOpts
-from src.oxylabs.utils.constants import source
+from typing import Any, Dict, Optional
+
 import oxylabs.utils.utils as utils
+from src.oxylabs.utils.constants import source
+from src.oxylabs.utils.utils import BaseEcommerceOpts, validate_url
 
 
 class GoogleShoppingSearchOpts(BaseEcommerceOpts):

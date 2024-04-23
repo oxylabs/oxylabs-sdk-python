@@ -1,8 +1,8 @@
-from .yandex_base import YandexBase
+from typing import Optional
 
-# from .serp import SERP, SERPAsync
 from src.oxylabs.utils.utils import prepare_config
-from typing import Optional, Dict, Any
+
+from .yandex_base import YandexBase
 
 
 class Yandex(YandexBase):

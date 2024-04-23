@@ -1,6 +1,8 @@
-from .baidu_base import BaiduBase
+from typing import Optional
+
 from src.oxylabs.utils.utils import prepare_config
-from typing import Optional, Dict, Any
+
+from .baidu_base import BaiduBase
 
 
 class Baidu(BaiduBase):
