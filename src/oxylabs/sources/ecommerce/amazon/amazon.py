@@ -1,6 +1,6 @@
 from .amazon_base import AmazonBase
 from typing import Optional
-from oxylabs.utils.utils import prepare_config
+from src.oxylabs.utils.utils import prepare_config
 
 
 class Amazon(AmazonBase):

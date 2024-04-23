@@ -1,7 +1,7 @@
 import asyncio
 import oxylabs.utils.utils as utils
-from oxylabs.internal import APICredentials, Client, ClientAsync
-from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
+from src.oxylabs.internal import APICredentials, Client, ClientAsync
+from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
 from . import (
     Bing,

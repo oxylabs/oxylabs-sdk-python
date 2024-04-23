@@ -1,17 +1,15 @@
-from .yandex_base import YandexBase
-
-# from .serp import SERP, SERPAsync
-from oxylabs.utils.utils import prepare_config
+from .baidu_base import BaiduBase
+from src.oxylabs.utils.utils import prepare_config
 from typing import Optional, Dict, Any
 
 
-class Yandex(YandexBase):
+class Baidu(BaiduBase):
     def __init__(self, serp_instance) -> None:
         """
-        Initializes an instance of the Yandex class.
+        Initializes an instance of the Baidu class.
 
         Args:
-            serp_instance: The SERP instance associated with the Yandex class.
+            serp_instance: The SERP instance associated with the Baidu class.
         """
         self._serp_instance = serp_instance
 
@@ -22,12 +20,11 @@ class Yandex(YandexBase):
         timeout: Optional[int] = None,
     ) -> dict:
         """
-        Scrapes the search results from Yandex.
+        Scrapes Baidu search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
-
+            opts (BaiduSearchOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -35,15 +32,12 @@ class Yandex(YandexBase):
                     "limit": 10,
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "locale": None,
-                    "geo_location": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-
-            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
 
         Returns:
-
             dict: The response from the server after the job is completed.
         """
 
@@ -59,15 +53,14 @@ class Yandex(YandexBase):
         timeout: Optional[int] = None,
     ) -> dict:
         """
-        Scrapes Yandex search results for a given URL.
+        Scrapes Baidu search results for a given URL.
 
         Args:
             url (str): The URL to be scraped.
-            opts (YandexUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (BaiduUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "render": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
@@ -83,13 +76,13 @@ class Yandex(YandexBase):
         return response
 
 
-class YandexAsync(YandexBase):
-    def __init__(self, serp_async_instance):
+class BaiduAsync(BaiduBase):
+    def __init__(self, serp_async_instance) -> None:
         """
-        Initializes an asynchronous Yandex client.
+        Initializes an instance of the BaiduAsync class.
 
         Args:
-            serp_async_instance (SERPAsync): The SERPAsync instance to be used for Yandex requests.
+            serp_async_instance: The SERPAsync instance associated with the BaiduAsync class.
         """
         self._serp_async_instance = serp_async_instance
 
@@ -101,12 +94,11 @@ class YandexAsync(YandexBase):
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
-        Asynchronously scrapes the search results from Yandex.
+        Asynchronously scrapes Baidu search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
-
+            opts (BaiduSearchOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -114,16 +106,13 @@ class YandexAsync(YandexBase):
                     "limit": 10,
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "locale": None,
-                    "geo_location": None,
+                    "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-
-            timeout (int, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int, optional): The interval in seconds for the request to poll the server for the job completion status. Defaults to 2.
+            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            poll_interval (int | 2, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
 
         Returns:
-
             dict: The response from the server after the job is completed.
         """
 
@@ -140,15 +129,14 @@ class YandexAsync(YandexBase):
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
-        Asynchronously scrapes Yandex search results for a given URL.
+        Asynchronously scrapes Baidu search results for a given URL.
 
         Args:
             url (str): The URL to be scraped.
-            opts (YandexUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (BaiduUrlOpts, optional): Configuration options for the search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
-                    "render": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.

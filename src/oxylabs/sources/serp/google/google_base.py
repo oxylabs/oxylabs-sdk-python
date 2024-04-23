@@ -1,5 +1,5 @@
-from oxylabs.utils.constants import render
-from oxylabs.utils.defaults import (
+from src.oxylabs.utils.constants import render
+from src.oxylabs.utils.defaults import (
     DEFAULT_DOMAIN,
     DEFAULT_LIMIT_SERP,
     DEFAULT_PAGES,
@@ -12,8 +12,8 @@ from oxylabs.utils.defaults import (
     set_default_hotel_occupancy,
     set_default_tbm_context,
 )
-from oxylabs.utils.utils import BaseGoogleOpts, validate_url
-from oxylabs.utils.constants import source
+from src.oxylabs.utils.utils import BaseGoogleOpts, validate_url
+from src.oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 from typing import Optional, Any, Dict
 

@@ -2,7 +2,7 @@ from .bing_base import BingBase
 from typing import Optional, Dict, Any
 
 # from .serp import SERP, SERPAsync
-from oxylabs.utils.utils import prepare_config
+from src.oxylabs.utils.utils import prepare_config
 
 
 class Bing(BingBase):

@@ -1,5 +1,5 @@
 from typing import Optional, Dict, Any
-from oxylabs.utils.defaults import (
+from src.oxylabs.utils.defaults import (
     DEFAULT_DOMAIN,
     DEFAULT_PAGES,
     DEFAULT_START_PAGE,
@@ -9,8 +9,8 @@ from oxylabs.utils.defaults import (
     set_default_user_agent_type,
     set_default_sort_by,
 )
-from oxylabs.utils.utils import validate_url, BaseEcommerceOpts
-from oxylabs.utils.constants import source
+from src.oxylabs.utils.utils import validate_url, BaseEcommerceOpts
+from src.oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 
 

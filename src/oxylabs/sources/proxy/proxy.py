@@ -1,6 +1,6 @@
 from typing import Optional
 from urllib.parse import quote
-from oxylabs.utils.defaults import PROXY_BASE_URL, PROXY_PORT
+from src.oxylabs.utils.defaults import PROXY_BASE_URL, PROXY_PORT
 
 import requests
 

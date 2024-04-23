@@ -1,4 +1,4 @@
-from oxylabs.utils.utils import prepare_config
+from src.oxylabs.utils.utils import prepare_config
 from .google_base import GoogleBase
 from typing import Optional, Dict, Any
 

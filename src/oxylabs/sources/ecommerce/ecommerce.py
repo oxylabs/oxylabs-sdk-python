@@ -1,5 +1,5 @@
-from oxylabs.internal import Client, APICredentials, ClientAsync
-from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
+from src.oxylabs.internal import Client, APICredentials, ClientAsync
+from src.oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 import asyncio
 import oxylabs.utils.utils as utils
 from . import (

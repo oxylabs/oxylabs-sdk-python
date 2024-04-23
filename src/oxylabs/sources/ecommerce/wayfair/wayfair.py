@@ -1,6 +1,6 @@
 from .wayfair_base import WayfairBase
 from typing import Optional, Dict, Any
-from oxylabs.utils.utils import prepare_config
+from src.oxylabs.utils.utils import prepare_config
 
 
 class Wayfair(WayfairBase):

@@ -1,5 +1,5 @@
-from oxylabs.utils.constants import domain, locale
-from oxylabs.utils.defaults import (
+from src.oxylabs.utils.constants import domain, locale
+from src.oxylabs.utils.defaults import (
     DEFAULT_LIMIT_SERP,
     set_default_domain,
     set_default_limit,
@@ -7,8 +7,8 @@ from oxylabs.utils.defaults import (
     set_default_start_page,
     set_default_user_agent_type,
 )
-from oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
-from oxylabs.utils.constants import source
+from src.oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
+from src.oxylabs.utils.constants import source
 import oxylabs.utils.utils as utils
 from typing import Optional, Dict, Any
 
