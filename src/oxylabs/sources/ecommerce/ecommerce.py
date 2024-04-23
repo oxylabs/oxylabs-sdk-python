@@ -2,16 +2,10 @@ import oxylabs.utils.utils as utils
 from src.oxylabs.internal import APICredentials, Client, ClientAsync
 from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
-from . import (
-    Amazon,
-    AmazonAsync,
-    GoogleShopping,
-    GoogleShoppingAsync,
-    Universal,
-    UniversalAsync,
-    Wayfair,
-    WayfairAsync,
-)
+from .amazon.amazon import Amazon, AmazonAsync
+from .google_shopping.google_shopping import GoogleShopping, GoogleShoppingAsync
+from .universal.universal import Universal, UniversalAsync
+from .wayfair.wayfair import Wayfair, WayfairAsync
 
 
 class Ecommerce:
@@ -30,7 +24,7 @@ class Ecommerce:
         self.universal = Universal(self)
         self.wayfair = Wayfair(self)
 
-    def get_resp(self, payload: dict, config: dict) -> dict:
+    def _get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload synchronously and fetches API response.
 
@@ -69,7 +63,7 @@ class EcommerceAsync:
         self._session = None
         self._requests = 0
 
-    async def get_resp(self, payload: dict, config: dict) -> dict:
+    async def _get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload asynchronously and fetches API response.
 

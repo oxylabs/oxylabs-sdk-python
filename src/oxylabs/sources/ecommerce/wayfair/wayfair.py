@@ -44,7 +44,7 @@ class Wayfair(WayfairBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_search_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_url(
@@ -73,7 +73,7 @@ class Wayfair(WayfairBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
 
@@ -124,7 +124,7 @@ class WayfairAsync(WayfairBase):
             async_integration=True,
         )
         payload = self._prepare_search_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_url(
@@ -161,5 +161,5 @@ class WayfairAsync(WayfairBase):
             async_integration=True,
         )
         payload = self._prepare_url_payload(url, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response

@@ -48,7 +48,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_search_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_url(
@@ -80,7 +80,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_product(
@@ -114,7 +114,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_product_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_pricing(
@@ -149,7 +149,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_pricing_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_reviews(
@@ -184,7 +184,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_reviews_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_questions(
@@ -217,7 +217,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_questions_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_bestsellers(
@@ -252,7 +252,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_bestseller_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
     def scrape_sellers(
@@ -285,7 +285,7 @@ class Amazon(AmazonBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_seller_payload(query, opts)
-        response = self._ecommerce_instance.get_resp(payload, config)
+        response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
 
@@ -340,7 +340,7 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_search_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_url(
@@ -380,7 +380,7 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_url_payload(url, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_product(
@@ -422,7 +422,7 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_product_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_pricing(
@@ -465,7 +465,7 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_pricing_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_reviews(
@@ -508,7 +508,7 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_reviews_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_questions(
@@ -549,7 +549,7 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_questions_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_bestsellers(
@@ -592,7 +592,7 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_bestseller_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_sellers(
@@ -633,5 +633,5 @@ class AmazonAsync(AmazonBase):
             async_integration=True,
         )
         payload = self._prepare_seller_payload(query, opts)
-        response = await self._ecommerce_async_instance.get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response

@@ -2,16 +2,10 @@ import oxylabs.utils.utils as utils
 from src.oxylabs.internal import APICredentials, Client, ClientAsync
 from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
-from . import (
-    Baidu,
-    BaiduAsync,
-    Bing,
-    BingAsync,
-    Google,
-    GoogleAsync,
-    Yandex,
-    YandexAsync,
-)
+from .baidu.baidu import Baidu, BaiduAsync
+from .bing.bing import Bing, BingAsync
+from .google.google import Google, GoogleAsync
+from .yandex.yandex import Yandex, YandexAsync
 
 
 class SERP:

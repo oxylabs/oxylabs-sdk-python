@@ -45,7 +45,7 @@ class Baidu(BaiduBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_search_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_url(
@@ -74,7 +74,7 @@ class Baidu(BaiduBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
 
@@ -126,7 +126,7 @@ class BaiduAsync(BaiduBase):
             async_integration=True,
         )
         payload = self._prepare_search_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_url(
@@ -163,5 +163,5 @@ class BaiduAsync(BaiduBase):
             async_integration=True,
         )
         payload = self._prepare_url_payload(url, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response

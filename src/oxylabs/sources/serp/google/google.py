@@ -52,7 +52,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_search_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_url(
@@ -84,7 +84,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_ads(
@@ -121,7 +121,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_ads_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_suggestions(
@@ -154,7 +154,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_suggestions_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_hotels(
@@ -191,7 +191,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_hotels_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_travel_hotels(
@@ -227,7 +227,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_travel_hotels_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_images(
@@ -265,7 +265,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_images_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_trends_explore(
@@ -295,7 +295,7 @@ class Google(GoogleBase):
 
         config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_trends_explore_payload(query, opts)
-        response = self._serp_instance.get_resp(payload, config)
+        response = self._serp_instance._get_resp(payload, config)
         return response
 
 
@@ -355,7 +355,7 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_search_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_url(
@@ -395,7 +395,7 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_url_payload(url, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_ads(
@@ -440,7 +440,7 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_ads_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_suggestions(
@@ -481,7 +481,7 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_suggestions_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_hotels(
@@ -526,7 +526,7 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_hotels_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_travel_hotels(
@@ -570,7 +570,7 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_travel_hotels_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_images(
@@ -616,7 +616,7 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_images_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_trends_explore(
@@ -654,5 +654,5 @@ class GoogleAsync(GoogleBase):
             async_integration=True,
         )
         payload = self._prepare_trends_explore_payload(query, opts)
-        response = await self._serp_async_instance.get_resp(payload, config)
+        response = await self._serp_async_instance._get_resp(payload, config)
         return response
