@@ -17,7 +17,7 @@ class Google(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google search results for a given query.
@@ -48,7 +48,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_search_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -57,7 +57,7 @@ class Google(GoogleBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google search results for a given URL.
@@ -80,7 +80,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -89,7 +89,7 @@ class Google(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Ads search results for a given query.
@@ -117,7 +117,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_ads_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -126,7 +126,7 @@ class Google(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google suggestions for a given query.
@@ -150,7 +150,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_suggestions_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -159,7 +159,7 @@ class Google(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Hotels search results for a given query.
@@ -187,7 +187,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_hotels_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -196,7 +196,7 @@ class Google(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Travel Hotels search results for a given query.
@@ -223,7 +223,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_travel_hotels_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -232,7 +232,7 @@ class Google(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Images search results for a given query.
@@ -261,7 +261,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_images_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -270,7 +270,7 @@ class Google(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Trends Explore results for a given query.
@@ -291,7 +291,7 @@ class Google(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_trends_explore_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -312,7 +312,8 @@ class GoogleAsync(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -345,7 +346,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_search_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -354,7 +360,8 @@ class GoogleAsync(GoogleBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -379,7 +386,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_url_payload(url, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -388,7 +400,8 @@ class GoogleAsync(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -418,7 +431,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_ads_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -427,7 +445,8 @@ class GoogleAsync(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -453,7 +472,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_suggestions_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -462,7 +486,8 @@ class GoogleAsync(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -492,7 +517,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_hotels_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -501,7 +531,8 @@ class GoogleAsync(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -530,7 +561,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_travel_hotels_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -539,7 +575,8 @@ class GoogleAsync(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -570,7 +607,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_images_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -579,7 +621,8 @@ class GoogleAsync(GoogleBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -602,7 +645,12 @@ class GoogleAsync(GoogleBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_trends_explore_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response

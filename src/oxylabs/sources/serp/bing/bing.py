@@ -1,7 +1,6 @@
 from .bing_base import BingBase
 from typing import Optional, Dict, Any
 
-# from .serp import SERP, SERPAsync
 from src.oxylabs.utils.utils import prepare_config
 
 
@@ -19,7 +18,7 @@ class Bing(BingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Bing search results for a given query.
@@ -45,7 +44,7 @@ class Bing(BingBase):
         Returns:
             dict: The response from the server after the job is completed.
         """
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_search_payload(query, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -54,7 +53,7 @@ class Bing(BingBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Bing search results for a given URL.
@@ -77,7 +76,7 @@ class Bing(BingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
         response = self._serp_instance.get_resp(payload, config)
         return response
@@ -97,7 +96,8 @@ class BingAsync(BingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -126,7 +126,13 @@ class BingAsync(BingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(poll_interval=poll_interval, timeout=timeout)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
+
         payload = self._prepare_search_payload(query, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response
@@ -135,7 +141,8 @@ class BingAsync(BingBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -160,7 +167,13 @@ class BingAsync(BingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(poll_interval=poll_interval, timeout=timeout)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
+
         payload = self._prepare_url_payload(url, opts)
         response = await self._serp_async_instance.get_resp(payload, config)
         return response

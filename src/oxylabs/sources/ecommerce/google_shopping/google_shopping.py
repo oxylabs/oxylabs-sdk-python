@@ -17,7 +17,7 @@ class GoogleShopping(GoogleShoppingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Shopping search results for a given query.
@@ -46,7 +46,7 @@ class GoogleShopping(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_shopping_search_payload(query, opts)
         response = self._ecommerce_instance.get_resp(payload, config)
         return response
@@ -55,7 +55,7 @@ class GoogleShopping(GoogleShoppingBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Shopping search results for a given URL.
@@ -75,7 +75,7 @@ class GoogleShopping(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_shopping_url_payload(url, opts)
         response = self._ecommerce_instance.get_resp(payload, config)
         return response
@@ -84,7 +84,7 @@ class GoogleShopping(GoogleShoppingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Shopping product results for a given query.
@@ -107,7 +107,7 @@ class GoogleShopping(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_shopping_product_payload(query, opts)
         response = self._ecommerce_instance.get_resp(payload, config)
         return response
@@ -116,7 +116,7 @@ class GoogleShopping(GoogleShoppingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Google Shopping product pricing results for a given product code.
@@ -141,7 +141,7 @@ class GoogleShopping(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_shopping_product_pricing_payload(query, opts)
         response = self._ecommerce_instance.get_resp(payload, config)
         return response
@@ -161,7 +161,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -192,7 +193,12 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_shopping_search_payload(query, opts)
         response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
@@ -201,7 +207,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -224,7 +231,12 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_shopping_url_payload(url, opts)
         response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
@@ -233,7 +245,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -259,7 +272,12 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_shopping_product_payload(query, opts)
         response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
@@ -268,7 +286,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -296,7 +315,12 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_shopping_product_pricing_payload(query, opts)
         response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response

@@ -14,7 +14,7 @@ class Universal(UniversalBase):
         self._ecommerce_instance = ecommerce_instance
 
     def scrape_url(
-        self, url: str, opts: Optional[dict] = None, timeout: int = None
+        self, url: str, opts: Optional[dict] = None, request_timeout: int = None
     ) -> dict:
         """
         Scrapes Universal search results for a given URL.
@@ -41,7 +41,7 @@ class Universal(UniversalBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
         response = self.client.get_resp(payload, config)
         return response
@@ -61,7 +61,8 @@ class UniversalAsync(UniversalBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: int = None,
+        request_timeout: int = None,
+        job_completion_timeout: int = None,
         poll_interval: int = None,
     ) -> dict:
         """
@@ -90,7 +91,12 @@ class UniversalAsync(UniversalBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_url_payload(url, opts)
         response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response

@@ -81,13 +81,11 @@ class SERPAsync:
         try:
             self.session = await utils.ensure_session(self.session)
 
-            result = await asyncio.wait_for(
-                self.client.execute_with_timeout(payload, config, self.session),
-                timeout=config["timeout"],
+            result = await self.client.execute_with_timeout(
+                payload, config, self.session
             )
             return result
-        except asyncio.TimeoutError:
-            print("The request timed out")
+
         except Exception as e:
             print(f"An error occurred: {e}")
 

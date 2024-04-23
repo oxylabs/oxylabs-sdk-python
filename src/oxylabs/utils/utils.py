@@ -5,13 +5,10 @@ from .constants import domain, fn_name, locale, render, source
 from .constants import user_agent
 from typing import Any, List
 from .defaults import (
-    DEFAULT_LIMIT_SERP,
-    DEFAULT_DOMAIN,
-    DEFAULT_START_PAGE,
-    DEFAULT_USER_AGENT,
-    DEFAULT_PAGES,
     DEFAULT_POLL_INTERVAL,
-    DEFAULT_TIMEOUT,
+    DEFAULT_REQUEST_TIMEOUT,
+    DEFAULT_REQUEST_TIMEOUT_ASYNC,
+    DEFAULT_JOB_COMPLETION_TIMEOUT,
 )
 
 
@@ -151,24 +148,35 @@ def prepare_config(**kwargs):
     Prepare a configuration dictionary based on the provided keyword arguments.
 
     Args:
-        timeout (int, optional): The timeout value in seconds. Defaults to None.
+        request_timeout (int, optional): The timeout value in seconds. Defaults to None.
         poll_interval (int, optional): The poll interval value in seconds. Defaults to None.
+        job_completion_timeout (int, optional): The job completion timeout value in seconds. Defaults to None.
 
     Returns:
         dict: The prepared configuration dictionary.
 
     """
     config = {}
-    if "timeout" in kwargs:
-        config["timeout"] = (
-            kwargs["timeout"] if kwargs["timeout"] is not None else DEFAULT_TIMEOUT
+    config["request_timeout"] = (
+        kwargs["request_timeout"]
+        if kwargs.get("request_timeout") is not None
+        else (
+            DEFAULT_REQUEST_TIMEOUT_ASYNC
+            if kwargs.get("async_integration") is not None
+            else DEFAULT_REQUEST_TIMEOUT
         )
-    if "poll_interval" in kwargs:
-        config["poll_interval"] = (
-            kwargs["poll_interval"]
-            if kwargs["poll_interval"] is not None
-            else DEFAULT_POLL_INTERVAL
-        )
+    )
+    config["poll_interval"] = (
+        kwargs["poll_interval"]
+        if kwargs.get("poll_interval") is not None
+        else DEFAULT_POLL_INTERVAL
+    )
+    config["job_completion_timeout"] = (
+        kwargs["job_completion_timeout"]
+        if kwargs.get("job_completion_timeout") is not None
+        else DEFAULT_JOB_COMPLETION_TIMEOUT
+    )
+
     return config
 
 

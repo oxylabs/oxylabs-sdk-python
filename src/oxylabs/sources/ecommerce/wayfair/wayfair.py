@@ -17,7 +17,7 @@ class Wayfair(WayfairBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Wayfair search results for a given query.
@@ -40,7 +40,7 @@ class Wayfair(WayfairBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_search_payload(query, opts)
         response = self._ecommerce_instance.get_resp(payload, config)
         return response
@@ -49,7 +49,7 @@ class Wayfair(WayfairBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
     ) -> dict:
         """
         Scrapes Wayfair search results for a given URL.
@@ -69,7 +69,7 @@ class Wayfair(WayfairBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout)
+        config = prepare_config(request_timeout=request_timeout)
         payload = self._prepare_url_payload(url, opts)
         response = self._ecommerce_instance.get_resp(payload, config)
         return response
@@ -89,7 +89,8 @@ class WayfairAsync(WayfairBase):
         self,
         query: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -114,7 +115,12 @@ class WayfairAsync(WayfairBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_search_payload(query, opts)
         response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
@@ -123,7 +129,8 @@ class WayfairAsync(WayfairBase):
         self,
         url: str,
         opts: Optional[dict] = None,
-        timeout: Optional[int] = None,
+        request_timeout: Optional[int] = None,
+        job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
@@ -145,7 +152,12 @@ class WayfairAsync(WayfairBase):
             dict: The response from the server after the job is completed.
         """
 
-        config = prepare_config(timeout=timeout, poll_interval=poll_interval)
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
         payload = self._prepare_url_payload(url, opts)
         response = await self._ecommerce_async_instance.get_resp(payload, config)
         return response
