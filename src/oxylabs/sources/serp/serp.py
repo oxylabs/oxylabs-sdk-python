@@ -18,13 +18,13 @@ class SERP:
     def __init__(self, username: str, password: str) -> None:
 
         api_credentials = APICredentials(username, password)
-        self.client = Client(SYNC_BASE_URL, api_credentials)
+        self._client = Client(SYNC_BASE_URL, api_credentials)
         self.bing = Bing(self)
         self.baidu = Baidu(self)
         self.yandex = Yandex(self)
         self.google = Google(self)
 
-    def get_resp(self, payload: dict, config: dict) -> dict:
+    def _get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload synchronously and fetches API response.
 
@@ -38,7 +38,7 @@ class SERP:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        return self.client.req(payload, "POST", config)
+        return self._client.req(payload, "POST", config)
 
 
 class SERPAsync:
@@ -52,15 +52,15 @@ class SERPAsync:
             password (str): The password for API authentication.
         """
         self.api_credentials = APICredentials(username, password)
-        self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
+        self._client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
         self.bing_async = BingAsync(self)
         self.baidu_async = BaiduAsync(self)
         self.yandex_async = YandexAsync(self)
         self.google_async = GoogleAsync(self)
-        self.session = None
-        self.requests = 0
+        self._session = None
+        self._requests = 0
 
-    async def get_resp(self, payload: dict, config: dict) -> dict:
+    async def _get_resp(self, payload: dict, config: dict) -> dict:
         """
         Processes the payload asynchronously and fetches API response.
 
@@ -75,13 +75,13 @@ class SERPAsync:
         payload = {k: v for k, v in payload.items() if v is not None}
 
         result: dict = None
-        self.requests += 1
+        self._requests += 1
 
         try:
-            self.session = await utils.ensure_session(self.session)
+            self._session = await utils.ensure_session(self._session)
 
-            result = await self.client.execute_with_timeout(
-                payload, config, self.session
+            result = await self._client.execute_with_timeout(
+                payload, config, self._session
             )
             return result
 
@@ -89,7 +89,7 @@ class SERPAsync:
             print(f"An error occurred: {e}")
 
         finally:
-            self.requests -= 1
-            if self.requests == 0:
-                await utils.close(self.session)
+            self._requests -= 1
+            if self._requests == 0:
+                await utils.close(self._session)
         return None

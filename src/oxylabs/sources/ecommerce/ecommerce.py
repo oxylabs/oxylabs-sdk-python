@@ -24,7 +24,7 @@ class Ecommerce:
             password (str): The password for API authentication.
         """
         api_credentials = APICredentials(username, password)
-        self.client = Client(SYNC_BASE_URL, api_credentials)
+        self._client = Client(SYNC_BASE_URL, api_credentials)
         self.amazon = Amazon(self)
         self.google_shopping = GoogleShopping(self)
         self.universal = Universal(self)
@@ -44,7 +44,7 @@ class Ecommerce:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        return self.client.req(payload, "POST", config)
+        return self._client.req(payload, "POST", config)
 
 
 class EcommerceAsync:
@@ -65,9 +65,9 @@ class EcommerceAsync:
         self.google_shopping_async = GoogleShoppingAsync(self)
         self.universal_async = UniversalAsync(self)
         self.wayfair_async = WayfairAsync(self)
-        self.client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
-        self.session = None
-        self.requests = 0
+        self._client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
+        self._session = None
+        self._requests = 0
 
     async def get_resp(self, payload: dict, config: dict) -> dict:
         """
@@ -84,14 +84,14 @@ class EcommerceAsync:
         payload = {k: v for k, v in payload.items() if v is not None}
 
         result = None
-        self.requests += 1
+        self._requests += 1
 
         try:
 
-            self.session = await utils.ensure_session(self.session)
+            self._session = await utils.ensure_session(self._session)
 
-            result = await self.client.execute_with_timeout(
-                payload, config, self.session
+            result = await self._client.execute_with_timeout(
+                payload, config, self._session
             )
             return result
 
@@ -99,7 +99,7 @@ class EcommerceAsync:
             print(f"An error occurred: {e}")
 
         finally:
-            self.requests -= 1
-            if self.requests == 0:
-                await utils.close(self.session)
+            self._requests -= 1
+            if self._requests == 0:
+                await utils.close(self._session)
         return None
