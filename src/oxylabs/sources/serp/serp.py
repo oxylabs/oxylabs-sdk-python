@@ -2,10 +2,8 @@ import oxylabs.utils.utils as utils
 from src.oxylabs.internal import APICredentials, Client, ClientAsync
 from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
-from .baidu.baidu import Baidu, BaiduAsync
 from .bing.bing import Bing, BingAsync
 from .google.google import Google, GoogleAsync
-from .yandex.yandex import Yandex, YandexAsync
 
 
 class SERP:
@@ -14,8 +12,6 @@ class SERP:
         api_credentials = APICredentials(username, password)
         self._client = Client(SYNC_BASE_URL, api_credentials)
         self.bing = Bing(self)
-        self.baidu = Baidu(self)
-        self.yandex = Yandex(self)
         self.google = Google(self)
 
     def _get_resp(self, payload: dict, config: dict) -> dict:
@@ -48,8 +44,6 @@ class SERPAsync:
         self.api_credentials = APICredentials(username, password)
         self._client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
         self.bing_async = BingAsync(self)
-        self.baidu_async = BaiduAsync(self)
-        self.yandex_async = YandexAsync(self)
         self.google_async = GoogleAsync(self)
         self._session = None
         self._requests = 0
