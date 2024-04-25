@@ -1,6 +1,6 @@
 from typing import Optional
 
-import oxylabs.utils.utils as utils
+import src.oxylabs.utils.utils as utils
 from src.oxylabs.utils.constants import source
 from src.oxylabs.utils.utils import BaseEcommerceOpts, validate_url
 
@@ -30,7 +30,7 @@ class AmazonSearchOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonSearchOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
@@ -49,7 +49,7 @@ class AmazonUrlOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonUrlOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
 
 
@@ -68,7 +68,7 @@ class AmazonProductOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonProductOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
 
 
@@ -88,7 +88,7 @@ class AmazonPricingOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonPricingOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
@@ -110,7 +110,7 @@ class AmazonReviewsOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonReviewsOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
@@ -130,7 +130,7 @@ class AmazonQuestionsOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonQuestionsOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
 
 
@@ -150,7 +150,7 @@ class AmazonBestsellerOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonBestsellerOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
@@ -170,7 +170,7 @@ class AmazonSellerOpts(BaseEcommerceOpts):
         """
         Checks the validity of AmazonSellerOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
 
 

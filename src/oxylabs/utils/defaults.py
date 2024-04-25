@@ -1,7 +1,7 @@
-from .constants import domain, user_agent
+from .constants import domain, user_agent_type
 
 # Constants
-DEFAULT_USER_AGENT = user_agent.DESKTOP
+DEFAULT_USER_AGENT = user_agent_type.DESKTOP
 DEFAULT_DOMAIN = domain.COM
 DEFAULT_START_PAGE = 1
 DEFAULT_PAGES = 1

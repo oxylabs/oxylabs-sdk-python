@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 
 import aiohttp
 
-from .constants import domain, fn_name, locale, render, source, user_agent
+from .constants import domain, fn_name, locale, render, source, user_agent_type
 from .defaults import (
     DEFAULT_JOB_COMPLETION_TIMEOUT,
     DEFAULT_POLL_INTERVAL,
@@ -135,7 +135,7 @@ def get_valid_values(module: object) -> list:
     return [getattr(module, name) for name in dir(module) if not name.startswith("__")]
 
 
-VALID_UAS = get_valid_values(user_agent)
+VALID_UAS = get_valid_values(user_agent_type)
 VALID_RENDERS = get_valid_values(render)
 VALID_FN_NAMES = get_valid_values(fn_name)
 VALID_SOURCES = get_valid_values(source)
@@ -216,7 +216,7 @@ def validate_url(input_url: str, host: str) -> None:
     return None
 
 
-def check_user_agent_validity(user_agent_type: str) -> None:
+def check_user_agent_type_validity(user_agent_type: str) -> None:
     """
     Check the validity of a user agent type.
 

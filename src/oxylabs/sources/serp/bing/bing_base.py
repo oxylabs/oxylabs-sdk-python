@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-import oxylabs.utils.utils as utils
+import src.oxylabs.utils.utils as utils
 from src.oxylabs.utils.constants import domain, source
 from src.oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 
@@ -53,7 +53,7 @@ class BingSearchOpts(BaseSearchOpts):
         Checks the validity of BingSearchOpts parameters.
         """
         utils.check_domain_validity(self.domain, BingSearchAcceptedDomainParameters)
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
@@ -92,7 +92,7 @@ class BingUrlOpts(BaseUrlOpts):
         """
         Checks the validity of BingUrlOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 

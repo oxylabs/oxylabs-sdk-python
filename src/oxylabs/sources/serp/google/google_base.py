@@ -1,6 +1,6 @@
 from typing import Any, Optional
 
-import oxylabs.utils.utils as utils
+import src.oxylabs.utils.utils as utils
 from src.oxylabs.utils.constants import render, source
 from src.oxylabs.utils.defaults import set_default_tbm_context
 from src.oxylabs.utils.utils import BaseGoogleOpts, validate_url
@@ -60,7 +60,7 @@ class GoogleSearchOpts(BaseGoogleOpts):
         Raises:
             ValueError: If any of the parameters are invalid.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
@@ -100,7 +100,7 @@ class GoogleUrlOpts(BaseGoogleOpts):
             InvalidRenderError: If the render option is invalid.
             InvalidParsingInstructionsError: If the parsing instructions are invalid.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
@@ -163,7 +163,7 @@ class GoogleAdsOpts(BaseGoogleOpts):
             ValueError: If any of the parameters are invalid.
 
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
@@ -205,7 +205,7 @@ class GoogleSuggestionsOpts(BaseGoogleOpts):
             None
 
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
@@ -260,7 +260,7 @@ class GoogleHotelsOpts(BaseGoogleOpts):
             ValueError: If any of the search parameters are invalid.
 
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_limit_validity(self.limit)
         utils.check_pages_validity(self.pages)
@@ -310,7 +310,7 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
             ValueError: If any of the parameters are invalid.
 
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
@@ -401,7 +401,7 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
             None
 
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
@@ -425,7 +425,8 @@ class GoogleBase:
         """
 
         if (
-            (
+            user_opts
+            and (
                 user_opts.get("limit") is not None
                 or user_opts.get("start_page") is not None
                 or user_opts.get("pages") is not None

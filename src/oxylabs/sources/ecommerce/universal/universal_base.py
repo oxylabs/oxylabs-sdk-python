@@ -1,6 +1,6 @@
 from typing import Optional
 
-import oxylabs.utils.utils as utils
+import src.oxylabs.utils.utils as utils
 from src.oxylabs.utils.constants import source
 from src.oxylabs.utils.utils import BaseUrlOpts
 
@@ -34,7 +34,7 @@ class UniversalUrlOpts(BaseUrlOpts):
         """
         Checks the validity of UniversalUrlOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_http_method_validity(self.context)
         utils.check_content_for_post_validity(self.context)

@@ -1,6 +1,6 @@
 from typing import Optional
 
-import oxylabs.utils.utils as utils
+import src.oxylabs.utils.utils as utils
 from src.oxylabs.utils.constants import source
 from src.oxylabs.utils.utils import validate_url
 
@@ -30,7 +30,7 @@ class WayfairSearchOpts:
         """
         Checks the validity of WayfairSearchOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_limit_validity_ecom(self.limit)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
@@ -49,7 +49,7 @@ class WayfairUrlOpts:
         """
         Checks the validity of WayfairUrlOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
 
 
 class WayfairBase:

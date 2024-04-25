@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional
 
-import oxylabs.utils.utils as utils
+import src.oxylabs.utils.utils as utils
 from src.oxylabs.utils.constants import source
 from src.oxylabs.utils.utils import BaseEcommerceOpts, validate_url
 
@@ -41,7 +41,7 @@ class GoogleShoppingSearchOpts(BaseEcommerceOpts):
         """
         Checks the validity of GoogleShoppingSearchOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
@@ -64,7 +64,7 @@ class GoogleShoppingUrlOpts(BaseEcommerceOpts):
         """
         Checks the validity of GoogleShoppingUrlOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
 
 
@@ -86,7 +86,7 @@ class GoogleShoppingProductOpts(BaseEcommerceOpts):
         """
         Checks the validity of GoogleShoppingProductOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
 
 
@@ -117,7 +117,7 @@ class GoogleProductPricingOpts(BaseEcommerceOpts):
         """
         Checks the validity of GoogleProductPricingOpts parameters.
         """
-        utils.check_user_agent_validity(self.user_agent_type)
+        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_pages_validity(self.pages)
         utils.check_start_page_validity(self.start_page)
