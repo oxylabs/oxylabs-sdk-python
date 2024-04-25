@@ -15,7 +15,7 @@ class UniversalUrlOpts(BaseUrlOpts):
         geo_location=None,
         locale=None,
         render=None,
-        content_encoding="base64",
+        content_encoding=None,
         context=None,
         parser_type=None,
         parse=None,
