@@ -94,7 +94,7 @@ class Proxy:
         """
         self.session.headers["x-oxylabs-render"] = render
 
-    def add_parse_header(self, parser_type: str) -> None:
+    def add_parse_header(self, parser_type: str = None, parsing_instructions: bool = False) -> None:
         """
         Adds a parse header to the session headers if a valid parser type is provided.
         Setting this will return parsed data for the targets for which we have dedicated parsers.
@@ -143,18 +143,23 @@ class Proxy:
                 f"Invalid parser_type '{parser_type}'. Must be one of: {', '.join(supported_parser_types)}"
             )
 
-        self.session.headers["x-oxylabs-parse"] = "1"
-        self.session.headers["x-oxylabs-parser-type"] = parser_type
+        if parsing_instructions:
+            self.session.headers["x-oxylabs-parse"] = "1"
+        elif parser_type:
+            self.session.headers["x-oxylabs-parser-type"] = parser_type
+            self.session.headers["x-oxylabs-parse"] = "1"
+        else:
+            raise ValueError("Either parser_type or parsing_instructions must be provided")
 
-        def add_geo_location_header(self, geo_location: str) -> None:
-            """
-            Adds a geo location header to the session headers.
-            In some cases, you may need to indicate the geographical location that the result should be adapted for.
+    def add_geo_location_header(self, geo_location: str) -> None:
+        """
+        Adds a geo location header to the session headers.
+        In some cases, you may need to indicate the geographical location that the result should be adapted for.
 
-            Args:
-                geo_location (str): The geo location to add. Accepted values depend on the URL you would like us to scrape.
+        Args:
+            geo_location (str): The geo location to add. Accepted values depend on the URL you would like us to scrape.
 
-            Returns:
-                None
-            """
-            self.session.headers["x-oxylabs-geo-location"] = geo_location
+        Returns:
+            None
+        """
+        self.session.headers["x-oxylabs-geo-location"] = geo_location
