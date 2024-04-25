@@ -208,8 +208,8 @@ class Google(GoogleBase):
 
             opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
                 {
-                    "domain": None,
-                    "start_page": None,
+                    "domain": com,
+                    "start_page": 1,
                     "locale": None,
                     "geo_location": None,
                     "user_agent_type": "desktop",
