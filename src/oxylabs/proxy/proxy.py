@@ -1,9 +1,9 @@
 from typing import Optional
-from urllib.parse import quote
+from urllib.parse import quote, urlparse
 
 import requests
 
-from src.oxylabs.utils.defaults import PROXY_BASE_URL, PROXY_PORT
+from src.oxylabs.utils.defaults import NON_UNIVERSAL_DOMAINS, PROXY_BASE_URL, PROXY_PORT
 
 
 class Proxy:
@@ -15,15 +15,16 @@ class Proxy:
             username (str): The username for the proxy authentication.
             password (str): The password for the proxy authentication.
         """
-        self.username = quote(username)
-        self.password = quote(password)
-        self.proxy_url = self._build_proxy_url()
-        self.session = requests.Session()
-        self.session.proxies = {
-            "http": self.proxy_url,
-            "https": self.proxy_url,
+        self._username = quote(username)
+        self._password = quote(password)
+        self._proxy_url = self._build_proxy_url()
+        self._session = requests.Session()
+        self._session.proxies = {
+            "http": self._proxy_url,
+            "https": self._proxy_url,
         }
-        self.session.verify = False
+        self._session.verify = False
+        self._url_to_scrape = None
 
     def _build_proxy_url(self) -> str:
         """
@@ -32,7 +33,7 @@ class Proxy:
         Returns:
             str: The constructed proxy URL.
         """
-        return f"http://{self.username}:{self.password}@{PROXY_BASE_URL}:{PROXY_PORT}"
+        return f"http://{self._username}:{self._password}@{PROXY_BASE_URL}:{PROXY_PORT}"
 
     def get(self, url: str) -> Optional[requests.Response]:
         """
@@ -48,7 +49,8 @@ class Proxy:
             requests.exceptions.RequestException: If the GET request encounters an error.
         """
         try:
-            response = self.session.get(url)
+            self._url_to_scrape = url
+            response = self._session.get(url)
             response.raise_for_status()
             return response
         except requests.exceptions.RequestException as e:
@@ -78,7 +80,7 @@ class Proxy:
         Returns:
             None
         """
-        self.session.headers["x-oxylabs-user-agent-type"] = user_agent_type
+        self._session.headers["x-oxylabs-user-agent-type"] = user_agent_type
 
     def add_render_header(self, render: str) -> None:
         """
@@ -92,68 +94,45 @@ class Proxy:
         Returns:
             None
         """
-        self.session.headers["x-oxylabs-render"] = render
+        self._session.headers["x-oxylabs-render"] = render
 
     def add_parse_header(
-        self, parser_type: str = None, parsing_instructions: bool = False
+        self, parse: bool = False, parsing_instructions: Optional[dict] = None
     ) -> None:
         """
-        Adds a parse header to the session headers if a valid parser type is provided.
-        Setting this will return parsed data for the targets for which we have dedicated parsers.
+        Adds a parse header to the session headers.
 
         Args:
-            parser_type (str): The parser type to add. Must be one of the
-            supported types:
-                - For Google: "google", "google_search", "google_ads",
-                "google_images"
-                - For Google Shopping: "google_shopping",
-                "google_shopping_search", "google_shopping_product",
-                "google_shopping_pricing"
-                - For Amazon: "amazon", "amazon_search", "amazon_product",
-                "amazon_pricing", "amazon_reviews", "amazon_questions",
-                "amazon_bestsellers", "amazon_sellers"
-                - For Best Buy, Etsy, Target, Walmart: "universal_ecommerce"
-
-        Raises:
-            ValueError: If an invalid parser_type is provided.
+            parse (bool, optional): Whether to enable parsing. Defaults to False.
+            parsing_instructions (dict, optional): Instructions for parsing. Defaults to None.
 
         Returns:
             None
         """
-        supported_parser_types = {
-            "google",
-            "google_search",
-            "google_ads",
-            "google_images",
-            "google_shopping",
-            "google_shopping_search",
-            "google_shopping_product",
-            "google_shopping_pricing",
-            "amazon",
-            "amazon_search",
-            "amazon_product",
-            "amazon_pricing",
-            "amazon_reviews",
-            "amazon_questions",
-            "amazon_bestsellers",
-            "amazon_sellers",
-            "universal_ecommerce",
-        }
 
-        if parser_type not in supported_parser_types:
-            raise ValueError(
-                f"Invalid parser_type '{parser_type}'. Must be one of: {', '.join(supported_parser_types)}"
-            )
-
-        if parsing_instructions:
-            self.session.headers["x-oxylabs-parse"] = "1"
-        elif parser_type:
-            self.session.headers["x-oxylabs-parser-type"] = parser_type
-            self.session.headers["x-oxylabs-parse"] = "1"
+        if parse or parsing_instructions:
+            self._session.headers["x-oxylabs-parse"] = "1"
+            if self._is_universal_source():
+                self._session.headers["x-oxylabs-parser-type"] = "universal_ecommerce"
+            else:
+                self._session.headers.pop("x-oxylabs-parser-type", None)
         else:
-            raise ValueError(
-                "Either parser_type or parsing_instructions must be provided"
-            )
+            self._session.headers.pop("x-oxylabs-parse", None)
+
+    def _is_universal_source(self) -> bool:
+        """
+        Checks if the URL to scrape belongs to a universal source.
+
+        Returns:
+            bool: True if the URL belongs to a universal source, False otherwise.
+        """
+        parsed_url = urlparse(self._url_to_scrape)
+        if any(
+            domain in parsed_url.netloc.decode() for domain in NON_UNIVERSAL_DOMAINS
+        ):
+            return False
+
+        return True
 
     def add_geo_location_header(self, geo_location: str) -> None:
         """
@@ -166,4 +145,4 @@ class Proxy:
         Returns:
             None
         """
-        self.session.headers["x-oxylabs-geo-location"] = geo_location
+        self._session.headers["x-oxylabs-geo-location"] = geo_location
