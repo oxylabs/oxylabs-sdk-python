@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
 import src.oxylabs.utils.utils as utils
-from src.oxylabs.utils.constants import domain, source
+from src.oxylabs.utils.types import domain, source
 from src.oxylabs.utils.utils import BaseSearchOpts, BaseUrlOpts, validate_url
 
 BingSearchAcceptedDomainParameters = [

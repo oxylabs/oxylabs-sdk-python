@@ -1,7 +1,7 @@
 from typing import Optional
 
 import src.oxylabs.utils.utils as utils
-from src.oxylabs.utils.constants import source
+from src.oxylabs.utils.types import source
 from src.oxylabs.utils.utils import BaseEcommerceOpts, validate_url
 
 

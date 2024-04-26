@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 
 import aiohttp
 
-from .constants import domain, fn_name, locale, render, source, user_agent_type
+from .types import domain, fn_name, locale, render, source, user_agent_type
 from .defaults import (
     DEFAULT_JOB_COMPLETION_TIMEOUT,
     DEFAULT_POLL_INTERVAL,
