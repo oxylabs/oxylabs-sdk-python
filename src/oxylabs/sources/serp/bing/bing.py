@@ -40,7 +40,7 @@ class Bing(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -71,7 +71,7 @@ class Bing(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -120,8 +120,9 @@ class BingAsync(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds between status checks for the asynchronous job. Defaults to 2.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -161,8 +162,9 @@ class BingAsync(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
-            poll_interval (int | 2, optional): The interval in seconds between status checks for the asynchronous job. Defaults to 2.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.

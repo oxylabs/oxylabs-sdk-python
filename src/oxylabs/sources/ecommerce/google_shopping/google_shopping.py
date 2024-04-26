@@ -42,7 +42,7 @@ class GoogleShopping(GoogleShoppingBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -188,7 +188,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
             poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
 
         Returns:
@@ -227,7 +227,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parse": None,
                     "parsing_instructions": None,
                 }
-                timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+                request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
                 poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
         Returns:
             dict: The response from the server after the job is completed.
@@ -268,7 +268,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parse": None,
                     "parsing_instructions": None,
                 }
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
             poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
         Returns:
             dict: The response from the server after the job is completed.
@@ -311,7 +311,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parse": None,
                     "parsing_instructions": None,
                 }
-            timeout (int | 50, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 50.
+            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
             poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
         Returns:
             dict: The response from the server after the job is completed.
