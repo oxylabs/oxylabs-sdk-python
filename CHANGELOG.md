@@ -6,4 +6,11 @@
 
 ## 1.0.0
 
-- Initial release of Oxylabs Serp, Ecommerce and Proxy integrations.
+- Initial release of Oxylabs SDK.
+- Web scraping categories:
+  - SERP
+  - Ecommerce
+- Integration methods:
+  - Proxy
+  - Push-Pull
+  - Realtime

@@ -42,14 +42,14 @@ pip install oxylabs
 ### Quick Start
 
 ```python
-from oxylabs import Serp
+from oxylabs import SERP
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
-# Initialize the SERP realtime client with your credentials.
-c = Serp(username, password)
+# Initialize the SERP Realtime client with your credentials.
+c = SERP(username, password)
 
 # Use `bing_search` as a source to scrape Bing with nike as a query.
 result = c.scrape_bing_search("nike")
@@ -61,8 +61,8 @@ print(result)
 
 There are three integration method for the Oxylabs SERP API, each exposed via different packages:
 
-- Realtime (Sync) - `Serp(username, password)`
-- Push-Pull (Async) - `SerpAsync(username, password)`
+- Realtime (Sync) - `SERP(username, password)`
+- Push-Pull (Async) - `SERPAsync(username, password)`
 - Proxy Endpoint - `Proxy(username, password)`
 
 Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods) and how this SDK uses them [here](#integration-methods-1).
@@ -75,8 +75,8 @@ There are currently four search engines you can scrape with the Oxylabs SERP API
 
 | Search Engine | Sources
 | ------------- | --------------
-| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, `google_travel_hotels`, `google_images`, `google_suggest`, `google_trends_explore`  
-| **Yandex**    | `yandex`, `yandex_search`  
+| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, `google_travel_hotels`, `google_images`, `google_suggest`, `google_trends_explore`
+| **Yandex**    | `yandex`, `yandex_search`
 | **Bing**      | `bing`, `bing_search`
 | **Baidu**     | `baidu`, `baidu_search`
 
@@ -85,7 +85,7 @@ In the SDK you'll just need to call the relevant function name from the client.
 For example if you wish to scrape Yandex with `yandex_search` as a source:
 
 ```python
-c = Serp(username, password)
+c = SERP(username, password)
 result = c.scrape_yandex_search("football")
 ```
 
@@ -113,7 +113,7 @@ result = c.scrape_yandex_search(
 For consistency and ease of use, this SDK provides a list of pre-defined commonly used parameter values as constants in our library. You can use them by importing the oxylabs type modue.
 
 ```python
-from oxylabs.types import user_agent, render, domain
+from oxylabs.types import user_agent_type, render, domain
 ```
 
 For the full list you can check the `utils` directory. You can send in these values as strings too.
@@ -121,14 +121,14 @@ For the full list you can check the `utils` directory. You can send in these val
 These can be used as follows:
 
 ```python
-from oxylabs.types import user_agent, render, domain
+from oxylabs.types import user_agent_type, render, domain
 
-c = Serp(username, password)
+c = SERP(username, password)
 
 result = c.scrape_google_search(
 	"adidas",
 	{
-		"user_agent_type": user_agent.DESKTOP,
+		"user_agent_type": user_agent_type.DESKTOP,
 		"render":          render.HTML,
 		"domain":          domain.COM,
 	}
@@ -141,7 +141,7 @@ You can send in context options relevant to `google`, `amazon` and `universal` s
 Here's an example for Google Search scraping:
 
 ```python
-c = Serp(username, password)
+c = SERP(username, password)
 
 c.scrape_google_search(
     "adidas",
@@ -169,14 +169,14 @@ c.scrape_google_search(
 SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser):
 
 ```python
-from oxylabs import Serp
+from oxylabs import SERP
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
-# Initialize the SERP realtime client with your credentials.
-c = Serp(username, password)
+# Initialize the SERP Realtime client with your credentials.
+c = SERP(username, password)
 
 # Use `bing_search` as a source to scrape Bing using custom parsing instructions.
 result = c.scrape_bing_url(
@@ -205,15 +205,15 @@ Realtime is a synchronous integration method. This means that upon sending your 
 
 The **TTL** of Realtime connections is **150 seconds**. There may be rare cases where your connection times out before you receive a response from us, for example, if our system is under heavier-than-usual load or the job you submitted was extremely hard to complete:
 
-### Push Pull(Polling) Integration <a id="push-pull"></a>
+### Push-Pull(Polling) Integration <a id="push-pull"></a>
 
 Push-Pull is an asynchronous integration method. This SDK implements this integration with a polling technique to poll the endpoint for results after a set interval of time.
 
-Using it as straightforward as using the realtime integration. The only difference is that it will return a channel with the Response. Below is an example of this integration method:
+Using it is as straightforward as using the Realtime integration. The only difference is that it will return an asyncio Task that will eventually contain the Response. Below is an example of this integration method:"
 
 ```python
 import asyncio
-from oxylabs import SerpAsync
+from oxylabs import SERPAsync
 
 async def main():
     # Set your Oxylabs API Credentials.
@@ -221,11 +221,11 @@ async def main():
     password = "password"
 
     # Initialize the SERP async client with your credentials.
-    c = SerpAsync(username, password)
+    c = SERPAsync(username, password)
 
     # 'timeout' specifies the maximum time (in seconds) to wait for the scraping job to complete.
-    # It is applicable for both realtime and push-pull integrations.
-    # 'poll_interval' is used only in push-pull integrations to set the delay (in seconds)
+    # It is applicable for both Realtime and Push-Pull integrations.
+    # 'poll_interval' is used only in Push-Pull integrations to set the delay (in seconds)
     # between consecutive status checks of the job.
     tasks = [
         c.scrape_bing_url(
@@ -258,7 +258,7 @@ This method is also synchronous (like Realtime), but instead of using our servic
 Since the parameters in this method are sent as as headers there are only a few parameters which this integration method accepts. You can find those parameters at
 https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods/proxy-endpoint#accepted-parameters.
 
-The proxy endpoint integration is very open ended allowing many different use cases:
+The Proxy endpoint integration is very open ended allowing many different use cases:
 
 ```python
 from oxylabs import Proxy
@@ -267,14 +267,15 @@ from oxylabs import Proxy
 username = "username"
 password = "password"
 
-# Initialize the proxy client with your credentials.
+# Initialize the Proxy client with your credentials.
 proxy = Proxy(username, password)
 
-# Add necessary headers.
+# Customize headers for specific requirements (optional).
 proxy.add_user_agent_header("desktop_chrome")
 proxy.add_geo_location_header("Germany")
 proxy.add_render_header("html")
 
+# Use the proxy to make a request.
 result = proxy.get("https://www.example.com")
 
 print(result.text)
