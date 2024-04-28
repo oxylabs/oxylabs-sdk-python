@@ -1,6 +1,5 @@
 from setuptools import find_packages, setup
 
-
 def get_version(rel_path):
     with open(rel_path, "r") as file:
         for line in file.read().splitlines():
@@ -20,13 +19,14 @@ Documentation can be found at https://github.com/mslmio/oxylabs-sdk-python.
 
 setup(
     name="oxylabs",
-    version=get_version("oxylabs/version.py"),
+    version=get_version("src/oxylabs/version.py"),
     description="Official Python library for Oxylabs Scraper APIs",
     long_description=long_description,
     url="https://oxylabs.io/",
     author="Oxylabs",
     author_email="support@oxylabs.io",
     license="MIT",
-    packages=find_packages(),
+    package_dir={'': 'src'},
+    packages=find_packages(where='src'),
     install_requires=["aiohttp", "requests"],
 )

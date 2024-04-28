@@ -52,7 +52,7 @@ password = "password"
 c = SERP(username, password)
 
 # Use `bing_search` as a source to scrape Bing with nike as a query.
-result = c.scrape_bing_search("nike")
+result = c.bing.scrape_search("nike")
 
 print(result)
 ```
@@ -76,17 +76,15 @@ There are currently four search engines you can scrape with the Oxylabs SERP API
 | Search Engine | Sources
 | ------------- | --------------
 | **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, `google_travel_hotels`, `google_images`, `google_suggest`, `google_trends_explore`
-| **Yandex**    | `yandex`, `yandex_search`
 | **Bing**      | `bing`, `bing_search`
-| **Baidu**     | `baidu`, `baidu_search`
 
 In the SDK you'll just need to call the relevant function name from the client.
 
-For example if you wish to scrape Yandex with `yandex_search` as a source:
+For example if you wish to scrape Bing with `bing_search` as a source:
 
 ```python
 c = SERP(username, password)
-result = c.scrape_yandex_search("football")
+result = c.bing.scrape_search("football")
 ```
 
 ### Query Parameters
@@ -96,14 +94,13 @@ Each source has different accepted query parameters. For a detailed list of acce
 By default, scrape functions will use default parameters. If you need to send specific query parameters, here is an example of how to do it:
 
 ```python
-result = c.scrape_yandex_search(
+result = c.bing.scrape_search(
 	"football",
 	{
 		"start_page": 1,
 		"pages":      3,
 		"limit":      4,
 		"domain":     "com",
-		"locale":     "en",
 	}
 )
 ```
@@ -125,7 +122,7 @@ from oxylabs.types import user_agent_type, render, domain
 
 c = SERP(username, password)
 
-result = c.scrape_google_search(
+result = c.google.scrape_search(
 	"adidas",
 	{
 		"user_agent_type": user_agent_type.DESKTOP,
@@ -143,7 +140,7 @@ Here's an example for Google Search scraping:
 ```python
 c = SERP(username, password)
 
-c.scrape_google_search(
+c.google.scrape_search(
     "adidas",
     {
         "parse": True,
@@ -179,7 +176,7 @@ password = "password"
 c = SERP(username, password)
 
 # Use `bing_search` as a source to scrape Bing using custom parsing instructions.
-result = c.scrape_bing_url(
+result = c.bing.scrape_url(
     "https://www.bing.com/search?q=nike",
     {
         "parse": True,
@@ -192,7 +189,6 @@ result = c.scrape_bing_url(
         },
     },
 )
-
 
 print(result)
 ```
@@ -228,13 +224,13 @@ async def main():
     # 'poll_interval' is used only in Push-Pull integrations to set the delay (in seconds)
     # between consecutive status checks of the job.
     tasks = [
-        c.scrape_bing_url(
+        c.bing.scrape_url(
             "https://www.bing.com/search?q=adidas",
             {"parse": True},
             timeout=35,
             poll_interval=3,
         ),
-        c.scrape_bing_url(
+        c.bing.scrape_url(
             "https://www.bing.com/search?q=puma",
             {"parse": True},
             timeout=45,
