@@ -95,6 +95,7 @@ class Client:
             print(f"Error occurred: {err}")
             return None
 
+
 class ClientAsync:
 
     def __init__(self, base_url: str, api_credentials: APICredentials) -> None:

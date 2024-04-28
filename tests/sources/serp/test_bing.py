@@ -4,23 +4,32 @@ from src.oxylabs.utils.types import user_agent_type
 
 class TestBingSearchSync(unittest.TestCase):
     def test_bing_search_sync(self):
-        serp = SERP('user', 'pass')  # Mock these appropriately.
+        """
+        Tests synchronous SERP's Bing search functionality to ensure it returns expected results.
+
+        Mocks the response from the _get_resp method to simulate SERP processing and validates
+        that the method handles the search query correctly and returns the correct mock response.
+        """
+        serp = SERP('user', 'pass')
         query = "nike"
         opts = {"domain": "com", "limit": 10}
-        # Mock the _get_resp method to return a controlled response
         serp._get_resp = lambda payload, config: {"mocked_response": "search_results"}
         
         result = serp.bing.scrape_search(query, opts)
-        print("result",result)
         self.assertIn("mocked_response", result)
         self.assertEqual(result["mocked_response"], "search_results")
 
 class TestBingUrlSync(unittest.TestCase):
     def test_bing_url_sync(self):
-        serp = SERP('user', 'pass')  # Mock these appropriately.
+        """
+        Tests the SERP's Bing URL scraping functionality in a synchronous manner.
+
+        Mocks the _get_resp method to return controlled responses, ensuring that the method
+        correctly processes the URL and user agent type, returning the expected data.
+        """
+        serp = SERP('user', 'pass')
         url = "https://www.bing.com/search?q=nike"
         opts = {"user_agent_type": user_agent_type.DESKTOP}
-        # Mock the _get_resp method to return a controlled response
         serp._get_resp = lambda payload, config: {"mocked_response": "url_results"}
         
         result = serp.bing.scrape_url(url, opts)
@@ -29,14 +38,17 @@ class TestBingUrlSync(unittest.TestCase):
 
 class TestBingSearchAsync(unittest.IsolatedAsyncioTestCase):
     async def test_bing_search_async(self):
-        serp_async = SERPAsync('user', 'pass')  # Mock these appropriately.
+        """
+        Asynchronously tests SERP's Bing search to validate the async API handling.
+
+        Uses a mocked asynchronous response to verify that the search query processing
+        is handled correctly and that the async functionality returns expected results.
+        """
+        serp_async = SERPAsync('user', 'pass')
         query = "nike"
         opts = {"domain": "com", "limit": 10}
-        
-        # Mock the _get_resp method to return a controlled response
         async def mock_get_resp(payload, config):
             return {"mocked_response": "async_search_results"}
-        
         serp_async._get_resp = mock_get_resp
         
         result = await serp_async.bing_async.scrape_search(query, opts)
@@ -45,14 +57,17 @@ class TestBingSearchAsync(unittest.IsolatedAsyncioTestCase):
 
 class TestBingUrlAsync(unittest.IsolatedAsyncioTestCase):
     async def test_bing_url_async(self):
-        serp_async = SERPAsync('user', 'pass')  # Mock these appropriately.
+        """
+        Asynchronously tests SERP's Bing URL scraping functionality.
+
+        Mocks the _get_resp method to provide controlled async responses, verifying that
+        the URL and user agent options are processed correctly and yield expected outcomes.
+        """
+        serp_async = SERPAsync('user', 'pass')
         url = "https://www.bing.com/search?q=nike"
         opts = {"user_agent_type": user_agent_type.DESKTOP}
-        
-        # Mock the _get_resp method to return a controlled response
         async def mock_get_resp(payload, config):
             return {"mocked_response": "async_url_results"}
-        
         serp_async._get_resp = mock_get_resp
         
         result = await serp_async.bing_async.scrape_url(url, opts)

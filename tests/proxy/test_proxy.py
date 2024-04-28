@@ -5,6 +5,26 @@ from src.oxylabs.proxy import Proxy
 class TestProxyGet(unittest.TestCase):
     @patch('requests.Session')
     def test_proxy_get_with_timeout(self, MockSession):
+        """
+        Tests the Proxy.get method for correct timeout handling and header setup.
+        
+        This test uses a mocked requests.Session to simulate HTTP responses and validate
+        the interaction, ensuring the Proxy class constructs requests with the correct
+        headers and timeout.
+
+        Args:
+            MockSession (MagicMock): A mock of the requests.Session to verify request execution.
+
+        Steps:
+        1. Set up a mock response to simulate an HTTP response.
+        2. Configure Proxy instance with headers.
+        3. Make a request using Proxy.get with a timeout and verify the method call and response.
+
+        Assertions:
+        - Verify correct URL and timeout parameters are passed to the session's get method.
+        - Check the response text matches expected content.
+        """
+        
         # Setup the mock response object with desired properties (like .text)
         mock_response = Mock()
         mock_response.status_code = 200

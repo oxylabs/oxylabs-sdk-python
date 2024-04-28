@@ -1,8 +1,11 @@
 from typing import Optional
 from urllib.parse import quote, urlparse
+
 import requests
+
 from src.oxylabs.utils.defaults import NON_UNIVERSAL_DOMAINS, PROXY_BASE_URL, PROXY_PORT
 from src.oxylabs.utils.utils import prepare_config
+
 
 class Proxy:
     def __init__(self, username: str, password: str) -> None:
@@ -33,7 +36,9 @@ class Proxy:
         """
         return f"http://{self._username}:{self._password}@{PROXY_BASE_URL}:{PROXY_PORT}"
 
-    def get(self, url: str, request_timeout: Optional[int] = None) -> Optional[requests.Response]:
+    def get(
+        self, url: str, request_timeout: Optional[int] = None
+    ) -> Optional[requests.Response]:
         """
         Sends a GET request to the specified URL using the session object.
 
@@ -51,7 +56,9 @@ class Proxy:
             response.raise_for_status()
             return response
         except requests.exceptions.Timeout:
-            print(f"Timeout error. The request to {url} has timed out after {request_timeout} seconds.")
+            print(
+                f"Timeout error. The request to {url} has timed out after {request_timeout} seconds."
+            )
             return None
         except requests.exceptions.RequestException as e:
             print(f"Request failed: {e}")
