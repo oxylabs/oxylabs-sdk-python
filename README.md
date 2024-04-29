@@ -1,7 +1,7 @@
 # Oxylabs Python SDK
 
-This is a Python SDK for the [Oxylabs](https://oxylabs.io) [Scraper APIs](https:
-//developers.oxylabs.io/scraper-apis/getting-started).
+This is a Python SDK for the [Oxylabs](https://oxylabs.io) [Scraper APIs]
+(https://developers.oxylabs.io/scraper-apis/getting-started).
 
 This will help simplify integrating with Oxylabs's APIs, which can help you with
 retrieving search engine results (SERP), eCommerce data, real estate data, and 
@@ -10,15 +10,20 @@ more.
 The Python SDK provides you with several benefits over using the raw APIs 
 directly:
 
-- **Simplified Interface**: abstracts away complexities, offering a straightforward user interface for interacting with the Oxylabs SERP and Ecommerce API.
-- **Automated Request Management**: streamlines the handling of API requests and responses for enhanced efficiency and reliability.
-- **Error Handling**: provides meaningful error messages and handles common API errors, simplifying troubleshooting.
+- **Simplified Interface**: abstracts away complexities, offering a 
+straightforward user interface for interacting with the Oxylabs SERP and 
+Ecommerce API.
+- **Automated Request Management**: streamlines the handling of API requests and
+ responses for enhanced efficiency and reliability.
+- **Error Handling**: provides meaningful error messages and handles common API 
+errors, simplifying troubleshooting.
 
 ## Requirements
 
 - Python 3.5 or above.
 
-You can check your Python version by running the following command in your preferred terminal:
+You can check your Python version by running the following command in your 
+preferred terminal:
 
 ```sh
 python --version
@@ -30,11 +35,14 @@ Or, for systems with multiple Python versions installed:
 python3 --version
 ```
 
-If you need to install or update python you can do so by following the steps mentioned [here](https://www.python.org/downloads/).
+If you need to install or update python you can do so by following the steps 
+mentioned [here](https://www.python.org/downloads/).
 
 ## Authentication
 
-You will need an Oxylabs API username and password which you can get by signing up at https://oxylabs.io. You can check things out with a free trial at https://oxylabs.io/products/scraper-api/serp.
+You will need an Oxylabs API username and password which you can get by signing 
+up at https://oxylabs.io. You can check things out with a free trial at 
+https://oxylabs.io/products/scraper-api/serp.
 
 ## Installation
 
@@ -62,23 +70,29 @@ print(result)
 
 ### Integration Methods
 
-There are three integration method for the Oxylabs SERP API, each exposed via different packages:
+There are three integration method for the Oxylabs SERP API, each exposed via 
+different packages:
 
 - Realtime (Sync) - `SERP(username, password)`
 - Push-Pull (Async) - `SERPAsync(username, password)`
 - Proxy Endpoint - `Proxy(username, password)`
 
-Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods) and how this SDK uses them [here](#integration-methods-1).
+Learn more about integration methods [on the official documentation]
+(https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods)
+ and how this SDK uses them [here](#integration-methods-1).
 
 ### Sources
 
 The Oxylabs SERP API scrapes according to the source provided via the API.
 
-There are currently four search engines you can scrape with the Oxylabs SERP API, each with different sources.
+There are currently four search engines you can scrape with the Oxylabs SERP 
+API, each with different sources.
 
 | Search Engine | Sources
 | ------------- | --------------
-| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, `google_travel_hotels`, `google_images`, `google_suggest`, `google_trends_explore`
+| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, 
+`google_travel_hotels`, `google_images`, `google_suggest`, 
+`google_trends_explore`
 | **Bing**      | `bing`, `bing_search`
 
 In the SDK you'll just need to call the relevant function name from the client.
@@ -92,9 +106,12 @@ result = c.bing.scrape_search("football")
 
 ### Query Parameters
 
-Each source has different accepted query parameters. For a detailed list of accepted parameters by each source you can head over to https://developers.oxylabs.io/scraper-apis/serp-scraper-api.
+Each source has different accepted query parameters. For a detailed list of 
+accepted parameters by each source you can head over to 
+https://developers.oxylabs.io/scraper-apis/serp-scraper-api.
 
-By default, scrape functions will use default parameters. If you need to send specific query parameters, here is an example of how to do it:
+By default, scrape functions will use default parameters. If you need to send 
+specific query parameters, here is an example of how to do it:
 
 ```python
 result = c.bing.scrape_search(
@@ -110,13 +127,16 @@ result = c.bing.scrape_search(
 
 ### Configurable Options
 
-For consistency and ease of use, this SDK provides a list of pre-defined commonly used parameter values as constants in our library. You can use them by importing the oxylabs type modue.
+For consistency and ease of use, this SDK provides a list of pre-defined 
+commonly used parameter values as constants in our library. You can use them by 
+importing the oxylabs type modue.
 
 ```python
 from oxylabs.types import user_agent_type, render, domain
 ```
 
-For the full list you can check the `utils` directory. You can send in these values as strings too.
+For the full list you can check the `utils` directory. You can send in these 
+values as strings too.
 
 These can be used as follows:
 
@@ -137,7 +157,11 @@ result = c.google.scrape_search(
 
 ### Context Options for Google sources
 
-You can send in context options relevant to `google`, `amazon` and `universal` sources. Here are the [supported context values for google search](https://developers.oxylabs.io/scraper-apis/serp-scraper-api/google/search). Similarly you can find supported context values for other sources in the documentation.
+You can send in context options relevant to `google`, `amazon` and `universal` 
+sources. Here are the [supported context values for google search]
+(https://developers.oxylabs.io/scraper-apis/serp-scraper-api/google/search). 
+Similarly you can find supported context values for other sources in the 
+documentation.
 Here's an example for Google Search scraping:
 
 ```python
@@ -166,7 +190,8 @@ c.google.scrape_search(
 
 ### Parse instructions
 
-SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser):
+SDK supports [custom parsing]
+(https://developers.oxylabs.io/scraper-apis/custom-parser):
 
 ```python
 from oxylabs import SERP
@@ -186,7 +211,10 @@ result = c.bing.scrape_url(
         "parsing_instructions": {
             "number_of_results": {
                 "_fns": [
-                    {"_fn": "xpath_one", "_args": [".//span[@class='sb_count']/text()"]}
+                    {
+                    "_fn": "xpath_one", 
+                    "_args": [".//span[@class='sb_count']/text()"]
+                    }
                 ]
             }
         },
@@ -200,15 +228,24 @@ print(result)
 
 ### Realtime Integration
 
-Realtime is a synchronous integration method. This means that upon sending your job submission request, **you will have to keep the connection open** until we successfully finish your job or return an error.
+Realtime is a synchronous integration method. This means that upon sending your 
+job submission request, **you will have to keep the connection open** until we 
+successfully finish your job or return an error.
 
-The **TTL** of Realtime connections is **150 seconds**. There may be rare cases where your connection times out before you receive a response from us, for example, if our system is under heavier-than-usual load or the job you submitted was extremely hard to complete:
+The **TTL** of Realtime connections is **150 seconds**. There may be rare cases 
+where your connection times out before you receive a response from us, for 
+example, if our system is under heavier-than-usual load or the job you submitted
+was extremely hard to complete:
 
 ### Push-Pull(Polling) Integration <a id="push-pull"></a>
 
-Push-Pull is an asynchronous integration method. This SDK implements this integration with a polling technique to poll the endpoint for results after a set interval of time.
+Push-Pull is an asynchronous integration method. This SDK implements this 
+integration with a polling technique to poll the endpoint for results after a 
+set interval of time.
 
-Using it is as straightforward as using the Realtime integration. The only difference is that it will return an asyncio Task that will eventually contain the Response. Below is an example of this integration method:"
+Using it is as straightforward as using the Realtime integration. The only 
+difference is that it will return an asyncio Task that will eventually contain 
+the Response. Below is an example of this integration method:"
 
 ```python
 import asyncio
@@ -222,9 +259,11 @@ async def main():
     # Initialize the SERP async client with your credentials.
     c = SERPAsync(username, password)
 
-    # 'timeout' specifies the maximum time (in seconds) to wait for the scraping job to complete.
+    # 'timeout' specifies the maximum time (in seconds) to wait for the scraping
+    #  job to complete.
     # It is applicable for both Realtime and Push-Pull integrations.
-    # 'poll_interval' is used only in Push-Pull integrations to set the delay (in seconds)
+    # 'poll_interval' is used only in Push-Pull integrations to set the delay 
+    # (in seconds)
     # between consecutive status checks of the job.
     tasks = [
         c.bing.scrape_url(
@@ -252,12 +291,19 @@ if __name__ == "__main__":
 
 ### Proxy Endpoint
 
-This method is also synchronous (like Realtime), but instead of using our service via a RESTful interface, you **can use our endpoint like a proxy**. Use Proxy Endpoint if you've used proxies before and would just like to get unblocked content from us.
+This method is also synchronous (like Realtime), but instead of using our 
+service via a RESTful interface, you **can use our endpoint like a proxy**. Use 
+Proxy Endpoint if you've used proxies before and would just like to get 
+unblocked content from us.
 
-Since the parameters in this method are sent as as headers there are only a few parameters which this integration method accepts. You can find those parameters at
-https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods/proxy-endpoint#accepted-parameters.
+Since the parameters in this method are sent as as headers there are only a few 
+parameters which this integration method accepts. You can find those parameters 
+at
+https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods/
+proxy-endpoint#accepted-parameters.
 
-The Proxy endpoint integration is very open ended allowing many different use cases:
+The Proxy endpoint integration is very open ended allowing many different use 
+cases:
 
 ```python
 from oxylabs import Proxy
@@ -301,6 +347,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## About Oxylabs
 
-Established in 2015, Oxylabs are a market-leading web intelligence collection platform, driven by the highest business, ethics, and compliance standards, enabling companies worldwide to unlock data-driven insights.
+Established in 2015, Oxylabs are a market-leading web intelligence collection 
+platform, driven by the highest business, ethics, and compliance standards, 
+enabling companies worldwide to unlock data-driven insights.
 
 [![image](https://oxylabs.io/images/og-image.png)](https://oxylabs.io/)
