@@ -31,10 +31,14 @@ class BingSearchOpts(BaseSearchOpts):
         Initialize an instance of the BingBase class.
 
         Args:
-            locale (str): The locale to be used for the search results. Defaults to None.
-            geo_location (str): The geo location to be used for the search results. Defaults to None.
-            render (bool): Whether to render JavaScript on the page. Defaults to None.
-            parse (bool): Whether to parse the search results. Defaults to None.
+            locale (str): The locale to be used for the search results. 
+            Defaults to None.
+            geo_location (str): The geo location to be used for the search 
+            results. Defaults to None.
+            render (bool): Whether to render JavaScript on the page. 
+            Defaults to None.
+            parse (bool): Whether to parse the search results. 
+            Defaults to None.
             **kwargs: Additional keyword arguments.
 
         Returns:

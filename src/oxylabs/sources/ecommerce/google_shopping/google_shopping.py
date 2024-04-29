@@ -11,7 +11,8 @@ class GoogleShopping(GoogleShoppingBase):
         Initializes an instance of the GoogleShopping class.
 
         Args:
-            ecommerce_instance: The Ecommerce instance associated with the GoogleShopping class.
+            ecommerce_instance: The Ecommerce instance associated with the 
+            GoogleShopping class.
         """
         self._ecommerce_instance = ecommerce_instance
 
@@ -26,7 +27,8 @@ class GoogleShopping(GoogleShoppingBase):
 
         Args:
             query (str): UTF-encoded keyword
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -42,7 +44,9 @@ class GoogleShopping(GoogleShoppingBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -64,7 +68,8 @@ class GoogleShopping(GoogleShoppingBase):
 
         Args:
             url (str): Direct URL (link) to Google page
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleShoppingUrlOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "render": None,
@@ -93,7 +98,8 @@ class GoogleShopping(GoogleShoppingBase):
 
         Args:
             query (str): UTF-encoded product code.
-            opts (GoogleShoppingProductOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleShoppingProductOpts, optional): Configuration options 
+            for the search. Defaults to:
                 {
                     "domain": com,
                     "locale": None,
@@ -125,7 +131,8 @@ class GoogleShopping(GoogleShoppingBase):
 
         Args:
             query (str): UTF-encoded product code.
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleShoppingUrlOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "domain": com,
                     "locale": None,
@@ -155,7 +162,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         Initializes an instance of the GoogleShoppingAsync class.
 
         Args:
-            ecommerce_async_instance: The EcommerceAsync instance associated with the GoogleShoppingAsync class.
+            ecommerce_async_instance: The EcommerceAsync instance associated 
+            with the GoogleShoppingAsync class.
         """
         self._ecommerce_async_instance = ecommerce_async_instance
 
@@ -172,7 +180,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
 
         Args:
             query (str): UTF-encoded keyword.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -188,8 +197,11 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int, optional): The interval in seconds for the 
+            request to poll the server for a response. Defaults to 5.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -220,7 +232,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
 
         Args:
             url (str): Direct URL (link) to Google page.
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleShoppingUrlOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "render": None,
@@ -229,8 +242,11 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parse": None,
                     "parsing_instructions": None,
                 }
-                request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-                poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
+            request_timeout (int | 165, optional): The interval in seconds 
+            for the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int, optional): The interval in seconds for the 
+            request to poll the server for a response. Defaults to 5.
         Returns:
             dict: The response from the server after the job is completed.
         """
@@ -260,7 +276,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
 
         Args:
             query (str): UTF-encoded product code.
-            opts (GoogleShoppingProductOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleShoppingProductOpts, optional): Configuration options 
+            for the search. Defaults to:
                 {
                     "domain": com,
                     "locale": None,
@@ -272,8 +289,11 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parse": None,
                     "parsing_instructions": None,
                 }
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int, optional): The interval in seconds for the 
+            request to poll the server for a response. Defaults to 5.
         Returns:
             dict: The response from the server after the job is completed.
         """
@@ -303,7 +323,8 @@ class GoogleShoppingAsync(GoogleShoppingBase):
 
         Args:
             url (str): UTF-encoded product code.
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleShoppingUrlOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -317,8 +338,11 @@ class GoogleShoppingAsync(GoogleShoppingBase):
                     "parse": None,
                     "parsing_instructions": None,
                 }
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int, optional): The interval in seconds for the request to poll the server for a response. Defaults to 2.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int, optional): The interval in seconds for the 
+            request to poll the server for a response. Defaults to 5.
         Returns:
             dict: The response from the server after the job is completed.
         """

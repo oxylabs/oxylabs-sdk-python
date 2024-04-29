@@ -5,10 +5,12 @@ from src.oxylabs.utils.types import user_agent_type
 class TestWayfairSearchSync(unittest.TestCase):
     def test_wayfair_search_sync(self):
         """
-        Tests synchronous search functionality for Ecommerce Wayfair to ensure it returns expected results.
+        Tests synchronous search functionality for Ecommerce Wayfair to ensure 
+        it returns expected results.
 
-        This test mocks the _get_resp method to simulate the Ecommerce service processing
-        and checks that the method handles the search query correctly and returns the correct mock response.
+        This test mocks the _get_resp method to simulate the Ecommerce service 
+        processing and checks that the method handles the search query 
+        correctly and returns the correct mock response.
         """
         ecommerce = Ecommerce('user', 'pass')
         query = "furniture"
@@ -22,10 +24,12 @@ class TestWayfairSearchSync(unittest.TestCase):
 class TestWayfairUrlSync(unittest.TestCase):
     def test_wayfair_url_sync(self):
         """
-        Tests the Ecommerce Wayfair URL scraping functionality in a synchronous manner.
+        Tests the Ecommerce Wayfair URL scraping functionality in a 
+        synchronous manner.
 
-        This test mocks the _get_resp method to return controlled responses, ensuring that
-        the method correctly processes the URL and user agent type, returning the expected data.
+        This test mocks the _get_resp method to return controlled responses, 
+        ensuring that the method correctly processes the URL and user agent 
+        type, returning the expected data.
         """
         ecommerce = Ecommerce('user', 'pass')
         url = "https://www.wayfair.com/furniture/sb0/sofas-c413892.html"
@@ -39,10 +43,12 @@ class TestWayfairUrlSync(unittest.TestCase):
 class TestWayfairSearchAsync(unittest.IsolatedAsyncioTestCase):
     async def test_wayfair_search_async(self):
         """
-        Asynchronously tests Ecommerce Wayfair search to validate the async API handling.
+        Asynchronously tests Ecommerce Wayfair search to validate the async 
+        API handling.
 
-        Uses a mocked asynchronous response to verify that the search query processing
-        is handled correctly and that the async functionality returns expected results.
+        Uses a mocked asynchronous response to verify that the search query 
+        processing is handled correctly and that the async functionality 
+        returns expected results.
         """
         ecommerce_async = EcommerceAsync('user', 'pass')
         query = "furniture"
@@ -60,8 +66,9 @@ class TestWayfairUrlAsync(unittest.IsolatedAsyncioTestCase):
         """
         Asynchronously tests Ecommerce Wayfair URL scraping functionality.
 
-        This test mocks the _get_resp method to provide controlled async responses, verifying that
-        the URL and user agent options are processed correctly and yield expected outcomes.
+        This test mocks the _get_resp method to provide controlled async 
+        responses, verifying that the URL and user agent options are processed 
+        correctly and yield expected outcomes.
         """
         ecommerce_async = EcommerceAsync('user', 'pass')
         url = "https://www.wayfair.com/furniture/sb0/sofas-c413892.html"

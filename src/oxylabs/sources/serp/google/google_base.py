@@ -20,12 +20,13 @@ class GoogleSearchOpts(BaseGoogleOpts):
         Initializes an instance of the GoogleBase class.
 
         Args:
-            domain (str): The domain to search on. Defaults to DEFAULT_DOMAIN.
-            start_page (int): The starting page number. Defaults to DEFAULT_START_PAGE.
-            pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
-            limit (int): The maximum number of search results per page. Defaults to DEFAULT_LIMIT_SERP.
+            domain (str): The domain to search on.
+            start_page (int): The starting page number.
+            pages (int): The number of pages to retrieve.
+            limit (int): The maximum number of search results per page.
             locale (str): The locale to use for the search. Defaults to None.
-            parse (bool): Whether to parse the search results. Defaults to False.
+            parse (bool): Whether to parse the search results. Defaults to 
+            False.
             **kwargs: Additional keyword arguments to pass to the base class.
 
         """
@@ -50,11 +51,13 @@ class GoogleSearchOpts(BaseGoogleOpts):
 
     def check_parameter_validity(self):
         """
-        Checks the validity of the parameters used for the Google SERP API request.
+        Checks the validity of the parameters used for the Google SERP API 
+        request.
 
-        This method validates the user agent type, render option, limit, pages, start page,
-        parsing instructions, and context TBM parameters. It calls various utility functions
-        to perform the validation.
+        This method validates the user agent type, render option, limit, pages, 
+        start page,
+        parsing instructions, and context TBM parameters. It calls various 
+        utility functions to perform the validation.
 
         Raises:
             ValueError: If any of the parameters are invalid.
@@ -77,8 +80,10 @@ class GoogleUrlOpts(BaseGoogleOpts):
         Initializes an instance of the GoogleBase class.
 
         Args:
-            parse (bool, optional): Indicates whether to parse the response. Defaults to False.
-            **kwargs: Additional keyword arguments to be passed to the base class constructor.
+            parse (bool, optional): Indicates whether to parse the response. 
+            Defaults to False.
+            **kwargs: Additional keyword arguments to be passed to the base 
+            class constructor.
         """
         super().__init__(
             **kwargs,
@@ -89,9 +94,9 @@ class GoogleUrlOpts(BaseGoogleOpts):
         """
         Checks the validity of the parameters used in the GoogleBase class.
 
-        This method calls various utility functions to validate the user agent type,
-        render option, and parsing instructions. If any of these parameters are invalid,
-        an exception will be raised.
+        This method calls various utility functions to validate the user agent 
+        type, render option, and parsing instructions. If any of these 
+        parameters are invalid, an exception will be raised.
 
         Parameters:
             self (GoogleBase): The current instance of the GoogleBase class.
@@ -99,7 +104,8 @@ class GoogleUrlOpts(BaseGoogleOpts):
         Raises:
             InvalidUserAgentError: If the user agent type is invalid.
             InvalidRenderError: If the render option is invalid.
-            InvalidParsingInstructionsError: If the parsing instructions are invalid.
+            InvalidParsingInstructionsError: If the parsing instructions are 
+            invalid.
         """
         utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
@@ -112,15 +118,16 @@ class GoogleAdsOpts(BaseGoogleOpts):
 
     Args:
         parse (bool): Whether to parse the response. Defaults to False.
-        domain (str): The domain to search on. Defaults to DEFAULT_DOMAIN.
-        start_page (int): The starting page number. Defaults to DEFAULT_START_PAGE.
-        pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
-        limit (int): The maximum number of results to retrieve. Defaults to DEFAULT_LIMIT_SERP.
+        domain (str): The domain to search on. .
+        start_page (int): The starting page number.
+        pages (int): The number of pages to retrieve.
+        limit (int): The maximum number of results to retrieve.
         locale (str): The locale to use for the search. Defaults to None.
         **kwargs: Additional keyword arguments.
 
     Attributes:
-        AcceptedTbmParameters (list): A list of accepted TBM (To Be Matched) parameters.
+        AcceptedTbmParameters (list): A list of accepted TBM (To Be Matched) 
+        parameters.
 
     Methods:
         check_parameter_validity: Checks the validity of the parameters.
@@ -202,7 +209,8 @@ class GoogleSuggestionsOpts(BaseGoogleOpts):
         """
         Checks the validity of the parameters.
 
-        This method checks the validity of the user agent type, render, and parsing instructions.
+        This method checks the validity of the user agent type, render, and 
+        parsing instructions.
 
         Returns:
             None
@@ -218,10 +226,10 @@ class GoogleHotelsOpts(BaseGoogleOpts):
     Options for making requests to Google Hotels search engine.
 
     Args:
-        domain (str): The domain to use for the search. Defaults to DEFAULT_DOMAIN.
-        start_page (int): The starting page number for the search. Defaults to DEFAULT_START_PAGE.
-        pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
-        limit (int): The maximum number of search results to retrieve. Defaults to DEFAULT_LIMIT_SERP.
+        domain (str): The domain to use for the search.
+        start_page (int): The starting page number for the search.
+        pages (int): The number of pages to retrieve.
+        limit (int): The maximum number of search results to retrieve.
         locale (str): The locale to use for the search. Defaults to None.
         **kwargs: Additional keyword arguments to pass to the parent class.
 
@@ -276,10 +284,12 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
     Options for retrieving hotel search results from Google Travel.
 
     Args:
-        domain (str, optional): The domain to use for the search. Defaults to DEFAULT_DOMAIN.
-        start_page (int, optional): The starting page number for the search. Defaults to DEFAULT_START_PAGE.
-        locale (str, optional): The locale to use for the search. Defaults to None.
-        **kwargs: Additional keyword arguments to be passed to the parent class.
+        domain (str, optional): The domain to use for the search.
+        start_page (int, optional): The starting page number for the search. 
+        locale (str, optional): The locale to use for the search. Defaults to 
+        None.
+        **kwargs: Additional keyword arguments to be passed to the parent 
+        class.
 
     Attributes:
         domain (str): The domain to use for the search.
@@ -324,10 +334,10 @@ class GoogleImagesOpts(BaseGoogleOpts):
     Options for making requests to the Google Images search engine.
 
     Args:
-        domain (str): The domain to use for the search. Defaults to DEFAULT_DOMAIN.
-        start_page (int): The starting page number for the search. Defaults to DEFAULT_START_PAGE.
-        pages (int): The number of pages to retrieve. Defaults to DEFAULT_PAGES.
-        limit (int): The maximum number of search results to retrieve. Defaults to DEFAULT_LIMIT_SERP.
+        domain (str): The domain to use for the search.
+        start_page (int): The starting page number for the search.
+        pages (int): The number of pages to retrieve.
+        limit (int): The maximum number of search results to retrieve.
         locale (str): The locale to use for the search. Defaults to None.
         parse (bool): Whether to parse the search results. Defaults to False.
         **kwargs: Additional keyword arguments to pass to the parent class.
@@ -382,7 +392,8 @@ class GoogleImagesOpts(BaseGoogleOpts):
         Sets the default tbm value if the provided value is None.
 
         Args:
-            context (list): The context list of dictionaries to be checked and updated.
+            context (list): The context list of dictionaries to be checked and 
+            updated.
 
         """
         if self.context is None:
@@ -401,7 +412,8 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
     """
     Represents options for exploring Google Trends.
 
-    This class provides methods to check the validity of parameters such as user agent type and parsing instructions.
+    This class provides methods to check the validity of parameters such as 
+    user agent type and parsing instructions.
 
     Attributes:
         user_agent_type (str): The type of user agent to be used.
@@ -416,7 +428,8 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
         """
         Checks the validity of the parameters.
 
-        This method checks the validity of the user agent type and parsing instructions.
+        This method checks the validity of the user agent type and parsing 
+        instructions.
         It calls utility functions to perform the validity checks.
 
         Returns:
@@ -442,7 +455,8 @@ class GoogleBase:
             dict: The prepared search payload.
 
         Raises:
-            ValueError: If the `limit`, `start_page`, and `pages` parameters are used together with the `limit_per_page` context parameter.
+            ValueError: If the `limit`, `start_page`, and `pages` parameters 
+            are used together with the `limit_per_page` context parameter.
 
         """
 
@@ -481,7 +495,8 @@ class GoogleBase:
             "context": opts.context,
         }
 
-        # If user sends limit_per_page context parameter, use it instead of limit, start_page, and pages parameters.
+        # If user sends limit_per_page context parameter, use it instead of 
+        # limit, start_page, and pages parameters.
         if opts.context and any(
             opt.get("key") == "limit_per_page" for opt in opts.context
         ):
@@ -734,8 +749,10 @@ class GoogleBase:
         Prepares the payload for Google Trends Explore API request.
 
         Args:
-            query (str): The query string for the Google Trends Explore API request.
-            opts (dict): Optional parameters for the Google Trends Explore API request.
+            query (str): The query string for the Google Trends Explore API 
+            request.
+            opts (dict): Optional parameters for the Google Trends Explore API 
+            request.
 
         Returns:
             dict: The prepared payload for the Google Trends Explore API request.

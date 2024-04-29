@@ -27,7 +27,8 @@ class Google(GoogleBase):
         Args:
 
             query (str): The search query.
-            opts (GoogleSearchOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleSearchOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": "com",
                     "start_page": 1,
@@ -44,7 +45,9 @@ class Google(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -66,7 +69,8 @@ class Google(GoogleBase):
 
         Args:
             url (str): The URL to be scraped.
-            opts (GoogleUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleUrlOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
@@ -76,7 +80,9 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -98,7 +104,8 @@ class Google(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleAdsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleAdsOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": "com",
                     "start_page": 1,
@@ -113,7 +120,9 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -135,7 +144,8 @@ class Google(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleSuggestionsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleSuggestionsOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "locale": None,
                     "geo_location": None,
@@ -146,7 +156,9 @@ class Google(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -168,7 +180,8 @@ class Google(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleHotelsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleHotelsOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": "com",
                     "start_page": 1,
@@ -183,7 +196,9 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -204,9 +219,14 @@ class Google(GoogleBase):
         Scrapes Google Travel Hotels search results for a given query.
 
         Args:
-            query (str): UTF-encoded keyword. "query": "hotels" will result list hotels in a given geo_location; "query": "hotels in <Location>" will result in a list hotels for <Location>. Eg hotels in Paris will list hotels in Paris, no matter what geo_location is given.
+            query (str): UTF-encoded keyword. "query": "hotels" will result 
+            list hotels in a given geo_location; "query": "hotels in 
+            <Location>" will result in a list hotels for <Location>. Eg hotels 
+            in Paris will list hotels in Paris, no matter what geo_location is 
+            given.
 
-            opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleTravelHotelsOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -219,7 +239,9 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -241,7 +263,8 @@ class Google(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleImagesOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleImagesOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -257,7 +280,9 @@ class Google(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -279,7 +304,8 @@ class Google(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleTrendsExploreOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleTrendsExploreOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "user_agent_type": "desktop",
                     "geo_location": None,
@@ -287,7 +313,9 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -305,7 +333,8 @@ class GoogleAsync(GoogleBase):
         Initializes an asynchronous Google object.
 
         Args:
-            serp_async_instance: The SERP instance to be used for Google requests.
+            serp_async_instance: The SERP instance to be used for Google 
+            requests.
         """
 
         self._serp_async_instance = serp_async_instance
@@ -324,7 +353,8 @@ class GoogleAsync(GoogleBase):
         Args:
 
             query (str): The search query.
-            opts (GoogleSearchOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleSearchOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": "com",
                     "start_page": 1,
@@ -341,9 +371,14 @@ class GoogleAsync(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -372,7 +407,8 @@ class GoogleAsync(GoogleBase):
 
         Args:
             url (str): The URL to be scraped.
-            opts (GoogleUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleUrlOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
@@ -382,9 +418,14 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -413,7 +454,8 @@ class GoogleAsync(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleAdsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleAdsOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": "com",
                     "start_page": 1,
@@ -428,9 +470,14 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -459,7 +506,8 @@ class GoogleAsync(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleSuggestionsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleSuggestionsOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "locale": None,
                     "geo_location": None,
@@ -470,9 +518,14 @@ class GoogleAsync(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -501,7 +554,8 @@ class GoogleAsync(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleHotelsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleHotelsOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": "com",
                     "start_page": 1,
@@ -516,9 +570,14 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -543,12 +602,18 @@ class GoogleAsync(GoogleBase):
         poll_interval: Optional[int] = None,
     ) -> dict:
         """
-        Asynchronously scrapes Google Travel Hotels search results for a given query.
+        Asynchronously scrapes Google Travel Hotels search results for a given 
+        query.
 
         Args:
-            query (str): UTF-encoded keyword. "query": "hotels" will result list hotels in a given geo_location; "query": "hotels in <Location>" will result in a list hotels for <Location>. Eg hotels in Paris will list hotels in Paris, no matter what geo_location is given.
+            query (str): UTF-encoded keyword. "query": "hotels" will result 
+            list hotels in a given geo_location; 
+            "query": "hotels in <Location>" will result in a list hotels for 
+            <Location>. Eg hotels in Paris will list hotels in Paris, no matter
+            what geo_location is given.
 
-            opts (GoogleTravelHotelsOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleTravelHotelsOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "domain": None,
                     "start_page": None,
@@ -561,9 +626,14 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -592,7 +662,8 @@ class GoogleAsync(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleImagesOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleImagesOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -608,9 +679,14 @@ class GoogleAsync(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -639,7 +715,8 @@ class GoogleAsync(GoogleBase):
 
         Args:
             query (str): The search query.
-            opts (GoogleTrendsExploreOpts, optional): Configuration options for the search. Defaults to:
+            opts (GoogleTrendsExploreOpts, optional): Configuration options for 
+            the search. Defaults to:
                 {
                     "user_agent_type": "desktop",
                     "geo_location": None,
@@ -647,9 +724,14 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.

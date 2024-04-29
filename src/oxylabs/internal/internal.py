@@ -19,7 +19,8 @@ class APICredentials:
 
     def get_encoded_credentials(self) -> str:
         """
-        Returns the Base64 encoded username and password for API authentication.
+        Returns the Base64 encoded username and password for API 
+        authentication.
         """
         credentials = f"{self.username}:{self.password}"
         return base64.b64encode(credentials.encode()).decode()
@@ -46,21 +47,26 @@ class Client:
 
     def req(self, payload: dict, method: str, config: dict) -> dict:
         """
-        Sends a HTTP request to the specified URL with the given payload and method.
+        Sends a HTTP request to the specified URL with the given payload
+        and method.
 
         Args:
             payload (dict): The payload to be sent with the request.
-            method (str): The HTTP method to be used for the request (e.g., "POST", "GET").
-            config (dict): Additional configuration options for the request.
+            method (str): The HTTP method to be used for the request 
+            (e.g., "POST", "GET").
+            config (dict): Additional configuration options for the 
+            request.
 
         Returns:
-            dict: The JSON response from the server, if the request is successful.
+            dict: The JSON response from the server, if the request is 
+            successful.
                   None, if an error occurs during the request.
 
         Raises:
             requests.exceptions.Timeout: If the request times out.
             requests.exceptions.HTTPError: If an HTTP error occurs.
-            requests.exceptions.RequestException: If a general request error occurs.
+            requests.exceptions.RequestException: If a general request 
+            error occurs.
         """
         try:
             if method == "POST":
@@ -104,7 +110,8 @@ class ClientAsync:
 
         Args:
             base_url (str): The base URL of the API.
-            api_credentials (ApiCredentials): The API credentials used for authorization.
+            api_credentials (ApiCredentials): The API credentials used for 
+            authorization.
 
         Returns:
             None
@@ -181,7 +188,8 @@ class ClientAsync:
 
         Args:
             job_id (str): The ID of the job.
-            user_session (aiohttp.ClientSession): The client session used for making the request.
+            user_session (aiohttp.ClientSession): The client session used for 
+            making the request.
 
         Returns:
             dict: The JSON response data.

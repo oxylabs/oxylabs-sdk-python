@@ -26,7 +26,8 @@ class Bing(BingBase):
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -40,7 +41,9 @@ class Bing(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -61,7 +64,8 @@ class Bing(BingBase):
 
         Args:
             url (str): The URL to be scraped.
-            opts (BingUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (BingUrlOpts, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "user_agent_type": desktop,
                     "geo_location": None,
@@ -71,7 +75,9 @@ class Bing(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -89,7 +95,8 @@ class BingAsync(BingBase):
         Initializes an instance of the BingAsync class.
 
         Args:
-            serp_async_instance: The SERPAsync instance associated with the BingAsync class.
+            serp_async_instance: The SERPAsync instance associated with the 
+            BingAsync class.
         """
         self._serp_async_instance = serp_async_instance
 
@@ -106,7 +113,8 @@ class BingAsync(BingBase):
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -120,9 +128,14 @@ class BingAsync(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -152,7 +165,8 @@ class BingAsync(BingBase):
 
         Args:
             url (str): The URL to be scraped.
-            opts (BingUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (BingUrlOpts, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "user_agent_type": desktop,
                     "geo_location": None,
@@ -162,9 +176,14 @@ class BingAsync(BingBase):
                     "parse": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.

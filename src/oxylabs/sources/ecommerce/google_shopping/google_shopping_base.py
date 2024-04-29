@@ -249,7 +249,8 @@ class GoogleShoppingBase:
         self, query: str, user_opts: Optional[dict] = None
     ) -> dict:
         """
-        Prepares the payload for retrieving product pricing from Google Shopping.
+        Prepares the payload for retrieving product pricing from 
+        Google Shopping.
 
         Args:
             query (str): The search query for the products.

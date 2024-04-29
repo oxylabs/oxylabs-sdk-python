@@ -27,13 +27,15 @@ class BaseSearchOpts:
         Represents the base search options for a search operation.
 
         Args:
-            domain (str): The domain to search on. Defaults to DEFAULT_DOMAIN.
-            start_page (int): The starting page number. Defaults to DEFAULT_START_PAGE.
-            pages (int): The number of pages to search. Defaults to DEFAULT_PAGES.
-            limit (int): The maximum number of search results per page. Defaults to DEFAULT_LIMIT_SERP.
-            user_agent_type (str): The user agent type to use. Defaults to DEFAULT_USER_AGENT.
-            callback_url (str): The URL to send the search results callback to. Defaults to None.
-            parsing_instructions (dict): Instructions for parsing the search results. Defaults to None.
+            domain (str): The domain to search on. .
+            start_page (int): The starting page number.
+            pages (int): The number of pages to search. 
+            limit (int): The maximum number of search results per page.
+            user_agent_type (str): The user agent type to use. 
+            callback_url (str): The URL to send the search results callback to. 
+            Defaults to None.
+            parsing_instructions (dict): Instructions for parsing the search 
+            results. Defaults to None.
         """
         self.domain = domain
         self.start_page = start_page
@@ -57,9 +59,11 @@ class BaseUrlOpts:
         Initialize the BaseUrlOpts class.
 
         Args:
-            user_agent_type (str): The type of user agent to use. Defaults to DEFAULT_USER_AGENT.
-            callback_url (str, optional): The callback URL to use. Defaults to None.
-            parsing_instructions (dict, optional): Instructions for parsing the response. Defaults to None.
+            user_agent_type (str): The type of user agent to use. 
+            callback_url (str, optional): The callback URL to use. Defaults to 
+            None.
+            parsing_instructions (dict, optional): Instructions for parsing the 
+            response. Defaults to None.
         """
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
@@ -80,12 +84,17 @@ class BaseGoogleOpts:
         Base class for Google-specific options.
 
         Args:
-            geo_location (str, optional): The geographic location to use for the request. Defaults to None.
-            user_agent_type (str, optional): The type of user agent to use. Defaults to DEFAULT_USER_AGENT.
-            render (bool, optional): Whether to render JavaScript on the page. Defaults to None.
-            callback_url (str, optional): The URL to send a callback request to. Defaults to None.
-            parsing_instructions (dict, optional): Instructions for parsing the response. Defaults to None.
-            context (list, optional): Additional context information. Defaults to None.
+            geo_location (str, optional): The geographic location to use for 
+            the request. Defaults to None.
+            user_agent_type (str, optional): The type of user agent to use. 
+            render (bool, optional): Whether to render JavaScript on the page. 
+            Defaults to None.
+            callback_url (str, optional): The URL to send a callback request 
+            to. Defaults to None.
+            parsing_instructions (dict, optional): Instructions for parsing the 
+            response. Defaults to None.
+            context (list, optional): Additional context information. Defaults 
+            to None.
         """
         self.geo_location = geo_location
         self.user_agent_type = user_agent_type
@@ -100,9 +109,10 @@ class BaseEcommerceOpts:
     Represents the options for an ecommerce request.
 
     Args:
-        user_agent_type (str): The type of user agent to use. Defaults to DEFAULT_USER_AGENT.
+        user_agent_type (str): The type of user agent to use. 
         render (str): The rendering mode for the request.
-        callback_url (str): The URL to which the response will be sent asynchronously.
+        callback_url (str): The URL to which the response will be sent 
+        asynchronously.
         geo_location (str): The desired geographic location for the request.
         parsing_instructions (str): Instructions for parsing the response.
     """
@@ -152,9 +162,12 @@ def prepare_config(**kwargs):
     Prepare a configuration dictionary based on the provided keyword arguments.
 
     Args:
-        request_timeout (int, optional): The timeout value in seconds. Defaults to None.
-        poll_interval (int, optional): The poll interval value in seconds. Defaults to None.
-        job_completion_timeout (int, optional): The job completion timeout value in seconds. Defaults to None.
+        request_timeout (int, optional): The timeout value in seconds. Defaults 
+        to None.
+        poll_interval (int, optional): The poll interval value in seconds. 
+        Defaults to None.
+        job_completion_timeout (int, optional): The job completion timeout 
+        value in seconds. Defaults to None.
 
     Returns:
         dict: The prepared configuration dictionary.
@@ -193,7 +206,8 @@ def validate_url(input_url: str, host: str) -> None:
         host (str): The expected domain or host.
 
     Raises:
-        ValueError: If the URL parameter is empty, missing scheme, missing host, or does not belong to the specified host.
+        ValueError: If the URL parameter is empty, missing scheme, missing 
+        host, or does not belong to the specified host.
 
     Returns:
         None
@@ -348,7 +362,8 @@ def check_sorting_parameter_validity(
 
     Args:
         context (List[dict]): The context containing the sorting parameter.
-        acceptable_sorting_parameters (List[str]): The list of acceptable sorting parameters.
+        acceptable_sorting_parameters (List[str]): The list of acceptable 
+        sorting parameters.
 
     Raises:
         ValueError: If the sorting parameter in the context is invalid.
@@ -410,7 +425,8 @@ def check_content_for_post_validity(context: list) -> None:
         context (list): The context containing the request information.
 
     Raises:
-        ValueError: If the content is provided but the request method is not POST.
+        ValueError: If the content is provided but the request method is not 
+        POST.
     """
     if (
         context
@@ -660,7 +676,8 @@ def validate_list_string_optional_int(args: list) -> None:
         args: A list containing the arguments to be validated.
 
     Raises:
-        ValueError: If the first argument is not a non-empty string or if the second argument is not a non-zero integer when present.
+        ValueError: If the first argument is not a non-empty string or if the 
+        second argument is not a non-zero integer when present.
     """
     if (
         not isinstance(args, list)

@@ -97,7 +97,8 @@ class WayfairBase:
             user_opts (dict): Optional user-defined options.
 
         Returns:
-            dict: The prepared payload containing the source, URL, user agent type, and callback URL.
+            dict: The prepared payload containing the source, URL, user agent 
+            type, and callback URL.
 
         Raises:
             ValidationError: If the URL is invalid.

@@ -11,7 +11,8 @@ class Wayfair(WayfairBase):
         Initializes an instance of the Wayfair class.
 
         Args:
-            ecommerce_instance: The Ecommerce instance associated with the Wayfair class.
+            ecommerce_instance: The Ecommerce instance associated with the 
+            Wayfair class.
         """
         self._ecommerce_instance = ecommerce_instance
 
@@ -26,7 +27,8 @@ class Wayfair(WayfairBase):
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "start_page": 1,
                     "pages": 1,
@@ -36,7 +38,9 @@ class Wayfair(WayfairBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -58,14 +62,17 @@ class Wayfair(WayfairBase):
 
         Args:
             url (str): The URL to be scraped.
-            opts (WayfairUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (WayfairUrlOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -83,7 +90,8 @@ class WayfairAsync(WayfairBase):
         Initializes an instance of the WayfairAsync class.
 
         Args:
-            ecommerce_async_instance: The EcommerceAsync instance associated with the WayfairAsync class.
+            ecommerce_async_instance: The EcommerceAsync instance associated 
+            with the WayfairAsync class.
         """
         self._ecommerce_async_instance = ecommerce_async_instance
 
@@ -100,7 +108,8 @@ class WayfairAsync(WayfairBase):
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "start_page": 1,
                     "pages": 1,
@@ -110,9 +119,14 @@ class WayfairAsync(WayfairBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -143,16 +157,22 @@ class WayfairAsync(WayfairBase):
 
         Args:
             url (str): The URL to be scraped.
-            opts (WayfairUrlOpts, optional): Configuration options for the search. Defaults to:
+            opts (WayfairUrlOpts, optional): Configuration options for the 
+            search. Defaults to:
                 {
                     "user_agent_type": desktop,
                     "callback_url": None,
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.

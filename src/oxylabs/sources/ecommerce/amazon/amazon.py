@@ -11,7 +11,8 @@ class Amazon(AmazonBase):
         Initializes an instance of the Amazon class.
 
         Args:
-            ecommerce_instance: The Ecommerce instance associated with the Amazon class.
+            ecommerce_instance: The Ecommerce instance associated with the 
+            Amazon class.
         """
         self._ecommerce_instance = ecommerce_instance
 
@@ -26,7 +27,8 @@ class Amazon(AmazonBase):
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -40,7 +42,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -62,7 +66,8 @@ class Amazon(AmazonBase):
 
         Args:
             url (str): The URL to scrape.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "user_agent_type": desktop,
@@ -72,7 +77,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -94,7 +101,8 @@ class Amazon(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "geo_location": None,
@@ -106,7 +114,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -128,7 +138,8 @@ class Amazon(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -141,7 +152,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -163,7 +176,8 @@ class Amazon(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -176,7 +190,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -198,7 +214,8 @@ class Amazon(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "geo_location": None,
@@ -209,7 +226,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -231,7 +250,8 @@ class Amazon(AmazonBase):
 
         Args:
             query (str): Browse node ID.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -244,7 +264,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -266,7 +288,8 @@ class Amazon(AmazonBase):
 
         Args:
             query (str): 13-character seller ID.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "geo_location": None,
@@ -277,7 +300,9 @@ class Amazon(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -295,7 +320,8 @@ class AmazonAsync(AmazonBase):
         Initializes an instance of the AmazonAsync class.
 
         Args:
-            ecommerce_async_instance: The EcommerceAsync instance associated with the AmazonAsync class.
+            ecommerce_async_instance: The EcommerceAsync instance associated 
+            with the AmazonAsync class.
         """
         self._ecommerce_async_instance = ecommerce_async_instance
 
@@ -312,7 +338,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -326,9 +353,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -359,7 +391,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             url (str): The URL to scrape.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "user_agent_type": desktop,
@@ -369,9 +402,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -402,7 +440,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "geo_location": None,
@@ -414,9 +453,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -447,7 +491,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -460,9 +505,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -493,7 +543,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -506,9 +557,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -539,7 +595,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "geo_location": None,
@@ -550,9 +607,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -583,7 +645,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             query (str): Browse node ID.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "start_page": 1,
@@ -596,9 +659,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
@@ -629,7 +697,8 @@ class AmazonAsync(AmazonBase):
 
         Args:
             query (str): 13-character seller ID.
-            opts (dict, optional): Configuration options for the search. Defaults to:
+            opts (dict, optional): Configuration options for the search. 
+            Defaults to:
                 {
                     "domain": com,
                     "geo_location": None,
@@ -640,9 +709,14 @@ class AmazonAsync(AmazonBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 160, optional): The interval in seconds for the request to time out if no response is returned. Defaults to 160.
-            poll_interval (int | 5, optional): The interval in seconds to poll the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in seconds for the job to time out if no response is returned. Defaults to 50
+            request_timeout (int | 165, optional): The interval in seconds for 
+            the request to time out if no response is returned. 
+            Defaults to 165.
+            poll_interval (int | 5, optional): The interval in seconds to poll 
+            the server for a response. Defaults to 5
+            job_completion_timeout (int | 50, optional): The interval in 
+            seconds for the job to time out if no response is returned. 
+            Defaults to 50
 
         Returns:
             dict: The response from the server after the job is completed.
