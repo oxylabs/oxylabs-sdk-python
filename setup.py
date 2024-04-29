@@ -19,7 +19,7 @@ Documentation can be found at https://github.com/mslmio/oxylabs-sdk-python.
 
 setup(
     name="oxylabs",
-    version=get_version("src/oxylabs/version.py"),
+    version=get_version("src/oxylabs/_version.py"),
     description="Official Python library for Oxylabs Scraper APIs",
     long_description=long_description,
     url="https://oxylabs.io/",

@@ -49,11 +49,28 @@ We will then take care of the issue as soon as possible.
 
 This project uses [Black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/) for code formatting. Before you submit your contribution, please make sure your code is formatted according to these style guides.
 
+First, you will need to install the required tools if you haven't already:
+
+```bash
+pip install black isort
+```
+
 You can use the provided `fmt.sh` script to automatically format your code. This script runs `isort` and `black` on the `src` directory. Here's how you can run it:
 
 ```bash
 scripts/fmt.sh
 ```
+
+## Running Tests
+
+To ensure the quality of the code, we encourage you to run tests after making any changes and before submitting a contribution. We have a script that facilitates running the unit tests for the project.
+
+To run the tests, use the `tests.sh` script located in the `scripts` directory. This will execute all the unit tests and report any failures.
+
+Here's how you can run it:
+
+```bash
+scripts/tests.sh
 
 ### Reporting Bugs
 

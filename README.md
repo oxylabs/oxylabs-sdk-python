@@ -1,15 +1,18 @@
 # Oxylabs Python SDK
 
-This is a Python SDK for the [Oxylabs](https://oxylabs.io) [Scraper APIs](https://developers.oxylabs.io/scraper-apis/getting-started).
+This is a Python SDK for the [Oxylabs](https://oxylabs.io) [Scraper APIs](https:
+//developers.oxylabs.io/scraper-apis/getting-started).
 
-This will help simplify integrating with Oxylabs's APIs, which can help you with retrieving search engine results (SERP), eCommerce data, real estate data, and more.
+This will help simplify integrating with Oxylabs's APIs, which can help you with
+retrieving search engine results (SERP), eCommerce data, real estate data, and 
+more.
 
-The Python SDK provides you with several benefits over using the raw APIs directly:
+The Python SDK provides you with several benefits over using the raw APIs 
+directly:
 
 - **Simplified Interface**: abstracts away complexities, offering a straightforward user interface for interacting with the Oxylabs SERP and Ecommerce API.
 - **Automated Request Management**: streamlines the handling of API requests and responses for enhanced efficiency and reliability.
 - **Error Handling**: provides meaningful error messages and handles common API errors, simplifying troubleshooting.
-- **Result Parsing**: streamlines the process of extracting relevant data from SERP and Ecommerce results, allowing developers to focus on application logic.
 
 ## Requirements
 

@@ -11,5 +11,3 @@ multidict==6.0.5
 requests==2.31.0
 urllib3==2.2.1
 yarl==1.9.4
-black==24.4.0
-isort==5.13.2

@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional
+from typing import Optional
 
 import src.oxylabs.utils.utils as utils
 from src.oxylabs.utils.types import source

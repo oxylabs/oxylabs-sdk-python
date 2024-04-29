@@ -2,8 +2,9 @@
 
 ## 1.0.2
 
-- Fixed function naming.
+- Fixed function and class naming.
 - Added request timeout in proxy.
+- Removed Yandex and Baidu sources from SERP.
 
 ## 1.0.1
 
