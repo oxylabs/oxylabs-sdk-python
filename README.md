@@ -1,7 +1,7 @@
 # Oxylabs Python SDK
 
-This is a Python SDK for the [Oxylabs](https://oxylabs.io) [Scraper APIs]
-(https://developers.oxylabs.io/scraper-apis/getting-started).
+This is a Python SDK for the [Oxylabs](https://oxylabs.io)
+[Scraper APIs](https://developers.oxylabs.io/scraper-apis/getting-started).
 
 This will help simplify integrating with Oxylabs's APIs, which can help you with
 retrieving search engine results (SERP), eCommerce data, real estate data, and 
@@ -77,9 +77,8 @@ different packages:
 - Push-Pull (Async) - `SERPAsync(username, password)`
 - Proxy Endpoint - `Proxy(username, password)`
 
-Learn more about integration methods [on the official documentation]
-(https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods)
- and how this SDK uses them [here](#integration-methods-1).
+Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods)
+and how this SDK uses them [here](#integration-methods-1).
 
 ### Sources
 
@@ -158,8 +157,7 @@ result = c.google.scrape_search(
 ### Context Options for Google sources
 
 You can send in context options relevant to `google`, `amazon` and `universal` 
-sources. Here are the [supported context values for google search]
-(https://developers.oxylabs.io/scraper-apis/serp-scraper-api/google/search). 
+sources. Here are the [supported context values for google search](https://developers.oxylabs.io/scraper-apis/serp-scraper-api/google/search). 
 Similarly you can find supported context values for other sources in the 
 documentation.
 Here's an example for Google Search scraping:
@@ -190,8 +188,7 @@ c.google.scrape_search(
 
 ### Parse instructions
 
-SDK supports [custom parsing]
-(https://developers.oxylabs.io/scraper-apis/custom-parser):
+SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser):
 
 ```python
 from oxylabs import SERP
@@ -299,8 +296,7 @@ unblocked content from us.
 Since the parameters in this method are sent as as headers there are only a few 
 parameters which this integration method accepts. You can find those parameters 
 at
-https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods/
-proxy-endpoint#accepted-parameters.
+https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods/proxy-endpoint#accepted-parameters.
 
 The Proxy endpoint integration is very open ended allowing many different use 
 cases:
