@@ -45,6 +45,16 @@ We will then take care of the issue as soon as possible.
 > of the content, that you have the necessary rights to the content and that
 > the content you contribute may be provided under the project licence.
 
+## Code Formatting
+
+This project uses [Black](https://black.readthedocs.io/en/stable/) and [isort](https://pycqa.github.io/isort/) for code formatting. Before you submit your contribution, please make sure your code is formatted according to these style guides.
+
+You can use the provided `fmt.sh` script to automatically format your code. This script runs `isort` and `black` on the `src` directory. Here's how you can run it:
+
+```bash
+scripts/fmt.sh
+```
+
 ### Reporting Bugs
 
 #### Before Submitting a Bug Report

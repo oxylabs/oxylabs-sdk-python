@@ -1,7 +1,6 @@
 from typing import Any, Optional
 
 import src.oxylabs.utils.utils as utils
-from src.oxylabs.utils.defaults import set_default_tbm_context
 from src.oxylabs.utils.types import render, source
 from src.oxylabs.utils.utils import BaseGoogleOpts, validate_url
 
@@ -374,6 +373,25 @@ class GoogleImagesOpts(BaseGoogleOpts):
         utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
+    def set_default_tbm_context(self):
+        """
+        Sets the default tbm value if the provided value is None.
+
+        Args:
+            context (list): The context list of dictionaries to be checked and updated.
+
+        """
+        if self.context is None:
+            self.context = []
+
+        default_tbm = "isch"
+        for item in self.context:
+            if item.get("key") == "tbm":
+                item["value"] = item.get("value", default_tbm)
+                break
+        else:
+            self.context.append({"key": "tbm", "value": default_tbm})
+
 
 class GoogleTrendsExploreOpts(BaseGoogleOpts):
     """
@@ -673,7 +691,7 @@ class GoogleBase:
         """
         opts = GoogleImagesOpts(**user_opts if user_opts is not None else {})
 
-        opts.context = set_default_tbm_context(opts.context)
+        opts.set_default_tbm_context()
         opts.check_parameter_validity()
 
         # Prepare payload
