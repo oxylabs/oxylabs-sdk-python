@@ -89,9 +89,8 @@ API, each with different sources.
 
 | Search Engine | Sources
 | ------------- | --------------
-| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, 
-                  `google_travel_hotels`, `google_images`, `google_suggest`, 
-                  `google_trends_explore`
+| **Google**    | `google`, `google_search`, `google_ads`, `google_hotels`, `google_travel_hotels`, `google_images`, `google_suggest`, 
+`google_trends_explore`
 | **Bing**      | `bing`, `bing_search`
 
 In the SDK you'll just need to call the relevant function name from the client.
