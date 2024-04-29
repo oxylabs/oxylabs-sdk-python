@@ -202,7 +202,9 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             async_integration=True,
         )
         payload = self._prepare_shopping_search_payload(query, opts)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_shopping_url(
@@ -240,7 +242,9 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             async_integration=True,
         )
         payload = self._prepare_shopping_url_payload(url, opts)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_shopping_products(
@@ -281,7 +285,9 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             async_integration=True,
         )
         payload = self._prepare_shopping_product_payload(query, opts)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_product_pricing(
@@ -324,5 +330,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             async_integration=True,
         )
         payload = self._prepare_shopping_product_pricing_payload(query, opts)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

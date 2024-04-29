@@ -16,7 +16,10 @@ class Universal(UniversalBase):
         self._ecommerce_instance = ecommerce_instance
 
     def scrape_url(
-        self, url: str, opts: Optional[dict] = None, request_timeout: int = None
+        self,
+        url: str,
+        opts: Optional[dict] = None,
+        request_timeout: int = None,
     ) -> dict:
         """
         Scrapes Universal search results for a given URL.
@@ -101,5 +104,7 @@ class UniversalAsync(UniversalBase):
             async_integration=True,
         )
         payload = self._prepare_url_payload(url, opts)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

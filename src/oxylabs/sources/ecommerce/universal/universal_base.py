@@ -41,7 +41,9 @@ class UniversalUrlOpts(BaseUrlOpts):
 
 
 class UniversalBase:
-    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
+    def _prepare_url_payload(
+        self, url: str, user_opts: Optional[dict] = None
+    ) -> dict:
         """
         Prepares the payload for a URL request.
 
@@ -75,7 +77,9 @@ class UniversalBase:
         }
 
         payload["parse"] = (
-            True if opts.parsing_instructions or opts.parser_type else opts.parse
+            True
+            if opts.parsing_instructions or opts.parser_type
+            else opts.parse
         )
 
         if opts.parsing_instructions:

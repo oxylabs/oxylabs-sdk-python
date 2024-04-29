@@ -86,7 +86,9 @@ class WayfairBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
+    def _prepare_url_payload(
+        self, url: str, user_opts: Optional[dict] = None
+    ) -> dict:
         """
         Prepare the payload for a Wayfair URL request.
 

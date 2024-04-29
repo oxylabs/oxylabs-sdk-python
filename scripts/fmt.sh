@@ -4,4 +4,4 @@
 isort src
 
 # Run black on the src directory
-black src
+black --line-length 79 src

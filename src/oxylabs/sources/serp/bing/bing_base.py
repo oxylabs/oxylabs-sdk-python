@@ -52,7 +52,9 @@ class BingSearchOpts(BaseSearchOpts):
         """
         Checks the validity of BingSearchOpts parameters.
         """
-        utils.check_domain_validity(self.domain, BingSearchAcceptedDomainParameters)
+        utils.check_domain_validity(
+            self.domain, BingSearchAcceptedDomainParameters
+        )
         utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_render_validity(self.render)
         utils.check_limit_validity(self.limit)
@@ -137,7 +139,9 @@ class BingBase:
 
         return payload
 
-    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
+    def _prepare_url_payload(
+        self, url: str, user_opts: Optional[dict] = None
+    ) -> dict:
         """
         Prepares the payload for a Bing URL request.
 

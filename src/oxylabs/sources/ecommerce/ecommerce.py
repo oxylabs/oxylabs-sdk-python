@@ -3,7 +3,10 @@ from src.oxylabs.internal import APICredentials, Client, ClientAsync
 from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
 from .amazon.amazon import Amazon, AmazonAsync
-from .google_shopping.google_shopping import GoogleShopping, GoogleShoppingAsync
+from .google_shopping.google_shopping import (
+    GoogleShopping,
+    GoogleShoppingAsync,
+)
 from .universal.universal import Universal, UniversalAsync
 from .wayfair.wayfair import Wayfair, WayfairAsync
 

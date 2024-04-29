@@ -117,7 +117,10 @@ class ClientAsync:
         }
 
     async def get_job_id(
-        self, payload: dict, user_session: aiohttp.ClientSession, request_timeout: int
+        self,
+        payload: dict,
+        user_session: aiohttp.ClientSession,
+        request_timeout: int,
     ) -> str:
         try:
             async with user_session.post(
@@ -130,11 +133,15 @@ class ClientAsync:
                 response.raise_for_status()
                 return data["id"]
         except aiohttp.ClientResponseError as e:
-            print(f"HTTP error occurred: {e.status} - {e.message} - {data['message']}")
+            print(
+                f"HTTP error occurred: {e.status} - {e.message} - {data['message']}"
+            )
         except aiohttp.ClientConnectionError as e:
             print(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
-            print(f"Timeout error. The request to {self.base_url} has timed out.")
+            print(
+                f"Timeout error. The request to {self.base_url} has timed out."
+            )
         except Exception as e:
             print(f"Error occurred: {str(e)}")
             return None
@@ -187,12 +194,16 @@ class ClientAsync:
         """
         result_url = f"{self.base_url}/{job_id}/results"
         try:
-            async with user_session.get(result_url, headers=self.headers) as response:
+            async with user_session.get(
+                result_url, headers=self.headers
+            ) as response:
                 data = await response.json()
                 response.raise_for_status()
                 return data
         except aiohttp.ClientResponseError as e:
-            print(f"HTTP error occurred: {e.status} - {e.message} - {data['message']}")
+            print(
+                f"HTTP error occurred: {e.status} - {e.message} - {data['message']}"
+            )
         except aiohttp.ClientConnectionError as e:
             print(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:

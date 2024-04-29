@@ -132,7 +132,11 @@ def get_valid_values(module: object) -> list:
     Returns:
         list: A list of valid values from the module.
     """
-    return [getattr(module, name) for name in dir(module) if not name.startswith("__")]
+    return [
+        getattr(module, name)
+        for name in dir(module)
+        if not name.startswith("__")
+    ]
 
 
 VALID_UAS = get_valid_values(user_agent_type)
@@ -389,7 +393,8 @@ def check_http_method_validity(context: List[dict]) -> None:
         ValueError: If an invalid HTTP method is found in the context.
     """
     if context and any(
-        item.get("key") == "http_method" and item.get("value") not in ["post", "get"]
+        item.get("key") == "http_method"
+        and item.get("value") not in ["post", "get"]
         for item in context
     ):
         raise ValueError(
@@ -670,7 +675,9 @@ def validate_list_string_optional_int(args: list) -> None:
         )
 
 
-def check_context_tbm_validity(context: List[dict], acceptable_tbms: List[str]) -> None:
+def check_context_tbm_validity(
+    context: List[dict], acceptable_tbms: List[str]
+) -> None:
     """
     Check the validity of the 'tbm' parameter value in the given context.
 
