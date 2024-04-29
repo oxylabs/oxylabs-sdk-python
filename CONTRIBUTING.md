@@ -22,10 +22,10 @@ involved. The community looks forward to your contributions.
 > answered your question.
 
 Before you ask a question, it is best to search for existing
-[Issues](https://github.com/mslmio/oxylabs-sdk-python/issues) that might help you. In
-case you have found a suitable issue and still need clarification, you can
-write your question in this issue. It is also advisable to search the internet
-for answers first.
+[Issues](https://github.com/mslmio/oxylabs-sdk-python/issues) that might help 
+you. In case you have found a suitable issue and still need clarification, you 
+can write your question in this issue. It is also advisable to search the 
+internet for answers first.
 
 If you then still feel the need to ask a question and need clarification, we
 recommend the following:
@@ -44,6 +44,42 @@ We will then take care of the issue as soon as possible.
 > When contributing to this project, you must agree that you have authored 100%
 > of the content, that you have the necessary rights to the content and that
 > the content you contribute may be provided under the project licence.
+
+## Code Formatting
+
+This project uses [Black](https://black.readthedocs.io/en/stable/) and 
+[isort](https://pycqa.github.io/isort/) for code formatting. Before you submit 
+your contribution, please make sure your code is formatted according to these 
+style guides.
+
+First, you will need to install the required tools if you haven't already:
+
+```bash
+pip install black isort
+```
+
+You can use the provided `fmt.sh` script to automatically format your code. 
+This script runs `isort` and `black` on the `src` directory. Here's how you can 
+run it:
+
+```bash
+scripts/fmt.sh
+```
+
+## Running Tests
+
+To ensure the quality of the code, we encourage you to run tests after making 
+any changes and before submitting a contribution. We have a script that 
+facilitates running the unit tests for the project.
+
+To run the tests, use the `tests.sh` script located in the `scripts` directory.
+This will execute all the unit tests and report any failures.
+
+Here's how you can run it:
+
+```bash
+scripts/tests.sh
+```
 
 ### Reporting Bugs
 
@@ -83,11 +119,12 @@ possible.
 > including sensitive information to the issue tracker, or elsewhere in public.
 > Instead sensitive bugs must be sent by email to .
 
-We use GitHub issues to track bugs and errors. If you run into an issue with the project:
+We use GitHub issues to track bugs and errors. If you run into an issue with the
+project:
 
-- Open an [Issue](https://github.com/mslmio/oxylabs-sdk-python/issues/new). (Since we
-  can't be sure at this point whether it is a bug or not, we ask you not to
-  talk about a bug yet and not to label the issue.)
+- Open an [Issue](https://github.com/mslmio/oxylabs-sdk-python/issues/new).
+  (Since we can't be sure at this point whether it is a bug or not, we ask you 
+  not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
 - Please provide as much context as possible and describe the *reproduction
   steps* that someone else can follow to recreate the issue on their own. This
@@ -119,8 +156,8 @@ community to understand your suggestion and find related suggestions.
 - Read the [documentation](https://developers.oxylabs.io/) carefully and
   find out if the functionality is already covered, maybe by an individual
   configuration.
-- Perform a [search](https://github.com/mslmio/oxylabs-sdk-python/issues) to see if
-  the enhancement has already been suggested. If it has, add a comment to the
+- Perform a [search](https://github.com/mslmio/oxylabs-sdk-python/issues) to see
+  if the enhancement has already been suggested. If it has, add a comment to the
   existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's
   up to you to make a strong case to convince the project's developers of the
@@ -131,7 +168,8 @@ community to understand your suggestion and find related suggestions.
 
 #### How Do I Submit a Good Enhancement Suggestion?
 
-Enhancement suggestions are tracked as [GitHub issues](https://github.com/mslmio/oxylabs-sdk-python/issues).
+Enhancement suggestions are tracked as
+[GitHub issues](https://github.com/mslmio/oxylabs-sdk-python/issues).
 
 - Use a **clear and descriptive title** for the issue to identify the
   suggestion.
