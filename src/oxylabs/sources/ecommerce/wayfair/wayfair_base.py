@@ -26,16 +26,6 @@ class WayfairSearchOpts:
         self.callback_url = callback_url
         self.parsing_instructions = parsing_instructions
 
-    def check_parameter_validity(self):
-        """
-        Checks the validity of WayfairSearchOpts parameters.
-        """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_limit_validity_ecom(self.limit)
-        utils.check_pages_validity(self.pages)
-        utils.check_start_page_validity(self.start_page)
-
-
 class WayfairUrlOpts:
     """
     Represents the URL options for Wayfair.
@@ -45,11 +35,6 @@ class WayfairUrlOpts:
         self.user_agent_type = user_agent_type
         self.callback_url = callback_url
 
-    def check_parameter_validity(self):
-        """
-        Checks the validity of WayfairUrlOpts parameters.
-        """
-        utils.check_user_agent_type_validity(self.user_agent_type)
 
 
 class WayfairBase:

@@ -56,14 +56,6 @@ class BingSearchOpts(BaseSearchOpts):
         """
         Checks the validity of BingSearchOpts parameters.
         """
-        utils.check_domain_validity(
-            self.domain, BingSearchAcceptedDomainParameters
-        )
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
-        utils.check_limit_validity(self.limit)
-        utils.check_pages_validity(self.pages)
-        utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
@@ -98,8 +90,7 @@ class BingUrlOpts(BaseUrlOpts):
         """
         Checks the validity of BingUrlOpts parameters.
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
+
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 

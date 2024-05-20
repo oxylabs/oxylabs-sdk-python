@@ -30,14 +30,6 @@ class UniversalUrlOpts(BaseUrlOpts):
         self.parser_type = parser_type
         self.parse = parse
 
-    def check_parameter_validity(self):
-        """
-        Checks the validity of UniversalUrlOpts parameters.
-        """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
-        utils.check_http_method_validity(self.context)
-        utils.check_content_for_post_validity(self.context)
 
 
 class UniversalBase:

@@ -40,14 +40,6 @@ class GoogleSearchOpts(BaseGoogleOpts):
         self.locale = locale
         self.parse = parse
 
-    AcceptedTbmParameters = [
-        "app",
-        "bks",
-        "isch",
-        "nws",
-        "pts",
-        "vid",
-    ]
 
     def check_parameter_validity(self):
         """
@@ -62,15 +54,9 @@ class GoogleSearchOpts(BaseGoogleOpts):
         Raises:
             ValueError: If any of the parameters are invalid.
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
-        utils.check_limit_validity(self.limit)
-        utils.check_pages_validity(self.pages)
-        utils.check_start_page_validity(self.start_page)
+
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-        utils.check_context_tbm_validity(
-            self.context, self.AcceptedTbmParameters
-        )
+
 
 
 class GoogleUrlOpts(BaseGoogleOpts):
@@ -107,8 +93,7 @@ class GoogleUrlOpts(BaseGoogleOpts):
             InvalidParsingInstructionsError: If the parsing instructions are 
             invalid.
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
+
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
@@ -171,13 +156,7 @@ class GoogleAdsOpts(BaseGoogleOpts):
             ValueError: If any of the parameters are invalid.
 
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
-        utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
-        utils.check_context_tbm_validity(
-            self.context, self.AcceptedTbmParameters
-        )
 
 
 class GoogleSuggestionsOpts(BaseGoogleOpts):
@@ -216,8 +195,6 @@ class GoogleSuggestionsOpts(BaseGoogleOpts):
             None
 
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
@@ -271,11 +248,7 @@ class GoogleHotelsOpts(BaseGoogleOpts):
             ValueError: If any of the search parameters are invalid.
 
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
-        utils.check_limit_validity(self.limit)
-        utils.check_pages_validity(self.pages)
-        utils.check_start_page_validity(self.start_page)
+
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
@@ -323,9 +296,7 @@ class GoogleTravelHotelsOpts(BaseGoogleOpts):
             ValueError: If any of the parameters are invalid.
 
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
-        utils.check_render_validity(self.render)
-        utils.check_start_page_validity(self.start_page)
+        
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
@@ -383,8 +354,6 @@ class GoogleImagesOpts(BaseGoogleOpts):
             ValueError: If any of the parameters are invalid.
 
         """
-        utils.check_render_validity(self.render)
-        utils.check_start_page_validity(self.start_page)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
     def set_default_tbm_context(self):
@@ -436,7 +405,6 @@ class GoogleTrendsExploreOpts(BaseGoogleOpts):
             None
 
         """
-        utils.check_user_agent_type_validity(self.user_agent_type)
         utils.check_parsing_instructions_validity(self.parsing_instructions)
 
 
