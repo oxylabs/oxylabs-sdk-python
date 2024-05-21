@@ -1,3 +1,5 @@
+import logging
+
 import src.oxylabs.utils.utils as utils
 from src.oxylabs.internal import APICredentials, Client, ClientAsync
 from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
@@ -9,6 +11,10 @@ from .google_shopping.google_shopping import (
 )
 from .universal.universal import Universal, UniversalAsync
 from .wayfair.wayfair import Wayfair, WayfairAsync
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class Ecommerce:
@@ -93,7 +99,7 @@ class EcommerceAsync:
             return result
 
         except Exception as e:
-            print(f"An error occurred: {e}")
+            logger.error(f"An error occurred: {e}")
 
         finally:
             self._requests -= 1

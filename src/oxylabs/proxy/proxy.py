@@ -1,3 +1,4 @@
+import logging
 from typing import Optional
 from urllib.parse import quote, urlparse
 
@@ -9,6 +10,10 @@ from src.oxylabs.utils.defaults import (
     PROXY_PORT,
 )
 from src.oxylabs.utils.utils import prepare_config
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class Proxy:
@@ -64,12 +69,12 @@ class Proxy:
             response.raise_for_status()
             return response
         except requests.exceptions.Timeout:
-            print(
+            logger.error(
                 f"Timeout error. The request to {url} has timed out after {request_timeout} seconds."
             )
             return None
         except requests.exceptions.RequestException as e:
-            print(f"Request failed: {e}")
+            logger.error(f"Request failed: {e}")
             return None
 
     def add_user_agent_header(self, user_agent_type: str) -> None:

@@ -1,8 +1,13 @@
 import asyncio
 import base64
+import logging
 
 import aiohttp
 import requests
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class APICredentials:
@@ -77,7 +82,7 @@ class Client:
                     timeout=config["request_timeout"],
                 )
             else:
-                print(f"Unsupported method: {method}")
+                logger.error(f"Unsupported method: {method}")
                 return None
 
             response.raise_for_status()
@@ -85,20 +90,20 @@ class Client:
             if response.status_code == 200:
                 return response.json()
             else:
-                print(f"Error occurred: {response.status_code}")
+                logger.error(f"Error occurred: {response.status_code}")
                 return None
 
         except requests.exceptions.Timeout:
-            print(
+            logger.error(
                 f"Timeout error. The request to {self.base_url} with method {method} has timed out."
             )
             return None
         except requests.exceptions.HTTPError as err:
-            print(f"HTTP error occurred: {err}")
-            print(response.text)
+            logger.error(f"HTTP error occurred: {err}")
+            logger.error(response.text)
             return None
         except requests.exceptions.RequestException as err:
-            print(f"Error occurred: {err}")
+            logger.error(f"Error occurred: {err}")
             return None
 
 
@@ -140,17 +145,17 @@ class ClientAsync:
                 response.raise_for_status()
                 return data["id"]
         except aiohttp.ClientResponseError as e:
-            print(
+            logger.error(
                 f"HTTP error occurred: {e.status} - {e.message} - {data['message']}"
             )
         except aiohttp.ClientConnectionError as e:
-            print(f"Connection error occurred: {e}")
+            logger.error(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
-            print(
+            logger.error(
                 f"Timeout error. The request to {self.base_url} has timed out."
             )
         except Exception as e:
-            print(f"Error occurred: {str(e)}")
+            logger.error(f"Error occurred: {str(e)}")
             return None
 
     async def poll_job_status(
@@ -174,10 +179,11 @@ class ClientAsync:
                     elif data["status"] == "faulted":
                         raise Exception("Job faulted")
             except Exception as e:
-                print(f"Error occurred: {str(e)}")
+                logger.error(f"Error occurred: {str(e)}")
                 return False
             await asyncio.sleep(poll_interval)
-        print("Job completion timeout exceeded")
+
+        logger.info("Job completion timeout exceeded")
         return False
 
     async def get_http_resp(
@@ -209,15 +215,17 @@ class ClientAsync:
                 response.raise_for_status()
                 return data
         except aiohttp.ClientResponseError as e:
-            print(
+            logger.error(
                 f"HTTP error occurred: {e.status} - {e.message} - {data['message']}"
             )
         except aiohttp.ClientConnectionError as e:
-            print(f"Connection error occurred: {e}")
+            logger.error(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
-            print(f"Timeout error. The request to {result_url} has timed out.")
+            logger.error(
+                f"Timeout error. The request to {result_url} has timed out."
+            )
         except Exception as e:
-            print(f"An error occurred: {e} - {data['message']}")
+            logger.error(f"An error occurred: {e} - {data['message']}")
         return None
 
     async def execute_with_timeout(
@@ -230,13 +238,13 @@ class ClientAsync:
 
         job_id = await self.get_job_id(payload, user_session, request_timeout)
         if not job_id:
-            print("Failed to get job ID")
+            logger.error("Failed to get job ID")
 
         job_completed = await self.poll_job_status(
             job_id, poll_interval, user_session, job_completion_timeout
         )
         if not job_completed:
-            print("Job did not complete successfully")
+            logger.error("Job did not complete successfully")
 
         result = await self.get_http_resp(job_id, user_session)
         return result
