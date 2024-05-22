@@ -1,11 +1,10 @@
 from typing import Optional
 
-from src.oxylabs.utils.utils import prepare_config
+from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
+from src.oxylabs.utils.types import source
 
-from .google_base import GoogleBase
 
-
-class Google(GoogleBase):
+class Google:
     def __init__(self, serp_instance) -> None:
         """
         Initializes an instance of the Google class.
@@ -18,8 +17,20 @@ class Google(GoogleBase):
     def scrape_search(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        limit: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google search results for a given query.
@@ -27,7 +38,7 @@ class Google(GoogleBase):
         Args:
 
             query (str): The search query.
-            opts (GoogleSearchOpts, optional): Configuration options for the 
+            opts (GoogleSearchOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": "com",
@@ -45,8 +56,8 @@ class Google(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -54,22 +65,45 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_search_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_SEARCH,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "limit": limit,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "context": context,
+            "parsing_instructions": parsing_instructions,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
         response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_url(
         self,
         url: str,
-        opts: Optional[dict] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google search results for a given URL.
 
         Args:
             url (str): The URL to be scraped.
-            opts (GoogleUrlOpts, optional): Configuration options for the 
+            opts (GoogleUrlOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "user_agent_type": desktop,
@@ -80,8 +114,8 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -89,22 +123,45 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_url_payload(url, opts)
+        payload = {
+            "source": source.GOOGLE_URL,
+            "url": url,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "geo_location": geo_location,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
+
         response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_ads(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google Ads search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleAdsOpts, optional): Configuration options for the 
+            opts (GoogleAdsOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": "com",
@@ -120,8 +177,8 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -129,22 +186,43 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_ads_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_ADS,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            "context": context,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
         response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_suggestions(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google suggestions for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleSuggestionsOpts, optional): Configuration options for 
+            opts (GoogleSuggestionsOpts, optional): Configuration options for
             the search. Defaults to:
                 {
                     "locale": None,
@@ -156,8 +234,8 @@ class Google(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -165,22 +243,41 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_suggestions_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_SUGGESTIONS,
+            "query": query,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            **kwargs,
+        }
         response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_hotels(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        limit: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google Hotels search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleHotelsOpts, optional): Configuration options for the 
+            opts (GoogleHotelsOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": "com",
@@ -196,8 +293,8 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -205,27 +302,49 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_hotels_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_HOTELS,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "limit": limit,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "context": context,
+            **kwargs,
+        }
         response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_travel_hotels(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google Travel Hotels search results for a given query.
 
         Args:
-            query (str): UTF-encoded keyword. "query": "hotels" will result 
-            list hotels in a given geo_location; "query": "hotels in 
-            <Location>" will result in a list hotels for <Location>. Eg hotels 
-            in Paris will list hotels in Paris, no matter what geo_location is 
+            query (str): UTF-encoded keyword. "query": "hotels" will result
+            list hotels in a given geo_location; "query": "hotels in
+            <Location>" will result in a list hotels for <Location>. Eg hotels
+            in Paris will list hotels in Paris, no matter what geo_location is
             given.
 
-            opts (GoogleTravelHotelsOpts, optional): Configuration options for 
+            opts (GoogleTravelHotelsOpts, optional): Configuration options for
             the search. Defaults to:
                 {
                     "domain": com,
@@ -239,8 +358,8 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -248,22 +367,45 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_travel_hotels_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_TRAVEL_HOTELS,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "context": context,
+            **kwargs,
+        }
         response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_images(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google Images search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleImagesOpts, optional): Configuration options for the 
+            opts (GoogleImagesOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": com,
@@ -280,8 +422,8 @@ class Google(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -289,22 +431,51 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_images_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_SEARCH,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            "context": context,
+            **kwargs,
+        }
+        payload.setdefault("context", [])
+
+        for item in payload["context"]:
+            if item.get("key") == "tbm":
+                item["value"] = item.get("value", "isch")
+                break
+        else:
+            payload["context"].append({"key": "tbm", "value": "isch"})
+
+        check_parsing_instructions_validity(parsing_instructions)
         response = self._serp_instance._get_resp(payload, config)
         return response
 
     def scrape_trends_explore(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Scrapes Google Trends Explore results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleTrendsExploreOpts, optional): Configuration options for 
+            opts (GoogleTrendsExploreOpts, optional): Configuration options for
             the search. Defaults to:
                 {
                     "user_agent_type": "desktop",
@@ -313,8 +484,8 @@ class Google(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -322,18 +493,26 @@ class Google(GoogleBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_trends_explore_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_TRENDS_EXPLORE,
+            "query": query,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "callback_url": callback_url,
+            "context": context,
+            **kwargs,
+        }
         response = self._serp_instance._get_resp(payload, config)
         return response
 
 
-class GoogleAsync(GoogleBase):
+class GoogleAsync:
     def __init__(self, serp_async_instance) -> None:
         """
         Initializes an asynchronous Google object.
 
         Args:
-            serp_async_instance: The SERP instance to be used for Google 
+            serp_async_instance: The SERP instance to be used for Google
             requests.
         """
 
@@ -342,10 +521,22 @@ class GoogleAsync(GoogleBase):
     async def scrape_search(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        limit: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Asynchronously scrapes Google search results for a given query.
@@ -353,7 +544,7 @@ class GoogleAsync(GoogleBase):
         Args:
 
             query (str): The search query.
-            opts (GoogleSearchOpts, optional): Configuration options for the 
+            opts (GoogleSearchOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": "com",
@@ -371,13 +562,13 @@ class GoogleAsync(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -390,24 +581,47 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_search_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_SEARCH,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "limit": limit,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "context": context,
+            "parsing_instructions": parsing_instructions,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
         response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_url(
         self,
         url: str,
-        opts: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        **kwargs,
     ) -> dict:
         """
         Asynchronously scrapes Google search results for a given URL.
 
         Args:
             url (str): The URL to be scraped.
-            opts (GoogleUrlOpts, optional): Configuration options for the 
+            opts (GoogleUrlOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "user_agent_type": desktop,
@@ -418,13 +632,13 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -437,24 +651,47 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_url_payload(url, opts)
+        payload = {
+            "source": source.GOOGLE_URL,
+            "url": url,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "geo_location": geo_location,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
+
         response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_ads(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Asynchronously scrapes Google Ads search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleAdsOpts, optional): Configuration options for the 
+            opts (GoogleAdsOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": "com",
@@ -470,13 +707,13 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -489,24 +726,45 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_ads_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_ADS,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            "context": context,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
         response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_suggestions(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Asynchronously scrapes Google suggestions for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleSuggestionsOpts, optional): Configuration options for 
+            opts (GoogleSuggestionsOpts, optional): Configuration options for
             the search. Defaults to:
                 {
                     "locale": None,
@@ -518,13 +776,13 @@ class GoogleAsync(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -537,24 +795,43 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_suggestions_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_SUGGESTIONS,
+            "query": query,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            **kwargs,
+        }
         response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_hotels(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        limit: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Asynchronously scrapes Google Hotels search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleHotelsOpts, optional): Configuration options for the 
+            opts (GoogleHotelsOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": "com",
@@ -570,13 +847,13 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -589,30 +866,52 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_hotels_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_HOTELS,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "limit": limit,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "context": context,
+            **kwargs,
+        }
         response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_travel_hotels(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
-        Asynchronously scrapes Google Travel Hotels search results for a given 
+        Asynchronously scrapes Google Travel Hotels search results for a given
         query.
 
         Args:
-            query (str): UTF-encoded keyword. "query": "hotels" will result 
-            list hotels in a given geo_location; 
-            "query": "hotels in <Location>" will result in a list hotels for 
+            query (str): UTF-encoded keyword. "query": "hotels" will result
+            list hotels in a given geo_location;
+            "query": "hotels in <Location>" will result in a list hotels for
             <Location>. Eg hotels in Paris will list hotels in Paris, no matter
             what geo_location is given.
 
-            opts (GoogleTravelHotelsOpts, optional): Configuration options for 
+            opts (GoogleTravelHotelsOpts, optional): Configuration options for
             the search. Defaults to:
                 {
                     "domain": None,
@@ -626,13 +925,13 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -645,24 +944,47 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_travel_hotels_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_TRAVEL_HOTELS,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "context": context,
+            **kwargs,
+        }
         response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_images(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Asynchronously scrapes Google Images search results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleImagesOpts, optional): Configuration options for the 
+            opts (GoogleImagesOpts, optional): Configuration options for the
             search. Defaults to:
                 {
                     "domain": com,
@@ -679,13 +1001,13 @@ class GoogleAsync(GoogleBase):
                 }
                 This parameter allows customization of the search request.
 
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -698,24 +1020,53 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_images_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_SEARCH,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            "context": context,
+            **kwargs,
+        }
+        payload.setdefault("context", [])
+
+        for item in payload["context"]:
+            if item.get("key") == "tbm":
+                item["value"] = item.get("value", "isch")
+                break
+        else:
+            payload["context"].append({"key": "tbm", "value": "isch"})
+
+        check_parsing_instructions_validity(parsing_instructions)
         response = await self._serp_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_trends_explore(
         self,
         query: str,
-        opts: Optional[dict] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
+        **kwargs,
     ) -> dict:
         """
         Asynchronously scrapes Google Trends Explore results for a given query.
 
         Args:
             query (str): The search query.
-            opts (GoogleTrendsExploreOpts, optional): Configuration options for 
+            opts (GoogleTrendsExploreOpts, optional): Configuration options for
             the search. Defaults to:
                 {
                     "user_agent_type": "desktop",
@@ -724,13 +1075,13 @@ class GoogleAsync(GoogleBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50
 
         Returns:
@@ -743,6 +1094,14 @@ class GoogleAsync(GoogleBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_trends_explore_payload(query, opts)
+        payload = {
+            "source": source.GOOGLE_TRENDS_EXPLORE,
+            "query": query,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "callback_url": callback_url,
+            "context": context,
+            **kwargs,
+        }
         response = await self._serp_async_instance._get_resp(payload, config)
         return response

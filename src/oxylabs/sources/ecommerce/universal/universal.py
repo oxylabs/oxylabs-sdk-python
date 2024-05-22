@@ -1,7 +1,7 @@
 from typing import Optional
 
-from src.oxylabs.utils.utils import prepare_config
-
+from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
+from src.oxylabs.utils.types import source
 from .universal_base import UniversalBase
 
 
@@ -18,8 +18,18 @@ class Universal(UniversalBase):
     def scrape_url(
         self,
         url: str,
-        opts: Optional[dict] = None,
+        user_agent_type: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        locale: Optional[str] = None,
+        render: Optional[str] = None,
+        content_encoding: Optional[str] = None,
+        context: Optional[list] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parser_type: Optional[str] = None,
+        parsing_instructions: Optional[dict] = None,
         request_timeout: int = None,
+        **kwargs
     ) -> dict:
         """
         Scrapes Universal search results for a given URL.
@@ -40,8 +50,8 @@ class Universal(UniversalBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
@@ -49,7 +59,22 @@ class Universal(UniversalBase):
         """
 
         config = prepare_config(request_timeout=request_timeout)
-        payload = self._prepare_url_payload(url, opts)
+        payload = {
+            "source": source.UNIVERSAL,
+            "url": url,
+            "user_agent_type": user_agent_type,
+            "geo_location": geo_location,
+            "locale": locale,
+            "render": render,
+            "content_encoding": content_encoding,
+            "context": context,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parser_type": parser_type,
+            "parsing_instructions": parsing_instructions,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
         response = self._ecommerce_instance._get_resp(payload, config)
         return response
 
@@ -67,10 +92,20 @@ class UniversalAsync(UniversalBase):
     async def scrape_url(
         self,
         url: str,
-        opts: Optional[dict] = None,
+        user_agent_type: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        locale: Optional[str] = None,
+        render: Optional[str] = None,
+        content_encoding: Optional[str] = None,
+        context: Optional[list] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parser_type: Optional[str] = None,
+        parsing_instructions: Optional[dict] = None,
         request_timeout: int = None,
         job_completion_timeout: int = None,
         poll_interval: int = None,
+        **kwargs
     ) -> dict:
         """
         Asynchronously scrapes Universal search results for a given URL.
@@ -91,13 +126,13 @@ class UniversalAsync(UniversalBase):
                     "parsing_instructions": None,
                 }
                 This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for 
-            the request to time out if no response is returned. 
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
             Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll 
+            poll_interval (int | 5, optional): The interval in seconds to poll
             the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in 
-            seconds for the job to time out if no response is returned. 
+            job_completion_timeout (int | 50, optional): The interval in
+            seconds for the job to time out if no response is returned.
             Defaults to 50.
 
         Returns:
@@ -110,8 +145,21 @@ class UniversalAsync(UniversalBase):
             job_completion_timeout=job_completion_timeout,
             async_integration=True,
         )
-        payload = self._prepare_url_payload(url, opts)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        payload = {
+            "source": source.UNIVERSAL,
+            "url": url,
+            "user_agent_type": user_agent_type,
+            "geo_location": geo_location,
+            "locale": locale,
+            "render": render,
+            "content_encoding": content_encoding,
+            "context": context,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parser_type": parser_type,
+            "parsing_instructions": parsing_instructions,
+            **kwargs,
+        }
+        check_parsing_instructions_validity(parsing_instructions)
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response

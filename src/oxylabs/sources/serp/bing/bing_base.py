@@ -23,7 +23,7 @@ class BingSearchOpts(BaseSearchOpts):
         self,
         locale: Optional[str] = None,
         geo_location: Optional[str] = None,
-        render: Optional[bool] = None,
+        render: Optional[str] = None,
         parse: Optional[bool] = None,
         **kwargs: Any,
     ) -> None:
@@ -31,13 +31,13 @@ class BingSearchOpts(BaseSearchOpts):
         Initialize an instance of the BingBase class.
 
         Args:
-            locale (str): The locale to be used for the search results. 
+            locale (str): The locale to be used for the search results.
             Defaults to None.
-            geo_location (str): The geo location to be used for the search 
+            geo_location (str): The geo location to be used for the search
             results. Defaults to None.
-            render (bool): Whether to render JavaScript on the page. 
+            render (bool): Whether to render JavaScript on the page.
             Defaults to None.
-            parse (bool): Whether to parse the search results. 
+            parse (bool): Whether to parse the search results.
             Defaults to None.
             **kwargs: Additional keyword arguments.
 
@@ -67,7 +67,7 @@ class BingUrlOpts(BaseUrlOpts):
     def __init__(
         self,
         geo_location: Optional[str] = None,
-        render: Optional[bool] = None,
+        render: Optional[str] = None,
         parse: Optional[bool] = None,
         **kwargs: Any,
     ) -> None:
@@ -134,9 +134,7 @@ class BingBase:
 
         return payload
 
-    def _prepare_url_payload(
-        self, url: str, user_opts: Optional[dict] = None
-    ) -> dict:
+    def _prepare_url_payload(self, url: str, user_opts: Optional[dict] = None) -> dict:
         """
         Prepares the payload for a Bing URL request.
 
