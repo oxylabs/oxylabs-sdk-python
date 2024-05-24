@@ -1,12 +1,11 @@
 from typing import Optional
 
+from src.oxylabs.sources.serp.response import SERPResponse
 from src.oxylabs.utils.types import source
 from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
 
-from .bing_base import BingBase
 
-
-class Bing(BingBase):
+class Bing:
     def __init__(self, serp_instance) -> None:
         """
         Initializes an instance of the Bing class.
@@ -32,7 +31,7 @@ class Bing(BingBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Bing search results for a given query.
 
@@ -95,7 +94,7 @@ class Bing(BingBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Bing search results for a given URL.
 
@@ -137,7 +136,7 @@ class Bing(BingBase):
         return response
 
 
-class BingAsync(BingBase):
+class BingAsync:
     def __init__(self, serp_async_instance) -> None:
         """
         Initializes an instance of the BingAsync class.
@@ -166,7 +165,7 @@ class BingAsync(BingBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Bing search results for a given query.
 
@@ -240,7 +239,7 @@ class BingAsync(BingBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Bing search results for a given URL.
 

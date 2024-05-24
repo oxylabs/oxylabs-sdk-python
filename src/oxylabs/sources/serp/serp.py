@@ -6,6 +6,7 @@ from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
 from .bing.bing import Bing, BingAsync
 from .google.google import Google, GoogleAsync
+from .response import SERPResponse
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -34,7 +35,7 @@ class SERP:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        return self._client.req(payload, "POST", config)
+        return SERPResponse(self._client.req(payload, "POST", config))
 
 
 class SERPAsync:
@@ -77,7 +78,7 @@ class SERPAsync:
             result = await self._client.execute_with_timeout(
                 payload, config, self._session
             )
-            return result
+            return SERPResponse(result)
 
         except Exception as e:
             logger.error(f"An error occurred: {e}")

@@ -1,5 +1,7 @@
 class SERPResponse:
     def __init__(self, data):
+        if data is None:
+            return
         self.parse = data.get("parse")
         self.parse_instructions = data.get("parse_instructions")
         self.results = [Results(item) for item in data.get("results", [])]
@@ -10,6 +12,8 @@ class SERPResponse:
 
 class Results:
     def __init__(self, data):
+        if data is None:
+            return
         self.custom_content_parsed = data.get("custom_content_parsed", {})
         self.content_parsed = Content(data.get("content_parsed", {}))
         self.content = data.get("content")
@@ -24,6 +28,8 @@ class Results:
 
 class Content:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.page = data.get("page")
         self.errors = data.get("_errors")
@@ -34,6 +40,8 @@ class Content:
 
 class Result:
     def __init__(self, data):
+        if data is None:
+            return
         self.pla = Pla(data.get("pla", {}))
         self.paid = [Paid(item) for item in data.get("paid", [])]
         self.images = Image(data.get("images", {}))
@@ -74,12 +82,16 @@ class Result:
 
 class Pla:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [PlaItem(item) for item in data.get("items", [])]
         self.pos_overall = data.get("pos_overall")
 
 
 class PlaItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.price = data.get("price")
@@ -91,6 +103,8 @@ class PlaItem:
 
 class Paid:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.desc = data.get("desc")
@@ -104,12 +118,16 @@ class Paid:
 
 class PaidSitelinks:
     def __init__(self, data):
+        if data is None:
+            return
         self.expanded = [Expanded(item) for item in data.get("expanded", [])]
         self.inline = [Inline(item) for item in data.get("inline", [])]
 
 
 class Expanded:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.desc = data.get("desc")
         self.title = data.get("title")
@@ -117,6 +135,8 @@ class Expanded:
 
 class Inline:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.desc = data.get("desc")
         self.title = data.get("title")
@@ -124,12 +144,16 @@ class Inline:
 
 class Image:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [ImageItem(item) for item in data.get("items", [])]
         self.pos_overall = data.get("pos_overall")
 
 
 class ImageItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.alt = data.get("alt")
         self.pos = data.get("pos")
         self.url = data.get("url")
@@ -139,6 +163,8 @@ class ImageItem:
 
 class Organic:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.desc = data.get("desc")
@@ -151,12 +177,16 @@ class Organic:
 
 class OrganicSitelinks:
     def __init__(self, data):
+        if data is None:
+            return
         self.expanded = [Expanded(item) for item in data.get("expanded", [])]
         self.inline = [Inline(item) for item in data.get("inline", [])]
 
 
 class Twitter:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.items = [TwitterItem(item) for item in data.get("items", [])]
@@ -166,6 +196,8 @@ class Twitter:
 
 class TwitterItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.content = data.get("content")
@@ -174,6 +206,8 @@ class TwitterItem:
 
 class Knowledge:
     def __init__(self, data):
+        if data is None:
+            return
         self.title = data.get("title")
         self.images = [item for item in data.get("images", [])]
         self.factoids = [Factoid(item) for item in data.get("factoids", [])]
@@ -187,6 +221,8 @@ class Knowledge:
 
 class Factoid:
     def __init__(self, data):
+        if data is None:
+            return
         self.links = [LinkElement(item) for item in data.get("links", [])]
         self.title = data.get("title")
         self.content = data.get("content")
@@ -194,18 +230,24 @@ class Factoid:
 
 class LinkElement:
     def __init__(self, data):
+        if data is None:
+            return
         self.href = data.get("href")
         self.title = data.get("title")
 
 
 class Profile:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.title = data.get("title")
 
 
 class RelatedSearches:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.title = data.get("title")
         self.section_title = data.get("section_title")
@@ -213,12 +255,16 @@ class RelatedSearches:
 
 class LocalPack:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [LocalPackItem(item) for item in data.get("items", [])]
         self.pos_overall = data.get("pos_overall")
 
 
 class LocalPackItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.cid = data.get("cid")
         self.pos = data.get("pos")
         self.links = [LocalPackLink(item) for item in data.get("links", [])]
@@ -232,18 +278,24 @@ class LocalPackItem:
 
 class LocalPackLink:
     def __init__(self, data):
+        if data is None:
+            return
         self.href = data.get("href")
         self.title = data.get("title")
 
 
 class TopStory:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [TopStoryItem(item) for item in data.get("items", [])]
         self.pos_overall = data.get("pos_overall")
 
 
 class TopStoryItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.title = data.get("title")
@@ -253,6 +305,8 @@ class TopStoryItem:
 
 class PopularProducts:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.price = data.get("price")
         self.rating = data.get("rating")
@@ -263,12 +317,16 @@ class PopularProducts:
 
 class RelatedSearches:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos_overall = data.get("pos_overall")
         self.related_searches = [item for item in data.get("related_searches", [])]
 
 
 class RelatedQuestions:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos_overall = data.get("pos_overall")
         self.related_questions = [
             RelatedQuestionsItem(item) for item in data.get("related_questions", [])
@@ -277,6 +335,8 @@ class RelatedQuestions:
 
 class RelatedQuestionsItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.answer = data.get("answer")
         self.source = data.get("source")
@@ -285,6 +345,8 @@ class RelatedQuestionsItem:
 
 class Source:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.title = data.get("title")
         self.url_shown = data.get("url_shown")
@@ -292,6 +354,8 @@ class Source:
 
 class SearchInformation:
     def __init__(self, data):
+        if data is None:
+            return
         self.image = SearchInformationImage(data.get("image", {}))
         self.query = data.get("query")
         self.showing_results_for = data.get("showing_results_for")
@@ -300,6 +364,8 @@ class SearchInformation:
 
 class SearchInformationImage:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.width = data.get("width")
         self.height = data.get("height")
@@ -308,6 +374,8 @@ class SearchInformationImage:
 
 class ItemCarousel:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [ItemCarouselItem(item) for item in data.get("items", [])]
         self.pos_overall = data.get("pos_overall")
         self.title = data.get("title")
@@ -315,6 +383,8 @@ class ItemCarousel:
 
 class ItemCarouselItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.href = data.get("href")
         self.title = data.get("title")
@@ -323,12 +393,16 @@ class ItemCarouselItem:
 
 class Recipes:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [RecipesItem(item) for item in data.get("items", [])]
         self.pos_overall = data.get("pos_overall")
 
 
 class RecipesItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.title = data.get("title")
@@ -339,12 +413,16 @@ class RecipesItem:
 
 class Videos:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [VideosItem(item) for item in data.get("items", [])]
         self.pos_overall = data.get("pos_overall")
 
 
 class VideosItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.title = data.get("title")
@@ -354,6 +432,8 @@ class VideosItem:
 
 class FeaturedSnippet:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.desc = data.get("desc")
         self.title = data.get("title")
@@ -363,6 +443,8 @@ class FeaturedSnippet:
 
 class RelatedSearchesCategorized:
     def __init__(self, data):
+        if data is None:
+            return
         self.items = [
             RelatedSearchesCategorizedItem(item) for item in data.get("items", [])
         ]
@@ -372,18 +454,24 @@ class RelatedSearchesCategorized:
 
 class RelatedSearchesCategorizedItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.title = data.get("title")
 
 
 class Category:
     def __init__(self, data):
+        if data is None:
+            return
         self.name = data.get("name")
         self.type = data.get("type")
 
 
 class Hotels:
     def __init__(self, data):
+        if data is None:
+            return
         self.date_to = data.get("date_to")
         self.results = [HotelsResult(item) for item in data.get("results", [])]
         self.date_from = data.get("date_from")
@@ -392,6 +480,8 @@ class Hotels:
 
 class HotelsResult:
     def __init__(self, data):
+        if data is None:
+            return
         self.price = data.get("price")
         self.title = data.get("title")
         self.from_location = data.get("from")
@@ -399,6 +489,8 @@ class HotelsResult:
 
 class Flights:
     def __init__(self, data):
+        if data is None:
+            return
         self.to = data.get("to")
         self.from_location = data.get("from")
         self.results = [FlightsResult(item) for item in data.get("results", [])]
@@ -408,6 +500,8 @@ class Flights:
 
 class FlightsResult:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.type = data.get("type")
         self.price = data.get("price")
@@ -417,6 +511,8 @@ class FlightsResult:
 
 class VideoBox:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.title = data.get("title")
         self.pos_overall = data.get("pos_overall")
@@ -424,12 +520,16 @@ class VideoBox:
 
 class LocalServiceAds:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos_overall = data.get("pos_overall")
         self.items = [LocalServiceAdsItem(item) for item in data.get("items", [])]
 
 
 class LocalServiceAdsItem:
     def __init__(self, data):
+        if data is None:
+            return
         self.pos = data.get("pos")
         self.url = data.get("url")
         self.title = data.get("title")
@@ -440,6 +540,8 @@ class LocalServiceAdsItem:
 
 class Navigation:
     def __init__(self, data):
+        if data is None:
+            return
         self.url = data.get("url")
         self.title = data.get("title")
         self.pos = data.get("pos")
@@ -447,6 +549,8 @@ class Navigation:
 
 class InstantAnswers:
     def __init__(self, data):
+        if data is None:
+            return
         self.type = data.get("type")
         self.parsed = data.get("_parsed")
         self.pos_overall = data.get("pos_overall")
@@ -454,12 +558,16 @@ class InstantAnswers:
 
 class VisuallySimilarImages:
     def __init__(self, data):
+        if data is None:
+            return
         self.all_images_url = data.get("all_images_url")
         self.featured_images = data.get("featured_images")
 
 
 class Job:
     def __init__(self, data):
+        if data is None:
+            return
         self.callback_url = data.get("callback_url")
         self.client_id = data.get("client_id")
         self.context = [Context(item) for item in data.get("context", [])]
@@ -494,12 +602,16 @@ class Job:
 
 class Context:
     def __init__(self, data):
+        if data is None:
+            return
         self.key = data.get("key")
         self.value = data.get("value")
 
 
 class JobLink:
     def __init__(self, data):
+        if data is None:
+            return
         self.rel = data.get("rel")
         self.href = data.get("href")
         self.method = data.get("method")

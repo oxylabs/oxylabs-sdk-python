@@ -1,4 +1,5 @@
 from typing import Optional
+from src.oxylabs.sources.serp.response import SERPResponse
 
 from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
 from src.oxylabs.utils.types import source
@@ -31,7 +32,7 @@ class Google:
         context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google search results for a given query.
 
@@ -97,7 +98,7 @@ class Google:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google search results for a given URL.
 
@@ -155,7 +156,7 @@ class Google:
         context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google Ads search results for a given query.
 
@@ -216,7 +217,7 @@ class Google:
         callback_url: Optional[str] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google suggestions for a given query.
 
@@ -271,7 +272,7 @@ class Google:
         context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google Hotels search results for a given query.
 
@@ -333,7 +334,7 @@ class Google:
         context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google Travel Hotels search results for a given query.
 
@@ -399,7 +400,7 @@ class Google:
         context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google Images search results for a given query.
 
@@ -469,7 +470,7 @@ class Google:
         context: Optional[list] = None,
         request_timeout: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Scrapes Google Trends Explore results for a given query.
 
@@ -537,7 +538,7 @@ class GoogleAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google search results for a given query.
 
@@ -615,7 +616,7 @@ class GoogleAsync:
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google search results for a given URL.
 
@@ -685,7 +686,7 @@ class GoogleAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google Ads search results for a given query.
 
@@ -758,7 +759,7 @@ class GoogleAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google suggestions for a given query.
 
@@ -825,7 +826,7 @@ class GoogleAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google Hotels search results for a given query.
 
@@ -899,7 +900,7 @@ class GoogleAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google Travel Hotels search results for a given
         query.
@@ -978,7 +979,7 @@ class GoogleAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google Images search results for a given query.
 
@@ -1060,7 +1061,7 @@ class GoogleAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> dict:
+    ) -> SERPResponse:
         """
         Asynchronously scrapes Google Trends Explore results for a given query.
 
