@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3
+
+- Updated import paths to resolve module not found errors.
+- Scraper methods now accept direct parameters and include a response object for easier access to results and metadata.
+- Replaced print statements with the logging module for better error handling.
+- Introduced AsyncClient, RealtimeClient, and ProxyClient to support all sources, providing a more organized structure.
+
 ## 1.0.2
 
 - Fixed function and class naming.
