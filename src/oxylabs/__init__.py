@@ -1,2 +1,2 @@
-from .proxy.proxy import Proxy
+from .proxy.proxy import ProxyClient
 from .internal import RealtimeClient, AsyncClient

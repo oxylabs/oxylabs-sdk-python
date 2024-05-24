@@ -16,10 +16,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-class Proxy:
+class ProxyClient:
     def __init__(self, username: str, password: str) -> None:
         """
-        Initializes a Proxy object with the provided username and password.
+        Initializes a ProxyClient object with the provided username and password.
 
         Args:
             username (str): The username for the proxy authentication.
