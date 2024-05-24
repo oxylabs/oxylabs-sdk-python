@@ -45,7 +45,7 @@ class GoogleShopping:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             results_language (Optional[str]): None,
             geo_location (Optional[str]): None,
@@ -102,7 +102,7 @@ class GoogleShopping:
 
         Args:
             url (str): Direct URL (link) to Google page
-            the search. 
+            the search.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -154,7 +154,7 @@ class GoogleShopping:
         Args:
             query (str): UTF-encoded product code.
             domain (Optional[str]): The domain to limit the search results to.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
@@ -212,7 +212,7 @@ class GoogleShopping:
         Args:
             query (str): UTF-encoded product code.
             domain (Optional[str]): The domain to limit the search results to.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             start_page (Optional[int]): The starting page number.
                         pages (Optional[int]): The number of pages to scrape.
@@ -291,7 +291,7 @@ class GoogleShoppingAsync:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
                         pages (Optional[int]): The number of pages to scrape.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
@@ -420,7 +420,7 @@ class GoogleShoppingAsync:
         Args:
             query (str): UTF-encoded product code.
             domain (Optional[str]): The domain to limit the search results to.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
@@ -491,7 +491,7 @@ class GoogleShoppingAsync:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
                         pages (Optional[int]): The number of pages to scrape.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,

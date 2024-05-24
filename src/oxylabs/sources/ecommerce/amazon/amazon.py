@@ -43,7 +43,7 @@ class Amazon:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -143,7 +143,7 @@ class Amazon:
         Args:
             query (str): 10-symbol ASIN code.
             domain (Optional[str]): The domain to limit the search results to.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -199,7 +199,7 @@ class Amazon:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -255,7 +255,7 @@ class Amazon:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -361,7 +361,7 @@ class Amazon:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -413,7 +413,7 @@ class Amazon:
         Args:
             query (str): 13-character seller ID.
             domain (Optional[str]): The domain to limit the search results to.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -482,7 +482,7 @@ class AmazonAsync:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -610,7 +610,7 @@ class AmazonAsync:
         Args:
             query (str): 10-symbol ASIN code.
             domain (Optional[str]): The domain to limit the search results to.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -680,7 +680,7 @@ class AmazonAsync:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -750,7 +750,7 @@ class AmazonAsync:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -816,7 +816,7 @@ class AmazonAsync:
         Args:
             query (str): 10-symbol ASIN code.
             domain (Optional[str]): The domain to limit the search results to.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -884,7 +884,7 @@ class AmazonAsync:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
@@ -950,7 +950,7 @@ class AmazonAsync:
         Args:
             query (str): 13-character seller ID.
             domain (Optional[str]): The domain to limit the search results to.
-            geo_location (Optional[str]): The Deliver to location.            
+            geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.

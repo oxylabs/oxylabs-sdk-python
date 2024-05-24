@@ -42,11 +42,11 @@ class Bing:
             query (str): UTF-encoded keyword.
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
-            pages (Optional[int]): The number of pages to scrape.            
+            pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]):  It goes like this: City,Region,Country.
             render (Optional[str]): Enables JavaScript rendering.
@@ -99,9 +99,9 @@ class Bing:
         Args:
             url (str): The URL to be scraped.
             user_agent_type (Optional[str]): Device type and browser.
-            geo_location (Optional[str]): The API uses Canonical Geo Location format to 
-                            determine request location. It goes like this: City,Region,Country            
-            callback_url (Optional[str]): URL to your callback endpoint.            
+            geo_location (Optional[str]): The API uses Canonical Geo Location format to
+                            determine request location. It goes like this: City,Region,Country
+            callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             parse (Optional[bool]): true will return structured data.
@@ -171,10 +171,10 @@ class BingAsync:
             limit (Optional[int]): Number of results to retrieve in each page.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
-            geo_location (Optional[str]): The API uses Canonical Geo Location format to 
-                            determine request location. It goes like this: City,Region,Country            
+            geo_location (Optional[str]): The API uses Canonical Geo Location format to
+                            determine request location. It goes like this: City,Region,Country
             render (Optional[str]): Enables JavaScript rendering.
             parse (Optional[bool]): true will return structured data.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -238,8 +238,8 @@ class BingAsync:
             url (str): The URL to be scraped.
 
             user_agent_type (Optional[str]): Device type and browser.
-            geo_location (Optional[str]): The API uses Canonical Geo Location format to 
-                            determine request location. It goes like this: City,Region,Country            
+            geo_location (Optional[str]): The API uses Canonical Geo Location format to
+                            determine request location. It goes like this: City,Region,Country
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.

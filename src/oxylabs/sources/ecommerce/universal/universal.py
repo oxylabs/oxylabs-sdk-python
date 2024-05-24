@@ -41,16 +41,15 @@ class Universal:
             url (str): The URL to be scraped.
             user_agent_type (Optional[str]): Device type and browser.
             "geo_location": None,
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             render (Optional[str]): Enables JavaScript rendering.
-            content_encoding:  Add this parameter if you are downloading images. 
+            content_encoding:  Add this parameter if you are downloading images.
             context: Optional[list],
             callback_url (Optional[str]): URL to your callback endpoint.
             parse (Optional[bool]): true will return structured data.
             parser_type: Set the value to ecommerce_product to access our AI-powered Adaptive Parser.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
-            
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -115,16 +114,15 @@ class UniversalAsync:
             url (str): The URL to be scraped.
             user_agent_type (Optional[str]): Device type and browser.
             "geo_location": None,
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             render (Optional[str]): Enables JavaScript rendering.
-            content_encoding:  Add this parameter if you are downloading images. 
+            content_encoding:  Add this parameter if you are downloading images.
             context: Optional[list],
             callback_url (Optional[str]): URL to your callback endpoint.
             parse (Optional[bool]): true will return structured data.
             parser_type: Set the value to ecommerce_product to access our AI-powered Adaptive Parser.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
-            
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.

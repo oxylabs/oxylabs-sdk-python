@@ -46,7 +46,7 @@ class Google:
                         pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
             user_agent_type (Optional[str]): Device type and browser.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             render (Optional[str]): Enables JavaScript rendering.
@@ -158,7 +158,7 @@ class Google:
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             render (Optional[str]): Enables JavaScript rendering.
@@ -211,7 +211,7 @@ class Google:
 
         Args:
             query (str): The search query.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -266,7 +266,7 @@ class Google:
             pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
             user_agent_type (Optional[str]): Device type and browser.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             render (Optional[str]): Enables JavaScript rendering.
@@ -325,7 +325,7 @@ class Google:
             given.
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -384,7 +384,7 @@ class Google:
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             render (Optional[str]): Enables JavaScript rendering.
@@ -514,7 +514,7 @@ class GoogleAsync:
             pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
             user_agent_type (Optional[str]): Device type and browser.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             render (Optional[str]): Enables JavaScript rendering.
@@ -650,7 +650,7 @@ class GoogleAsync:
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             render (Optional[str]): Enables JavaScript rendering.
@@ -715,7 +715,7 @@ class GoogleAsync:
 
         Args:
             query (str): The search query.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -777,19 +777,18 @@ class GoogleAsync:
 
         Args:
             query (str): The search query.
-            
-                    domain (Optional[str]): The domain to limit the search results to.
-                    start_page (Optional[int]): The starting page number.
-                    pages (Optional[int]): The number of pages to scrape.
-                    limit (Optional[int]): Number of results to retrieve in each page.
-                    user_agent_type (Optional[str]): Device type and browser.
-                    locale (Optional[str]): Accept-Language header value which changes your Bing search 
-                                    page web interface language.
-                    geo_location (Optional[str]): None,
-                    render (Optional[str]): Enables JavaScript rendering.
-                    callback_url (Optional[str]): URL to your callback endpoint.
-                    context: Optional[list],
-                    parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            limit (Optional[int]): Number of results to retrieve in each page.
+            user_agent_type (Optional[str]): Device type and browser.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
+                            page web interface language.
+            geo_location (Optional[str]): None,
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            context: Optional[list],
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -855,7 +854,7 @@ class GoogleAsync:
             what geo_location is given.
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -926,7 +925,7 @@ class GoogleAsync:
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+            locale (Optional[str]): Accept-Language header value which changes your Bing search
                             page web interface language.
             geo_location (Optional[str]): None,
             render (Optional[str]): Enables JavaScript rendering.
