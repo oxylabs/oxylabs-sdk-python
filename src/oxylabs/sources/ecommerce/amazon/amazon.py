@@ -1,7 +1,11 @@
 from typing import Optional
 
-from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
+from src.oxylabs.sources.ecommerce.response import EcommerceResponse
 from src.oxylabs.utils.types import source
+from src.oxylabs.utils.utils import (
+    check_parsing_instructions_validity,
+    prepare_config,
+)
 
 from .amazon_base import AmazonBase
 
@@ -32,7 +36,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon search results for a given query.
 
@@ -91,7 +95,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon search results for a given URL.
 
@@ -144,7 +148,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon product details for a given query.
 
@@ -203,7 +207,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon pricing details for a given query.
 
@@ -264,7 +268,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon reviews for a given query.
 
@@ -323,7 +327,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon questions for a given query.
 
@@ -380,7 +384,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon bestsellers.
 
@@ -439,7 +443,7 @@ class Amazon(AmazonBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon sellers for a given query.
 
@@ -511,7 +515,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon search results for a given query.
 
@@ -582,7 +586,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon search results for a given URL.
 
@@ -647,7 +651,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon product details for a given query.
 
@@ -718,7 +722,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon pricing details for a given query.
 
@@ -791,7 +795,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon reviews for a given query.
 
@@ -862,7 +866,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon questions for a given query.
 
@@ -931,7 +935,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon bestsellers.
 
@@ -1002,7 +1006,7 @@ class AmazonAsync(AmazonBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Amazon sellers for a given query.
 

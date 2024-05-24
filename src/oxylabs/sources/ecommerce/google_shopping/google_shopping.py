@@ -1,7 +1,11 @@
 from typing import Optional
 
-from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
+from src.oxylabs.sources.ecommerce.response import EcommerceResponse
 from src.oxylabs.utils.types import source
+from src.oxylabs.utils.utils import (
+    check_parsing_instructions_validity,
+    prepare_config,
+)
 
 from .google_shopping_base import GoogleShoppingBase
 
@@ -34,7 +38,7 @@ class GoogleShopping(GoogleShoppingBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping search results for a given query.
 
@@ -98,7 +102,7 @@ class GoogleShopping(GoogleShoppingBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping search results for a given URL.
 
@@ -148,7 +152,7 @@ class GoogleShopping(GoogleShoppingBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping product results for a given query.
 
@@ -206,7 +210,7 @@ class GoogleShopping(GoogleShoppingBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping product pricing results for a given product code.
 
@@ -283,7 +287,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping search results for a given query.
 
@@ -340,7 +344,9 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_shopping_url(
@@ -356,7 +362,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping search results for a given URL.
 
@@ -399,7 +405,9 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_shopping_products(
@@ -418,7 +426,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping product results for a given query.
 
@@ -467,7 +475,9 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_product_pricing(
@@ -488,7 +498,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Google Shopping product pricing results for a given product code.
 
@@ -541,5 +551,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

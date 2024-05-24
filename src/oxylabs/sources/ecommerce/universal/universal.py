@@ -1,7 +1,12 @@
 from typing import Optional
 
-from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
+from src.oxylabs.sources.ecommerce.response import EcommerceResponse
 from src.oxylabs.utils.types import source
+from src.oxylabs.utils.utils import (
+    check_parsing_instructions_validity,
+    prepare_config,
+)
+
 from .universal_base import UniversalBase
 
 
@@ -30,7 +35,7 @@ class Universal(UniversalBase):
         parsing_instructions: Optional[dict] = None,
         request_timeout: int = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Universal search results for a given URL.
 
@@ -106,7 +111,7 @@ class UniversalAsync(UniversalBase):
         job_completion_timeout: int = None,
         poll_interval: int = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Asynchronously scrapes Universal search results for a given URL.
 
@@ -161,5 +166,7 @@ class UniversalAsync(UniversalBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

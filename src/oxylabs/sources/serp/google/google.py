@@ -1,8 +1,11 @@
 from typing import Optional
-from src.oxylabs.sources.serp.response import SERPResponse
 
-from src.oxylabs.utils.utils import prepare_config, check_parsing_instructions_validity
+from src.oxylabs.sources.serp.response import SERPResponse
 from src.oxylabs.utils.types import source
+from src.oxylabs.utils.utils import (
+    check_parsing_instructions_validity,
+    prepare_config,
+)
 
 
 class Google:

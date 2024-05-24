@@ -29,12 +29,12 @@ class BaseSearchOpts:
         Args:
             domain (str): The domain to search on. .
             start_page (int): The starting page number.
-            pages (int): The number of pages to search. 
+            pages (int): The number of pages to search.
             limit (int): The maximum number of search results per page.
-            user_agent_type (str): The user agent type to use. 
-            callback_url (str): The URL to send the search results callback to. 
+            user_agent_type (str): The user agent type to use.
+            callback_url (str): The URL to send the search results callback to.
             Defaults to None.
-            parsing_instructions (dict): Instructions for parsing the search 
+            parsing_instructions (dict): Instructions for parsing the search
             results. Defaults to None.
         """
         self.domain = domain
@@ -59,10 +59,10 @@ class BaseUrlOpts:
         Initialize the BaseUrlOpts class.
 
         Args:
-            user_agent_type (str): The type of user agent to use. 
-            callback_url (str, optional): The callback URL to use. Defaults to 
+            user_agent_type (str): The type of user agent to use.
+            callback_url (str, optional): The callback URL to use. Defaults to
             None.
-            parsing_instructions (dict, optional): Instructions for parsing the 
+            parsing_instructions (dict, optional): Instructions for parsing the
             response. Defaults to None.
         """
         self.user_agent_type = user_agent_type
@@ -84,16 +84,16 @@ class BaseGoogleOpts:
         Base class for Google-specific options.
 
         Args:
-            geo_location (str, optional): The geographic location to use for 
+            geo_location (str, optional): The geographic location to use for
             the request. Defaults to None.
-            user_agent_type (str, optional): The type of user agent to use. 
-            render (bool, optional): Whether to render JavaScript on the page. 
+            user_agent_type (str, optional): The type of user agent to use.
+            render (bool, optional): Whether to render JavaScript on the page.
             Defaults to None.
-            callback_url (str, optional): The URL to send a callback request 
+            callback_url (str, optional): The URL to send a callback request
             to. Defaults to None.
-            parsing_instructions (dict, optional): Instructions for parsing the 
+            parsing_instructions (dict, optional): Instructions for parsing the
             response. Defaults to None.
-            context (list, optional): Additional context information. Defaults 
+            context (list, optional): Additional context information. Defaults
             to None.
         """
         self.geo_location = geo_location
@@ -109,9 +109,9 @@ class BaseEcommerceOpts:
     Represents the options for an ecommerce request.
 
     Args:
-        user_agent_type (str): The type of user agent to use. 
+        user_agent_type (str): The type of user agent to use.
         render (str): The rendering mode for the request.
-        callback_url (str): The URL to which the response will be sent 
+        callback_url (str): The URL to which the response will be sent
         asynchronously.
         geo_location (str): The desired geographic location for the request.
         parsing_instructions (str): Instructions for parsing the response.
@@ -148,6 +148,7 @@ def get_valid_values(module: object) -> list:
         if not name.startswith("__")
     ]
 
+
 VALID_FN_NAMES = get_valid_values(fn_name)
 
 
@@ -156,11 +157,11 @@ def prepare_config(**kwargs):
     Prepare a configuration dictionary based on the provided keyword arguments.
 
     Args:
-        request_timeout (int, optional): The timeout value in seconds. Defaults 
+        request_timeout (int, optional): The timeout value in seconds. Defaults
         to None.
-        poll_interval (int, optional): The poll interval value in seconds. 
+        poll_interval (int, optional): The poll interval value in seconds.
         Defaults to None.
-        job_completion_timeout (int, optional): The job completion timeout 
+        job_completion_timeout (int, optional): The job completion timeout
         value in seconds. Defaults to None.
 
     Returns:
@@ -200,7 +201,7 @@ def validate_url(input_url: str, host: str) -> None:
         host (str): The expected domain or host.
 
     Raises:
-        ValueError: If the URL parameter is empty, missing scheme, missing 
+        ValueError: If the URL parameter is empty, missing scheme, missing
         host, or does not belong to the specified host.
 
     Returns:
@@ -226,6 +227,7 @@ def validate_url(input_url: str, host: str) -> None:
         raise ValueError(f"URL does not belong to {host}")
 
     return None
+
 
 async def ensure_session(session) -> aiohttp.ClientSession:
     """
@@ -464,7 +466,7 @@ def validate_list_string_optional_int(args: list) -> None:
         args: A list containing the arguments to be validated.
 
     Raises:
-        ValueError: If the first argument is not a non-empty string or if the 
+        ValueError: If the first argument is not a non-empty string or if the
         second argument is not a non-zero integer when present.
     """
     if (

@@ -9,6 +9,7 @@ from .google_shopping.google_shopping import (
     GoogleShopping,
     GoogleShoppingAsync,
 )
+from .response import EcommerceResponse
 from .universal.universal import Universal, UniversalAsync
 from .wayfair.wayfair import Wayfair, WayfairAsync
 
@@ -47,7 +48,7 @@ class Ecommerce:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        return self._client.req(payload, "POST", config)
+        return EcommerceResponse(self._client.req(payload, "POST", config))
 
 
 class EcommerceAsync:
@@ -96,7 +97,7 @@ class EcommerceAsync:
             result = await self._client.execute_with_timeout(
                 payload, config, self._session
             )
-            return result
+            return EcommerceResponse(result)
 
         except Exception as e:
             logger.error(f"An error occurred: {e}")

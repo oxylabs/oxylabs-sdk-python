@@ -1,5 +1,6 @@
 from typing import Optional
 
+from src.oxylabs.sources.ecommerce.response import EcommerceResponse
 from src.oxylabs.utils.types import source
 from src.oxylabs.utils.utils import prepare_config
 
@@ -27,7 +28,7 @@ class Wayfair(WayfairBase):
         callback_url: Optional[str] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Wayfair search results for a given query.
 
@@ -73,7 +74,7 @@ class Wayfair(WayfairBase):
         callback_url: Optional[str] = None,
         request_timeout: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Scrapes Wayfair search results for a given URL.
 
@@ -130,7 +131,7 @@ class WayfairAsync(WayfairBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Asynchronously scrapes Wayfair search results for a given query.
 
@@ -176,7 +177,9 @@ class WayfairAsync(WayfairBase):
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_url(
@@ -188,7 +191,7 @@ class WayfairAsync(WayfairBase):
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> dict:
+    ) -> EcommerceResponse:
         """
         Asynchronously scrapes Wayfair search results for a given URL.
 
@@ -228,5 +231,7 @@ class WayfairAsync(WayfairBase):
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
