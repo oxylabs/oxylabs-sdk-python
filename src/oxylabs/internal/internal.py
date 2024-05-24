@@ -4,6 +4,9 @@ import logging
 
 import aiohttp
 import requests
+from oxylabs.sources.ecommerce.ecommerce import Ecommerce, EcommerceAsync
+from oxylabs.sources.serp.serp import SERP, SERPAsync
+from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -24,67 +27,64 @@ class APICredentials:
 
     def get_encoded_credentials(self) -> str:
         """
-        Returns the Base64 encoded username and password for API 
+        Returns the Base64 encoded username and password for API
         authentication.
         """
         credentials = f"{self.username}:{self.password}"
         return base64.b64encode(credentials.encode()).decode()
 
 
-class Client:
+class BaseClient:
     def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
-        """
-        Initializes an instance of the Internal class.
-
-        Args:
-            base_url (str): The base URL of the API.
-            api_credentials (ApiCredentials): The API credentials.
-
-        Returns:
-            None
-        """
-        self.base_url = base_url
-        self.api_credentials = api_credentials
-        self.headers = {
+        self._base_url = base_url
+        self._api_credentials = api_credentials
+        self._headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
+            "Authorization": f"Basic {self._api_credentials.get_encoded_credentials()}",
         }
 
-    def req(self, payload: dict, method: str, config: dict) -> dict:
+
+class RealtimeClient(BaseClient):
+    def __init__(self, username: str, password: str) -> None:
+        super().__init__(SYNC_BASE_URL, APICredentials(username, password))
+        self.serp = SERP(self)
+        self.ecommerce = Ecommerce(self)
+
+    def _req(self, payload: dict, method: str, config: dict) -> dict:
         """
         Sends a HTTP request to the specified URL with the given payload
         and method.
 
         Args:
             payload (dict): The payload to be sent with the request.
-            method (str): The HTTP method to be used for the request 
+            method (str): The HTTP method to be used for the request
             (e.g., "POST", "GET").
-            config (dict): Additional configuration options for the 
+            config (dict): Additional configuration options for the
             request.
 
         Returns:
-            dict: The JSON response from the server, if the request is 
+            dict: The JSON response from the server, if the request is
             successful.
                   None, if an error occurs during the request.
 
         Raises:
             requests.exceptions.Timeout: If the request times out.
             requests.exceptions.HTTPError: If an HTTP error occurs.
-            requests.exceptions.RequestException: If a general request 
+            requests.exceptions.RequestException: If a general request
             error occurs.
         """
         try:
             if method == "POST":
                 response = requests.post(
-                    self.base_url,
-                    headers=self.headers,
+                    self._base_url,
+                    headers=self._headers,
                     json=payload,
                     timeout=config["request_timeout"],
                 )
             else:
                 logger.error(f"Unsupported method: {method}")
                 return None
-
+            print(response.status_code)
             response.raise_for_status()
 
             if response.status_code == 200:
@@ -95,7 +95,7 @@ class Client:
 
         except requests.exceptions.Timeout:
             logger.error(
-                f"Timeout error. The request to {self.base_url} with method {method} has timed out."
+                f"Timeout error. The request to {self._base_url} with method {method} has timed out."
             )
             return None
         except requests.exceptions.HTTPError as err:
@@ -107,28 +107,13 @@ class Client:
             return None
 
 
-class ClientAsync:
+class AsyncClient(BaseClient):
+    def __init__(self, username: str, password: str) -> None:
+        super().__init__(ASYNC_BASE_URL, APICredentials(username, password))
+        self.serp = SERPAsync(self)
+        self.ecommerce = EcommerceAsync(self)
 
-    def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
-        """
-        Initializes an instance of the Internal class.
-
-        Args:
-            base_url (str): The base URL of the API.
-            api_credentials (ApiCredentials): The API credentials used for 
-            authorization.
-
-        Returns:
-            None
-        """
-        self.base_url = base_url
-        self.api_credentials = api_credentials
-        self.headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Basic {self.api_credentials.get_encoded_credentials()}",
-        }
-
-    async def get_job_id(
+    async def _get_job_id(
         self,
         payload: dict,
         user_session: aiohttp.ClientSession,
@@ -136,8 +121,8 @@ class ClientAsync:
     ) -> str:
         try:
             async with user_session.post(
-                self.base_url,
-                headers=self.headers,
+                self._base_url,
+                headers=self._headers,
                 json=payload,
                 timeout=request_timeout,
             ) as response:
@@ -152,25 +137,25 @@ class ClientAsync:
             logger.error(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
             logger.error(
-                f"Timeout error. The request to {self.base_url} has timed out."
+                f"Timeout error. The request to {self._base_url} has timed out."
             )
         except Exception as e:
             logger.error(f"Error occurred: {str(e)}")
             return None
 
-    async def poll_job_status(
+    async def _poll_job_status(
         self,
         job_id: str,
         poll_interval: int,
         user_session: aiohttp.ClientSession,
         timeout: int,
     ) -> bool:
-        job_status_url = f"{self.base_url}/{job_id}"
+        job_status_url = f"{self._base_url}/{job_id}"
         end_time = asyncio.get_event_loop().time() + timeout
         while asyncio.get_event_loop().time() < end_time:
             try:
                 async with user_session.get(
-                    job_status_url, headers=self.headers, timeout=poll_interval
+                    job_status_url, headers=self._headers, timeout=poll_interval
                 ) as response:
                     data = await response.json()
                     response.raise_for_status()
@@ -186,7 +171,7 @@ class ClientAsync:
         logger.info("Job completion timeout exceeded")
         return False
 
-    async def get_http_resp(
+    async def _get_http_resp(
         self, job_id: str, user_session: aiohttp.ClientSession
     ) -> dict:
         """
@@ -194,7 +179,7 @@ class ClientAsync:
 
         Args:
             job_id (str): The ID of the job.
-            user_session (aiohttp.ClientSession): The client session used for 
+            user_session (aiohttp.ClientSession): The client session used for
             making the request.
 
         Returns:
@@ -206,11 +191,9 @@ class ClientAsync:
             asyncio.TimeoutError: If the request times out.
             Exception: If any other error occurs.
         """
-        result_url = f"{self.base_url}/{job_id}/results"
+        result_url = f"{self._base_url}/{job_id}/results"
         try:
-            async with user_session.get(
-                result_url, headers=self.headers
-            ) as response:
+            async with user_session.get(result_url, headers=self._headers) as response:
                 data = await response.json()
                 response.raise_for_status()
                 return data
@@ -221,14 +204,12 @@ class ClientAsync:
         except aiohttp.ClientConnectionError as e:
             logger.error(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
-            logger.error(
-                f"Timeout error. The request to {result_url} has timed out."
-            )
+            logger.error(f"Timeout error. The request to {result_url} has timed out.")
         except Exception as e:
             logger.error(f"An error occurred: {e} - {data['message']}")
         return None
 
-    async def execute_with_timeout(
+    async def _execute_with_timeout(
         self, payload: dict, config: dict, user_session: aiohttp.ClientSession
     ) -> dict:
 
@@ -236,15 +217,15 @@ class ClientAsync:
         job_completion_timeout = config["job_completion_timeout"]
         poll_interval = config["poll_interval"]
 
-        job_id = await self.get_job_id(payload, user_session, request_timeout)
+        job_id = await self._get_job_id(payload, user_session, request_timeout)
         if not job_id:
             logger.error("Failed to get job ID")
 
-        job_completed = await self.poll_job_status(
+        job_completed = await self._poll_job_status(
             job_id, poll_interval, user_session, job_completion_timeout
         )
         if not job_completed:
             logger.error("Job did not complete successfully")
 
-        result = await self.get_http_resp(job_id, user_session)
+        result = await self._get_http_resp(job_id, user_session)
         return result

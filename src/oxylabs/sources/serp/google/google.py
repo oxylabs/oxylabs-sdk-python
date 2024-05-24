@@ -1,8 +1,8 @@
 from typing import Optional
 
-from src.oxylabs.sources.serp.response import SERPResponse
-from src.oxylabs.utils.types import source
-from src.oxylabs.utils.utils import (
+from oxylabs.sources.serp.response import SERPResponse
+from oxylabs.utils.types import source
+from oxylabs.utils.utils import (
     check_parsing_instructions_validity,
     prepare_config,
 )

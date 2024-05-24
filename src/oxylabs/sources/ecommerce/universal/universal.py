@@ -1,16 +1,14 @@
 from typing import Optional
 
-from src.oxylabs.sources.ecommerce.response import EcommerceResponse
-from src.oxylabs.utils.types import source
-from src.oxylabs.utils.utils import (
+from oxylabs.sources.ecommerce.response import EcommerceResponse
+from oxylabs.utils.types import source
+from oxylabs.utils.utils import (
     check_parsing_instructions_validity,
     prepare_config,
 )
 
-from .universal_base import UniversalBase
 
-
-class Universal(UniversalBase):
+class Universal:
     def __init__(self, ecommerce_instance) -> None:
         """
         Initializes an instance of the Universal class.
@@ -84,7 +82,7 @@ class Universal(UniversalBase):
         return response
 
 
-class UniversalAsync(UniversalBase):
+class UniversalAsync:
     def __init__(self, ecommerce_async_instance) -> None:
         """
         Initializes an instance of the UniversalAsync class.
@@ -166,7 +164,5 @@ class UniversalAsync(UniversalBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response

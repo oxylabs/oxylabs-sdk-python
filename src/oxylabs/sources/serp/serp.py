@@ -1,8 +1,6 @@
 import logging
 
-import src.oxylabs.utils.utils as utils
-from src.oxylabs.internal import APICredentials, Client, ClientAsync
-from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
+import oxylabs.utils.utils as utils
 
 from .bing.bing import Bing, BingAsync
 from .google.google import Google, GoogleAsync
@@ -14,10 +12,9 @@ logger = logging.getLogger(__name__)
 
 
 class SERP:
-    def __init__(self, username: str, password: str) -> None:
 
-        api_credentials = APICredentials(username, password)
-        self._client = Client(SYNC_BASE_URL, api_credentials)
+    def __init__(self, client) -> None:
+        self._client = client
         self.bing = Bing(self)
         self.google = Google(self)
 
@@ -35,23 +32,15 @@ class SERP:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        return SERPResponse(self._client.req(payload, "POST", config))
+        return SERPResponse(self._client._req(payload, "POST", config))
 
 
 class SERPAsync:
 
-    def __init__(self, username: str, password: str) -> None:
-        """
-        Initializes an asynchronous SERP client.
-
-        Args:
-            username (str): The username for API authentication.
-            password (str): The password for API authentication.
-        """
-        self.api_credentials = APICredentials(username, password)
-        self._client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
-        self.bing_async = BingAsync(self)
-        self.google_async = GoogleAsync(self)
+    def __init__(self, client) -> None:
+        self._client = client
+        self.bing = BingAsync(self)
+        self.google = GoogleAsync(self)
         self._session = None
         self._requests = 0
 
@@ -75,7 +64,7 @@ class SERPAsync:
         try:
             self._session = await utils.ensure_session(self._session)
 
-            result = await self._client.execute_with_timeout(
+            result = await self._client._execute_with_timeout(
                 payload, config, self._session
             )
             return SERPResponse(result)
@@ -87,4 +76,4 @@ class SERPAsync:
             self._requests -= 1
             if self._requests == 0:
                 await utils.close(self._session)
-        return None
+        return SERPResponse(None)

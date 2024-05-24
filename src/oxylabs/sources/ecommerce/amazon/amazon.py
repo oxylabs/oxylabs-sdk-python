@@ -1,16 +1,14 @@
 from typing import Optional
 
-from src.oxylabs.sources.ecommerce.response import EcommerceResponse
-from src.oxylabs.utils.types import source
-from src.oxylabs.utils.utils import (
+from oxylabs.sources.ecommerce.response import EcommerceResponse
+from oxylabs.utils.types import source
+from oxylabs.utils.utils import (
     check_parsing_instructions_validity,
     prepare_config,
 )
 
-from .amazon_base import AmazonBase
 
-
-class Amazon(AmazonBase):
+class Amazon:
     def __init__(self, ecommerce_instance) -> None:
         """
         Initializes an instance of the Amazon class.
@@ -487,7 +485,7 @@ class Amazon(AmazonBase):
         return response
 
 
-class AmazonAsync(AmazonBase):
+class AmazonAsync:
     def __init__(self, ecommerce_async_instance) -> None:
         """
         Initializes an instance of the AmazonAsync class.

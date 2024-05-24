@@ -1,13 +1,11 @@
 from typing import Optional
 
-from src.oxylabs.sources.ecommerce.response import EcommerceResponse
-from src.oxylabs.utils.types import source
-from src.oxylabs.utils.utils import prepare_config
-
-from .wayfair_base import WayfairBase
+from oxylabs.sources.ecommerce.response import EcommerceResponse
+from oxylabs.utils.types import source
+from oxylabs.utils.utils import prepare_config
 
 
-class Wayfair(WayfairBase):
+class Wayfair:
     def __init__(self, ecommerce_instance) -> None:
         """
         Initializes an instance of the Wayfair class.
@@ -108,7 +106,7 @@ class Wayfair(WayfairBase):
         return response
 
 
-class WayfairAsync(WayfairBase):
+class WayfairAsync:
     def __init__(self, ecommerce_async_instance) -> None:
         """
         Initializes an instance of the WayfairAsync class.
@@ -177,9 +175,7 @@ class WayfairAsync(WayfairBase):
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_url(
@@ -231,7 +227,5 @@ class WayfairAsync(WayfairBase):
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response

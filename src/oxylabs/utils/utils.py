@@ -9,127 +9,7 @@ from .defaults import (
     DEFAULT_REQUEST_TIMEOUT,
     DEFAULT_REQUEST_TIMEOUT_ASYNC,
 )
-from .types import domain, fn_name, locale, render, source, user_agent_type
-
-
-class BaseSearchOpts:
-    def __init__(
-        self,
-        domain: str = None,
-        start_page: int = None,
-        pages: int = None,
-        limit: int = None,
-        user_agent_type: str = None,
-        callback_url: str = None,
-        parsing_instructions: str = None,
-    ):
-        """
-        Represents the base search options for a search operation.
-
-        Args:
-            domain (str): The domain to search on. .
-            start_page (int): The starting page number.
-            pages (int): The number of pages to search.
-            limit (int): The maximum number of search results per page.
-            user_agent_type (str): The user agent type to use.
-            callback_url (str): The URL to send the search results callback to.
-            Defaults to None.
-            parsing_instructions (dict): Instructions for parsing the search
-            results. Defaults to None.
-        """
-        self.domain = domain
-        self.start_page = start_page
-        self.pages = pages
-        self.limit = limit
-        self.user_agent_type = user_agent_type
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-
-
-class BaseUrlOpts:
-    """Options for configuring the base URL."""
-
-    def __init__(
-        self,
-        user_agent_type: str = None,
-        callback_url: str = None,
-        parsing_instructions: str = None,
-    ):
-        """
-        Initialize the BaseUrlOpts class.
-
-        Args:
-            user_agent_type (str): The type of user agent to use.
-            callback_url (str, optional): The callback URL to use. Defaults to
-            None.
-            parsing_instructions (dict, optional): Instructions for parsing the
-            response. Defaults to None.
-        """
-        self.user_agent_type = user_agent_type
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-
-
-class BaseGoogleOpts:
-    def __init__(
-        self,
-        geo_location: str = None,
-        user_agent_type: str = None,
-        render: bool = None,
-        callback_url: str = None,
-        parsing_instructions: dict = None,
-        context: list = None,
-    ):
-        """
-        Base class for Google-specific options.
-
-        Args:
-            geo_location (str, optional): The geographic location to use for
-            the request. Defaults to None.
-            user_agent_type (str, optional): The type of user agent to use.
-            render (bool, optional): Whether to render JavaScript on the page.
-            Defaults to None.
-            callback_url (str, optional): The URL to send a callback request
-            to. Defaults to None.
-            parsing_instructions (dict, optional): Instructions for parsing the
-            response. Defaults to None.
-            context (list, optional): Additional context information. Defaults
-            to None.
-        """
-        self.geo_location = geo_location
-        self.user_agent_type = user_agent_type
-        self.render = render
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-        self.context = context
-
-
-class BaseEcommerceOpts:
-    """
-    Represents the options for an ecommerce request.
-
-    Args:
-        user_agent_type (str): The type of user agent to use.
-        render (str): The rendering mode for the request.
-        callback_url (str): The URL to which the response will be sent
-        asynchronously.
-        geo_location (str): The desired geographic location for the request.
-        parsing_instructions (str): Instructions for parsing the response.
-    """
-
-    def __init__(
-        self,
-        user_agent_type: str = None,
-        render: str = None,
-        callback_url: str = None,
-        geo_location: str = None,
-        parsing_instructions: str = None,
-    ):
-        self.user_agent_type = user_agent_type
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-        self.render = render
-        self.geo_location = geo_location
+from .types import fn_name
 
 
 def get_valid_values(module: object) -> list:
@@ -142,11 +22,7 @@ def get_valid_values(module: object) -> list:
     Returns:
         list: A list of valid values from the module.
     """
-    return [
-        getattr(module, name)
-        for name in dir(module)
-        if not name.startswith("__")
-    ]
+    return [getattr(module, name) for name in dir(module) if not name.startswith("__")]
 
 
 VALID_FN_NAMES = get_valid_values(fn_name)

@@ -1,8 +1,6 @@
 import logging
 
-import src.oxylabs.utils.utils as utils
-from src.oxylabs.internal import APICredentials, Client, ClientAsync
-from src.oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
+import oxylabs.utils.utils as utils
 
 from .amazon.amazon import Amazon, AmazonAsync
 from .google_shopping.google_shopping import (
@@ -19,16 +17,9 @@ logger = logging.getLogger(__name__)
 
 
 class Ecommerce:
-    def __init__(self, username: str, password: str) -> None:
-        """
-        Initializes an instance of the Ecommerce class.
 
-        Args:
-            username (str): The username for API authentication.
-            password (str): The password for API authentication.
-        """
-        api_credentials = APICredentials(username, password)
-        self._client = Client(SYNC_BASE_URL, api_credentials)
+    def __init__(self, client) -> None:
+        self._client = client
         self.amazon = Amazon(self)
         self.google_shopping = GoogleShopping(self)
         self.universal = Universal(self)
@@ -48,28 +39,17 @@ class Ecommerce:
         # Remove empty or null values from the payload
         payload = {k: v for k, v in payload.items() if v is not None}
 
-        return EcommerceResponse(self._client.req(payload, "POST", config))
+        return EcommerceResponse(self._client._req(payload, "POST", config))
 
 
 class EcommerceAsync:
-    def __init__(self, username: str, password: str) -> None:
-        """
-        Initializes an instance of the EcommerceAsync class.
 
-        Args:
-            username (str): The username for API authentication.
-            password (str): The password for API authentication.
-
-        Returns:
-            None
-        """
-
-        self.api_credentials = APICredentials(username, password)
-        self.amazon_async = AmazonAsync(self)
-        self.google_shopping_async = GoogleShoppingAsync(self)
-        self.universal_async = UniversalAsync(self)
-        self.wayfair_async = WayfairAsync(self)
-        self._client = ClientAsync(ASYNC_BASE_URL, self.api_credentials)
+    def __init__(self, client) -> None:
+        self._client = client
+        self.amazon = AmazonAsync(self)
+        self.google_shopping = GoogleShoppingAsync(self)
+        self.universal = UniversalAsync(self)
+        self.wayfair = WayfairAsync(self)
         self._session = None
         self._requests = 0
 
@@ -94,7 +74,7 @@ class EcommerceAsync:
 
             self._session = await utils.ensure_session(self._session)
 
-            result = await self._client.execute_with_timeout(
+            result = await self._client._execute_with_timeout(
                 payload, config, self._session
             )
             return EcommerceResponse(result)
@@ -106,4 +86,4 @@ class EcommerceAsync:
             self._requests -= 1
             if self._requests == 0:
                 await utils.close(self._session)
-        return None
+        return EcommerceResponse(None)

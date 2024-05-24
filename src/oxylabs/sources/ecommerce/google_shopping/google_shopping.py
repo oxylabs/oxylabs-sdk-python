@@ -1,16 +1,14 @@
 from typing import Optional
 
-from src.oxylabs.sources.ecommerce.response import EcommerceResponse
-from src.oxylabs.utils.types import source
-from src.oxylabs.utils.utils import (
+from oxylabs.sources.ecommerce.response import EcommerceResponse
+from oxylabs.utils.types import source
+from oxylabs.utils.utils import (
     check_parsing_instructions_validity,
     prepare_config,
 )
 
-from .google_shopping_base import GoogleShoppingBase
 
-
-class GoogleShopping(GoogleShoppingBase):
+class GoogleShopping:
     def __init__(self, ecommerce_instance) -> None:
         """
         Initializes an instance of the GoogleShopping class.
@@ -257,7 +255,7 @@ class GoogleShopping(GoogleShoppingBase):
         return response
 
 
-class GoogleShoppingAsync(GoogleShoppingBase):
+class GoogleShoppingAsync:
     def __init__(self, ecommerce_async_instance) -> None:
         """
         Initializes an instance of the GoogleShoppingAsync class.
@@ -344,9 +342,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_shopping_url(
@@ -405,9 +401,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_shopping_products(
@@ -475,9 +469,7 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
 
     async def scrape_product_pricing(
@@ -551,7 +543,5 @@ class GoogleShoppingAsync(GoogleShoppingBase):
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
+        response = await self._ecommerce_async_instance._get_resp(payload, config)
         return response
