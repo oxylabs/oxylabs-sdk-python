@@ -34,7 +34,7 @@ class GoogleShopping:
         parse: Optional[bool] = None,
         context: Optional[list] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -42,29 +42,25 @@ class GoogleShopping:
 
         Args:
             query (str): UTF-encoded keyword
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "locale": None,
-                    "results_language": None,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            results_language (Optional[str]): None,
+            geo_location (Optional[str]): None,
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            context: Optional[list],
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -98,7 +94,7 @@ class GoogleShopping:
         geo_location: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -106,18 +102,19 @@ class GoogleShopping:
 
         Args:
             url (str): Direct URL (link) to Google page
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for
-            the search. Defaults to:
-                {
-                    "user_agent_type": desktop,
-                    "render": None,
-                    "callback_url": None,
-                    "geo_location": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
+            the search. 
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            geo_location (Optional[str]): None,
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
+            Defaults to 165.
+
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -148,7 +145,7 @@ class GoogleShopping:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -156,21 +153,21 @@ class GoogleShopping:
 
         Args:
             query (str): UTF-encoded product code.
-            opts (GoogleShoppingProductOpts, optional): Configuration options
-            for the search. Defaults to:
-                {
-                    "domain": com,
-                    "locale": None,
-                    "results_language": None,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "render": None,
-                    "callback_url": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
+            domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            "results_language": None,
+            geo_location (Optional[str]): None,
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
+            Defaults to 165.
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -206,7 +203,7 @@ class GoogleShopping:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -214,23 +211,23 @@ class GoogleShopping:
 
         Args:
             query (str): UTF-encoded product code.
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for
-            the search. Defaults to:
-                {
-                    "domain": com,
-                    "locale": None,
-                    "start_page": 1,
-                    "pages": 1,
-                    "results_language": None,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "render": None,
-                    "callback_url": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
+            domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            start_page (Optional[int]): The starting page number.
+                        pages (Optional[int]): The number of pages to scrape.
+            "results_language": None,
+            geo_location (Optional[str]): None,
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            request_timeout (int | 165, optional): The interval in seconds for
+            the request to time out if no response is returned.
+            Defaults to 165.
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -281,7 +278,7 @@ class GoogleShoppingAsync:
         parse: Optional[bool] = None,
         context: Optional[list] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -291,23 +288,19 @@ class GoogleShoppingAsync:
 
         Args:
             query (str): UTF-encoded keyword.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "locale": None,
-                    "results_language": None,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+                        pages (Optional[int]): The number of pages to scrape.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            "results_language": None,
+            geo_location (Optional[str]): None,
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            context: Optional[list],
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -315,7 +308,7 @@ class GoogleShoppingAsync:
             request to poll the server for a response. Defaults to 5.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -356,7 +349,7 @@ class GoogleShoppingAsync:
         geo_location: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -366,23 +359,19 @@ class GoogleShoppingAsync:
 
         Args:
             url (str): Direct URL (link) to Google page.
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for
-            the search. Defaults to:
-                {
-                    "user_agent_type": desktop,
-                    "render": None,
-                    "callback_url": None,
-                    "geo_location": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            geo_location (Optional[str]): None,
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds
             for the request to time out if no response is returned.
             Defaults to 165.
             poll_interval (int, optional): The interval in seconds for the
             request to poll the server for a response. Defaults to 5.
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -420,7 +409,7 @@ class GoogleShoppingAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -430,26 +419,23 @@ class GoogleShoppingAsync:
 
         Args:
             query (str): UTF-encoded product code.
-            opts (GoogleShoppingProductOpts, optional): Configuration options
-            for the search. Defaults to:
-                {
-                    "domain": com,
-                    "locale": None,
-                    "results_language": None,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "render": None,
-                    "callback_url": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
+            domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            "results_language": None,
+            geo_location (Optional[str]): None,
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
             poll_interval (int, optional): The interval in seconds for the
             request to poll the server for a response. Defaults to 5.
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -492,7 +478,7 @@ class GoogleShoppingAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -502,28 +488,25 @@ class GoogleShoppingAsync:
 
         Args:
             url (str): UTF-encoded product code.
-            opts (GoogleShoppingUrlOpts, optional): Configuration options for
-            the search. Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "locale": None,
-                    "results_language": None,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "render": None,
-                    "callback_url": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+                        pages (Optional[int]): The number of pages to scrape.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            "results_language": None,
+            geo_location (Optional[str]): None,
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
             poll_interval (int, optional): The interval in seconds for the
             request to poll the server for a response. Defaults to 5.
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(

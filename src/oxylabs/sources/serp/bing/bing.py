@@ -32,35 +32,30 @@ class Bing:
         render: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs,
     ) -> SERPResponse:
         """
-        Scrapes Bing search results for a given query.
+        Scrapes search results from Bing.
 
         Args:
-            query (str): The search query.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "limit": 10,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "locale": None,
-                    "geo_location": None,
-                    "render": None,
-                    "parse": None,
-                }
-                This parameter allows customization of the search request.
-            request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-
+            query (str): UTF-encoded keyword.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.            
+            limit (Optional[int]): Number of results to retrieve in each page.
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            geo_location (Optional[str]):  It goes like this: City,Region,Country.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            request_timeout (Optional[int]): The timeout for the request in seconds.
+            **kwargs: Additional keyword arguments.
         Returns:
-            dict: The response from the server after the job is completed.
+            SERPResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -95,7 +90,7 @@ class Bing:
         render: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs,
     ) -> SERPResponse:
         """
@@ -103,23 +98,19 @@ class Bing:
 
         Args:
             url (str): The URL to be scraped.
-            opts (BingUrlOpts, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "user_agent_type": desktop,
-                    "geo_location": None,
-                    "callback_url": None,
-                    "render": None,
-                    "parsing_instructions": None,
-                    "parse": None,
-                }
-                This parameter allows customization of the search request.
+            user_agent_type (Optional[str]): Device type and browser.
+            geo_location (Optional[str]): The API uses Canonical Geo Location format to 
+                            determine request location. It goes like this: City,Region,Country            
+            callback_url (Optional[str]): URL to your callback endpoint.            
+            render (Optional[str]): Enables JavaScript rendering.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            parse (Optional[bool]): true will return structured data.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            SERPResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -164,7 +155,7 @@ class BingAsync:
         render: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
@@ -174,21 +165,18 @@ class BingAsync:
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "limit": 10,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "locale": None,
-                    "geo_location": None,
-                    "render": None,
-                    "parse": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            limit (Optional[int]): Number of results to retrieve in each page.
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            geo_location (Optional[str]): The API uses Canonical Geo Location format to 
+                            determine request location. It goes like this: City,Region,Country            
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -199,7 +187,7 @@ class BingAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            SERPResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -238,7 +226,7 @@ class BingAsync:
         render: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
@@ -248,17 +236,14 @@ class BingAsync:
 
         Args:
             url (str): The URL to be scraped.
-            opts (BingUrlOpts, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "user_agent_type": desktop,
-                    "geo_location": None,
-                    "callback_url": None,
-                    "render": None,
-                    "parsing_instructions": None,
-                    "parse": None,
-                }
-                This parameter allows customization of the search request.
+
+            user_agent_type (Optional[str]): Device type and browser.
+            geo_location (Optional[str]): The API uses Canonical Geo Location format to 
+                            determine request location. It goes like this: City,Region,Country            
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            parse (Optional[bool]): true will return structured data.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -269,7 +254,7 @@ class BingAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            SERPResponse: The response containing the scraped results.
         """
 
         config = prepare_config(

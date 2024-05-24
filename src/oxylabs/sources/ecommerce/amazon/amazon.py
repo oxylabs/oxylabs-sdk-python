@@ -32,7 +32,7 @@ class Amazon:
         context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -40,27 +40,22 @@ class Amazon:
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            context: Optional[list],
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -91,7 +86,7 @@ class Amazon:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -99,23 +94,18 @@ class Amazon:
 
         Args:
             url (str): The URL to scrape.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -144,7 +134,7 @@ class Amazon:
         context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -152,25 +142,20 @@ class Amazon:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            context: Optional[list],
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -203,7 +188,7 @@ class Amazon:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -211,26 +196,21 @@ class Amazon:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -264,7 +244,7 @@ class Amazon:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -272,26 +252,21 @@ class Amazon:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -323,7 +298,7 @@ class Amazon:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -331,24 +306,19 @@ class Amazon:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -380,7 +350,7 @@ class Amazon:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -388,26 +358,21 @@ class Amazon:
 
         Args:
             query (str): Browse node ID.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -439,7 +404,7 @@ class Amazon:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         **kwargs
     ) -> EcommerceResponse:
         """
@@ -447,24 +412,19 @@ class Amazon:
 
         Args:
             query (str): 13-character seller ID.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -509,7 +469,7 @@ class AmazonAsync:
         context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -519,21 +479,16 @@ class AmazonAsync:
 
         Args:
             query (str): The search query.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            context: Optional[list],
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -544,7 +499,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -582,7 +537,7 @@ class AmazonAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -592,17 +547,12 @@ class AmazonAsync:
 
         Args:
             url (str): The URL to scrape.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -613,7 +563,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -649,7 +599,7 @@ class AmazonAsync:
         context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -659,19 +609,14 @@ class AmazonAsync:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "context": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            context: Optional[list],
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -682,7 +627,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -722,7 +667,7 @@ class AmazonAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -732,20 +677,15 @@ class AmazonAsync:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -756,7 +696,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -797,7 +737,7 @@ class AmazonAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -807,20 +747,15 @@ class AmazonAsync:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -831,7 +766,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -870,7 +805,7 @@ class AmazonAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -880,18 +815,13 @@ class AmazonAsync:
 
         Args:
             query (str): 10-symbol ASIN code.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -902,7 +832,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -941,7 +871,7 @@ class AmazonAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -951,20 +881,15 @@ class AmazonAsync:
 
         Args:
             query (str): Browse node ID.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "start_page": 1,
-                    "pages": 1,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -975,7 +900,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -1014,7 +939,7 @@ class AmazonAsync:
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
-        request_timeout: Optional[int] = None,
+        request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
@@ -1024,18 +949,13 @@ class AmazonAsync:
 
         Args:
             query (str): 13-character seller ID.
-            opts (dict, optional): Configuration options for the search.
-            Defaults to:
-                {
-                    "domain": com,
-                    "geo_location": None,
-                    "user_agent_type": desktop,
-                    "callback_url": None,
-                    "render": None,
-                    "parse": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.            
+            user_agent_type (Optional[str]): Device type and browser.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            render (Optional[str]): Enables JavaScript rendering.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -1046,7 +966,7 @@ class AmazonAsync:
             Defaults to 50
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response containing the scraped results.
         """
 
         config = prepare_config(

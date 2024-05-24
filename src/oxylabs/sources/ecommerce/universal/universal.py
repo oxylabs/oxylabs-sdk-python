@@ -39,26 +39,24 @@ class Universal:
 
         Args:
             url (str): The URL to be scraped.
-            opts (UniversalUrlOpts, optional): Configuration options for the search. Defaults to:
-                {
-                    "user_agent_type": desktop,
-                    "geo_location": None,
-                    "locale": None,
-                    "render": None,
-                    "content_encoding": "base64",
-                    "context": None,
-                    "callback_url": None,
-                    "parse": None,
-                    "parser_type": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            user_agent_type (Optional[str]): Device type and browser.
+            "geo_location": None,
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            render (Optional[str]): Enables JavaScript rendering.
+            content_encoding:  Add this parameter if you are downloading images. 
+            context: Optional[list],
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parser_type: Set the value to ecommerce_product to access our AI-powered Adaptive Parser.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -115,20 +113,18 @@ class UniversalAsync:
 
         Args:
             url (str): The URL to be scraped.
-            opts (UniversalUrlOpts, optional): Configuration options for the search. Defaults to:
-                {
-                    "user_agent_type": desktop,
-                    "geo_location": None,
-                    "locale": None,
-                    "render": None,
-                    "content_encoding": "base64",
-                    "context": None,
-                    "callback_url": None,
-                    "parse": None,
-                    "parser_type": None,
-                    "parsing_instructions": None,
-                }
-                This parameter allows customization of the search request.
+            user_agent_type (Optional[str]): Device type and browser.
+            "geo_location": None,
+            locale (Optional[str]): Accept-Language header value which changes your Bing search 
+                            page web interface language.
+            render (Optional[str]): Enables JavaScript rendering.
+            content_encoding:  Add this parameter if you are downloading images. 
+            context: Optional[list],
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parser_type: Set the value to ecommerce_product to access our AI-powered Adaptive Parser.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            
             request_timeout (int | 165, optional): The interval in seconds for
             the request to time out if no response is returned.
             Defaults to 165.
@@ -139,7 +135,7 @@ class UniversalAsync:
             Defaults to 50.
 
         Returns:
-            dict: The response from the server after the job is completed.
+            EcommerceResponse: The response from the server after the job is completed.
         """
 
         config = prepare_config(
