@@ -53,19 +53,19 @@ pip install oxylabs
 ### Quick Start
 
 ```python
-from oxylabs import SERP
+from oxylabs import RealtimeClient
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
 # Initialize the SERP Realtime client with your credentials.
-c = SERP(username, password)
+c = RealtimeClient(username, password)
 
 # Use `bing_search` as a source to scrape Bing with nike as a query.
-result = c.bing.scrape_search("nike")
+res = c.serp.bing.scrape_search("nike")
 
-print(result)
+print(res.raw)
 ```
 
 ### Integration Methods
@@ -73,9 +73,9 @@ print(result)
 There are three integration method for the Oxylabs SERP API, each exposed via
 different packages:
 
-- Realtime (Sync) - `SERP(username, password)`
-- Push-Pull (Async) - `SERPAsync(username, password)`
-- Proxy Endpoint - `Proxy(username, password)`
+- Realtime (Sync) - `RealtimeClient(username, password)`
+- Push-Pull (Async) - `AsyncClient(username, password)`
+- Proxy Endpoint - `ProxyClient(username, password)`
 
 Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/getting-started/integration-methods)
 and how this SDK uses them [here](#integration-methods-1).
@@ -97,8 +97,8 @@ In the SDK you'll just need to call the relevant function name from the client.
 For example if you wish to scrape Bing with `bing_search` as a source:
 
 ```python
-c = SERP(username, password)
-result = c.bing.scrape_search("football")
+c = RealtimeClient(username, password)
+result = c.serp.bing.scrape_search("football")
 ```
 
 ### Query Parameters
@@ -111,7 +111,7 @@ By default, scrape functions will use default parameters. If you need to send
 specific query parameters, here is an example of how to do it:
 
 ```python
-result = c.bing.scrape_search(
+result = c.serp.bing.scrape_search(
 	"football",
     start_page=1,
     pages=3,
@@ -127,20 +127,20 @@ commonly used parameter values as constants in our library. You can use them by
 importing the oxylabs type modue.
 
 ```python
-from oxylabs.types import user_agent_type, render, domain
+from oxylabs.utils.types import user_agent_type, render, domain
 ```
 
-For the full list you can check the `utils` directory. You can send in these
+For the full list you can check the `types` directory. You can send in these
 values as strings too.
 
 These can be used as follows:
 
 ```python
-from oxylabs.types import user_agent_type, render, domain
+from oxylabs.utils.types import user_agent_type, render, domain
 
-c = SERP(username, password)
+c = RealtimeClient(username, password)
 
-result = c.google.scrape_search(
+result = c.serp.google.scrape_search(
     "adidas",
     user_agent_type=user_agent_type.DESKTOP,
     render=render.HTML,
@@ -191,11 +191,11 @@ username = "username"
 password = "password"
 
 # Initialize the SERP Realtime client with your credentials.
-c = SERP(username, password)
+c = RealtimeClient(username, password)
 
 # Use `bing_search` as a source to scrape Bing using custom parsing
 # instructions.
-result = c.bing.scrape_url(
+result = c.serp.bing.scrape_url(
     "https://www.bing.com/search?q=nike",
     parse=True,
     parsing_instructions={
@@ -210,7 +210,6 @@ result = c.bing.scrape_url(
     },
 )
 
-print(result)
 ```
 
 ## Integration Methods
@@ -238,7 +237,7 @@ the Response. Below is an example of this integration method:"
 
 ```python
 import asyncio
-from oxylabs import SERPAsync
+from oxylabs import AsyncClient
 
 async def main():
     # Set your Oxylabs API Credentials.
@@ -246,7 +245,7 @@ async def main():
     password = "password"
 
     # Initialize the SERP async client with your credentials.
-    c = SERPAsync(username, password)
+    c = AsyncClient(username, password)
 
     # 'timeout' specifies the maximum time (in seconds) to wait for the scraping
     #  job to complete.
@@ -255,13 +254,13 @@ async def main():
     # (in seconds)
     # between consecutive status checks of the job.
     tasks = [
-        c.bing.scrape_url(
+        c.serp.bing.scrape_url(
             "https://www.bing.com/search?q=adidas",
             parse=True,
             timeout=35,
             poll_interval=3,
         ),
-        c.bing.scrape_url(
+        c.serp.bing.scrape_url(
             "https://www.bing.com/search?q=puma",
             parse=True,
             timeout=45,
@@ -271,7 +270,6 @@ async def main():
 
     for future in asyncio.as_completed(tasks):
         result = await future
-        print(result)
 
 
 if __name__ == "__main__":
@@ -294,14 +292,14 @@ The Proxy endpoint integration is very open ended allowing many different use
 cases:
 
 ```python
-from oxylabs import Proxy
+from oxylabs import ProxyClient
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
-# Initialize the Proxy client with your credentials.
-proxy = Proxy(username, password)
+# Initialize the ProxyClient with your credentials.
+proxy = ProxyClient(username, password)
 
 # Customize headers for specific requirements (optional).
 proxy.add_user_agent_header("desktop_chrome")
