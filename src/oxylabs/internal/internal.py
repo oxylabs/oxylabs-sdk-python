@@ -85,7 +85,6 @@ class RealtimeClient(BaseClient):
             else:
                 logger.error(f"Unsupported method: {method}")
                 return None
-            print(response.status_code)
             response.raise_for_status()
 
             if response.status_code == 200:

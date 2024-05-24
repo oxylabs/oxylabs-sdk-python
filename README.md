@@ -158,9 +158,9 @@ documentation.
 Here's an example for Google Search scraping:
 
 ```python
-c = SERP(username, password)
+c = RealtimeClient(username, password)
 
-c.google.scrape_search(
+c.serp.google.scrape_search(
     "adidas",
     parse=True,
     context=[
@@ -184,13 +184,13 @@ c.google.scrape_search(
 SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser):
 
 ```python
-from oxylabs import SERP
+from oxylabs import RealtimeClient
 
 # Set your Oxylabs API Credentials.
 username = "username"
 password = "password"
 
-# Initialize the SERP Realtime client with your credentials.
+# Initialize the Realtime client with your credentials.
 c = RealtimeClient(username, password)
 
 # Use `bing_search` as a source to scrape Bing using custom parsing
@@ -244,7 +244,7 @@ async def main():
     username = "username"
     password = "password"
 
-    # Initialize the SERP async client with your credentials.
+    # Initialize the async client with your credentials.
     c = AsyncClient(username, password)
 
     # 'timeout' specifies the maximum time (in seconds) to wait for the scraping
