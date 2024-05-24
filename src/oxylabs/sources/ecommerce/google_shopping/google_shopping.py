@@ -342,7 +342,9 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_shopping_url(
@@ -401,7 +403,9 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_shopping_products(
@@ -469,7 +473,9 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_product_pricing(
@@ -543,5 +549,7 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

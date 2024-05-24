@@ -22,7 +22,11 @@ def get_valid_values(module: object) -> list:
     Returns:
         list: A list of valid values from the module.
     """
-    return [getattr(module, name) for name in dir(module) if not name.startswith("__")]
+    return [
+        getattr(module, name)
+        for name in dir(module)
+        if not name.startswith("__")
+    ]
 
 
 VALID_FN_NAMES = get_valid_values(fn_name)

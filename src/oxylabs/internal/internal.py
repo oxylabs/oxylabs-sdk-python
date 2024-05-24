@@ -4,9 +4,10 @@ import logging
 
 import aiohttp
 import requests
+
 from oxylabs.sources.ecommerce.ecommerce import Ecommerce, EcommerceAsync
 from oxylabs.sources.serp.serp import SERP, SERPAsync
-from oxylabs.utils.defaults import SYNC_BASE_URL, ASYNC_BASE_URL
+from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -155,7 +156,9 @@ class AsyncClient(BaseClient):
         while asyncio.get_event_loop().time() < end_time:
             try:
                 async with user_session.get(
-                    job_status_url, headers=self._headers, timeout=poll_interval
+                    job_status_url,
+                    headers=self._headers,
+                    timeout=poll_interval,
                 ) as response:
                     data = await response.json()
                     response.raise_for_status()
@@ -193,7 +196,9 @@ class AsyncClient(BaseClient):
         """
         result_url = f"{self._base_url}/{job_id}/results"
         try:
-            async with user_session.get(result_url, headers=self._headers) as response:
+            async with user_session.get(
+                result_url, headers=self._headers
+            ) as response:
                 data = await response.json()
                 response.raise_for_status()
                 return data
@@ -204,7 +209,9 @@ class AsyncClient(BaseClient):
         except aiohttp.ClientConnectionError as e:
             logger.error(f"Connection error occurred: {e}")
         except asyncio.TimeoutError:
-            logger.error(f"Timeout error. The request to {result_url} has timed out.")
+            logger.error(
+                f"Timeout error. The request to {result_url} has timed out."
+            )
         except Exception as e:
             logger.error(f"An error occurred: {e} - {data['message']}")
         return None

@@ -164,5 +164,7 @@ class UniversalAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

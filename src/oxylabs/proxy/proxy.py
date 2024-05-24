@@ -63,7 +63,9 @@ class ProxyClient:
         try:
             config = prepare_config(request_timeout=request_timeout)
             self._url_to_scrape = url
-            response = self._session.get(url, timeout=config["request_timeout"])
+            response = self._session.get(
+                url, timeout=config["request_timeout"]
+            )
             response.raise_for_status()
             return response
         except requests.exceptions.Timeout:
@@ -144,7 +146,9 @@ class ProxyClient:
         if parse or parsing_instructions:
             self._session.headers["x-oxylabs-parse"] = "1"
             if self._is_universal_source():
-                self._session.headers["x-oxylabs-parser-type"] = "universal_ecommerce"
+                self._session.headers["x-oxylabs-parser-type"] = (
+                    "universal_ecommerce"
+                )
             else:
                 self._session.headers.pop("x-oxylabs-parser-type", None)
         else:
@@ -160,7 +164,8 @@ class ProxyClient:
         """
         parsed_url = urlparse(self._url_to_scrape)
         if any(
-            domain in parsed_url.netloc.decode() for domain in NON_UNIVERSAL_DOMAINS
+            domain in parsed_url.netloc.decode()
+            for domain in NON_UNIVERSAL_DOMAINS
         ):
             return False
 

@@ -569,7 +569,9 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_url(
@@ -631,7 +633,9 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_product(
@@ -701,7 +705,9 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_pricing(
@@ -774,7 +780,9 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_reviews(
@@ -847,7 +855,9 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_questions(
@@ -914,7 +924,9 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_bestsellers(
@@ -987,7 +999,9 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_sellers(
@@ -1054,5 +1068,7 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

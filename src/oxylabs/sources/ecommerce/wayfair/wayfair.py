@@ -175,7 +175,9 @@ class WayfairAsync:
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response
 
     async def scrape_url(
@@ -227,5 +229,7 @@ class WayfairAsync:
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(payload, config)
+        response = await self._ecommerce_async_instance._get_resp(
+            payload, config
+        )
         return response

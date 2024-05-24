@@ -1,1 +1,1 @@
-from .internal import RealtimeClient, AsyncClient
+from .internal import AsyncClient, RealtimeClient
