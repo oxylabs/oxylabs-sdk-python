@@ -9,127 +9,7 @@ from .defaults import (
     DEFAULT_REQUEST_TIMEOUT,
     DEFAULT_REQUEST_TIMEOUT_ASYNC,
 )
-from .types import domain, fn_name, locale, render, source, user_agent_type
-
-
-class BaseSearchOpts:
-    def __init__(
-        self,
-        domain: str = None,
-        start_page: int = None,
-        pages: int = None,
-        limit: int = None,
-        user_agent_type: str = None,
-        callback_url: str = None,
-        parsing_instructions: str = None,
-    ):
-        """
-        Represents the base search options for a search operation.
-
-        Args:
-            domain (str): The domain to search on. .
-            start_page (int): The starting page number.
-            pages (int): The number of pages to search. 
-            limit (int): The maximum number of search results per page.
-            user_agent_type (str): The user agent type to use. 
-            callback_url (str): The URL to send the search results callback to. 
-            Defaults to None.
-            parsing_instructions (dict): Instructions for parsing the search 
-            results. Defaults to None.
-        """
-        self.domain = domain
-        self.start_page = start_page
-        self.pages = pages
-        self.limit = limit
-        self.user_agent_type = user_agent_type
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-
-
-class BaseUrlOpts:
-    """Options for configuring the base URL."""
-
-    def __init__(
-        self,
-        user_agent_type: str = None,
-        callback_url: str = None,
-        parsing_instructions: str = None,
-    ):
-        """
-        Initialize the BaseUrlOpts class.
-
-        Args:
-            user_agent_type (str): The type of user agent to use. 
-            callback_url (str, optional): The callback URL to use. Defaults to 
-            None.
-            parsing_instructions (dict, optional): Instructions for parsing the 
-            response. Defaults to None.
-        """
-        self.user_agent_type = user_agent_type
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-
-
-class BaseGoogleOpts:
-    def __init__(
-        self,
-        geo_location: str = None,
-        user_agent_type: str = None,
-        render: bool = None,
-        callback_url: str = None,
-        parsing_instructions: dict = None,
-        context: list = None,
-    ):
-        """
-        Base class for Google-specific options.
-
-        Args:
-            geo_location (str, optional): The geographic location to use for 
-            the request. Defaults to None.
-            user_agent_type (str, optional): The type of user agent to use. 
-            render (bool, optional): Whether to render JavaScript on the page. 
-            Defaults to None.
-            callback_url (str, optional): The URL to send a callback request 
-            to. Defaults to None.
-            parsing_instructions (dict, optional): Instructions for parsing the 
-            response. Defaults to None.
-            context (list, optional): Additional context information. Defaults 
-            to None.
-        """
-        self.geo_location = geo_location
-        self.user_agent_type = user_agent_type
-        self.render = render
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-        self.context = context
-
-
-class BaseEcommerceOpts:
-    """
-    Represents the options for an ecommerce request.
-
-    Args:
-        user_agent_type (str): The type of user agent to use. 
-        render (str): The rendering mode for the request.
-        callback_url (str): The URL to which the response will be sent 
-        asynchronously.
-        geo_location (str): The desired geographic location for the request.
-        parsing_instructions (str): Instructions for parsing the response.
-    """
-
-    def __init__(
-        self,
-        user_agent_type: str = None,
-        render: str = None,
-        callback_url: str = None,
-        geo_location: str = None,
-        parsing_instructions: str = None,
-    ):
-        self.user_agent_type = user_agent_type
-        self.callback_url = callback_url
-        self.parsing_instructions = parsing_instructions
-        self.render = render
-        self.geo_location = geo_location
+from .types import fn_name
 
 
 def get_valid_values(module: object) -> list:
@@ -149,12 +29,7 @@ def get_valid_values(module: object) -> list:
     ]
 
 
-VALID_UAS = get_valid_values(user_agent_type)
-VALID_RENDERS = get_valid_values(render)
 VALID_FN_NAMES = get_valid_values(fn_name)
-VALID_SOURCES = get_valid_values(source)
-VALID_DOMAINS = get_valid_values(domain)
-VALID_LOCALES = get_valid_values(locale)
 
 
 def prepare_config(**kwargs):
@@ -162,11 +37,11 @@ def prepare_config(**kwargs):
     Prepare a configuration dictionary based on the provided keyword arguments.
 
     Args:
-        request_timeout (int, optional): The timeout value in seconds. Defaults 
+        request_timeout (int, optional): The timeout value in seconds. Defaults
         to None.
-        poll_interval (int, optional): The poll interval value in seconds. 
+        poll_interval (int, optional): The poll interval value in seconds.
         Defaults to None.
-        job_completion_timeout (int, optional): The job completion timeout 
+        job_completion_timeout (int, optional): The job completion timeout
         value in seconds. Defaults to None.
 
     Returns:
@@ -206,7 +81,7 @@ def validate_url(input_url: str, host: str) -> None:
         host (str): The expected domain or host.
 
     Raises:
-        ValueError: If the URL parameter is empty, missing scheme, missing 
+        ValueError: If the URL parameter is empty, missing scheme, missing
         host, or does not belong to the specified host.
 
     Returns:
@@ -232,211 +107,6 @@ def validate_url(input_url: str, host: str) -> None:
         raise ValueError(f"URL does not belong to {host}")
 
     return None
-
-
-def check_user_agent_type_validity(user_agent_type: str) -> None:
-    """
-    Check the validity of a user agent type.
-
-    Args:
-        user_agent_type (str): The user agent type to check.
-
-    Raises:
-        ValueError: If the user agent type is invalid.
-    """
-    if user_agent_type and user_agent_type not in VALID_UAS:
-        raise ValueError(f"Invalid user agent parameter: {user_agent_type}")
-
-
-def check_render_validity(render: str) -> None:
-    """
-    Check the validity of the render parameter.
-
-    Args:
-        render (str): The render parameter to be checked.
-
-    Raises:
-        ValueError: If the render parameter is invalid.
-    """
-    if render and render not in VALID_RENDERS:
-        raise ValueError(f"Invalid render parameter: {render}")
-
-
-def check_domain_validity(domain: str, acceptable_domains: list) -> None:
-    """
-    Check the validity of a domain.
-
-    Args:
-        domain (str): The domain to check.
-        acceptable_domains (list): A list of acceptable domains.
-
-    Raises:
-        ValueError: If the domain is invalid.
-
-    Returns:
-        None
-    """
-    if domain and domain not in acceptable_domains:
-        raise ValueError(f"Invalid domain parameter: {domain}")
-
-
-def check_locale_validity(locale: str, acceptable_locales: list) -> None:
-    """
-    Check the validity of a given locale.
-
-    Args:
-        locale (str): The locale to be checked.
-        acceptable_locales (list): A list of acceptable locales.
-
-    Raises:
-        ValueError: If the locale is invalid.
-
-    Returns:
-        None
-    """
-    if locale and locale not in acceptable_locales:
-        raise ValueError(f"Invalid locale parameter: {locale}")
-
-
-def check_limit_validity(limit: int) -> None:
-    """
-    Check the validity of the limit parameter.
-
-    Args:
-        limit: An integer representing the limit parameter.
-
-    Raises:
-        ValueError: If the limit parameter is less than or equal to 0.
-    """
-    if limit and limit <= 0:
-        raise ValueError("Limit parameter must be greater than 0")
-
-
-def check_limit_validity_ecom(limit: int) -> None:
-    """
-    Check the validity of the limit parameter for e-commerce.
-
-    Args:
-        limit: An integer representing the limit parameter.
-
-    Raises:
-        ValueError: If the limit parameter is not 24, 48, or 96.
-    """
-    if limit and limit != 24 and limit != 48 and limit != 96:
-        raise ValueError("Limit parameter must be 24, 48, or 96")
-
-
-def check_pages_validity(pages: int) -> None:
-    """
-    Check the validity of the pages parameter.
-
-    Args:
-        pages (int): The number of pages.
-
-    Raises:
-        ValueError: If pages is less than or equal to 0.
-    """
-    if pages and pages <= 0:
-        raise ValueError("Pages parameter must be greater than 0")
-
-
-def check_start_page_validity(start_page: int) -> None:
-    """
-    Check the validity of the start page parameter.
-
-    Args:
-        start_page (int): The start page parameter to be checked.
-
-    Raises:
-        ValueError: If the start page parameter is less than or equal to 0.
-    """
-    if start_page and start_page <= 0:
-        raise ValueError("Start page parameter must be greater than 0")
-
-
-def check_sorting_parameter_validity(
-    context: List[dict], acceptable_sorting_parameters: List[str]
-) -> None:
-    """
-    Check the validity of the sorting parameter in the given context.
-
-    Args:
-        context (List[dict]): The context containing the sorting parameter.
-        acceptable_sorting_parameters (List[str]): The list of acceptable 
-        sorting parameters.
-
-    Raises:
-        ValueError: If the sorting parameter in the context is invalid.
-    """
-    if context and any(
-        item.get("key") == "sort_by"
-        and item.get("value") not in acceptable_sorting_parameters
-        for item in context
-    ):
-        raise ValueError(
-            f"Invalid sorting parameter, must be one of {acceptable_sorting_parameters}"
-        )
-
-
-def check_price_range_validity(context: List[dict]) -> None:
-    """
-    Check the validity of price range parameters.
-
-    Args:
-        context: A list of dictionaries representing the context.
-
-    Raises:
-        ValueError: If any of the price range parameters is less than 0.
-    """
-    if context and any(
-        item.get("key") in ("min_price", "max_price")
-        and item.get("value") is not None
-        and item.get("value") < 0
-        for item in context
-    ):
-        raise ValueError("Price range parameters must be greater than 0")
-
-
-def check_http_method_validity(context: List[dict]) -> None:
-    """
-    Check the validity of the HTTP method in the given context.
-
-    Args:
-        context: A list of dictionaries representing the context.
-
-    Raises:
-        ValueError: If an invalid HTTP method is found in the context.
-    """
-    if context and any(
-        item.get("key") == "http_method"
-        and item.get("value") not in ["post", "get"]
-        for item in context
-    ):
-        raise ValueError(
-            "Invalid HTTP method in context, must be one of ['post', 'get']"
-        )
-
-
-def check_content_for_post_validity(context: list) -> None:
-    """
-    Check if the content is valid for a POST request.
-
-    Args:
-        context (list): The context containing the request information.
-
-    Raises:
-        ValueError: If the content is provided but the request method is not 
-        POST.
-    """
-    if (
-        context
-        and any(item.get("key") == "content" for item in context)
-        and not any(
-            item.get("key") == "http_method" and item.get("value") == "post"
-            for item in context
-        )
-    ):
-        raise ValueError("Content is only allowed for POST requests")
 
 
 async def ensure_session(session) -> aiohttp.ClientSession:
@@ -676,7 +346,7 @@ def validate_list_string_optional_int(args: list) -> None:
         args: A list containing the arguments to be validated.
 
     Raises:
-        ValueError: If the first argument is not a non-empty string or if the 
+        ValueError: If the first argument is not a non-empty string or if the
         second argument is not a non-zero integer when present.
     """
     if (
@@ -690,23 +360,3 @@ def validate_list_string_optional_int(args: list) -> None:
         raise ValueError(
             "_args second argument must be a non-zero integer when present"
         )
-
-
-def check_context_tbm_validity(
-    context: List[dict], acceptable_tbms: List[str]
-) -> None:
-    """
-    Check the validity of the 'tbm' parameter value in the given context.
-
-    Args:
-        context: A list of dictionaries representing the context.
-        acceptable_tbms: A list of acceptable 'tbm' parameter values.
-
-    Raises:
-        ValueError: If the 'tbm' parameter value in the context is invalid.
-    """
-    if context and any(
-        item.get("key") == "tbm" and item.get("value") not in acceptable_tbms
-        for item in context
-    ):
-        raise ValueError("Invalid tbm parameter value in context")

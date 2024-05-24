@@ -1,6 +1,6 @@
 import unittest
-from src.oxylabs.sources.ecommerce import Ecommerce, EcommerceAsync
-from src.oxylabs.utils.types import user_agent_type
+from oxylabs.sources.ecommerce import Ecommerce, EcommerceAsync
+from oxylabs.utils.types import user_agent_type
 
 class TestWayfairSearchSync(unittest.TestCase):
     def test_wayfair_search_sync(self):

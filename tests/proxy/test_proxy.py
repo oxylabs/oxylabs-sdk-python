@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
-from src.oxylabs.proxy import Proxy
+from oxylabs.proxy import ProxyClient
 
 class TestProxyGet(unittest.TestCase):
     @patch('requests.Session')
@@ -40,7 +40,7 @@ class TestProxyGet(unittest.TestCase):
         session_instance.get.return_value = mock_response
 
         # Initialize the Proxy with credentials
-        proxy = Proxy("wsapiuman", "A1705pdVe9hil")
+        proxy = ProxyClient("wsapiuman", "A1705pdVe9hil")
 
         # Customize headers (optional)
         proxy.add_user_agent_header("desktop_chrome")
