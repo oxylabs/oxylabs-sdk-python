@@ -1,5 +1,6 @@
 from setuptools import find_packages, setup
 
+
 def get_version(rel_path):
     with open(rel_path, "r") as file:
         for line in file.read().splitlines():
@@ -14,7 +15,7 @@ long_description = """
 The official Python library for the Oxylabs Scraper APIs.
 
 Collect public data at scale with industry-leading web scraping solutions and the world's largest ethical proxy network.
-Documentation can be found at https://github.com/mslmio/oxylabs-sdk-python.
+Documentation can be found at https://github.com/oxylabs/oxylabs-sdk-python.
 """
 
 setup(
@@ -26,7 +27,7 @@ setup(
     author="Oxylabs",
     author_email="support@oxylabs.io",
     license="MIT",
-    package_dir={'': 'src'},
-    packages=find_packages(where='src'),
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
     install_requires=["aiohttp", "requests"],
 )
