@@ -22,15 +22,15 @@ involved. The community looks forward to your contributions.
 > answered your question.
 
 Before you ask a question, it is best to search for existing
-[Issues](https://github.com/mslmio/oxylabs-sdk-python/issues) that might help 
-you. In case you have found a suitable issue and still need clarification, you 
-can write your question in this issue. It is also advisable to search the 
+[Issues](https://github.com/oxylabs/oxylabs-sdk-python/issues) that might help
+you. In case you have found a suitable issue and still need clarification, you
+can write your question in this issue. It is also advisable to search the
 internet for answers first.
 
 If you then still feel the need to ask a question and need clarification, we
 recommend the following:
 
-- Open an [Issue](https://github.com/mslmio/oxylabs-sdk-python/issues/new).
+- Open an [Issue](https://github.com/oxylabs/oxylabs-sdk-python/issues/new).
 - Provide as much context as you can about what you're running into.
 - Provide project and platform versions (nodejs, npm, etc), depending on what
   seems relevant.
@@ -47,9 +47,9 @@ We will then take care of the issue as soon as possible.
 
 ## Code Formatting
 
-This project uses [Black](https://black.readthedocs.io/en/stable/) and 
-[isort](https://pycqa.github.io/isort/) for code formatting. Before you submit 
-your contribution, please make sure your code is formatted according to these 
+This project uses [Black](https://black.readthedocs.io/en/stable/) and
+[isort](https://pycqa.github.io/isort/) for code formatting. Before you submit
+your contribution, please make sure your code is formatted according to these
 style guides.
 
 First, you will need to install the required tools if you haven't already:
@@ -58,8 +58,8 @@ First, you will need to install the required tools if you haven't already:
 pip install black isort
 ```
 
-You can use the provided `fmt.sh` script to automatically format your code. 
-This script runs `isort` and `black` on the `src` directory. Here's how you can 
+You can use the provided `fmt.sh` script to automatically format your code.
+This script runs `isort` and `black` on the `src` directory. Here's how you can
 run it:
 
 ```bash
@@ -68,8 +68,8 @@ scripts/fmt.sh
 
 ## Running Tests
 
-To ensure the quality of the code, we encourage you to run tests after making 
-any changes and before submitting a contribution. We have a script that 
+To ensure the quality of the code, we encourage you to run tests after making
+any changes and before submitting a contribution. We have a script that
 facilitates running the unit tests for the project.
 
 To run the tests, use the `tests.sh` script located in the `scripts` directory.
@@ -101,7 +101,7 @@ possible.
 - To see if other users have experienced (and potentially already solved) the
   same issue you are having, check if there is not already a bug report
   existing for your bug or error in the [bug
-  tracker](https://github.com/mslmio/oxylabs-sdk-python/issues?q=label%3Abug).
+  tracker](https://github.com/oxylabs/oxylabs-sdk-python/issues?q=label%3Abug).
 - Also make sure to search the internet (including Stack Overflow) to see if
   users outside of the GitHub community have discussed the issue.
 - Collect information about the bug:
@@ -122,8 +122,8 @@ possible.
 We use GitHub issues to track bugs and errors. If you run into an issue with the
 project:
 
-- Open an [Issue](https://github.com/mslmio/oxylabs-sdk-python/issues/new).
-  (Since we can't be sure at this point whether it is a bug or not, we ask you 
+- Open an [Issue](https://github.com/oxylabs/oxylabs-sdk-python/issues/new).
+  (Since we can't be sure at this point whether it is a bug or not, we ask you
   not to talk about a bug yet and not to label the issue.)
 - Explain the behavior you would expect and the actual behavior.
 - Please provide as much context as possible and describe the *reproduction
@@ -156,7 +156,7 @@ community to understand your suggestion and find related suggestions.
 - Read the [documentation](https://developers.oxylabs.io/) carefully and
   find out if the functionality is already covered, maybe by an individual
   configuration.
-- Perform a [search](https://github.com/mslmio/oxylabs-sdk-python/issues) to see
+- Perform a [search](https://github.com/oxylabs/oxylabs-sdk-python/issues) to see
   if the enhancement has already been suggested. If it has, add a comment to the
   existing issue instead of opening a new one.
 - Find out whether your idea fits with the scope and aims of the project. It's
@@ -169,7 +169,7 @@ community to understand your suggestion and find related suggestions.
 #### How Do I Submit a Good Enhancement Suggestion?
 
 Enhancement suggestions are tracked as
-[GitHub issues](https://github.com/mslmio/oxylabs-sdk-python/issues).
+[GitHub issues](https://github.com/oxylabs/oxylabs-sdk-python/issues).
 
 - Use a **clear and descriptive title** for the issue to identify the
   suggestion.
