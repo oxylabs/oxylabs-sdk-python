@@ -40,7 +40,7 @@ class TestProxyGet(unittest.TestCase):
         session_instance.get.return_value = mock_response
 
         # Initialize the Proxy with credentials
-        proxy = ProxyClient("wsapiuman", "A1705pdVe9hil")
+        proxy = ProxyClient("CHANGEME", "CHANGEME")
 
         # Customize headers (optional)
         proxy.add_user_agent_header("desktop_chrome")
