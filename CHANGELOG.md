@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Security updates in 3rd party libraries
+
 ## 1.0.3
 
 - Updated import paths to resolve module not found errors.
