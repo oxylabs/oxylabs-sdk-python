@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Cleaned up tests from obsolete credentials
+
 ## 1.0.4
 
 - Security updates in 3rd party libraries
