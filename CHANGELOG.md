@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.6
+
+- Security updates in 3rd party libraries
+- Docs update
+
 ## 1.0.5
 
 - Cleaned up tests from obsolete credentials
