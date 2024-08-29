@@ -1,6 +1,7 @@
 import asyncio
 import base64
 import logging
+from platform import python_version, architecture
 
 import aiohttp
 import requests
@@ -8,6 +9,7 @@ import requests
 from oxylabs.sources.ecommerce.ecommerce import Ecommerce, EcommerceAsync
 from oxylabs.sources.serp.serp import SERP, SERPAsync
 from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
+from oxylabs._version import __version__
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -39,9 +41,11 @@ class BaseClient:
     def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
         self._base_url = base_url
         self._api_credentials = api_credentials
+        bits, _ = architecture()
         self._headers = {
             "Content-Type": "application/json",
             "Authorization": f"Basic {self._api_credentials.get_encoded_credentials()}",
+            "x-oxylabs-sdk": f"oxylabs-sdk-python/{__version__} ({python_version()}; {bits})",
         }
 
 
