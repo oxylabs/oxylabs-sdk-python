@@ -1,4 +1,5 @@
 import logging
+from platform import python_version, architecture
 from typing import Optional
 from urllib.parse import quote, urlparse
 
@@ -10,6 +11,7 @@ from oxylabs.utils.defaults import (
     PROXY_PORT,
 )
 from oxylabs.utils.utils import prepare_config
+from oxylabs._version import __version__
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -35,6 +37,9 @@ class ProxyClient:
         }
         self._session.verify = False
         self._url_to_scrape = None
+        bits, _ = architecture()
+        self._session.headers["x-oxylabs-sdk"] = f"oxylabs-sdk-python/{__version__} ({python_version()}; {bits})"
+
 
     def _build_proxy_url(self) -> str:
         """
