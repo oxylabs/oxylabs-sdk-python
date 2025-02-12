@@ -1,17 +1,26 @@
 # Changelog
 
+## 2.0.0
+- SERP and Ecommerce source split has been removed. New common modules have been created: API, Client and Response.
+- Support for new sources has been added: google_maps, google_lens, kroger, kroger_product, kroger_search, youtube_transcript.
+- Added browser_instructions parameter for universal source.
+- Docs update.
+
+## 1.0.7
+- Add an SDK version identifier to all requests.
+
 ## 1.0.6
 
-- Security updates in 3rd party libraries
-- Docs update
+- Security updates in 3rd party libraries.
+- Docs update.
 
 ## 1.0.5
 
-- Cleaned up tests from obsolete credentials
+- Cleaned up tests from obsolete credentials.
 
 ## 1.0.4
 
-- Security updates in 3rd party libraries
+- Security updates in 3rd party libraries.
 
 ## 1.0.3
 

@@ -1,4 +1,5 @@
-class EcommerceResponse:
+
+class Response:
     def __init__(self, data):
         if data is None:
             data = {}
@@ -121,7 +122,6 @@ class Result:
         self.raw = data
         self.paid = [Paid(item) for item in data.get("paid", [])]
         self.filters = [Filters(item) for item in data.get("filters", [])]
-        self.organic = [Organic(item) for item in data.get("organic", [])]
         self.search_information = SearchInformation(
             data.get("search_information")
         )
@@ -146,6 +146,47 @@ class Result:
         self.price_str = data.get("price_str")
         self.price_upper = data.get("price_upper")
         self.ratings_count = data.get("ratings_count")
+        self.pla = Pla(data.get("pla", {}))
+        self.images = Image(data.get("images", {}))
+        self.twitter = Twitter(data.get("twitter", {}))
+        self.knowledge = Knowledge(data.get("knowledge", {}))
+        self.local_pack = LocalPack(data.get("local_pack", {}))
+        self.top_stories = TopStory(data.get("top_stories", {}))
+        self.popular_products = [
+            PopularProducts(item) for item in data.get("popular_products", [])
+        ]
+        self.related_searches = RelatedSearches(
+            data.get("related_searches", {})
+        )
+        self.related_questions = RelatedQuestions(
+            data.get("related_questions", {})
+        )
+        self.item_carousel = ItemCarousel(data.get("item_carousel", {}))
+        self.recipes = Recipes(data.get("recipes", {}))
+        self.videos = Videos(data.get("videos", {}))
+        self.featured_snippet = [
+            FeaturedSnippet(item) for item in data.get("featured_snippet", [])
+        ]
+        self.related_searches_categorized = [
+            RelatedSearchesCategorized(item)
+            for item in data.get("related_searches_categorized", [])
+        ]
+        self.hotels = Hotels(data.get("hotels", {}))
+        self.flights = Flights(data.get("flights", {}))
+        self.video_box = VideoBox(data.get("video_box", {}))
+        self.local_service_ads = LocalServiceAds(
+            data.get("local_service_ads", {})
+        )
+        self.navigation = [
+            Navigation(item) for item in data.get("navigation", [])
+        ]
+        self.instant_answers = [
+            InstantAnswers(item) for item in data.get("instant_answers", [])
+        ]
+        self.visually_similar_images = VisuallySimilarImages(
+            data.get("visually_similar_images", {})
+        )
+        self.total_results_count = data.get("total_results_count")
 
 
 class Paid:
@@ -235,6 +276,7 @@ class Organic:
         self.raw = data
         self.pos = data.get("pos")
         self.url = data.get("url")
+        self.desc = data.get("desc")
         self.type = data.get("type")
         self.price = data.get("price")
         self.title = data.get("title")
@@ -258,6 +300,9 @@ class Organic:
         self.variations = [
             Variations(item) for item in data.get("variations", [])
         ]
+        self.images = [item for item in data.get("images", [])]
+        self.site_links = OrganicSitelinks(data.get("sitelinks", {}))
+        self.url_shown = data.get("url_shown")
         self.pos_overall = data.get("pos_overall")
 
 
@@ -289,6 +334,8 @@ class SearchInformation:
         self.raw = data
         self.query = data.get("query")
         self.showing_results_for = data.get("showing_results_for")
+        self.image = SearchInformationImage(data.get("image", {}))
+        self.total_results_count = data.get("total_results_count")
 
 
 class Variants:
@@ -678,3 +725,459 @@ class JobLink:
         self.rel = data.get("rel")
         self.href = data.get("href")
         self.method = data.get("method")
+
+class Pla:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.items = [PlaItem(item) for item in data.get("items", [])]
+        self.pos_overall = data.get("pos_overall")
+
+class PlaItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.price = data.get("price")
+        self.title = data.get("title")
+        self.seller = data.get("seller")
+        self.url_image = data.get("url_image")
+        self.image_data = data.get("image_data")
+
+class Image:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.items = [ImageItem(item) for item in data.get("items", [])]
+        self.pos_overall = data.get("pos_overall")
+
+
+class ImageItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.alt = data.get("alt")
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.data = data.get("data")
+        self.source = data.get("source")
+
+
+class OrganicSitelinks:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.expanded = [Expanded(item) for item in data.get("expanded", [])]
+        self.inline = [Inline(item) for item in data.get("inline", [])]
+
+
+class Twitter:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.items = [TwitterItem(item) for item in data.get("items", [])]
+        self.title = data.get("title")
+        self.pos_overall = data.get("pos_overall")
+
+
+class TwitterItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.content = data.get("content")
+        self.time_frame = data.get("time_frame")
+
+
+class Knowledge:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.title = data.get("title")
+        self.images = [item for item in data.get("images", [])]
+        self.factoids = [Factoid(item) for item in data.get("factoids", [])]
+        self.profiles = [Profile(item) for item in data.get("profiles", [])]
+        self.subtitle = data.get("subtitle")
+        self.description = data.get("description")
+        self.related_searches = [
+            RelatedSearches(item) for item in data.get("related_searches", [])
+        ]
+
+
+class Factoid:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.links = [LinkElement(item) for item in data.get("links", [])]
+        self.title = data.get("title")
+        self.content = data.get("content")
+
+
+class LinkElement:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.href = data.get("href")
+        self.title = data.get("title")
+
+
+class Profile:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.title = data.get("title")
+
+
+class RelatedSearches:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.section_title = data.get("section_title")
+        self.pos_overall = data.get("pos_overall")
+        self.related_searches = [
+            item for item in data.get("related_searches", [])
+        ]
+
+
+class LocalPack:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.items = [LocalPackItem(item) for item in data.get("items", [])]
+        self.pos_overall = data.get("pos_overall")
+
+
+class LocalPackItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.cid = data.get("cid")
+        self.pos = data.get("pos")
+        self.links = [LocalPackLink(item) for item in data.get("links", [])]
+        self.phone = data.get("phone")
+        self.title = data.get("title")
+        self.rating = data.get("rating")
+        self.address = data.get("address")
+        self.subtitle = data.get("subtitle")
+        self.rating_count = data.get("rating_count")
+
+
+class LocalPackLink:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.href = data.get("href")
+        self.title = data.get("title")
+
+
+class TopStory:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.items = [TopStoryItem(item) for item in data.get("items", [])]
+        self.pos_overall = data.get("pos_overall")
+
+
+class TopStoryItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.source = data.get("source")
+        self.time_frame = data.get("time_frame")
+
+
+class PopularProducts:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.price = data.get("price")
+        self.rating = data.get("rating")
+        self.seller = data.get("seller")
+        self.title = data.get("title")
+        self.image_data = data.get("image_data")
+
+class RelatedQuestions:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos_overall = data.get("pos_overall")
+        self.related_questions = [
+            RelatedQuestionsItem(item)
+            for item in data.get("related_questions", [])
+        ]
+
+
+class RelatedQuestionsItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.answer = data.get("answer")
+        self.source = data.get("source")
+        self.question = data.get("question")
+
+
+class Source:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.url_shown = data.get("url_shown")
+
+class SearchInformationImage:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.width = data.get("width")
+        self.height = data.get("height")
+        self.other_sizes = data.get("other_sizes")
+
+
+class ItemCarousel:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.items = [ItemCarouselItem(item) for item in data.get("items", [])]
+        self.pos_overall = data.get("pos_overall")
+        self.title = data.get("title")
+
+
+class ItemCarouselItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.href = data.get("href")
+        self.title = data.get("title")
+        self.subtitle = data.get("subtitle")
+
+
+class Recipes:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.items = [RecipesItem(item) for item in data.get("items", [])]
+        self.pos_overall = data.get("pos_overall")
+
+
+class RecipesItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.rating = data.get("rating")
+        self.source = data.get("source")
+        self.duration = data.get("duration")
+
+
+class Videos:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.items = [VideosItem(item) for item in data.get("items", [])]
+        self.pos_overall = data.get("pos_overall")
+
+
+class VideosItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.author = data.get("author")
+        self.source = data.get("source")
+
+
+class FeaturedSnippet:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.desc = data.get("desc")
+        self.title = data.get("title")
+        self.url_shown = data.get("url_shown")
+        self.pos_overall = data.get("pos_overall")
+
+
+class RelatedSearchesCategorized:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.items = [
+            RelatedSearchesCategorizedItem(item)
+            for item in data.get("items", [])
+        ]
+        self.category = data.get("category")
+        self.pos_overall = data.get("pos_overall")
+
+
+class RelatedSearchesCategorizedItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.title = data.get("title")
+
+
+class Category:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.name = data.get("name")
+        self.type = data.get("type")
+
+
+class Hotels:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.date_to = data.get("date_to")
+        self.results = [HotelsResult(item) for item in data.get("results", [])]
+        self.date_from = data.get("date_from")
+        self.pos_overall = data.get("pos_overall")
+
+
+class HotelsResult:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.price = data.get("price")
+        self.title = data.get("title")
+        self.from_location = data.get("from")
+
+
+class Flights:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.to = data.get("to")
+        self.from_location = data.get("from")
+        self.results = [
+            FlightsResult(item) for item in data.get("results", [])
+        ]
+        self.date_from = data.get("date_from")
+        self.pos_overall = data.get("pos_overall")
+
+
+class FlightsResult:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.type = data.get("type")
+        self.price = data.get("price")
+        self.airline = data.get("airline")
+        self.duration = data.get("duration")
+
+
+class VideoBox:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.pos_overall = data.get("pos_overall")
+
+
+class LocalServiceAds:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos_overall = data.get("pos_overall")
+        self.items = [
+            LocalServiceAdsItem(item) for item in data.get("items", [])
+        ]
+
+
+class LocalServiceAdsItem:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.pos = data.get("pos")
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.rating = data.get("rating")
+        self.reviews_count = data.get("reviews_count")
+        self.google_guaranteed = data.get("google_guaranteed")
+
+
+class Navigation:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.url = data.get("url")
+        self.title = data.get("title")
+        self.pos = data.get("pos")
+
+
+class InstantAnswers:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.type = data.get("type")
+        self.parsed = data.get("_parsed")
+        self.pos_overall = data.get("pos_overall")
+
+
+class VisuallySimilarImages:
+    def __init__(self, data):
+        if data is None:
+            data = {}
+        self.raw = data
+        self.all_images_url = data.get("all_images_url")
+        self.featured_images = data.get("featured_images")
