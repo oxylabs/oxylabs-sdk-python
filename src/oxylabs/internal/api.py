@@ -1,63 +1,76 @@
-import asyncio
 import base64
 import logging
-from platform import python_version, architecture
-
-import aiohttp
 import requests
-
-from oxylabs.sources.ecommerce.ecommerce import Ecommerce, EcommerceAsync
-from oxylabs.sources.serp.serp import SERP, SERPAsync
-from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
+import aiohttp
+import asyncio
+from platform import python_version, architecture
 from oxylabs._version import __version__
+from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
+from oxylabs.utils.utils import ensure_session, close_session
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
 class APICredentials:
     def __init__(self, username: str, password: str) -> None:
         """
-        Initializes an instance of ApiCredentials.
+        Initializes an instance of the ApiCredentials class.
 
         Args:
             username (str): The username for API authentication.
             password (str): The password for API authentication.
         """
-        self.username = username
-        self.password = password
+        credentials = f"{username}:{password}"
+        self.encoded_credentials = base64.b64encode(credentials.encode()).decode()
 
-    def get_encoded_credentials(self) -> str:
+class BaseAPI:
+    def __init__(self, base_url: str, api_credentials: APICredentials, **kwargs) -> None:
         """
-        Returns the Base64 encoded username and password for API
-        authentication.
+        Initializes an instance of the BaseAPI class.
+
+        Args:
+            base_url (str): The URL of the API.
+            api_credentials (APICredentials): An instance of APICredentials used for authentication.
         """
-        credentials = f"{self.username}:{self.password}"
-        return base64.b64encode(credentials.encode()).decode()
-
-
-class BaseClient:
-    def __init__(self, base_url: str, api_credentials: APICredentials) -> None:
         self._base_url = base_url
-        self._api_credentials = api_credentials
         bits, _ = architecture()
+        sdk_type = kwargs.get("sdk_type", f"oxylabs-sdk-python/{__version__} ({python_version()}; {bits})")
         self._headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Basic {self._api_credentials.get_encoded_credentials()}",
-            "x-oxylabs-sdk": f"oxylabs-sdk-python/{__version__} ({python_version()}; {bits})",
+            "Authorization": f"Basic {api_credentials.encoded_credentials}",
+            "x-oxylabs-sdk": sdk_type,
         }
 
-
-class RealtimeClient(BaseClient):
-    def __init__(self, username: str, password: str) -> None:
-        super().__init__(SYNC_BASE_URL, APICredentials(username, password))
-        self.serp = SERP(self)
-        self.ecommerce = Ecommerce(self)
-
-    def _req(self, payload: dict, method: str, config: dict) -> dict:
+class RealtimeAPI(BaseAPI):
+    def __init__(self, api_credentials: APICredentials, **kwargs) -> None:
         """
-        Sends a HTTP request to the specified URL with the given payload
+        Initializes an instance of the RealtimeAPI class.
+
+        Args:
+            api_credentials (APICredentials): An instance of APICredentials used for authentication.
+        """
+        super().__init__(SYNC_BASE_URL, api_credentials, **kwargs)
+
+    def get_response(self, payload:dict, config:dict) -> dict:
+        """
+        Sends the payload synchronously and fetches the response.
+
+        Args:
+            payload (dict): The payload for the request.
+            config (dict): The configuration for the request.
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        # Remove empty or null values from the payload
+        payload = {k: v for k, v in payload.items() if v is not None}
+
+        return self._get_http_response(payload, "POST", config)
+
+    def _get_http_response(self, payload: dict, method: str, config: dict) -> dict | None:
+        """
+        Sends an HTTP request to the specified URL with the given payload
         and method.
 
         Args:
@@ -89,6 +102,7 @@ class RealtimeClient(BaseClient):
             else:
                 logger.error(f"Unsupported method: {method}")
                 return None
+
             response.raise_for_status()
 
             if response.status_code == 200:
@@ -110,19 +124,58 @@ class RealtimeClient(BaseClient):
             logger.error(f"Error occurred: {err}")
             return None
 
+class AsyncAPI(BaseAPI):
+    def __init__(self, api_credentials: APICredentials, **kwargs) -> None:
+        """
+        Initializes an instance of the AsyncAPI class.
 
-class AsyncClient(BaseClient):
-    def __init__(self, username: str, password: str) -> None:
-        super().__init__(ASYNC_BASE_URL, APICredentials(username, password))
-        self.serp = SERPAsync(self)
-        self.ecommerce = EcommerceAsync(self)
+        Args:
+            api_credentials (APICredentials): An instance of APICredentials used for authentication.
+        """
+        super().__init__(ASYNC_BASE_URL, api_credentials, **kwargs)
+        self._session = None
+        self._requests = 0
+
+    async def get_response(self, payload: dict, config: dict) -> dict | None:
+        """
+        Processes the payload asynchronously and fetches the response.
+
+        Args:
+            payload (dict): The payload for the request.
+            config (dict): The configuration for the request.
+
+        Returns:
+            dict: The response from the server after the job is completed.
+        """
+        # Remove empty or null values from the payload
+        payload = {k: v for k, v in payload.items() if v is not None}
+
+        result = None
+        self._requests += 1
+
+        try:
+            self._session = await ensure_session(self._session)
+
+            result = await self._execute_with_timeout(
+                payload, config, self._session
+            )
+            return result
+
+        except Exception as e:
+            logger.error(f"An error occurred: {e}")
+
+        finally:
+            self._requests -= 1
+            if self._requests == 0:
+                await close_session(self._session)
+        return None
 
     async def _get_job_id(
         self,
         payload: dict,
         user_session: aiohttp.ClientSession,
         request_timeout: int,
-    ) -> str:
+    ) -> str | None:
         try:
             async with user_session.post(
                 self._base_url,
@@ -177,9 +230,9 @@ class AsyncClient(BaseClient):
         logger.info("Job completion timeout exceeded")
         return False
 
-    async def _get_http_resp(
+    async def _get_http_response(
         self, job_id: str, user_session: aiohttp.ClientSession
-    ) -> dict:
+    ) -> dict | None:
         """
         Retrieves the HTTP response for a given job ID.
 
@@ -237,5 +290,5 @@ class AsyncClient(BaseClient):
         if not job_completed:
             logger.error("Job did not complete successfully")
 
-        result = await self._get_http_resp(job_id, user_session)
+        result = await self._get_http_response(job_id, user_session)
         return result

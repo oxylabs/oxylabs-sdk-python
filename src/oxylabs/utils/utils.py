@@ -125,7 +125,7 @@ async def ensure_session(session) -> aiohttp.ClientSession:
     return session
 
 
-async def close(user_session: aiohttp.ClientSession) -> None:
+async def close_session(user_session: aiohttp.ClientSession) -> None:
     """
     Closes the user session.
 
