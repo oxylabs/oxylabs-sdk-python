@@ -1,20 +1,20 @@
 from typing import Optional
 
-from oxylabs.sources.ecommerce.response import EcommerceResponse
+from oxylabs.internal.api import RealtimeAPI, AsyncAPI
+from oxylabs.sources.response import Response
 from oxylabs.utils.types import source
 from oxylabs.utils.utils import prepare_config
 
 
 class Wayfair:
-    def __init__(self, ecommerce_instance) -> None:
+    def __init__(self, api_instance:RealtimeAPI) -> None:
         """
         Initializes an instance of the Wayfair class.
 
         Args:
-            ecommerce_instance: The Ecommerce instance associated with the
-            Wayfair class.
+            api_instance: An instance of the RealtimeAPI class used for making requests.
         """
-        self._ecommerce_instance = ecommerce_instance
+        self._api_instance = api_instance
 
     def scrape_search(
         self,
@@ -26,7 +26,7 @@ class Wayfair:
         callback_url: Optional[str] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Wayfair search results for a given query.
 
@@ -39,11 +39,11 @@ class Wayfair:
             callback_url (Optional[str]): URL to your callback endpoint.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -57,8 +57,8 @@ class Wayfair:
             "callback_url": callback_url,
             **kwargs,
         }
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_url(
         self,
@@ -67,7 +67,7 @@ class Wayfair:
         callback_url: Optional[str] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Wayfair search results for a given URL.
 
@@ -77,11 +77,11 @@ class Wayfair:
             callback_url (Optional[str]): URL to your callback endpoint.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -92,20 +92,19 @@ class Wayfair:
             "callback_url": callback_url,
             **kwargs,
         }
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
 
 class WayfairAsync:
-    def __init__(self, ecommerce_async_instance) -> None:
+    def __init__(self, api_instance:AsyncAPI) -> None:
         """
-        Initializes an instance of the WayfairAsync class.
+        Initializes an instance of the Wayfair class.
 
         Args:
-            ecommerce_async_instance: The EcommerceAsync instance associated
-            with the WayfairAsync class.
+            api_instance: An instance of the AsyncAPI class used for making requests.
         """
-        self._ecommerce_async_instance = ecommerce_async_instance
+        self._api_instance = api_instance
 
     async def scrape_search(
         self,
@@ -119,7 +118,7 @@ class WayfairAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Asynchronously scrapes Wayfair search results for a given query.
 
@@ -132,16 +131,15 @@ class WayfairAsync:
             callback_url (Optional[str]): URL to your callback endpoint.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -160,10 +158,8 @@ class WayfairAsync:
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_url(
         self,
@@ -174,7 +170,7 @@ class WayfairAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Asynchronously scrapes Wayfair search results for a given URL.
 
@@ -184,16 +180,15 @@ class WayfairAsync:
             callback_url (Optional[str]): URL to your callback endpoint.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -209,7 +204,5 @@ class WayfairAsync:
             "callback_url": callback_url,
             **kwargs,
         }
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)

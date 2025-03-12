@@ -1,6 +1,7 @@
 from typing import Optional
 
-from oxylabs.sources.ecommerce.response import EcommerceResponse
+from oxylabs.sources.response import Response
+from oxylabs.internal.api import RealtimeAPI, AsyncAPI
 from oxylabs.utils.types import source
 from oxylabs.utils.utils import (
     check_parsing_instructions_validity,
@@ -9,15 +10,14 @@ from oxylabs.utils.utils import (
 
 
 class Amazon:
-    def __init__(self, ecommerce_instance) -> None:
+    def __init__(self, api_instance:RealtimeAPI) -> None:
         """
         Initializes an instance of the Amazon class.
 
         Args:
-            ecommerce_instance: The Ecommerce instance associated with the
-            Amazon class.
+            api_instance: An instance of the RealtimeAPI class used for making requests.
         """
-        self._ecommerce_instance = ecommerce_instance
+        self._api_instance = api_instance
 
     def scrape_search(
         self,
@@ -34,7 +34,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon search results for a given query.
 
@@ -51,11 +51,11 @@ class Amazon:
             context: Optional[list],
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -75,8 +75,8 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_url(
         self,
@@ -88,7 +88,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon search results for a given URL.
 
@@ -101,11 +101,11 @@ class Amazon:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -120,8 +120,8 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_product(
         self,
@@ -136,7 +136,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon product details for a given query.
 
@@ -151,11 +151,11 @@ class Amazon:
             context: Optional[list],
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -173,8 +173,8 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_pricing(
         self,
@@ -190,7 +190,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon pricing details for a given query.
 
@@ -206,11 +206,11 @@ class Amazon:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -229,8 +229,8 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_reviews(
         self,
@@ -246,7 +246,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon reviews for a given query.
 
@@ -262,11 +262,11 @@ class Amazon:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -285,8 +285,8 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_questions(
         self,
@@ -300,7 +300,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon questions for a given query.
 
@@ -314,11 +314,11 @@ class Amazon:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -335,8 +335,8 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_bestsellers(
         self,
@@ -352,7 +352,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon bestsellers.
 
@@ -368,11 +368,11 @@ class Amazon:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -391,8 +391,8 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_sellers(
         self,
@@ -406,7 +406,7 @@ class Amazon:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon sellers for a given query.
 
@@ -420,11 +420,11 @@ class Amazon:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -441,20 +441,19 @@ class Amazon:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
 
 class AmazonAsync:
-    def __init__(self, ecommerce_async_instance) -> None:
+    def __init__(self, api_instance:AsyncAPI) -> None:
         """
-        Initializes an instance of the AmazonAsync class.
+        Initializes an instance of the Amazon class.
 
         Args:
-            ecommerce_async_instance: The EcommerceAsync instance associated
-            with the AmazonAsync class.
+            api_instance: An instance of the AsyncAPI class used for making requests.
         """
-        self._ecommerce_async_instance = ecommerce_async_instance
+        self._api_instance = api_instance
 
     async def scrape_search(
         self,
@@ -473,7 +472,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon search results for a given query.
 
@@ -490,16 +489,14 @@ class AmazonAsync:
             context: Optional[list],
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
-
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -524,10 +521,8 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_url(
         self,
@@ -541,7 +536,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon search results for a given URL.
 
@@ -554,16 +549,15 @@ class AmazonAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -583,10 +577,8 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_product(
         self,
@@ -603,7 +595,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon product details for a given query.
 
@@ -618,16 +610,15 @@ class AmazonAsync:
             context: Optional[list],
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -650,10 +641,8 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_pricing(
         self,
@@ -671,7 +660,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon pricing details for a given query.
 
@@ -687,16 +676,15 @@ class AmazonAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -720,10 +708,8 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_reviews(
         self,
@@ -741,7 +727,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon reviews for a given query.
 
@@ -757,16 +743,15 @@ class AmazonAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -790,10 +775,8 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_questions(
         self,
@@ -809,7 +792,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon questions for a given query.
 
@@ -823,16 +806,15 @@ class AmazonAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -854,10 +836,8 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_bestsellers(
         self,
@@ -875,7 +855,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon bestsellers.
 
@@ -891,16 +871,15 @@ class AmazonAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -924,10 +903,8 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_sellers(
         self,
@@ -943,7 +920,7 @@ class AmazonAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Amazon sellers for a given query.
 
@@ -957,16 +934,15 @@ class AmazonAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -988,7 +964,5 @@ class AmazonAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)

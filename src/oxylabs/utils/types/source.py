@@ -1,11 +1,12 @@
 GOOGLE_URL = "google"
 GOOGLE_ADS = "google_ads"
-GOOGLE_HOTELS = "google_hotels"
 GOOGLE_SEARCH = "google_search"
 GOOGLE_IMAGES = "google_images"
 GOOGLE_SUGGESTIONS = "google_suggest"
 GOOGLE_TRAVEL_HOTELS = "google_travel_hotels"
 GOOGLE_TRENDS_EXPLORE = "google_trends_explore"
+GOOGLE_MAPS = "google_maps"
+GOOGLE_LENS = "google_lens"
 
 BING_URL = "bing"
 BING_SEARCH = "bing_search"
@@ -34,3 +35,9 @@ AMAZON_REVIEWS = "amazon_reviews"
 AMAZON_QUESTIONS = "amazon_questions"
 AMAZON_BEST_SELLERS = "amazon_bestsellers"
 AMAZON_SELLERS = "amazon_sellers"
+
+KROGER = "kroger"
+KROGER_PRODUCT = "kroger_product"
+KROGER_SEARCH = "kroger_search"
+
+YOUTUBE_TRANSCRIPT = "youtube_transcript"
