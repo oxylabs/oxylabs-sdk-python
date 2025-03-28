@@ -1,6 +1,7 @@
 from typing import Optional
 
-from oxylabs.sources.serp.response import SERPResponse
+from oxylabs.internal.api import RealtimeAPI, AsyncAPI
+from oxylabs.sources.response import Response
 from oxylabs.utils.types import source
 from oxylabs.utils.utils import (
     check_parsing_instructions_validity,
@@ -9,14 +10,14 @@ from oxylabs.utils.utils import (
 
 
 class Bing:
-    def __init__(self, serp_instance) -> None:
+    def __init__(self, api_instance:RealtimeAPI) -> None:
         """
         Initializes an instance of the Bing class.
 
         Args:
-            serp_instance: The SERP instance associated with the Bing class.
+            api_instance: An instance of the RealtimeAPI class used for making requests.
         """
-        self._serp_instance = serp_instance
+        self._api_instance = api_instance
 
     def scrape_search(
         self,
@@ -34,7 +35,7 @@ class Bing:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs,
-    ) -> SERPResponse:
+    ) -> Response:
         """
         Scrapes search results from Bing.
 
@@ -46,8 +47,7 @@ class Bing:
             limit (Optional[int]): Number of results to retrieve in each page.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             geo_location (Optional[str]):  It goes like this: City,Region,Country.
             render (Optional[str]): Enables JavaScript rendering.
             parse (Optional[bool]): true will return structured data.
@@ -55,7 +55,7 @@ class Bing:
             request_timeout (Optional[int]): The timeout for the request in seconds.
             **kwargs: Additional keyword arguments.
         Returns:
-            SERPResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -77,9 +77,8 @@ class Bing:
         }
 
         check_parsing_instructions_validity(parsing_instructions)
-
-        response = self._serp_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_url(
         self,
@@ -92,7 +91,7 @@ class Bing:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs,
-    ) -> SERPResponse:
+    ) -> Response:
         """
         Scrapes Bing search results for a given URL.
 
@@ -106,11 +105,11 @@ class Bing:
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             parse (Optional[bool]): true will return structured data.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            SERPResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -126,20 +125,19 @@ class Bing:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._serp_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
 
 class BingAsync:
-    def __init__(self, serp_async_instance) -> None:
+    def __init__(self, api_instance:AsyncAPI) -> None:
         """
-        Initializes an instance of the BingAsync class.
+        Initializes an instance of the Bing class.
 
         Args:
-            serp_async_instance: The SERPAsync instance associated with the
-            BingAsync class.
+            api_instance: An instance of the AsyncAPI class used for making requests.
         """
-        self._serp_async_instance = serp_async_instance
+        self._api_instance = api_instance
 
     async def scrape_search(
         self,
@@ -159,7 +157,7 @@ class BingAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> SERPResponse:
+    ) -> Response:
         """
         Asynchronously scrapes Bing search results for a given query.
 
@@ -171,23 +169,21 @@ class BingAsync:
             limit (Optional[int]): Number of results to retrieve in each page.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             geo_location (Optional[str]): The API uses Canonical Geo Location format to
                             determine request location. It goes like this: City,Region,Country
             render (Optional[str]): Enables JavaScript rendering.
             parse (Optional[bool]): true will return structured data.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            SERPResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -214,8 +210,8 @@ class BingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._serp_async_instance._get_resp(payload, config)
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_url(
         self,
@@ -230,7 +226,7 @@ class BingAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs,
-    ) -> SERPResponse:
+    ) -> Response:
         """
         Asynchronously scrapes Bing search results for a given URL.
 
@@ -245,16 +241,15 @@ class BingAsync:
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             parse (Optional[bool]): true will return structured data.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int | 5, optional): The interval in seconds to poll
-            the server for a response. Defaults to 5
-            job_completion_timeout (int | 50, optional): The interval in
-            seconds for the job to time out if no response is returned.
-            Defaults to 50
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            SERPResponse: The response containing the scraped results.
+            Response: The response containing the scraped results.
         """
 
         config = prepare_config(
@@ -275,5 +270,5 @@ class BingAsync:
             "parsing_instructions": parsing_instructions,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._serp_async_instance._get_resp(payload, config)
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)

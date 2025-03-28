@@ -1,6 +1,7 @@
 from typing import Optional
 
-from oxylabs.sources.ecommerce.response import EcommerceResponse
+from oxylabs.internal.api import RealtimeAPI, AsyncAPI
+from oxylabs.sources.response import Response
 from oxylabs.utils.types import source
 from oxylabs.utils.utils import (
     check_parsing_instructions_validity,
@@ -9,15 +10,14 @@ from oxylabs.utils.utils import (
 
 
 class GoogleShopping:
-    def __init__(self, ecommerce_instance) -> None:
+    def __init__(self, api_instance:RealtimeAPI) -> None:
         """
-        Initializes an instance of the GoogleShopping class.
+        Initializes an instance of the Google Shopping class.
 
         Args:
-            ecommerce_instance: The Ecommerce instance associated with the
-            GoogleShopping class.
+            api_instance: An instance of the RealtimeAPI class used for making requests.
         """
-        self._ecommerce_instance = ecommerce_instance
+        self._api_instance = api_instance
 
     def scrape_shopping_search(
         self,
@@ -36,7 +36,7 @@ class GoogleShopping:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping search results for a given query.
 
@@ -45,8 +45,7 @@ class GoogleShopping:
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             results_language (Optional[str]): None,
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -56,11 +55,11 @@ class GoogleShopping:
             context: Optional[list],
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -82,8 +81,8 @@ class GoogleShopping:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_shopping_url(
         self,
@@ -96,7 +95,7 @@ class GoogleShopping:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping search results for a given URL.
 
@@ -110,11 +109,11 @@ class GoogleShopping:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
 
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -130,8 +129,8 @@ class GoogleShopping:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_shopping_products(
         self,
@@ -147,15 +146,14 @@ class GoogleShopping:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping product results for a given query.
 
         Args:
             query (str): UTF-encoded product code.
             domain (Optional[str]): The domain to limit the search results to.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -164,10 +162,10 @@ class GoogleShopping:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -186,8 +184,8 @@ class GoogleShopping:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     def scrape_product_pricing(
         self,
@@ -205,17 +203,16 @@ class GoogleShopping:
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping product pricing results for a given product code.
 
         Args:
             query (str): UTF-encoded product code.
             domain (Optional[str]): The domain to limit the search results to.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             start_page (Optional[int]): The starting page number.
-                        pages (Optional[int]): The number of pages to scrape.
+            pages (Optional[int]): The number of pages to scrape.
             "results_language": None,
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -224,10 +221,10 @@ class GoogleShopping:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(request_timeout=request_timeout)
@@ -248,20 +245,18 @@ class GoogleShopping:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = self._ecommerce_instance._get_resp(payload, config)
-        return response
-
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
 class GoogleShoppingAsync:
-    def __init__(self, ecommerce_async_instance) -> None:
+    def __init__(self, api_instance:AsyncAPI) -> None:
         """
-        Initializes an instance of the GoogleShoppingAsync class.
+        Initializes an instance of the Google Shopping class.
 
         Args:
-            ecommerce_async_instance: The EcommerceAsync instance associated
-            with the GoogleShoppingAsync class.
+            api_instance: An instance of the AsyncAPI class used for making requests.
         """
-        self._ecommerce_async_instance = ecommerce_async_instance
+        self._api_instance = api_instance
 
     async def scrape_shopping_search(
         self,
@@ -282,7 +277,7 @@ class GoogleShoppingAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping search results for a given query.
 
@@ -290,9 +285,8 @@ class GoogleShoppingAsync:
             query (str): UTF-encoded keyword.
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
-                        pages (Optional[int]): The number of pages to scrape.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            pages (Optional[int]): The number of pages to scrape.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -302,13 +296,15 @@ class GoogleShoppingAsync:
             context: Optional[list],
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int, optional): The interval in seconds for the
-            request to poll the server for a response. Defaults to 5.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
 
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -335,10 +331,8 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_shopping_url(
         self,
@@ -353,7 +347,7 @@ class GoogleShoppingAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping search results for a given URL.
 
@@ -365,13 +359,15 @@ class GoogleShoppingAsync:
             geo_location (Optional[str]): None,
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
-            request_timeout (int | 165, optional): The interval in seconds
-            for the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int, optional): The interval in seconds for the
-            request to poll the server for a response. Defaults to 5.
+            request_timeout (int | 165, optional): The interval in seconds for
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -392,10 +388,8 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_shopping_products(
         self,
@@ -413,15 +407,14 @@ class GoogleShoppingAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping product results for a given query.
 
         Args:
             query (str): UTF-encoded product code.
             domain (Optional[str]): The domain to limit the search results to.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -430,12 +423,14 @@ class GoogleShoppingAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int, optional): The interval in seconds for the
-            request to poll the server for a response. Defaults to 5.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -459,10 +454,8 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
 
     async def scrape_product_pricing(
         self,
@@ -482,7 +475,7 @@ class GoogleShoppingAsync:
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
         **kwargs
-    ) -> EcommerceResponse:
+    ) -> Response:
         """
         Scrapes Google Shopping product pricing results for a given product code.
 
@@ -490,9 +483,8 @@ class GoogleShoppingAsync:
             url (str): UTF-encoded product code.
             domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
-                        pages (Optional[int]): The number of pages to scrape.
-            locale (Optional[str]): Accept-Language header value which changes your Bing search
-                            page web interface language.
+            pages (Optional[int]): The number of pages to scrape.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
             user_agent_type (Optional[str]): Device type and browser.
@@ -501,12 +493,14 @@ class GoogleShoppingAsync:
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
-            the request to time out if no response is returned.
-            Defaults to 165.
-            poll_interval (int, optional): The interval in seconds for the
-            request to poll the server for a response. Defaults to 5.
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
         Returns:
-            EcommerceResponse: The response from the server after the job is completed.
+            Response: The response from the server after the job is completed.
         """
 
         config = prepare_config(
@@ -532,7 +526,5 @@ class GoogleShoppingAsync:
             **kwargs,
         }
         check_parsing_instructions_validity(parsing_instructions)
-        response = await self._ecommerce_async_instance._get_resp(
-            payload, config
-        )
-        return response
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
