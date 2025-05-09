@@ -3,6 +3,7 @@ import logging
 import requests
 import aiohttp
 import asyncio
+from typing import Union
 from platform import python_version, architecture
 from oxylabs._version import __version__
 from oxylabs.utils.defaults import ASYNC_BASE_URL, SYNC_BASE_URL
@@ -68,7 +69,7 @@ class RealtimeAPI(BaseAPI):
 
         return self._get_http_response(payload, "POST", config)
 
-    def _get_http_response(self, payload: dict, method: str, config: dict) -> dict | None:
+    def _get_http_response(self, payload: dict, method: str, config: dict) -> Union[dict, None]:
         """
         Sends an HTTP request to the specified URL with the given payload
         and method.
@@ -136,7 +137,7 @@ class AsyncAPI(BaseAPI):
         self._session = None
         self._requests = 0
 
-    async def get_response(self, payload: dict, config: dict) -> dict | None:
+    async def get_response(self, payload: dict, config: dict) -> Union[dict, None]:
         """
         Processes the payload asynchronously and fetches the response.
 
@@ -175,7 +176,7 @@ class AsyncAPI(BaseAPI):
         payload: dict,
         user_session: aiohttp.ClientSession,
         request_timeout: int,
-    ) -> str | None:
+    ) -> Union[str, None]:
         try:
             async with user_session.post(
                 self._base_url,
@@ -232,7 +233,7 @@ class AsyncAPI(BaseAPI):
 
     async def _get_http_response(
         self, job_id: str, user_session: aiohttp.ClientSession
-    ) -> dict | None:
+    ) -> Union[dict, None]:
         """
         Retrieves the HTTP response for a given job ID.
 
