@@ -92,7 +92,7 @@ The Oxylabs API scrapes according to the sources provided via the API:
 | Target                 | Sources
 |------------------------| --------------
 | **Amazon**             | `amazon`, `amazon_product`, `amazon_search`, `amazon_pricing`, `amazon_sellers`, `amazon_bestsellers`, `amazon_reviews`, `amazon_questions`
-| **Google**             | `google`, `google_search`, `google_ads`, `google_travel_hotels`, `google_images`, `google_suggest`,`google_trends_explore`,`google_maps`,`google_lens`
+| **Google**             | `google`, `google_search`, `google_ads`, `google_travel_hotels`, `google_suggest`,`google_trends_explore`,`google_maps`,`google_lens`
 | **Google Shopping**    | `google_shopping`, `google_shopping_product`, `google_shopping_search`, `google_shopping_pricing`
 | **Bing**               | `bing`, `bing_search`
 | **Kroger**             | `kroger`, `kroger_product`, `kroger_search`
