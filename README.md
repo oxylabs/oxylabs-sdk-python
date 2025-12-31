@@ -93,7 +93,6 @@ The Oxylabs API scrapes according to the sources provided via the API:
 |------------------------| --------------
 | **Amazon**             | `amazon`, `amazon_product`, `amazon_search`, `amazon_pricing`, `amazon_sellers`, `amazon_bestsellers`, `amazon_reviews`, `amazon_questions`
 | **Google**             | `google`, `google_search`, `google_ads`, `google_travel_hotels`, `google_suggest`,`google_trends_explore`,`google_maps`,`google_lens`
-| **Google Shopping**    | `google_shopping`, `google_shopping_product`, `google_shopping_search`, `google_shopping_pricing`
 | **Bing**               | `bing`, `bing_search`
 | **Kroger**             | `kroger`, `kroger_product`, `kroger_search`
 | **Wayfair**            | `wayfair`, `wayfair_search`
@@ -107,7 +106,6 @@ These are the equivalent targets and methods available for scraping in the Pytho
 | **amazon**             | `scrape_search`, `scrape_url`, `scrape_product`, `scrape_pricing`, `scrape_reviews`, `scrape_questions`, `scrape_bestsellers`, `scrape_sellers` 
 | **bing**               | `scrape_search`, `scrape_url`
 | **google**             | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_suggestions`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_maps`, `scrape_lens`
-| **google_shopping**    | `scrape_shopping_search`, `scrape_shopping_url`, `scrape_shopping_products`, `scrape_product_pricing`
 | **kroger**             | `scrape_product`, `scrape_search`, `scrape_url`
 | **wayfair**            | `scrape_search`, `scrape_url`
 | **youtube_transcript** | `scrape_transcript`
