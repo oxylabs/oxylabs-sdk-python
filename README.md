@@ -92,11 +92,10 @@ The Oxylabs API scrapes according to the sources provided via the API:
 | Target                 | Sources
 |------------------------| --------------
 | **Amazon**             | `amazon`, `amazon_product`, `amazon_search`, `amazon_pricing`, `amazon_sellers`, `amazon_bestsellers`, `amazon_reviews`, `amazon_questions`
-| **Google**             | `google`, `google_search`, `google_ads`, `google_travel_hotels`, `google_suggest`,`google_trends_explore`,`google_maps`,`google_lens`
+| **Google**             | `google`, `google_search`, `google_ads`, `google_travel_hotels`, `google_suggest`,`google_trends_explore`,`google_lens`
 | **Bing**               | `bing`, `bing_search`
 | **Kroger**             | `kroger`, `kroger_product`, `kroger_search`
 | **Wayfair**            | `wayfair`, `wayfair_search`
-| **Youtube Transcript** | `youtube_transcript`
 | **Other Websites**     | `universal`
 
 These are the equivalent targets and methods available for scraping in the Python SDK:
@@ -105,10 +104,9 @@ These are the equivalent targets and methods available for scraping in the Pytho
 |------------------------| --------------
 | **amazon**             | `scrape_search`, `scrape_url`, `scrape_product`, `scrape_pricing`, `scrape_reviews`, `scrape_questions`, `scrape_bestsellers`, `scrape_sellers` 
 | **bing**               | `scrape_search`, `scrape_url`
-| **google**             | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_suggestions`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_maps`, `scrape_lens`
+| **google**             | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_suggestions`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_lens`
 | **kroger**             | `scrape_product`, `scrape_search`, `scrape_url`
 | **wayfair**            | `scrape_search`, `scrape_url`
-| **youtube_transcript** | `scrape_transcript`
 | **universal**          | `scrape_url`
 
 In the SDK you'll just need to call the relevant method name from the client.
