@@ -1,0 +1,25 @@
+name: GitBook Event Receiver
+
+on:
+  repository_dispatch:
+    types: [gitbook_update] # This must match the event_type from Repo A
+
+jobs:
+  process-gitbook-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Acknowledge Event
+        run: |
+          echo "Event Received!"
+          echo "Source SHA: ${{ github.event.client_payload.sha }}"
+          echo "Author: ${{ github.event.client_payload.author }}"
+          echo "Message: ${{ github.event.client_payload.message }}"
+
+      - name: Log the Changes
+        run: |
+          echo "--- START OF DIFF ---"
+          echo "${{ github.event.client_payload.diff }}"
+          echo "--- END OF DIFF ---"
+
+      # Optional: You can add steps here to trigger a build, 
+      # update a local file, or send a Slack notification.
