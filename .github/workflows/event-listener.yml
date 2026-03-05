@@ -2,7 +2,7 @@ name: GitBook Event Receiver
 
 on:
   repository_dispatch:
-    types: [gitbook_update] # This must match the event_type from Repo A
+    types: [gitbook_update]
 
 jobs:
   process-gitbook-update:
@@ -10,16 +10,25 @@ jobs:
     steps:
       - name: Acknowledge Event
         run: |
-          echo "Event Received!"
-          echo "Source SHA: ${{ github.event.client_payload.sha }}"
+          echo "🚀 Event Received from GitBook!"
+          echo "Commit: ${{ github.event.client_payload.sha }}"
           echo "Author: ${{ github.event.client_payload.author }}"
-          echo "Message: ${{ github.event.client_payload.message }}"
+          echo "Summary: ${{ github.event.client_payload.message }}"
 
-      - name: Log the Changes
+      - name: Show Changed Paths
+        run: |
+          echo "The following filtered paths were modified:"
+          echo "${{ github.event.client_payload.changed_paths }}"
+
+      - name: View Detailed Diff
         run: |
           echo "--- START OF DIFF ---"
           echo "${{ github.event.client_payload.diff }}"
           echo "--- END OF DIFF ---"
 
-      # Optional: You can add steps here to trigger a build, 
-      # update a local file, or send a Slack notification.
+      # EXAMPLE: Action based on specific path
+      - name: Conditional Logic
+        if: contains(github.event.client_payload.changed_paths, 'docs/api-reference')
+        run: |
+          echo "Detected change in API Reference. Triggering internal sync..."
+          # Insert your custom command here (e.g., npm run build-docs)
