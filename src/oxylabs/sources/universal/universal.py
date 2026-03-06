@@ -24,13 +24,11 @@ class Universal:
         url: str,
         user_agent_type: Optional[str] = None,
         geo_location: Optional[str] = None,
-        locale: Optional[str] = None,
         render: Optional[str] = None,
         content_encoding: Optional[str] = None,
         context: Optional[list] = None,
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
-        parser_type: Optional[str] = None,
         parsing_instructions: Optional[dict] = None,
         browser_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -43,13 +41,11 @@ class Universal:
             url (str): The URL to be scraped.
             user_agent_type (Optional[str]): Device type and browser.
             geo_location (Optional[str]): None,
-            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             render (Optional[str]): Enables JavaScript rendering.
             content_encoding:  Add this parameter if you are downloading images.
             context: Optional[list],
             callback_url (Optional[str]): URL to your callback endpoint.
             parse (Optional[bool]): true will return structured data.
-            parser_type: Set the value to ecommerce_product to access our AI-powered Adaptive Parser.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             browser_instructions (Optional[dict]): Browser instructions that are executed when rendering JavaScript.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -66,13 +62,11 @@ class Universal:
             "url": url,
             "user_agent_type": user_agent_type,
             "geo_location": geo_location,
-            "locale": locale,
             "render": render,
             "content_encoding": content_encoding,
             "context": context,
             "callback_url": callback_url,
             "parse": parse,
-            "parser_type": parser_type,
             "parsing_instructions": parsing_instructions,
             "browser_instructions": browser_instructions,
             **kwargs,
@@ -96,13 +90,11 @@ class UniversalAsync:
         url: str,
         user_agent_type: Optional[str] = None,
         geo_location: Optional[str] = None,
-        locale: Optional[str] = None,
         render: Optional[str] = None,
         content_encoding: Optional[str] = None,
         context: Optional[list] = None,
         callback_url: Optional[str] = None,
         parse: Optional[bool] = None,
-        parser_type: Optional[str] = None,
         parsing_instructions: Optional[dict] = None,
         browser_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -117,13 +109,11 @@ class UniversalAsync:
             url (str): The URL to be scraped.
             user_agent_type (Optional[str]): Device type and browser.
             geo_location (Optional[str]): None,
-            locale (Optional[str]): Accept-Language header value which changes page web interface language.
             render (Optional[str]): Enables JavaScript rendering.
             content_encoding:  Add this parameter if you are downloading images.
             context: Optional[list],
             callback_url (Optional[str]): URL to your callback endpoint.
             parse (Optional[bool]): true will return structured data.
-            parser_type: Set the value to ecommerce_product to access our AI-powered Adaptive Parser.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             browser_instructions (Optional[dict]): Browser instructions that are executed when rendering JavaScript.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -149,13 +139,11 @@ class UniversalAsync:
             "url": url,
             "user_agent_type": user_agent_type,
             "geo_location": geo_location,
-            "locale": locale,
             "render": render,
             "content_encoding": content_encoding,
             "context": context,
             "callback_url": callback_url,
             "parse": parse,
-            "parser_type": parser_type,
             "parsing_instructions": parsing_instructions,
             "browser_instructions": browser_instructions,
             **kwargs,

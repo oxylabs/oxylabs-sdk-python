@@ -67,15 +67,15 @@ password = "password"
 # Initialize the Realtime client with your credentials.
 client = RealtimeClient(username, password)
 
-# Use `bing_search` as a source to scrape Bing with nike as a query.
-result = client.bing.scrape_search("nike")
+# Use `google_search` as a source to scrape Google with nike as a query.
+result = client.google.scrape_search("nike")
 
 print(result.raw)
 ```
 
 ### Integration Methods
 
-There are three integration methods for the Oxylabs SERP API, each exposed via
+There are three integration methods for the Oxylabs Web Scraper API, each exposed via
 different packages:
 
 - Realtime (Sync) - `RealtimeClient(username, password)`
@@ -87,35 +87,64 @@ and how this SDK uses them [here](#integration-methods-1).
 
 ### Sources
 
-The Oxylabs API scrapes according to the sources provided via the API:
+These are the targets and methods available for scraping in the Python SDK:
 
-| Target                 | Sources
-|------------------------| --------------
-| **Amazon**             | `amazon`, `amazon_product`, `amazon_search`, `amazon_pricing`, `amazon_sellers`, `amazon_bestsellers`, `amazon_reviews`, `amazon_questions`
-| **Google**             | `google`, `google_search`, `google_ads`, `google_travel_hotels`, `google_suggest`,`google_trends_explore`,`google_lens`
-| **Bing**               | `bing`, `bing_search`
-| **Kroger**             | `kroger`, `kroger_product`, `kroger_search`
-| **Wayfair**            | `wayfair`, `wayfair_search`
-| **Other Websites**     | `universal`
-
-These are the equivalent targets and methods available for scraping in the Python SDK:
-
-| Target                 | Methods
-|------------------------| --------------
-| **amazon**             | `scrape_search`, `scrape_url`, `scrape_product`, `scrape_pricing`, `scrape_reviews`, `scrape_questions`, `scrape_bestsellers`, `scrape_sellers` 
-| **bing**               | `scrape_search`, `scrape_url`
-| **google**             | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_suggestions`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_lens`
-| **kroger**             | `scrape_product`, `scrape_search`, `scrape_url`
-| **wayfair**            | `scrape_search`, `scrape_url`
-| **universal**          | `scrape_url`
+| Target                    | Methods
+|---------------------------| --------------
+| **amazon**                | `scrape_search`, `scrape_url`, `scrape_product`, `scrape_pricing`, `scrape_reviews`, `scrape_questions`, `scrape_bestsellers`, `scrape_sellers`
+| **bing**                  | `scrape_search`, `scrape_url`
+| **google**                | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_suggestions`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_lens`, `scrape_ai_mode`, `scrape_news`
+| **google_shopping**       | `scrape_shopping_search`, `scrape_shopping_url`, `scrape_shopping_products`
+| **ebay**                  | `scrape_search`, `scrape_product`, `scrape_url`
+| **etsy**                  | `scrape_search`, `scrape_product`, `scrape_url`
+| **youtube**               | `scrape_search`, `scrape_search_max`, `scrape_metadata`, `scrape_channel`, `scrape_subtitles`, `scrape_transcript`, `scrape_video_trainability`, `scrape_autocomplete`, `scrape_download` (async only)
+| **tiktok**                | `scrape_shop_search`, `scrape_shop_product`, `scrape_shop_url`
+| **chatgpt**               | `scrape`
+| **perplexity**            | `scrape`
+| **kroger**                | `scrape_product`, `scrape_search`, `scrape_url`
+| **walmart**               | `scrape_search`, `scrape_product`, `scrape_url`
+| **bestbuy**               | `scrape_search`, `scrape_product`
+| **target_store**          | `scrape_search`, `scrape_product`, `scrape_category`, `scrape_url`
+| **costco**                | `scrape_search`, `scrape_product`, `scrape_url`
+| **lowes**                 | `scrape_search`, `scrape_product`, `scrape_url`
+| **menards**               | `scrape_search`, `scrape_product`, `scrape_url`
+| **instacart**             | `scrape_search`, `scrape_product`, `scrape_url`
+| **bedbathandbeyond**      | `scrape_search`, `scrape_product`, `scrape_url`
+| **petco**                 | `scrape_search`, `scrape_url`
+| **grainger**              | `scrape_search`, `scrape_product`, `scrape_url`
+| **publix**                | `scrape_search`, `scrape_product`, `scrape_url`
+| **staples**               | `scrape_search`
+| **wayfair**               | `scrape_search`, `scrape_url`
+| **allegro**               | `scrape_search`, `scrape_product`
+| **cdiscount**             | `scrape_search`, `scrape_product`, `scrape_url`
+| **idealo**                | `scrape_search`
+| **mediamarkt**            | `scrape_search`, `scrape_product`, `scrape_url`
+| **alibaba**               | `scrape_search`, `scrape_product`, `scrape_url`
+| **aliexpress**            | `scrape_search`, `scrape_product`, `scrape_url`
+| **flipkart**              | `scrape_search`, `scrape_product`, `scrape_url`
+| **indiamart**             | `scrape_search`, `scrape_product`, `scrape_url`
+| **lazada**                | `scrape_search`, `scrape_product`, `scrape_url`
+| **rakuten**               | `scrape_search`, `scrape_url`
+| **tokopedia**             | `scrape_search`, `scrape_url`
+| **shein**                 | `scrape_search`
+| **avnet**                 | `scrape_search`
+| **dcard**                 | `scrape_search`
+| **mercadolibre**          | `scrape_search`, `scrape_product`, `scrape_url`
+| **mercadolivre**          | `scrape_search`, `scrape_product`
+| **magazineluiza**         | `scrape_search`, `scrape_product`, `scrape_url`
+| **falabella**             | `scrape_search`, `scrape_product`, `scrape_url`
+| **bodegaaurrera**         | `scrape_search`, `scrape_product`, `scrape_url`
+| **airbnb**                | `scrape_url`, `scrape_product`
+| **zillow**                | `scrape_url`
+| **universal**             | `scrape_url`
 
 In the SDK you'll just need to call the relevant method name from the client.
 
-For example if you wish to scrape Bing search you can do it with the following code:
+For example if you wish to scrape Google search you can do it with the following code:
 
 ```python
 client = RealtimeClient(username, password)
-result = client.bing.scrape_search("football")
+result = client.google.scrape_search("football")
 ```
 
 ### Query Parameters
@@ -129,7 +158,7 @@ specific query parameters, here is an example of how to do it:
 
 ```python
 client = RealtimeClient(username, password)
-result = client.bing.scrape_search(
+result = client.google.scrape_search(
     "football",
     start_page=1,
     pages=3,
@@ -200,18 +229,18 @@ SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-
 you define your own parsing and data processing logic that is executed on a raw scraping result.
 
 ```python
-# Use `bing_search` as a source to scrape Bing using custom parsing
+# Use `google_search` as a source to scrape Google using custom parsing
 # instructions.
 client = RealtimeClient(username, password)
-result = client.bing.scrape_url(
-    "https://www.bing.com/search?q=nike",
+result = client.google.scrape_url(
+    "https://www.google.com/search?q=nike",
     parse=True,
     parsing_instructions={
         "number_of_results": {
             "_fns": [
                 {
                     "_fn": "xpath_one",
-                    "_args": [".//span[@class='sb_count']/text()"],
+                    "_args": [".//div[@id='result-stats']/text()"],
                 }
             ]
         }
@@ -267,7 +296,7 @@ response = client.amazon.scrape_search("headset", parse=True)
 
 for result in response.results:
     for item in result.content["results"]["organic"]:
-        print(f"{item["asin"]}: {item["title"]}")
+        print(f'{item["asin"]}: {item["title"]}')
 ```
 
 ## Integration Methods
@@ -305,24 +334,24 @@ async def main():
     # Initialize the async client with your credentials.
     client = AsyncClient(username, password)
 
-    # 'timeout' specifies the maximum time (in seconds) to wait for the scraping
+    # 'job_completion_timeout' specifies the maximum time (in seconds) to wait for the scraping
     #  job to complete.
     # It is applicable for both Realtime and Push-Pull integrations.
     # 'poll_interval' is used only in Push-Pull integrations to set the delay
     # (in seconds)
     # between consecutive status checks of the job.
     tasks = [
-        client.bing.scrape_url(
-            "https://www.bing.com/search?q=adidas",
+        client.google.scrape_url(
+            "https://www.google.com/search?q=adidas",
             parse=True,
-            timeout=35,
+            job_completion_timeout=35,
             poll_interval=3,
         ),
-        client.bing.scrape_url(
-            "https://www.bing.com/search?q=puma",
+        client.google.scrape_url(
+            "https://www.google.com/search?q=puma",
             parse=True,
             timeout=45,
-            poll_interval=5,
+            job_completion_timeout=5,
         ),
     ]
 

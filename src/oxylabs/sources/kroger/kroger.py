@@ -71,6 +71,7 @@ class Kroger:
         store_id: Optional[int] = None,
         delivery_zip: Optional[str] = None,
         fulfillment_type: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = 165,
         **kwargs
     ) -> Response:
@@ -85,6 +86,7 @@ class Kroger:
             store_id (Optional[int]): The store ID.
             delivery_zip (Optional[str]): The delivery location ZIP code.
             fulfillment_type (Optional[str]): The Fulfillment method.
+            context (Optional[list]): Context parameters (price_range, brand).
             request_timeout (int | 165, optional): The interval in seconds for
                             the request to time out if no response is returned.
                             Defaults to 165.
@@ -103,6 +105,7 @@ class Kroger:
             "store_id": store_id,
             "delivery_zip": delivery_zip,
             "fulfillment_type": fulfillment_type,
+            "context": context,
             **kwargs,
         }
         api_response = self._api_instance.get_response(payload, config)
@@ -231,6 +234,7 @@ class KrogerAsync:
         store_id: Optional[int] = None,
         delivery_zip: Optional[str] = None,
         fulfillment_type: Optional[str] = None,
+        context: Optional[list] = None,
         request_timeout: Optional[int] = 165,
         job_completion_timeout: Optional[int] = None,
         poll_interval: Optional[int] = None,
@@ -247,6 +251,7 @@ class KrogerAsync:
             store_id (Optional[int]): The store ID.
             delivery_zip (Optional[str]): The delivery location ZIP code.
             fulfillment_type (Optional[str]): The Fulfillment method.
+            context (Optional[list]): Context parameters (price_range, brand).
             request_timeout (int | 165, optional): The interval in seconds for
                             the request to time out if no response is returned.
                             Defaults to 165.
@@ -274,6 +279,7 @@ class KrogerAsync:
             "store_id": store_id,
             "delivery_zip": delivery_zip,
             "fulfillment_type": fulfillment_type,
+            "context": context,
             **kwargs,
         }
         api_response = await self._api_instance.get_response(payload, config)

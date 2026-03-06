@@ -23,8 +23,11 @@ class Amazon:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
+        sort_by: Optional[str] = None,
+        refinements: Optional[str] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
@@ -41,8 +44,11 @@ class Amazon:
         Args:
             query (str): The search query.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
+            sort_by (Optional[str]): The sorting parameter.
+            refinements (Optional[str]): The refinements parameter.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -63,8 +69,11 @@ class Amazon:
             "source": source.AMAZON_SEARCH,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "start_page": start_page,
             "pages": pages,
+            "sort_by": sort_by,
+            "refinements": refinements,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
@@ -81,9 +90,12 @@ class Amazon:
     def scrape_url(
         self,
         url: str,
+        geo_location: Optional[str] = None,
+        locale: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -95,9 +107,12 @@ class Amazon:
         Args:
             url (str): The URL to scrape.
             domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.
+            locale (Optional[str]): The locale of the results.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
+            context (Optional[list]): Context parameters.
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -112,9 +127,12 @@ class Amazon:
         payload = {
             "source": source.AMAZON_URL,
             "url": url,
+            "geo_location": geo_location,
+            "locale": locale,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
+            "context": context,
             "parse": parse,
             "parsing_instructions": parsing_instructions,
             **kwargs,
@@ -127,6 +145,7 @@ class Amazon:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
@@ -143,6 +162,7 @@ class Amazon:
         Args:
             query (str): 10-symbol ASIN code.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -163,6 +183,7 @@ class Amazon:
             "source": source.AMAZON_PRODUCT,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
@@ -180,12 +201,14 @@ class Amazon:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -197,12 +220,14 @@ class Amazon:
         Args:
             query (str): 10-symbol ASIN code.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
+            context (Optional[list]): Context parameters.
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -218,12 +243,14 @@ class Amazon:
             "source": source.AMAZON_PRICING,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "start_page": start_page,
             "pages": pages,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
+            "context": context,
             "parse": parse,
             "parsing_instructions": parsing_instructions,
             **kwargs,
@@ -342,12 +369,14 @@ class Amazon:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -359,12 +388,14 @@ class Amazon:
         Args:
             query (str): Browse node ID.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
+            context (Optional[list]): Context parameters.
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -380,12 +411,14 @@ class Amazon:
             "source": source.AMAZON_BEST_SELLERS,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "start_page": start_page,
             "pages": pages,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
+            "context": context,
             "parse": parse,
             "parsing_instructions": parsing_instructions,
             **kwargs,
@@ -398,6 +431,7 @@ class Amazon:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
@@ -413,6 +447,7 @@ class Amazon:
         Args:
             query (str): 13-character seller ID.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -432,6 +467,7 @@ class Amazon:
             "source": source.AMAZON_SELLERS,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
@@ -459,8 +495,11 @@ class AmazonAsync:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
+        sort_by: Optional[str] = None,
+        refinements: Optional[str] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
@@ -479,8 +518,11 @@ class AmazonAsync:
         Args:
             query (str): The search query.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
+            sort_by (Optional[str]): The sorting parameter.
+            refinements (Optional[str]): The refinements parameter.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -509,8 +551,11 @@ class AmazonAsync:
             "source": source.AMAZON_SEARCH,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "start_page": start_page,
             "pages": pages,
+            "sort_by": sort_by,
+            "refinements": refinements,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
@@ -527,9 +572,12 @@ class AmazonAsync:
     async def scrape_url(
         self,
         url: str,
+        geo_location: Optional[str] = None,
+        locale: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -543,9 +591,12 @@ class AmazonAsync:
         Args:
             url (str): The URL to scrape.
             domain (Optional[str]): The domain to limit the search results to.
+            geo_location (Optional[str]): The Deliver to location.
+            locale (Optional[str]): The locale of the results.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
+            context (Optional[list]): Context parameters.
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -569,9 +620,12 @@ class AmazonAsync:
         payload = {
             "source": source.AMAZON_URL,
             "url": url,
+            "geo_location": geo_location,
+            "locale": locale,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
+            "context": context,
             "parse": parse,
             "parsing_instructions": parsing_instructions,
             **kwargs,
@@ -584,6 +638,7 @@ class AmazonAsync:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
@@ -602,6 +657,7 @@ class AmazonAsync:
         Args:
             query (str): 10-symbol ASIN code.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -631,6 +687,7 @@ class AmazonAsync:
             "source": source.AMAZON_PRODUCT,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
@@ -648,12 +705,14 @@ class AmazonAsync:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -667,12 +726,14 @@ class AmazonAsync:
         Args:
             query (str): 10-symbol ASIN code.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
+            context (Optional[list]): Context parameters.
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -697,12 +758,14 @@ class AmazonAsync:
             "source": source.AMAZON_PRICING,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "start_page": start_page,
             "pages": pages,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
+            "context": context,
             "parse": parse,
             "parsing_instructions": parsing_instructions,
             **kwargs,
@@ -843,12 +906,14 @@ class AmazonAsync:
         self,
         query,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
+        context: Optional[list] = None,
         parse: Optional[bool] = None,
         parsing_instructions: Optional[dict] = None,
         request_timeout: Optional[int] = 165,
@@ -862,12 +927,14 @@ class AmazonAsync:
         Args:
             query (str): Browse node ID.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
             render (Optional[str]): Enables JavaScript rendering.
+            context (Optional[list]): Context parameters.
             parse (Optional[bool]): true will return structured data.
             parsing_instructions (Optional[dict]): Instructions for parsing the results.
             request_timeout (int | 165, optional): The interval in seconds for
@@ -892,12 +959,14 @@ class AmazonAsync:
             "source": source.AMAZON_BEST_SELLERS,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "start_page": start_page,
             "pages": pages,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
+            "context": context,
             "parse": parse,
             "parsing_instructions": parsing_instructions,
             **kwargs,
@@ -910,6 +979,7 @@ class AmazonAsync:
         self,
         query: str,
         domain: Optional[str] = None,
+        locale: Optional[str] = None,
         geo_location: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
@@ -927,6 +997,7 @@ class AmazonAsync:
         Args:
             query (str): 13-character seller ID.
             domain (Optional[str]): The domain to limit the search results to.
+            locale (Optional[str]): The locale of the results.
             geo_location (Optional[str]): The Deliver to location.
             user_agent_type (Optional[str]): Device type and browser.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -955,6 +1026,7 @@ class AmazonAsync:
             "source": source.AMAZON_SELLERS,
             "query": query,
             "domain": domain,
+            "locale": locale,
             "geo_location": geo_location,
             "user_agent_type": user_agent_type,
             "render": render,

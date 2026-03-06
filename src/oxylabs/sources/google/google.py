@@ -511,6 +511,123 @@ class Google:
         api_response = self._api_instance.get_response(payload, config)
         return Response(api_response)
 
+    def scrape_ai_mode(
+        self,
+        query: str,
+        render: Optional[str] = "html",
+        parse: Optional[bool] = None,
+        geo_location: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        request_timeout: Optional[int] = 165,
+        **kwargs,
+    ) -> Response:
+        """
+        Scrapes Google AI Mode results for a given query.
+
+        Args:
+            query (str): The prompt or question to submit. Must be less than 400 symbols.
+            render (Optional[str]): Enables JavaScript rendering. Required for this
+                            source, defaults to "html".
+            parse (Optional[bool]): true will return structured data.
+            geo_location (Optional[str]): The geographical location that the
+                            result should be adapted for.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            request_timeout (int | 165, optional): The interval in seconds for
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+
+        Returns:
+            Response: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(request_timeout=request_timeout)
+        payload = {
+            "source": source.GOOGLE_AI_MODE,
+            "query": query,
+            "render": render,
+            "parse": parse,
+            "geo_location": geo_location,
+            "callback_url": callback_url,
+            **kwargs,
+        }
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
+
+    def scrape_news(
+        self,
+        query: str,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        limit: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
+        request_timeout: Optional[int] = 165,
+        **kwargs,
+    ) -> Response:
+        """
+        Scrapes Google News search results for a given query.
+
+        Args:
+            query (str): The search query.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            limit (Optional[int]): Number of results to retrieve in each page.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
+            geo_location (Optional[str]): The geographical location that the
+                            result should be adapted for.
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            context (Optional[list]): Context parameters.
+            request_timeout (int | 165, optional): The interval in seconds for
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+
+        Returns:
+            Response: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(request_timeout=request_timeout)
+        payload = {
+            "source": source.GOOGLE_SEARCH,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "limit": limit,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            "context": context,
+            **kwargs,
+        }
+        payload["context"] = payload.get("context") or []
+
+        for item in payload["context"]:
+            if item.get("key") == "tbm":
+                item["value"] = item.get("value", "nws")
+                break
+        else:
+            payload["context"].append({"key": "tbm", "value": "nws"})
+
+        check_parsing_instructions_validity(parsing_instructions)
+        api_response = self._api_instance.get_response(payload, config)
+        return Response(api_response)
+
 class GoogleAsync:
     def __init__(self, api_instance:AsyncAPI) -> None:
         """
@@ -1109,5 +1226,144 @@ class GoogleAsync:
             "callback_url": callback_url,
             **kwargs,
         }
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
+
+    async def scrape_ai_mode(
+        self,
+        query: str,
+        render: Optional[str] = "html",
+        parse: Optional[bool] = None,
+        geo_location: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        request_timeout: Optional[int] = 165,
+        job_completion_timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
+        **kwargs,
+    ) -> Response:
+        """
+        Asynchronously scrapes Google AI Mode results for a given query.
+
+        Args:
+            query (str): The prompt or question to submit. Must be less than 400 symbols.
+            render (Optional[str]): Enables JavaScript rendering. Required for this
+                            source, defaults to "html".
+            parse (Optional[bool]): true will return structured data.
+            geo_location (Optional[str]): The geographical location that the
+                            result should be adapted for.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            request_timeout (int | 165, optional): The interval in seconds for
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
+
+        Returns:
+            Response: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
+        payload = {
+            "source": source.GOOGLE_AI_MODE,
+            "query": query,
+            "render": render,
+            "parse": parse,
+            "geo_location": geo_location,
+            "callback_url": callback_url,
+            **kwargs,
+        }
+        api_response = await self._api_instance.get_response(payload, config)
+        return Response(api_response)
+
+    async def scrape_news(
+        self,
+        query: str,
+        domain: Optional[str] = None,
+        start_page: Optional[int] = None,
+        pages: Optional[int] = None,
+        limit: Optional[int] = None,
+        locale: Optional[str] = None,
+        geo_location: Optional[str] = None,
+        user_agent_type: Optional[str] = None,
+        render: Optional[str] = None,
+        callback_url: Optional[str] = None,
+        parse: Optional[bool] = None,
+        parsing_instructions: Optional[dict] = None,
+        context: Optional[list] = None,
+        request_timeout: Optional[int] = 165,
+        job_completion_timeout: Optional[int] = None,
+        poll_interval: Optional[int] = None,
+        **kwargs,
+    ) -> Response:
+        """
+        Asynchronously scrapes Google News search results for a given query.
+
+        Args:
+            query (str): The search query.
+            domain (Optional[str]): The domain to limit the search results to.
+            start_page (Optional[int]): The starting page number.
+            pages (Optional[int]): The number of pages to scrape.
+            limit (Optional[int]): Number of results to retrieve in each page.
+            locale (Optional[str]): Accept-Language header value which changes page web interface language.
+            geo_location (Optional[str]): The geographical location that the
+                            result should be adapted for.
+            user_agent_type (Optional[str]): Device type and browser.
+            render (Optional[str]): Enables JavaScript rendering.
+            callback_url (Optional[str]): URL to your callback endpoint.
+            parse (Optional[bool]): true will return structured data.
+            parsing_instructions (Optional[dict]): Instructions for parsing the results.
+            context (Optional[list]): Context parameters.
+            request_timeout (int | 165, optional): The interval in seconds for
+                            the request to time out if no response is returned.
+                            Defaults to 165.
+            poll_interval (Optional[int]): The interval in seconds to poll
+                            the server for a response.
+            job_completion_timeout (Optional[int]): The interval in
+                            seconds for the job to time out if no response is returned.
+
+        Returns:
+            Response: The response from the server after the job is completed.
+        """
+
+        config = prepare_config(
+            request_timeout=request_timeout,
+            poll_interval=poll_interval,
+            job_completion_timeout=job_completion_timeout,
+            async_integration=True,
+        )
+        payload = {
+            "source": source.GOOGLE_SEARCH,
+            "query": query,
+            "domain": domain,
+            "start_page": start_page,
+            "pages": pages,
+            "limit": limit,
+            "locale": locale,
+            "geo_location": geo_location,
+            "user_agent_type": user_agent_type,
+            "render": render,
+            "callback_url": callback_url,
+            "parse": parse,
+            "parsing_instructions": parsing_instructions,
+            "context": context,
+            **kwargs,
+        }
+        payload["context"] = payload.get("context") or []
+
+        for item in payload["context"]:
+            if item.get("key") == "tbm":
+                item["value"] = item.get("value", "nws")
+                break
+        else:
+            payload["context"].append({"key": "tbm", "value": "nws"})
+
+        check_parsing_instructions_validity(parsing_instructions)
         api_response = await self._api_instance.get_response(payload, config)
         return Response(api_response)
