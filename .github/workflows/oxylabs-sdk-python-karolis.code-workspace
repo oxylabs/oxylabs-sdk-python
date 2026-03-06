@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "oxylabs-sdk-python-karolis",
+			"path": "../.."
+		},
+		{
+			"name": "tests",
+			"path": "../../../oxylabs-sdk-master-repo/oxylabs-sdk-python/tests"
+		}
+	],
+	"settings": {}
+}
