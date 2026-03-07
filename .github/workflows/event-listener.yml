@@ -53,7 +53,7 @@ jobs:
 
       - name: Ensure docs-sync label exists
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           gh label create "docs-sync" \
             --repo "${{ github.repository }}" \
@@ -63,7 +63,7 @@ jobs:
 
       - name: Create GitHub Issue for Claude
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
           COMMIT_SHA: ${{ steps.vars.outputs.sha }}
           COMMIT_AUTHOR: ${{ steps.vars.outputs.author }}
           COMMIT_MSG: ${{ steps.vars.outputs.message }}
