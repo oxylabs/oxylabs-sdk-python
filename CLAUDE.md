@@ -74,7 +74,8 @@ A diff modifies an existing target page with new or changed parameters in the re
 1. Find the corresponding SDK source file
 2. Add the new parameter to the method signature (both sync and async classes) with `Optional` type and `None` default
 3. Add the parameter to the payload dict
-4. Add a test verifying the parameter flows through
+4. Update the docstring — add the new parameter with its type and description, following existing docstring style
+5. Add a test verifying the parameter flows through
 
 ### 2. New Feature — New methods on an existing source
 
@@ -83,7 +84,7 @@ A diff adds a new `.md` page for a source that already has an SDK class.
 **What to do:**
 1. Determine if the page describes a new API source or is just a usage guide. Skip usage guides.
 2. Add the source constant to `src/oxylabs/utils/types/source.py` if needed
-3. Add the new `scrape_<method>` to both sync and async classes in the existing source file
+3. Add the new `scrape_<method>` to both sync and async classes in the existing source file, including docstrings
 4. Add tests
 
 ### 3. New Target — Entirely new source with no SDK class
@@ -92,7 +93,7 @@ A diff adds documentation for a target with no SDK class.
 
 **What to do:**
 1. Add source constants to `src/oxylabs/utils/types/source.py`
-2. Create `src/oxylabs/sources/<target>/__init__.py` and `<target>.py` with sync + async classes
+2. Create `src/oxylabs/sources/<target>/__init__.py` and `<target>.py` with sync + async classes, including docstrings
 3. Register in `src/oxylabs/internal/client.py` — import and add as attribute on both `RealtimeClient` and `AsyncClient`
 4. Create tests in `tests/sources/<target>/test_<target>.py`
 
@@ -160,6 +161,7 @@ def test_<method>_<param>(self):
 ## Important Rules
 
 - Each source file has TWO classes: sync (e.g. `Amazon`) and async (e.g. `AmazonAsync`). Always update both.
+- Always update docstrings when adding or changing parameters — follow the existing docstring style in the file.
 - Only care about **payload fields** from the docs — ignore language-specific syntax in code examples.
 - If docs have typos in one language but correct spelling in others, use the **correct spelling**.
 - Parameters are `Optional[str]` by default unless clearly a different type (int, bool, list, dict).
