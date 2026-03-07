@@ -63,7 +63,7 @@ jobs:
 
       - name: Create GitHub Issue for Claude
         env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
           COMMIT_SHA: ${{ steps.vars.outputs.sha }}
           COMMIT_AUTHOR: ${{ steps.vars.outputs.author }}
           COMMIT_MSG: ${{ steps.vars.outputs.message }}
@@ -71,12 +71,8 @@ jobs:
           DIFF_CONTENT=$(cat /tmp/diff.txt)
           CHANGED_PATHS=$(cat /tmp/paths.txt)
 
-          gh issue create \
-            --repo "${{ github.repository }}" \
-            --title "Docs sync: $COMMIT_MSG" \
-            --label "docs-sync" \
-            --body "$(cat <<ISSUE_EOF
-          @claude
+          # Build the issue body
+          ISSUE_BODY="@claude
 
           ## Documentation Change Detected
 
@@ -106,6 +102,18 @@ jobs:
           After making changes:
           1. Create a new branch named docs-sync/$COMMIT_SHA
           2. Commit your changes
-          3. Open a pull request with a summary of what changed and why
-          ISSUE_EOF
-          )"
+          3. Open a pull request with a summary of what changed and why"
+
+          # Use jq to safely build JSON payload
+          PAYLOAD=$(jq -n \
+            --arg title "Docs sync: $COMMIT_MSG" \
+            --arg body "$ISSUE_BODY" \
+            '{title: $title, body: $body, labels: ["docs-sync"]}')
+
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $PAT_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/issues \
+            -d "$PAYLOAD"
