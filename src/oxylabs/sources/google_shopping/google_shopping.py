@@ -22,7 +22,6 @@ class GoogleShopping:
     def scrape_shopping_search(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         locale: Optional[str] = None,
@@ -42,7 +41,6 @@ class GoogleShopping:
 
         Args:
             query (str): UTF-encoded keyword
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
@@ -65,7 +63,6 @@ class GoogleShopping:
         config = prepare_config(request_timeout=request_timeout)
         payload = {
             "source": source.GOOGLE_SHOPPING_SEARCH,
-            "domain": domain,
             "query": query,
             "start_page": start_page,
             "pages": pages,
@@ -135,7 +132,6 @@ class GoogleShopping:
     def scrape_shopping_products(
         self,
         query: str,
-        domain: Optional[str] = None,
         locale: Optional[str] = None,
         results_language: Optional[str] = None,
         geo_location: Optional[str] = None,
@@ -152,7 +148,6 @@ class GoogleShopping:
 
         Args:
             query (str): UTF-encoded product code.
-            domain (Optional[str]): The domain to limit the search results to.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
@@ -172,7 +167,6 @@ class GoogleShopping:
         payload = {
             "source": source.GOOGLE_SHOPPING_PRODUCT,
             "query": query,
-            "domain": domain,
             "locale": locale,
             "results_language": results_language,
             "geo_location": geo_location,
@@ -200,7 +194,6 @@ class GoogleShoppingAsync:
     async def scrape_shopping_search(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         locale: Optional[str] = None,
@@ -222,7 +215,6 @@ class GoogleShoppingAsync:
 
         Args:
             query (str): UTF-encoded keyword.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
@@ -254,7 +246,6 @@ class GoogleShoppingAsync:
         )
         payload = {
             "source": source.GOOGLE_SHOPPING_SEARCH,
-            "domain": domain,
             "query": query,
             "start_page": start_page,
             "pages": pages,
@@ -333,7 +324,6 @@ class GoogleShoppingAsync:
     async def scrape_shopping_products(
         self,
         query: str,
-        domain: Optional[str] = None,
         locale: Optional[str] = None,
         results_language: Optional[str] = None,
         geo_location: Optional[str] = None,
@@ -352,7 +342,6 @@ class GoogleShoppingAsync:
 
         Args:
             query (str): UTF-encoded product code.
-            domain (Optional[str]): The domain to limit the search results to.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
             "results_language": None,
             geo_location (Optional[str]): None,
@@ -381,7 +370,6 @@ class GoogleShoppingAsync:
         payload = {
             "source": source.GOOGLE_SHOPPING_PRODUCT,
             "query": query,
-            "domain": domain,
             "locale": locale,
             "results_language": results_language,
             "geo_location": geo_location,
