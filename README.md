@@ -151,7 +151,7 @@ result = client.google.scrape_search("football")
 
 Each source has different accepted query parameters. For a detailed list of
 accepted parameters by each source you can head over to
-https://developers.oxylabs.io/scraper-apis/web-scraper-api.
+[Web Scraper API Documentation](https://developers.oxylabs.io/scraping-solutions/web-scraper-api).
 
 By default, scrape functions will use default parameters. If you need to send
 specific query parameters, here is an example of how to do it:
@@ -163,7 +163,6 @@ result = client.google.scrape_search(
     start_page=1,
     pages=3,
     limit=4,
-    domain="com",
 )
 ```
 
@@ -174,7 +173,7 @@ commonly used parameter values as constants in our library. You can use them by
 importing the oxylabs type module.
 
 ```python
-from oxylabs.utils.types import user_agent_type, render, domain
+from oxylabs.utils.types import user_agent_type, render
 ```
 
 For the full list you can check the `types` directory. You can send in these
@@ -184,14 +183,13 @@ These can be used as follows:
 
 ```python
 from oxylabs import RealtimeClient
-from oxylabs.utils.types import user_agent_type, render, domain
+from oxylabs.utils.types import user_agent_type, render
 
 client = RealtimeClient(username, password)
 result = client.google.scrape_search(
     "adidas",
     user_agent_type=user_agent_type.DESKTOP,
     render=render.HTML,
-    domain=domain.COM,
 )
 ```
 
