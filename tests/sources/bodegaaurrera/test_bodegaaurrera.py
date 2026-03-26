@@ -24,6 +24,16 @@ class TestBodegaaurrerapSearchSync(unittest.TestCase):
 
         self.assertEqual(captured["subdomain"], "despensa")
 
+    def test_search_delivery_zip(self):
+        client = RealtimeClient('user', 'pass')
+        api = client.bodegaaurrera._api_instance
+        captured = {}
+        api._get_http_response = lambda payload, method, config: (captured.update(payload) or {"mock": True})
+
+        client.bodegaaurrera.scrape_search("arroz", delivery_zip="06600")
+
+        self.assertEqual(captured["delivery_zip"], "06600")
+
 
 class TestBodegaaurreraProductSync(unittest.TestCase):
     def test_product_source(self):
@@ -36,6 +46,26 @@ class TestBodegaaurreraProductSync(unittest.TestCase):
 
         self.assertEqual(captured["source"], "bodegaaurrera_product")
 
+    def test_product_subdomain(self):
+        client = RealtimeClient('user', 'pass')
+        api = client.bodegaaurrera._api_instance
+        captured = {}
+        api._get_http_response = lambda payload, method, config: (captured.update(payload) or {"mock": True})
+
+        client.bodegaaurrera.scrape_product("123456", subdomain="despensa")
+
+        self.assertEqual(captured["subdomain"], "despensa")
+
+    def test_product_delivery_zip(self):
+        client = RealtimeClient('user', 'pass')
+        api = client.bodegaaurrera._api_instance
+        captured = {}
+        api._get_http_response = lambda payload, method, config: (captured.update(payload) or {"mock": True})
+
+        client.bodegaaurrera.scrape_product("123456", delivery_zip="06600")
+
+        self.assertEqual(captured["delivery_zip"], "06600")
+
 
 class TestBodegaaurreraUrlSync(unittest.TestCase):
     def test_url_source(self):
@@ -47,3 +77,13 @@ class TestBodegaaurreraUrlSync(unittest.TestCase):
         client.bodegaaurrera.scrape_url("https://www.bodegaaurrera.com.mx/")
 
         self.assertEqual(captured["source"], "bodegaaurrera")
+
+    def test_url_delivery_zip(self):
+        client = RealtimeClient('user', 'pass')
+        api = client.bodegaaurrera._api_instance
+        captured = {}
+        api._get_http_response = lambda payload, method, config: (captured.update(payload) or {"mock": True})
+
+        client.bodegaaurrera.scrape_url("https://www.bodegaaurrera.com.mx/", delivery_zip="06600")
+
+        self.assertEqual(captured["delivery_zip"], "06600")

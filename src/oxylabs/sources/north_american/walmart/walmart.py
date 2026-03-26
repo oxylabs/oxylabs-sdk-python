@@ -90,6 +90,7 @@ class Walmart:
         self,
         product_id: str,
         domain: Optional[str] = None,
+        fulfillment_type: Optional[str] = None,
         delivery_zip: Optional[str] = None,
         store_id: Optional[str] = None,
         user_agent_type: Optional[str] = None,
@@ -104,8 +105,11 @@ class Walmart:
 
         Args:
             product_id (str): Walmart product ID.
-            domain (Optional[str]): Domain localization for Walmart.
-            delivery_zip (Optional[str]): Set the shipping to location.
+            domain (Optional[str]): Domain localization for Walmart. Available
+                            values: "com", "com.mx", "ca", "co.cr". Default: "com".
+            fulfillment_type (Optional[str]): Set the fulfillment type. Supported
+                            values: "pickup", "delivery", "shipping".
+            delivery_zip (Optional[str]): Set the shipping-to location.
             store_id (Optional[str]): Set the store location.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
@@ -124,6 +128,7 @@ class Walmart:
             "source": source.WALMART_PRODUCT,
             "product_id": product_id,
             "domain": domain,
+            "fulfillment_type": fulfillment_type,
             "delivery_zip": delivery_zip,
             "store_id": store_id,
             "user_agent_type": user_agent_type,
@@ -271,6 +276,7 @@ class WalmartAsync:
         self,
         product_id: str,
         domain: Optional[str] = None,
+        fulfillment_type: Optional[str] = None,
         delivery_zip: Optional[str] = None,
         store_id: Optional[str] = None,
         user_agent_type: Optional[str] = None,
@@ -287,8 +293,11 @@ class WalmartAsync:
 
         Args:
             product_id (str): Walmart product ID.
-            domain (Optional[str]): Domain localization for Walmart.
-            delivery_zip (Optional[str]): Set the shipping to location.
+            domain (Optional[str]): Domain localization for Walmart. Available
+                            values: "com", "com.mx", "ca", "co.cr". Default: "com".
+            fulfillment_type (Optional[str]): Set the fulfillment type. Supported
+                            values: "pickup", "delivery", "shipping".
+            delivery_zip (Optional[str]): Set the shipping-to location.
             store_id (Optional[str]): Set the store location.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
@@ -316,6 +325,7 @@ class WalmartAsync:
             "source": source.WALMART_PRODUCT,
             "product_id": product_id,
             "domain": domain,
+            "fulfillment_type": fulfillment_type,
             "delivery_zip": delivery_zip,
             "store_id": store_id,
             "user_agent_type": user_agent_type,
