@@ -21,6 +21,7 @@ class Bodegaaurrera:
         query: str,
         start_page: Optional[int] = None,
         subdomain: Optional[str] = None,
+        delivery_zip: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -33,7 +34,10 @@ class Bodegaaurrera:
         Args:
             query (str): The keyword or phrase to search for.
             start_page (Optional[int]): The starting page number.
-            subdomain (Optional[str]): Subdomain localization. Accepts only "despensa".
+            subdomain (Optional[str]): Subdomain localization. Accepts "www" and
+                            "despensa" values. Default: "www".
+            delivery_zip (Optional[str]): Set the delivery or pickup location.
+                            Accepts a Mexican postal code.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -51,6 +55,7 @@ class Bodegaaurrera:
             "query": query,
             "start_page": start_page,
             "subdomain": subdomain,
+            "delivery_zip": delivery_zip,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -62,6 +67,8 @@ class Bodegaaurrera:
     def scrape_product(
         self,
         product_id: str,
+        subdomain: Optional[str] = None,
+        delivery_zip: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -73,6 +80,10 @@ class Bodegaaurrera:
 
         Args:
             product_id (str): Bodega Aurrera product ID.
+            subdomain (Optional[str]): Subdomain localization. Accepts "www" and
+                            "despensa" values. Default: "www".
+            delivery_zip (Optional[str]): Set the delivery or pickup location.
+                            Accepts a Mexican postal code.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -88,6 +99,8 @@ class Bodegaaurrera:
         payload = {
             "source": source.BODEGAAURRERA_PRODUCT,
             "product_id": product_id,
+            "subdomain": subdomain,
+            "delivery_zip": delivery_zip,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -99,6 +112,7 @@ class Bodegaaurrera:
     def scrape_url(
         self,
         url: str,
+        delivery_zip: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -110,6 +124,8 @@ class Bodegaaurrera:
 
         Args:
             url (str): Direct URL to any Bodega Aurrera page.
+            delivery_zip (Optional[str]): Set the delivery or pickup location.
+                            Accepts a Mexican postal code.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -125,6 +141,7 @@ class Bodegaaurrera:
         payload = {
             "source": source.BODEGAAURRERA_URL,
             "url": url,
+            "delivery_zip": delivery_zip,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -149,6 +166,7 @@ class BodegaaurreraAsync:
         query: str,
         start_page: Optional[int] = None,
         subdomain: Optional[str] = None,
+        delivery_zip: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -163,7 +181,10 @@ class BodegaaurreraAsync:
         Args:
             query (str): The keyword or phrase to search for.
             start_page (Optional[int]): The starting page number.
-            subdomain (Optional[str]): Subdomain localization. Accepts only "despensa".
+            subdomain (Optional[str]): Subdomain localization. Accepts "www" and
+                            "despensa" values. Default: "www".
+            delivery_zip (Optional[str]): Set the delivery or pickup location.
+                            Accepts a Mexican postal code.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -190,6 +211,7 @@ class BodegaaurreraAsync:
             "query": query,
             "start_page": start_page,
             "subdomain": subdomain,
+            "delivery_zip": delivery_zip,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -201,6 +223,8 @@ class BodegaaurreraAsync:
     async def scrape_product(
         self,
         product_id: str,
+        subdomain: Optional[str] = None,
+        delivery_zip: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -214,6 +238,10 @@ class BodegaaurreraAsync:
 
         Args:
             product_id (str): Bodega Aurrera product ID.
+            subdomain (Optional[str]): Subdomain localization. Accepts "www" and
+                            "despensa" values. Default: "www".
+            delivery_zip (Optional[str]): Set the delivery or pickup location.
+                            Accepts a Mexican postal code.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -238,6 +266,8 @@ class BodegaaurreraAsync:
         payload = {
             "source": source.BODEGAAURRERA_PRODUCT,
             "product_id": product_id,
+            "subdomain": subdomain,
+            "delivery_zip": delivery_zip,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -249,6 +279,7 @@ class BodegaaurreraAsync:
     async def scrape_url(
         self,
         url: str,
+        delivery_zip: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -262,6 +293,8 @@ class BodegaaurreraAsync:
 
         Args:
             url (str): Direct URL to any Bodega Aurrera page.
+            delivery_zip (Optional[str]): Set the delivery or pickup location.
+                            Accepts a Mexican postal code.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -286,6 +319,7 @@ class BodegaaurreraAsync:
         payload = {
             "source": source.BODEGAAURRERA_URL,
             "url": url,
+            "delivery_zip": delivery_zip,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,

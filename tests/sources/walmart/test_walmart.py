@@ -64,6 +64,16 @@ class TestWalmartProductSync(unittest.TestCase):
 
         self.assertEqual(captured["store_id"], "1234")
 
+    def test_product_fulfillment_type(self):
+        client = RealtimeClient('user', 'pass')
+        api = client.walmart._api_instance
+        captured = {}
+        api._get_http_response = lambda payload, method, config: (captured.update(payload) or {"mock": True})
+
+        client.walmart.scrape_product("123456789", fulfillment_type="pickup")
+
+        self.assertEqual(captured["fulfillment_type"], "pickup")
+
 
 class TestWalmartUrlSync(unittest.TestCase):
     """Tests that scrape_url parameters flow through to the payload."""
