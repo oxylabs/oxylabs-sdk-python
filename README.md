@@ -93,7 +93,7 @@ These are the targets and methods available for scraping in the Python SDK:
 |---------------------------| --------------
 | **amazon**                | `scrape_search`, `scrape_url`, `scrape_product`, `scrape_pricing`, `scrape_reviews`, `scrape_questions`, `scrape_bestsellers`, `scrape_sellers`
 | **bing**                  | `scrape_search`, `scrape_url`
-| **google**                | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_suggestions`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_lens`, `scrape_ai_mode`, `scrape_news`
+| **google**                | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_lens`, `scrape_ai_mode`, `scrape_news`
 | **google_shopping**       | `scrape_shopping_search`, `scrape_shopping_url`, `scrape_shopping_products`
 | **ebay**                  | `scrape_search`, `scrape_product`, `scrape_url`
 | **etsy**                  | `scrape_search`, `scrape_product`, `scrape_url`
