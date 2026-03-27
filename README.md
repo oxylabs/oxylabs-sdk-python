@@ -93,7 +93,7 @@ These are the targets and methods available for scraping in the Python SDK:
 |---------------------------| --------------
 | **amazon**                | `scrape_search`, `scrape_url`, `scrape_product`, `scrape_pricing`, `scrape_reviews`, `scrape_questions`, `scrape_bestsellers`, `scrape_sellers`
 | **bing**                  | `scrape_search`, `scrape_url`
-| **google**                | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_suggestions`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_lens`, `scrape_ai_mode`, `scrape_news`
+| **google**                | `scrape_search`, `scrape_url`, `scrape_ads`, `scrape_travel_hotels`, `scrape_images`, `scrape_trends_explore`, `scrape_lens`, `scrape_ai_mode`, `scrape_news`
 | **google_shopping**       | `scrape_shopping_search`, `scrape_shopping_url`, `scrape_shopping_products`
 | **ebay**                  | `scrape_search`, `scrape_product`, `scrape_url`
 | **etsy**                  | `scrape_search`, `scrape_product`, `scrape_url`
@@ -151,7 +151,7 @@ result = client.google.scrape_search("football")
 
 Each source has different accepted query parameters. For a detailed list of
 accepted parameters by each source you can head over to
-https://developers.oxylabs.io/scraper-apis/web-scraper-api.
+[Web Scraper API Documentation](https://developers.oxylabs.io/scraping-solutions/web-scraper-api).
 
 By default, scrape functions will use default parameters. If you need to send
 specific query parameters, here is an example of how to do it:
@@ -163,7 +163,6 @@ result = client.google.scrape_search(
     start_page=1,
     pages=3,
     limit=4,
-    domain="com",
 )
 ```
 
@@ -174,7 +173,7 @@ commonly used parameter values as constants in our library. You can use them by
 importing the oxylabs type module.
 
 ```python
-from oxylabs.utils.types import user_agent_type, render, domain
+from oxylabs.utils.types import user_agent_type, render
 ```
 
 For the full list you can check the `types` directory. You can send in these
@@ -184,14 +183,13 @@ These can be used as follows:
 
 ```python
 from oxylabs import RealtimeClient
-from oxylabs.utils.types import user_agent_type, render, domain
+from oxylabs.utils.types import user_agent_type, render
 
 client = RealtimeClient(username, password)
 result = client.google.scrape_search(
     "adidas",
     user_agent_type=user_agent_type.DESKTOP,
     render=render.HTML,
-    domain=domain.COM,
 )
 ```
 

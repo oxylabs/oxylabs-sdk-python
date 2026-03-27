@@ -22,7 +22,6 @@ class Google:
     def scrape_search(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         limit: Optional[int] = None,
@@ -42,7 +41,6 @@ class Google:
 
         Args:
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
                         pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
@@ -66,7 +64,6 @@ class Google:
         payload = {
             "source": source.GOOGLE_SEARCH,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "limit": limit,
@@ -134,7 +131,6 @@ class Google:
     def scrape_ads(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         locale: Optional[str] = None,
@@ -153,7 +149,6 @@ class Google:
 
         Args:
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
@@ -176,7 +171,6 @@ class Google:
         payload = {
             "source": source.GOOGLE_ADS,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "locale": locale,
@@ -193,54 +187,9 @@ class Google:
         api_response = self._api_instance.get_response(payload, config)
         return Response(api_response)
 
-    def scrape_suggestions(
-        self,
-        query: str,
-        locale: Optional[str] = None,
-        geo_location: Optional[str] = None,
-        user_agent_type: Optional[str] = None,
-        render: Optional[str] = None,
-        callback_url: Optional[str] = None,
-        request_timeout: Optional[int] = 165,
-        **kwargs,
-    ) -> Response:
-        """
-        Scrapes Google suggestions for a given query.
-
-        Args:
-            query (str): The search query.
-            locale (Optional[str]): Accept-Language header value which changes page web interface language.
-            geo_location (Optional[str]): None,
-            user_agent_type (Optional[str]): Device type and browser.
-            render (Optional[str]): Enables JavaScript rendering.
-            callback_url (Optional[str]): URL to your callback endpoint.
-            parsing_instructions (Optional[dict]): Instructions for parsing the results.
-            request_timeout (int | 165, optional): The interval in seconds for
-                            the request to time out if no response is returned.
-                            Defaults to 165.
-
-        Returns:
-            Response: The response from the server after the job is completed.
-        """
-
-        config = prepare_config(request_timeout=request_timeout)
-        payload = {
-            "source": source.GOOGLE_SUGGESTIONS,
-            "query": query,
-            "locale": locale,
-            "geo_location": geo_location,
-            "user_agent_type": user_agent_type,
-            "render": render,
-            "callback_url": callback_url,
-            **kwargs,
-        }
-        api_response = self._api_instance.get_response(payload, config)
-        return Response(api_response)
-
     def scrape_travel_hotels(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         locale: Optional[str] = None,
         geo_location: Optional[str] = None,
@@ -260,7 +209,6 @@ class Google:
             <Location>" will result in a list hotels for <Location>. Eg hotels
             in Paris will list hotels in Paris, no matter what geo_location is
             given.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
             geo_location (Optional[str]): None,
@@ -281,7 +229,6 @@ class Google:
         payload = {
             "source": source.GOOGLE_TRAVEL_HOTELS,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "locale": locale,
             "geo_location": geo_location,
@@ -297,7 +244,6 @@ class Google:
     def scrape_images(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         locale: Optional[str] = None,
@@ -316,7 +262,6 @@ class Google:
 
         Args:
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
@@ -339,7 +284,6 @@ class Google:
         payload = {
             "source": source.GOOGLE_SEARCH,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "locale": locale,
@@ -412,7 +356,6 @@ class Google:
         callback_url: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         geo_location: Optional[str] = None,
-        domain: Optional[str] = None,
         locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
@@ -431,7 +374,6 @@ class Google:
             user_agent_type (Optional[str]): Device type and browser.
             geo_location (Optional[str]): The geographical location that the
                             results should be adapted for.
-            domain (Optional[str]): The domain to limit the search results to.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
@@ -452,7 +394,6 @@ class Google:
             "render": render,
             "user_agent_type": user_agent_type,
             "geo_location": geo_location,
-            "domain": domain,
             "locale": locale,
             "start_page": start_page,
             "pages": pages,
@@ -556,7 +497,6 @@ class Google:
     def scrape_news(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         limit: Optional[int] = None,
@@ -576,7 +516,6 @@ class Google:
 
         Args:
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
@@ -601,7 +540,6 @@ class Google:
         payload = {
             "source": source.GOOGLE_SEARCH,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "limit": limit,
@@ -641,7 +579,6 @@ class GoogleAsync:
     async def scrape_search(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         limit: Optional[int] = None,
@@ -664,7 +601,6 @@ class GoogleAsync:
         Args:
 
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
@@ -697,7 +633,6 @@ class GoogleAsync:
         payload = {
             "source": source.GOOGLE_SEARCH,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "limit": limit,
@@ -776,7 +711,6 @@ class GoogleAsync:
     async def scrape_ads(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         locale: Optional[str] = None,
@@ -797,7 +731,6 @@ class GoogleAsync:
 
         Args:
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
@@ -829,7 +762,6 @@ class GoogleAsync:
         payload = {
             "source": source.GOOGLE_ADS,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "locale": locale,
@@ -846,65 +778,9 @@ class GoogleAsync:
         api_response = await self._api_instance.get_response(payload, config)
         return Response(api_response)
 
-    async def scrape_suggestions(
-        self,
-        query: str,
-        locale: Optional[str] = None,
-        geo_location: Optional[str] = None,
-        user_agent_type: Optional[str] = None,
-        render: Optional[str] = None,
-        callback_url: Optional[str] = None,
-        request_timeout: Optional[int] = 165,
-        job_completion_timeout: Optional[int] = None,
-        poll_interval: Optional[int] = None,
-        **kwargs,
-    ) -> Response:
-        """
-        Asynchronously scrapes Google suggestions for a given query.
-
-        Args:
-            query (str): The search query.
-            locale (Optional[str]): Accept-Language header value which changes page web interface language.
-            geo_location (Optional[str]): None,
-            user_agent_type (Optional[str]): Device type and browser.
-            render (Optional[str]): Enables JavaScript rendering.
-            callback_url (Optional[str]): URL to your callback endpoint.
-            parsing_instructions (Optional[dict]): Instructions for parsing the results.
-            request_timeout (int | 165, optional): The interval in seconds for
-                            the request to time out if no response is returned.
-                            Defaults to 165.
-            poll_interval (Optional[int]): The interval in seconds to poll
-                            the server for a response.
-            job_completion_timeout (Optional[int]): The interval in
-                            seconds for the job to time out if no response is returned.
-
-        Returns:
-            Response: The response from the server after the job is completed.
-        """
-
-        config = prepare_config(
-            request_timeout=request_timeout,
-            poll_interval=poll_interval,
-            job_completion_timeout=job_completion_timeout,
-            async_integration=True,
-        )
-        payload = {
-            "source": source.GOOGLE_SUGGESTIONS,
-            "query": query,
-            "locale": locale,
-            "geo_location": geo_location,
-            "user_agent_type": user_agent_type,
-            "render": render,
-            "callback_url": callback_url,
-            **kwargs,
-        }
-        api_response = await self._api_instance.get_response(payload, config)
-        return Response(api_response)
-
     async def scrape_travel_hotels(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         locale: Optional[str] = None,
         geo_location: Optional[str] = None,
@@ -927,7 +803,6 @@ class GoogleAsync:
             "query": "hotels in <Location>" will result in a list hotels for
             <Location>. Eg hotels in Paris will list hotels in Paris, no matter
             what geo_location is given.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
             geo_location (Optional[str]): None,
@@ -957,7 +832,6 @@ class GoogleAsync:
         payload = {
             "source": source.GOOGLE_TRAVEL_HOTELS,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "locale": locale,
             "geo_location": geo_location,
@@ -973,7 +847,6 @@ class GoogleAsync:
     async def scrape_images(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         locale: Optional[str] = None,
@@ -994,7 +867,6 @@ class GoogleAsync:
 
         Args:
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             user_agent_type (Optional[str]): Device type and browser.
@@ -1025,7 +897,6 @@ class GoogleAsync:
         payload = {
             "source": source.GOOGLE_SEARCH,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "locale": locale,
@@ -1109,7 +980,6 @@ class GoogleAsync:
         callback_url: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         geo_location: Optional[str] = None,
-        domain: Optional[str] = None,
         locale: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
@@ -1130,7 +1000,6 @@ class GoogleAsync:
             user_agent_type (Optional[str]): Device type and browser.
             geo_location (Optional[str]): The geographical location that the
                             results should be adapted for.
-            domain (Optional[str]): The domain to limit the search results to.
             locale (Optional[str]): Accept-Language header value which changes page web interface language.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
@@ -1159,7 +1028,6 @@ class GoogleAsync:
             "render": render,
             "user_agent_type": user_agent_type,
             "geo_location": geo_location,
-            "domain": domain,
             "locale": locale,
             "start_page": start_page,
             "pages": pages,
@@ -1285,7 +1153,6 @@ class GoogleAsync:
     async def scrape_news(
         self,
         query: str,
-        domain: Optional[str] = None,
         start_page: Optional[int] = None,
         pages: Optional[int] = None,
         limit: Optional[int] = None,
@@ -1307,7 +1174,6 @@ class GoogleAsync:
 
         Args:
             query (str): The search query.
-            domain (Optional[str]): The domain to limit the search results to.
             start_page (Optional[int]): The starting page number.
             pages (Optional[int]): The number of pages to scrape.
             limit (Optional[int]): Number of results to retrieve in each page.
@@ -1341,7 +1207,6 @@ class GoogleAsync:
         payload = {
             "source": source.GOOGLE_SEARCH,
             "query": query,
-            "domain": domain,
             "start_page": start_page,
             "pages": pages,
             "limit": limit,

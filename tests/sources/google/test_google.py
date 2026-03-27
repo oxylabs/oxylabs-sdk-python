@@ -83,15 +83,6 @@ class TestGoogleNewsSync(unittest.TestCase):
         tbm_count = sum(1 for item in captured["context"] if item.get("key") == "tbm")
         self.assertEqual(tbm_count, 1)
 
-    def test_news_domain(self):
-        client = RealtimeClient('user', 'pass')
-        api = client.google._api_instance
-        captured = {}
-        api._get_http_response = lambda payload, method, config: (captured.update(payload) or {"mock": True})
-
-        client.google.scrape_news("breaking news", domain="co.uk")
-
-        self.assertEqual(captured["domain"], "co.uk")
 
     def test_news_pagination(self):
         client = RealtimeClient('user', 'pass')

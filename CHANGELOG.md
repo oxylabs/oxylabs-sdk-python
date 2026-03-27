@@ -1,4 +1,50 @@
 # Changelog
+## 3.0.0
+  Updated Sources
+
+  | Source | Change |
+  |---|---|
+  | **Amazon** | Added missing params |
+  | **Google** | Added `scrape_ai_mode`, `scrape_news` |
+  | **Google Shopping** | Removed deprecated `scrape_product_pricing`
+  |
+  | **Kroger** | Added `context` param to `scrape_search` |
+  | **Universal** | Deprecated `locale` and `parser_type` params |
+
+  New Sources
+
+  **General**
+  YouTube (`search`, `metadata`, `channel`, `subtitles`, `transcript`,
+   `trainability`, `autocomplete`, `download`†)
+   
+  youtube_transcript deprecated, use youtube.scrape_transcript instead
+   
+  eBay, Etsy, TikTok, Shop, ChatGPT, Perplexity
+
+  **North American Retail**
+  Walmart, Best Buy, Target, Costco, Lowe's, Menards, Instacart, Bed
+  Bath & Beyond, Petco, Grainger, Publix, Staples, Shein, Avnet
+
+  **European**
+  Allegro, Cdiscount, Idealo, MediaMarkt
+
+  **Asian**
+  Alibaba, AliExpress, Flipkart, IndiaMart, Lazada, Rakuten,
+  Tokopedia, Dcard
+
+  **Latin American**
+  Mercado Libre, Mercado Livre, Magazine Luiza, Falabella, Bodega
+  Aurrera
+
+  **Real Estate**
+  Airbnb, Zillow
+
+  - Regional sources reorganized into geographic subdirectories
+  (`asian/`, `european/`, `latin_american/`, `north_american/`,
+  `real_estate/`)
+  - Tests added for all new sources and Universal
+  - README updated to reflect all changes
+
 
 ## 2.0.0
 - SERP and Ecommerce source split has been removed. New common modules have been created: API, Client and Response.
