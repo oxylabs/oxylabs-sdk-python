@@ -19,6 +19,7 @@ class Tiktok:
     def scrape_shop_search(
         self,
         query: str,
+        country: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -30,6 +31,8 @@ class Tiktok:
 
         Args:
             query (str): The keyword or phrase to search for products.
+            country (Optional[str]): The domain localization setting. Supported
+                            values: "com", "jp", "gb", "my", "th", "vn", "ph", "id".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -45,6 +48,7 @@ class Tiktok:
         payload = {
             "source": source.TIKTOK_SHOP_SEARCH,
             "query": query,
+            "country": country,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -56,7 +60,7 @@ class Tiktok:
     def scrape_shop_product(
         self,
         product_id: str,
-        domain: Optional[str] = None,
+        country: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -68,7 +72,8 @@ class Tiktok:
 
         Args:
             product_id (str): A unique TikTok Shop product ID.
-            domain (Optional[str]): Domain localization. Currently only "com" (US) is supported.
+            country (Optional[str]): The domain localization setting. Supported
+                            values: "com", "jp", "gb", "my", "th", "vn", "ph", "id".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -84,7 +89,7 @@ class Tiktok:
         payload = {
             "source": source.TIKTOK_SHOP_PRODUCT,
             "product_id": product_id,
-            "domain": domain,
+            "country": country,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -96,6 +101,7 @@ class Tiktok:
     def scrape_shop_url(
         self,
         url: str,
+        country: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -107,6 +113,8 @@ class Tiktok:
 
         Args:
             url (str): Direct URL to any TikTok Shop page.
+            country (Optional[str]): The domain localization setting. Supported
+                            values: "com", "jp", "gb", "my", "th", "vn", "ph", "id".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -122,6 +130,7 @@ class Tiktok:
         payload = {
             "source": source.TIKTOK_URL,
             "url": url,
+            "country": country,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -144,6 +153,7 @@ class TiktokAsync:
     async def scrape_shop_search(
         self,
         query: str,
+        country: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -157,6 +167,8 @@ class TiktokAsync:
 
         Args:
             query (str): The keyword or phrase to search for products.
+            country (Optional[str]): The domain localization setting. Supported
+                            values: "com", "jp", "gb", "my", "th", "vn", "ph", "id".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -181,6 +193,7 @@ class TiktokAsync:
         payload = {
             "source": source.TIKTOK_SHOP_SEARCH,
             "query": query,
+            "country": country,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -192,7 +205,7 @@ class TiktokAsync:
     async def scrape_shop_product(
         self,
         product_id: str,
-        domain: Optional[str] = None,
+        country: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -206,7 +219,8 @@ class TiktokAsync:
 
         Args:
             product_id (str): A unique TikTok Shop product ID.
-            domain (Optional[str]): Domain localization. Currently only "com" (US) is supported.
+            country (Optional[str]): The domain localization setting. Supported
+                            values: "com", "jp", "gb", "my", "th", "vn", "ph", "id".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -231,7 +245,7 @@ class TiktokAsync:
         payload = {
             "source": source.TIKTOK_SHOP_PRODUCT,
             "product_id": product_id,
-            "domain": domain,
+            "country": country,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -243,6 +257,7 @@ class TiktokAsync:
     async def scrape_shop_url(
         self,
         url: str,
+        country: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -256,6 +271,8 @@ class TiktokAsync:
 
         Args:
             url (str): Direct URL to any TikTok Shop page.
+            country (Optional[str]): The domain localization setting. Supported
+                            values: "com", "jp", "gb", "my", "th", "vn", "ph", "id".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -280,6 +297,7 @@ class TiktokAsync:
         payload = {
             "source": source.TIKTOK_URL,
             "url": url,
+            "country": country,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
