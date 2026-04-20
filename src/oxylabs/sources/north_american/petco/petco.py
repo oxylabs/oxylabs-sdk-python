@@ -20,8 +20,6 @@ class Petco:
         self,
         query: str,
         start_page: Optional[int] = None,
-        store_id: Optional[str] = None,
-        fulfillment_type: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -34,9 +32,6 @@ class Petco:
         Args:
             query (str): The keyword or phrase to search for.
             start_page (Optional[int]): The starting page number.
-            store_id (Optional[str]): Specify a store.
-            fulfillment_type (Optional[str]): Order fulfillment method.
-                            Accepted values: "repeat_delivery", "free_pickup_today", "same_day_delivery".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -53,8 +48,6 @@ class Petco:
             "source": source.PETCO_SEARCH,
             "query": query,
             "start_page": start_page,
-            "store_id": store_id,
-            "fulfillment_type": fulfillment_type,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -66,7 +59,6 @@ class Petco:
     def scrape_url(
         self,
         url: str,
-        store_id: Optional[int] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -78,7 +70,6 @@ class Petco:
 
         Args:
             url (str): Direct URL to any Petco page.
-            store_id (Optional[int]): Specify a Petco store.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -94,7 +85,6 @@ class Petco:
         payload = {
             "source": source.PETCO_URL,
             "url": url,
-            "store_id": store_id,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -118,8 +108,6 @@ class PetcoAsync:
         self,
         query: str,
         start_page: Optional[int] = None,
-        store_id: Optional[str] = None,
-        fulfillment_type: Optional[str] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -134,9 +122,6 @@ class PetcoAsync:
         Args:
             query (str): The keyword or phrase to search for.
             start_page (Optional[int]): The starting page number.
-            store_id (Optional[str]): Specify a store.
-            fulfillment_type (Optional[str]): Order fulfillment method.
-                            Accepted values: "repeat_delivery", "free_pickup_today", "same_day_delivery".
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -162,8 +147,6 @@ class PetcoAsync:
             "source": source.PETCO_SEARCH,
             "query": query,
             "start_page": start_page,
-            "store_id": store_id,
-            "fulfillment_type": fulfillment_type,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
@@ -175,7 +158,6 @@ class PetcoAsync:
     async def scrape_url(
         self,
         url: str,
-        store_id: Optional[int] = None,
         user_agent_type: Optional[str] = None,
         render: Optional[str] = None,
         callback_url: Optional[str] = None,
@@ -189,7 +171,6 @@ class PetcoAsync:
 
         Args:
             url (str): Direct URL to any Petco page.
-            store_id (Optional[int]): Specify a Petco store.
             user_agent_type (Optional[str]): Device type and browser.
             render (Optional[str]): Enables JavaScript rendering.
             callback_url (Optional[str]): URL to your callback endpoint.
@@ -214,7 +195,6 @@ class PetcoAsync:
         payload = {
             "source": source.PETCO_URL,
             "url": url,
-            "store_id": store_id,
             "user_agent_type": user_agent_type,
             "render": render,
             "callback_url": callback_url,
