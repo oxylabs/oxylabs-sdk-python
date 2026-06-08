@@ -365,8 +365,8 @@ if __name__ == "__main__":
 
 This method is also synchronous (like Realtime), but instead of using our
 service via a RESTful interface, you **can use our endpoint like a proxy**. Use
-Proxy Endpoint if you've used proxies before and would just like to get
-unblocked content from us.
+Proxy Endpoint if you've used proxies before and would just like to access
+web data from us.
 
 Since the parameters in this method are sent as headers there are only a few
 parameters which this integration method accepts. You can find those parameters
