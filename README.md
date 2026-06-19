@@ -20,7 +20,7 @@ straightforward user interface for interacting with the Oxylabs API.
  responses for enhanced efficiency and reliability.
 - **Error Handling**: provides meaningful error messages and handles common API
 errors, simplifying troubleshooting.
-- **Result Parsing**: streamlines the process of extracting relevant data from HTML results, 
+- **Result Parsing**: streamlines the process of extracting relevant data from HTML results,
 allowing developers to focus on application logic.
 
 ## Requirements
