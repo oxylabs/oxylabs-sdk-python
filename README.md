@@ -5,7 +5,7 @@
 [![](https://dcbadge.limes.pink/api/server/Pds3gBmKMH?style=for-the-badge&theme=discord)](https://discord.gg/Pds3gBmKMH) [![YouTube](https://img.shields.io/badge/YouTube-Oxylabs-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@oxylabs)
 
 This is a Python SDK for the [Oxylabs](https://oxylabs.io)
-[Scraper APIs](https://developers.oxylabs.io/scraper-apis/web-scraper-api#getting-started).
+[Scraper APIs](https://developers.oxylabs.io/products/web-scraper-api#getting-started).
 
 This SDK helps integrate with Oxylabs’ all-in-one Web Scraper API. 
 It can help you retrieve data from e-commerce websites, search engines (SERP), 
@@ -82,7 +82,7 @@ different packages:
 - Push-Pull (Async) - `AsyncClient(username, password)`
 - Proxy Endpoint - `ProxyClient(username, password)`
 
-Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/scraper-apis/web-scraper-api/integration-methods)
+Learn more about integration methods [on the official documentation](https://developers.oxylabs.io/products/web-scraper-api/integration-methods)
 and how this SDK uses them [here](#integration-methods-1).
 
 ### Sources
@@ -196,7 +196,7 @@ result = client.google.scrape_search(
 ### Context Options for Google sources
 
 You can send in context options relevant to `google`, `amazon` and `universal`
-sources. Here are the [supported context values for google search](https://developers.oxylabs.io/scraper-apis/web-scraper-api/google/search).
+sources. Here are the [supported context values for google search](https://developers.oxylabs.io/api-targets/search-engines/google/search).
 Similarly you can find supported context values for other sources in the
 documentation.
 Here's an example for Google Search scraping:
@@ -223,7 +223,7 @@ result = client.google.scrape_search(
 
 ### Parse instructions
 
-SDK supports [custom parsing](https://developers.oxylabs.io/scraper-apis/custom-parser) which lets
+SDK supports [custom parsing](https://developers.oxylabs.io/products/web-scraper-api/features/custom-parser) which lets
 you define your own parsing and data processing logic that is executed on a raw scraping result.
 
 ```python
@@ -248,7 +248,7 @@ result = client.google.scrape_url(
 
 ### Browser instructions
 
-SDK allows you to define your own [browser instructions](https://developers.oxylabs.io/scraper-apis/web-scraper-api/features/browser-instructions)
+SDK allows you to define your own [browser instructions](https://developers.oxylabs.io/products/web-scraper-api/features/js-rendering-and-browser-control#browser-instructions)
 that are executed when rendering JavaScript.
 
 ```python
@@ -281,7 +281,7 @@ result = client.universal.scrape_url(
 
 ### Dedicated parsers
 Oxylab's Web Scraper API has dedicated parsers for some sources. You can find a list of available
-dedicated parsers [here](https://developers.oxylabs.io/scraper-apis/web-scraper-api/features/dedicated-parsers). If you want to use a dedicated parser to get structured data,
+dedicated parsers [here](https://developers.oxylabs.io/products/web-scraper-api/features/result-processing-and-storage/dedicated-parsers). If you want to use a dedicated parser to get structured data,
 then add **parse=True** parameter when calling scrape method.
 
 Here is an example of using a dedicated parser:
@@ -371,7 +371,7 @@ web data from us.
 Since the parameters in this method are sent as headers there are only a few
 parameters which this integration method accepts. You can find those parameters
 at
-https://developers.oxylabs.io/scraper-apis/web-scraper-api/integration-methods/proxy-endpoint#accepted-parameters.
+https://developers.oxylabs.io/products/web-scraper-api/integration-methods/proxy-endpoint.
 
 The Proxy endpoint integration is very open-ended allowing many different use
 cases:
